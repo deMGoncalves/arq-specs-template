@@ -1,4 +1,4 @@
-# 💎 **ARQ-SPECS-TEMPLATE:** O Manifesto do Desenvolvimento Orientado a Contexto (Context Driven Development)
+# 💎 O Manifesto do Context Driven Development (CDD)
 
 [![Licença MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Padrões de Qualidade](https://img.shields.io/badge/Rules-39%2B-brightgreen.svg)](specs/02_constraints/patterns/)
@@ -6,7 +6,7 @@
 
 ---
 
-## 🚀 **Context Driven Development (CDD): Transforme a Documentação em Conhecimento Acionável**
+## 🚀 **(CDD): Transforme a Documentação em Conhecimento Acionável**
 
 A maioria dos projetos sofre de "Deriva Arquitetural" porque a documentação é um artefato passivo. O **ARQ-SPECS-TEMPLATE** inverte essa lógica.
 
