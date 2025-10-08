@@ -37,6 +37,8 @@ ESLint: `no-chaining` (com plugins customizados).
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-009]: reforça
+- [ESTRUTURAL-006]: complementa
 
 ---
 

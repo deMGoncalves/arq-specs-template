@@ -36,6 +36,8 @@ Análise de dependências: Cálculo de métricas de estabilidade (I) do pacote.
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-014]: reforça (DIP é o mecanismo principal para aderir ao SDP)
+- [ESTRUTURAL-018]: complementa (Estabilidade de Pacotes)
 
 ---
 

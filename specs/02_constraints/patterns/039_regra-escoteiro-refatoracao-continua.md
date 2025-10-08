@@ -36,6 +36,8 @@ Análise de *commits*: Verificar se a refatoração está sendo feita em pequena
 
 ## Relacionada com
 
+- [ESTRUTURAL-022]: reforça (Simplicidade)
+- [ESTRUTURAL-025]: complementa (The Blob)
 
 ---
 

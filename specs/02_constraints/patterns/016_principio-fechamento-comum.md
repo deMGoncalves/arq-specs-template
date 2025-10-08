@@ -36,6 +36,10 @@ Análise de métricas de código: ferramentas que rastreiam arquivos alterados p
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-010]: reforça (SRP)
+- [ESTRUTURAL-015]: complementa (Coesão de Pacotes)
+- [ESTRUTURAL-007]: reforça (Limite de Linhas)
+- [ESTRUTURAL-017]: complementa (CRP)
 
 ---
 

@@ -36,6 +36,8 @@ ESLint: `no-relative-imports` (ou regras que verificam profundidade).
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-014]: reforça (DIP)
+- [ESTRUTURAL-018]: reforça (ADP)
 
 ---
 

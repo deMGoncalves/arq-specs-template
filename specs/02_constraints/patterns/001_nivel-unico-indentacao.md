@@ -36,6 +36,8 @@ SonarQube/ESLint: `complexity.max-depth: 1`
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-002]: reforça
+- [ESTRUTURAL-007]: complementa
 
 ---
 

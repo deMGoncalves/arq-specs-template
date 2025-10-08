@@ -36,6 +36,9 @@ ESLint: Regras customizadas que verificam o padrão de nomes de métodos de leit
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-036]: reforça (Side Effects)
+- [COMPORTAMENTAL-010]: reforça (SRP)
+- [COMPORTAMENTAL-009]: reforça (LoD)
 
 ---
 

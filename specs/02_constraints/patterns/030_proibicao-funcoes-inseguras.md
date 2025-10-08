@@ -36,6 +36,7 @@ ESLint: `no-eval`, `no-implied-eval`.
 
 ## Relacionada com
 
+- [CRIACIONAL-024]: complementa (Constantes Mágicas)
 
 ---
 

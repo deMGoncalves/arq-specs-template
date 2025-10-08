@@ -36,6 +36,8 @@ TypeScript: Uso de `readonly` em propriedades.
 
 ## Relacionada com
 
+- [CRIACIONAL-003]: reforça (Encapsulamento de Primitivos)
+- [COMPORTAMENTAL-008]: reforça (Proibição de Setters)
 
 ---
 

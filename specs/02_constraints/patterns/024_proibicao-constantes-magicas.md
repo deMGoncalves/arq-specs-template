@@ -37,6 +37,8 @@ SonarQube/ESLint: `no-magic-numbers`, `no-magic-strings`.
 
 ## Relacionada com
 
+- [CRIACIONAL-003]: reforça (Encapsulamento de Primitivos)
+- [ESTRUTURAL-006]: complementa (Nomes Abreviados)
 
 ---
 

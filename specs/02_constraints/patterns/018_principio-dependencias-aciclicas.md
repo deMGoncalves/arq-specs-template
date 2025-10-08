@@ -36,6 +36,8 @@ Análise de dependências: `dependency-graph-analysis` (detecta ciclos).
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-014]: reforça (DIP é a solução mais comum para quebrar ciclos ADP)
+- [COMPORTAMENTAL-009]: reforça (Princípio do "Diga, Não Pergunte")
 
 ---
 

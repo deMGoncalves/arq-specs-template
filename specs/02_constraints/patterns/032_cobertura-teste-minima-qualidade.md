@@ -36,6 +36,8 @@ Bun Test Runner/Jest: Configuração de `coverageThresholds`.
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-011]: reforça (OCP)
+- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

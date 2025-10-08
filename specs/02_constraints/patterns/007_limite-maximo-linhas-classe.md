@@ -37,6 +37,8 @@ SonarQube/ESLint: `max-lines-per-file: 50` e `max-lines-per-method: 5`.
 
 ## Relacionada com
 
+- [ESTRUTURAL-001]: reforça
+- [ESTRUTURAL-004]: reforça
 
 ---
 

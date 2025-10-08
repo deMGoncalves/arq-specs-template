@@ -37,6 +37,8 @@ ESLint: Regras customizadas para identificar padrões de métodos `get/set` vazi
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-009]: reforça
+- [CRIACIONAL-003]: complementa
 
 ---
 

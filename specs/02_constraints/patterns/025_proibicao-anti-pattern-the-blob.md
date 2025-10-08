@@ -36,6 +36,8 @@ SonarQube: LCOM (Lack of Cohesion in Methods) e WMC (Weighted Methods Per Class)
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-010]: substitui (SRP - Aplicação Extrema)
+- [ESTRUTURAL-007]: reforça (Limite Máximo de Linhas por Classe)
 
 ---
 

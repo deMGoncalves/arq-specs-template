@@ -37,6 +37,9 @@ ESLint: `no-side-effects-in-conditions` e análise de *mutability*.
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-009]: reforça
+- [COMPORTAMENTAL-027]: reforça
+- [COMPORTAMENTAL-038]: reforça (CQS)
 
 ---
 

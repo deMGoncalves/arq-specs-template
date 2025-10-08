@@ -36,6 +36,8 @@ TypeScript: Detectar o uso excessivo de `string` ou `number` para campos tipados
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-008]: reforça
+- [COMPORTAMENTAL-009]: reforça
 
 ---
 

@@ -36,6 +36,8 @@ SonarQube/ESLint: `no-unused-vars`, `no-empty-function`.
 
 ## Relacionada com
 
+- [ESTRUTURAL-007]: reforça (Limite de Linhas)
+- [ESTRUTURAL-022]: complementa (Simplicidade)
 
 ---
 

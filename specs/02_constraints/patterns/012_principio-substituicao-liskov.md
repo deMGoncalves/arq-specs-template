@@ -36,6 +36,9 @@ TypeScript/Compilador: Verificação de tipagem rígida de parâmetros e retorno
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-011]: reforça (LSP é essencial para a Extensão do OCP)
+- [COMPORTAMENTAL-009]: reforça (Princípio do "Diga, Não Pergunte")
+- [CRIACIONAL-003]: complementa (Reforça o contrato de *Value Objects*)
 
 ---
 

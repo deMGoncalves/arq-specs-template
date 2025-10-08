@@ -36,6 +36,8 @@ SonarQube/ESLint: `complexity.max-cycles: 5`.
 
 ## Relacionada com
 
+- [ESTRUTURAL-001]: reforça (1 Nível de Indentação)
+- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

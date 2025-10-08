@@ -37,6 +37,8 @@ ESLint: Regras personalizadas para proibir o retorno de `Array` em classes de do
 
 ## Relacionada com
 
+- [ESTRUTURAL-007]: reforça
+- [COMPORTAMENTAL-008]: reforça
 
 ---
 

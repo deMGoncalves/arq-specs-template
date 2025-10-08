@@ -36,6 +36,8 @@ ESLint: `no-floating-promises`, `require-await`.
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-027]: reforça (Qualidade no Tratamento de Erros)
+- [COMPORTAMENTAL-014]: complementa (DIP em funções de I/O)
 
 ---
 

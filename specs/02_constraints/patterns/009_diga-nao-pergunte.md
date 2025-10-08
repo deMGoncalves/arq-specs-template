@@ -37,6 +37,9 @@ ESLint: `no-chaining` com alta profundidade e `no-access-target` (com plugins cu
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-008]: reforça
+- [ESTRUTURAL-005]: reforça
+- [COMPORTAMENTAL-012]: reforça (LSP)
 
 ---
 

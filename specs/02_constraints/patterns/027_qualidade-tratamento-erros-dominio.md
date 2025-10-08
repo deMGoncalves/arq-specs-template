@@ -36,6 +36,8 @@ ESLint: `no-return-null`, `no-empty-catch`.
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-002]: complementa (Proibição da Cláusula ELSE)
+- [ESTRUTURAL-022]: reforça (Simplicidade no tratamento do fluxo)
 
 ---
 

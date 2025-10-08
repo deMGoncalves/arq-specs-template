@@ -36,6 +36,8 @@ Análise de dependências: `dependency-analysis` para identificar classes sem us
 
 ## Relacionada com
 
+- [ESTRUTURAL-016]: complementa (Coesão de Pacotes)
+- [COMPORTAMENTAL-010]: reforça (SRP a nível de Classe)
 
 ---
 

@@ -36,6 +36,8 @@ ESLint: `no-else-return` e `no-lonely-if` com configurações para forçar a sa�
 
 ## Relacionada com
 
+- [ESTRUTURAL-001]: reforça
+- [COMPORTAMENTAL-008]: reforça
 
 ---
 

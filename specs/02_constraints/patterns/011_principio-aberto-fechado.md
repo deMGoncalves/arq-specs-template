@@ -36,6 +36,9 @@ ESLint: Regras que detectam alto número de *switch/if-else* em um método.
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-002]: reforça (Proibição da Cláusula ELSE)
+- [COMPORTAMENTAL-012]: depende (LSP é um pré-requisito para o OCP funcionar)
+- [COMPORTAMENTAL-014]: complementa (O uso de Interfaces de ISP ajuda na extensão OCP)
 
 ---
 

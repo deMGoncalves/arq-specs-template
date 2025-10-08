@@ -36,6 +36,8 @@ ESLint: `naming-convention` com regras para classes e funções.
 
 ## Relacionada com
 
+- [ESTRUTURAL-006]: reforça
+- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

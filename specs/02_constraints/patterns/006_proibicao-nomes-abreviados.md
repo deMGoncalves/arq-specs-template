@@ -37,6 +37,8 @@ ESLint: `naming-convention` com limites mínimos de caracteres.
 
 ## Relacionada com
 
+- [ESTRUTURAL-005]: complementa
+- [CRIACIONAL-003]: reforça
 
 ---
 

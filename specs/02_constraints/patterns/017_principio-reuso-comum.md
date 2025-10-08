@@ -36,6 +36,8 @@ Análise de dependências: Ferramentas que mapeiam a porcentagem de classes cons
 
 ## Relacionada com
 
+- [ESTRUTURAL-015]: complementa (Enfoca o reuso do pacote)
+- [COMPORTAMENTAL-013]: reforça (ISP)
 
 ---
 

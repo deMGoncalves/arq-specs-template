@@ -37,6 +37,8 @@ SonarQube/ESLint: `no-duplicated-code` (com análise semântica).
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-010]: reforça (SRP é o caminho para o DRY)
+- [ESTRUTURAL-007]: reforça (Limite de Linhas)
 
 ---
 

@@ -36,6 +36,8 @@ Biome/ESLint: `max-params: ["error", 3]`.
 
 ## Relacionada com
 
+- [CRIACIONAL-003]: reforça (Encapsulamento de Primitivos)
+- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

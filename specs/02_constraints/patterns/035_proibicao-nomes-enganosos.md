@@ -36,6 +36,8 @@ ESLint: Regras personalizadas contra notação húngara e para verificar padrõe
 
 ## Relacionada com
 
+- [ESTRUTURAL-006]: complementa
+- [CRIACIONAL-003]: reforça
 
 ---
 

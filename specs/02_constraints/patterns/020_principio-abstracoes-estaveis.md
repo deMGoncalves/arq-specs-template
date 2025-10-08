@@ -36,6 +36,9 @@ Análise de dependências: Cálculo de métricas de abstração (A), instabilida
 
 ## Relacionada com
 
+- [COMPORTAMENTAL-014]: reforça (DIP)
+- [ESTRUTURAL-019]: complementa (SDP)
+- [COMPORTAMENTAL-012]: reforça (LSP)
 
 ---
 

@@ -37,6 +37,8 @@ ESLint: Regras para detectar comentários em linhas de código simples.
 
 ## Relacionada com
 
+- [ESTRUTURAL-006]: reforça (Nomes Abreviados)
+- [ESTRUTURAL-022]: complementa (Simplicidade)
 
 ---
 
