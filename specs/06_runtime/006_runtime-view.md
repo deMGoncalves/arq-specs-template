@@ -7,45 +7,14 @@
 
 ## 6.1 Cenários Principais
 
-### [Cenário 1: Nome do Fluxo Principal]
+Os cenários de execução detalhados e seus respectivos critérios de aceitação automatizáveis são documentados utilizando o formato Gherkin (Given/When/Then).
 
-**Descrição**: [PREENCHER: O que acontece neste cenário]
+**Localização dos Cenários**: `scenarios/`
 
-**Atores**: [PREENCHER]
-
-**Pré-condições**: [PREENCHER]
-
-**Diagrama de Sequência**:
-```mermaid
-[PREENCHER: Diagrama de sequência]
-
-Exemplo:
-sequenceDiagram
-    Actor Usuario
-    Usuario->>API: POST /recurso
-    API->>UseCase: execute(dto)
-    UseCase->>Repository: save(entity)
-    Repository-->>UseCase: entity
-    UseCase-->>API: result
-    API-->>Usuario: 201 Created
-```
-
-**Passo a Passo**:
-1. [PREENCHER: Descrição detalhada do passo 1]
-2. [PREENCHER: Descrição detalhada do passo 2]
-3. [PREENCHER: Descrição detalhada do passo 3]
-
-**Pós-condições**: [PREENCHER]
-
----
-
-### [Cenário 2: Nome do Fluxo Alternativo]
-[PREENCHER: Repetir estrutura acima]
-
----
-
-### [Cenário 3: Nome do Fluxo de Erro]
-[PREENCHER: Repetir estrutura acima, incluindo tratamento de erros]
+**Formato dos Arquivos**:
+- `SCN-[NÚMERO]_[nome-do-cenario].md`
+- **Template**: (Reutilizar template do Capítulo 10/anterior)
+- **Rastreabilidade**: Cada SCN deve referenciar um cenário principal (`6.1`) e um componente (`CMP-XXX`).
 
 ---
 
