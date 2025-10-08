@@ -67,7 +67,7 @@
 [PREENCHER: Referência para .rules/ se aplicável]
 
 - **Style Guide**: [PREENCHER]
-- **Regras**: Ver `.rules/` para detalhes
+- **Regras**: Ver `patterns/` para detalhes
 - **Ferramentas**: [PREENCHER: Biome, ESLint, etc]
 
 ### Convenções de Nomenclatura
