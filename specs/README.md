@@ -56,18 +56,18 @@ O SDD exige que a regra técnica seja verificada antes da codificação.
 
 | \# | Seção | Status | Descrição |
 |---|-------|--------|-----------|
-| 01 | [Introdução e Objetivos](./01_introduction/001_introduction-and-goals.md) | [STATUS] | Propósito, objetivos e stakeholders |
-| 02 | [Restrições](./02_constraints/002_constraints.md) | [STATUS] | Limitações técnicas e **Padrões de Engenharia (Patterns)** |
-| 03 | [Contexto e Escopo](./03_context/003_context-and-scope.md) | [STATUS] | Atores e sistemas externos (C4 L1) |
-| 04 | [Estratégia de Solução](./04_solution-strategy/004_solution-strategy.md) | [STATUS] | Decisões tecnológicas fundamentais |
-| 05 | [Blocos de Construção](./05_building-blocks/005_building-block-view.md) | [STATUS] | Containers e componentes (C4 L2-L3) |
-| 06 | [Visão de Runtime](./06_runtime/006_runtime-view.md) | [STATUS] | Fluxos e cenários de execução |
-| 07 | [Visão de Deployment](./07_deployment/007_deployment-view.md) | [STATUS] | Infraestrutura e ambientes |
-| 08 | [Conceitos Transversais](./08_crosscutting/008_crosscutting-concepts.md) | [STATUS] | Segurança, persistência, *error handling*, etc |
-| 09 | [Decisões Arquiteturais](./09_decisions/009_architectural-decisions.md) | [STATUS] | **ADRs** e justificativas |
-| 10 | [Requisitos de Qualidade](./10_quality/010_quality-requirements.md) | [STATUS] | SLIs, SLOs, métricas |
-| 11 | [Riscos e Débito Técnico](./11_risks/011_risks-and-technical-debt.md) | [STATUS] | Riscos identificados e TDs |
-| 12 | [Glossário](./12_glossary/012_glossary.md) | [STATUS] | Linguagem ubíqua do projeto |
+| 01 | [Introdução e Objetivos](./01_introduction/001_introduction-and-goals.md) | 🟡 Em Progresso | Propósito, objetivos e stakeholders |
+| 02 | [Restrições](./02_constraints/002_constraints.md) | 🟡 Em Progresso | Limitações técnicas e **Padrões de Engenharia (Patterns)** |
+| 03 | [Contexto e Escopo](./03_context/003_context-and-scope.md) | 🟡 Em Progresso | Atores e sistemas externos (C4 L1) |
+| 04 | [Estratégia de Solução](./04_solution-strategy/004_solution-strategy.md) | 🟡 Em Progresso | Decisões tecnológicas fundamentais |
+| 05 | [Blocos de Construção](./05_building-blocks/005_building-block-view.md) | 🟡 Em Progresso | Containers e componentes (C4 L2-L3) |
+| 06 | [Visão de Runtime](./06_runtime/006_runtime-view.md) | 🟡 Em Progresso | Fluxos e cenários de execução |
+| 07 | [Visão de Deployment](./07_deployment/007_deployment-view.md) | 🟡 Em Progresso | Infraestrutura e ambientes |
+| 08 | [Conceitos Transversais](./08_crosscutting/008_crosscutting-concepts.md) | 🟡 Em Progresso | Segurança, persistência, *error handling*, etc |
+| 09 | [Decisões Arquiteturais](./09_decisions/009_architectural-decisions.md) | 🟡 Em Progresso | **ADRs** e justificativas |
+| 10 | [Requisitos de Qualidade](./10_quality/010_quality-requirements.md) | 🟡 Em Progresso | SLIs, SLOs, métricas |
+| 11 | [Riscos e Débito Técnico](./11_risks/011_risks-and-technical-debt.md) | 🟡 Em Progresso | Riscos identificados e TDs |
+| 12 | [Glossário](./12_glossary/012_glossary.md) | 🟡 Em Progresso | Linguagem ubíqua do projeto |
 
 -----
 
@@ -75,16 +75,16 @@ O SDD exige que a regra técnica seja verificada antes da codificação.
 
 ### 📐 Governança e Regras Técnicas (Pattern Layer)
 
-  - **Padrões de Engenharia (`patterns/`)**: **[TOTAL]** regras documentadas (SRP, DIP, Nomenclatura)
+  - **Padrões de Engenharia (`patterns/`)**: **39** regras documentadas (SRP, DIP, Nomenclatura)
       - Ver todos em [`02_constraints/patterns/`](./02_constraints/patterns/)
-  - **Decisões de Arquitetura (ADRs)**: **[TOTAL]** decisões registradas
+  - **Decisões de Arquitetura (ADRs)**: **0** decisões registradas (1 template)
       - Ver todas em [`09_decisions/adrs/`](./09_decisions/adrs/)
 
 ### 📊 Estrutura de Domínio (C4 Model)
 
-  - **Containers (Level 2)**: [TOTAL] containers
+  - **Containers (Level 2)**: 0 containers (1 template)
       - Ver [`05_building-blocks/containers/`](./05_building-blocks/containers/)
-  - **Componentes (Level 3)**: [TOTAL] componentes
+  - **Componentes (Level 3)**: 0 componentes (1 template)
       - Ver [`05_building-blocks/components/`](./05_building-blocks/components/)
 
 -----
