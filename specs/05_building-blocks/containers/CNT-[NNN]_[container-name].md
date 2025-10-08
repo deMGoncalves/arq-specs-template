@@ -23,6 +23,7 @@
 ## 🛠️ Tecnologia
 
 ### Stack Principal
+
 - **Linguagem**: [PREENCHER: ex: TypeScript, Python, Java, Go]
 - **Versão Linguagem**: [PREENCHER: ex: Node.js 20.x, Python 3.11]
 - **Framework**: [PREENCHER: ex: Express, NestJS, FastAPI, Spring Boot]
@@ -36,6 +37,7 @@
 | [PREENCHER] | [PREENCHER] | [PREENCHER] | [PREENCHER] |
 
 **Dependências de Sistema**:
+
 - [PREENCHER: ex: PostgreSQL 15+, Redis 7+]
 
 ### Build e Artefatos
@@ -43,6 +45,7 @@
 **Ferramenta de Build**: [PREENCHER: npm, pip, maven, gradle, go build]
 
 **Comandos**:
+
 ```bash
 # Instalar dependências
 [PREENCHER: npm install, pip install -r requirements.txt]
@@ -58,6 +61,7 @@
 ```
 
 **Artefatos Gerados**:
+
 - [PREENCHER: ex: dist/, target/*.jar, bin/app]
 - **Docker Image**: [PREENCHER: nome da imagem]
 - **Tamanho**: [PREENCHER: ex: 150MB]
@@ -67,20 +71,24 @@
 ## 📦 Responsabilidades
 
 ### Responsabilidade Principal
+
 [PREENCHER: Qual a principal função deste container em 1 frase]
 
 ### Funcionalidades
 
 **Core Features**:
+
 1. [PREENCHER: Funcionalidade crítica 1]
 2. [PREENCHER: Funcionalidade crítica 2]
 3. [PREENCHER: Funcionalidade crítica 3]
 
 **Features Secundárias**:
+
 - [PREENCHER: Feature adicional 1]
 - [PREENCHER: Feature adicional 2]
 
 ### O que NÃO faz
+>
 > ⚠️ **Importante**: Escopo explicitamente fora deste container
 
 - ❌ [PREENCHER: Responsabilidade explicitamente fora do escopo]
@@ -98,12 +106,14 @@
 
 **Porta**: [PREENCHER: ex: 3000]
 
-**Base URL**: 
+**Base URL**:
+
 - **Dev**: [PREENCHER: http://localhost:3000]
 - **Staging**: [PREENCHER: https://staging-api.exemplo.com]
 - **Prod**: [PREENCHER: https://api.exemplo.com]
 
 **Principais Endpoints**:
+
 ```
 [PREENCHER: Listar 10-15 endpoints principais com método e path]
 
@@ -181,11 +191,13 @@ POST   /admin/actions
 ### Configuração de Recursos
 
 **Ambiente de Desenvolvimento**:
+
 - **CPU**: [PREENCHER: 0.5 vCPU]
 - **Memória**: [PREENCHER: 512 MB]
 - **Disco**: [PREENCHER: 10 GB]
 
 **Ambiente de Produção**:
+
 - **CPU**: [PREENCHER: 2 vCPU]
 - **Memória**: [PREENCHER: 4 GB]
 - **Disco**: [PREENCHER: 20 GB]
@@ -196,11 +208,13 @@ POST   /admin/actions
 **Tipo**: [Horizontal | Vertical | Ambas | Não escalável]
 
 **Configuração Horizontal**:
+
 - **Min Instâncias**: [PREENCHER: 2]
 - **Max Instâncias**: [PREENCHER: 10]
 - **Desired**: [PREENCHER: 3]
 
 **Auto-scaling Triggers**:
+
 - **CPU**: [> 70% por 5 minutos → scale up]
 - **Memória**: [> 80% por 5 minutos → scale up]
 - **Requests**: [> 1000/s → scale up]
@@ -213,6 +227,7 @@ POST   /admin/actions
 **Estratégia**: [Rolling Update | Blue/Green | Canary | Recreate]
 
 **Configuração**:
+
 ```yaml
 [PREENCHER: Exemplo de configuração]
 
@@ -226,6 +241,7 @@ maxUnavailable: 0
 **Health Check durante Deploy**: [PREENCHER: Como verificar saúde]
 
 **Rollback**:
+
 - **Automático**: [Sim | Não] - [PREENCHER: Condições]
 - **Manual**: [PREENCHER: Procedimento]
 - **Tempo para Rollback**: [PREENCHER: X minutos]
@@ -251,12 +267,14 @@ maxUnavailable: 0
 **Ferramenta**: [AWS Secrets Manager | HashiCorp Vault | Kubernetes Secrets | Azure Key Vault]
 
 **Secrets Armazenados**:
+
 - `database-credentials`: [User/Pass do BD]
 - `api-keys`: [Chaves de APIs externas]
 - `jwt-secret`: [Secret para JWT]
 - [PREENCHER: Outros secrets]
 
-**Rotação**: 
+**Rotação**:
+
 - **Automática**: [PREENCHER: Ex: Senha BD a cada 90 dias]
 - **Manual**: [PREENCHER: Ex: API Keys quando necessário]
 
@@ -267,6 +285,7 @@ maxUnavailable: 0
 **Ferramenta**: [LaunchDarkly | Unleash | AWS AppConfig | Custom]
 
 **Flags Ativas**:
+
 | Flag | Descrição | Ambientes | % Rollout |
 |------|-----------|-----------|-----------|
 | [PREENCHER] | [PREENCHER] | [Dev/Stg/Prod] | [100%] |
@@ -282,15 +301,18 @@ maxUnavailable: 0
 **Versão**: [PREENCHER: 15.x]
 
 **Connection Pool**:
+
 - **Min**: [PREENCHER: 5]
 - **Max**: [PREENCHER: 20]
 - **Timeout**: [PREENCHER: 30s]
 
 **Schemas/Collections Usados**:
+
 - [PREENCHER: schema_name]
 - [PREENCHER: collection_name]
 
 **Migrações**:
+
 - **Ferramenta**: [PREENCHER: Flyway, Alembic, Liquibase, Prisma]
 - **Estratégia**: [PREENCHER: Como são aplicadas]
 - **Localização**: [PREENCHER: path/to/migrations]
@@ -300,6 +322,7 @@ maxUnavailable: 0
 **Tipo**: [Redis | Memcached | In-memory | CDN]
 
 **Uso**:
+
 - [PREENCHER: Sessions: TTL 24h]
 - [PREENCHER: API responses: TTL 5min]
 - [PREENCHER: User profile: TTL 1h]
@@ -317,6 +340,7 @@ maxUnavailable: 0
 **Bucket/Container**: [PREENCHER: nome]
 
 **Tipos de Arquivo Armazenados**:
+
 - [PREENCHER: Uploads de usuários]
 - [PREENCHER: Relatórios gerados]
 
@@ -329,6 +353,7 @@ maxUnavailable: 0
 **Broker**: [RabbitMQ | Kafka | AWS SQS | Redis Pub/Sub]
 
 **Queues/Topics**:
+
 | Nome | Tipo | Propósito | Retenção |
 |------|------|-----------|----------|
 | [PREENCHER] | [Queue/Topic] | [PREENCHER] | [7 dias] |
@@ -346,6 +371,7 @@ maxUnavailable: 0
 **Formato**: [JSON | Plain Text]
 
 **Campos Obrigatórios**:
+
 ```json
 {
   "timestamp": "ISO8601",
@@ -358,11 +384,13 @@ maxUnavailable: 0
 ```
 
 **Níveis**:
+
 - **Dev**: DEBUG
 - **Staging**: INFO
 - **Prod**: INFO (ERROR para componentes críticos)
 
-**Retenção**: 
+**Retenção**:
+
 - **Dev**: 7 dias
 - **Staging**: 30 dias
 - **Prod**: 90 dias
@@ -376,11 +404,13 @@ maxUnavailable: 0
 **Métricas Instrumentadas**:
 
 **Business Metrics**:
+
 - `transactions_total`: Counter - Total de transações
 - `active_users`: Gauge - Usuários ativos
 - [PREENCHER: Métrica de negócio específica]
 
 **Technical Metrics**:
+
 - `http_request_duration_seconds`: Histogram - Latência de requests
 - `http_requests_total`: Counter - Total de requests por status
 - `database_query_duration_seconds`: Histogram - Latência de queries
@@ -395,6 +425,7 @@ maxUnavailable: 0
 **Ferramenta**: [Jaeger | AWS X-Ray | Zipkin | OpenTelemetry]
 
 **Sample Rate**:
+
 - **Dev**: 100%
 - **Staging**: 50%
 - **Prod**: 10% (100% para erros)
@@ -406,6 +437,7 @@ maxUnavailable: 0
 **Endpoint**: `/health`
 
 **Liveness Probe**:
+
 ```yaml
 path: /health/live
 initialDelaySeconds: 30
@@ -415,6 +447,7 @@ failureThreshold: 3
 ```
 
 **Readiness Probe**:
+
 ```yaml
 path: /health/ready
 initialDelaySeconds: 15
@@ -424,11 +457,13 @@ failureThreshold: 3
 ```
 
 **Critérios de Health**:
+
 - [PREENCHER: ex: Database conectado]
 - [PREENCHER: ex: Cache acessível]
 - [PREENCHER: ex: Disco < 90%]
 
 **Response**:
+
 ```json
 {
   "status": "healthy|degraded|unhealthy",
@@ -460,6 +495,7 @@ failureThreshold: 3
 **Mecanismo**: [JWT | OAuth 2.0 | API Key | mTLS | Session Cookie]
 
 **Implementação**:
+
 ```
 [PREENCHER: Como autentica requests recebidos]
 
@@ -477,6 +513,7 @@ Authorization: Bearer <JWT_TOKEN>
 **Modelo**: [RBAC | ABAC | ACL | Custom]
 
 **Roles Suportadas**:
+
 - `admin`: [PREENCHER: Permissões]
 - `user`: [PREENCHER: Permissões]
 - `guest`: [PREENCHER: Permissões]
@@ -486,18 +523,22 @@ Authorization: Bearer <JWT_TOKEN>
 ### Proteções Implementadas
 
 **Input Validation**:
+
 - [PREENCHER: Biblioteca usada - ex: Joi, Zod]
 - [PREENCHER: Validação em todas as entradas]
 
 **Output Encoding**:
+
 - [PREENCHER: Prevenção de XSS]
 
 **Rate Limiting**:
+
 - **Por IP**: [PREENCHER: 1000 req/min]
 - **Por Usuário**: [PREENCHER: 500 req/min]
 - **Por Endpoint**: [PREENCHER: Específico por rota]
 
 **CORS**:
+
 ```yaml
 allowedOrigins:
   - https://app.exemplo.com
@@ -508,6 +549,7 @@ maxAge: 86400
 ```
 
 **Security Headers**:
+
 ```
 X-Frame-Options: DENY
 X-Content-Type-Options: nosniff
@@ -519,10 +561,12 @@ Content-Security-Policy: [PREENCHER]
 **SQL Injection Prevention**: [PREENCHER: Prepared statements, ORM]
 
 **Secrets no Código**:
+
 - **Scanner**: [GitGuardian | TruffleHog | Gitleaks]
 - **Pre-commit Hook**: [Sim | Não]
 
 **Dependency Scanning**:
+
 - **Ferramenta**: [Snyk | Dependabot | npm audit]
 - **Frequência**: [Diária | Semanal]
 
@@ -552,6 +596,7 @@ Content-Security-Policy: [PREENCHER]
 **Padrão**: [AAA (Arrange-Act-Assert) | Given-When-Then]
 
 **Exemplo**:
+
 ```typescript
 [PREENCHER: Teste representativo]
 
@@ -574,7 +619,8 @@ describe('UserService', () => {
 
 **Localização**: [PREENCHER: src/**/*.spec.ts]
 
-**Comando**: 
+**Comando**:
+
 ```bash
 npm test
 npm test:coverage
@@ -589,11 +635,13 @@ npm test:coverage
 **Ferramenta**: [PREENCHER: Supertest, TestContainers]
 
 **Escopo**:
+
 - [PREENCHER: Testa integração com BD]
 - [PREENCHER: Testa integração com cache]
 - [PREENCHER: Testa APIs externas (mocked)]
 
 **Exemplo**:
+
 ```typescript
 [PREENCHER: Teste de integração representativo]
 
@@ -615,6 +663,7 @@ describe('POST /users', () => {
 **Localização**: [PREENCHER: tests/integration/**/*.test.ts]
 
 **Comando**:
+
 ```bash
 npm run test:integration
 ```
@@ -628,6 +677,7 @@ npm run test:integration
 **Ferramenta**: [PREENCHER: Cypress, Playwright, Selenium]
 
 **Cenários Cobertos**:
+
 - [PREENCHER: Happy path principal]
 - [PREENCHER: Fluxo de erro crítico]
 - [PREENCHER: Edge cases importantes]
@@ -635,6 +685,7 @@ npm run test:integration
 **Ambiente**: [PREENCHER: Staging dedicated]
 
 **Comando**:
+
 ```bash
 npm run test:e2e
 ```
@@ -646,12 +697,14 @@ npm run test:e2e
 **Ferramenta**: [PREENCHER: K6, JMeter, Artillery, Gatling]
 
 **Cenários**:
+
 1. **Load Test**: [PREENCHER: 1000 users por 10min]
 2. **Stress Test**: [PREENCHER: Aumentar até breaking point]
 3. **Spike Test**: [PREENCHER: Picos repentinos]
 4. **Soak Test**: [PREENCHER: Carga constante por 4h]
 
 **Baseline Performance**:
+
 - **Throughput**: [PREENCHER: 1000 req/s]
 - **Latency p50**: [PREENCHER: 50ms]
 - **Latência p95**: [PREENCHER: 200ms]
@@ -659,6 +712,7 @@ npm run test:e2e
 - **Error Rate**: [PREENCHER: < 0.1%]
 
 **Comando**:
+
 ```bash
 k6 run tests/performance/load-test.js
 ```
@@ -668,11 +722,13 @@ k6 run tests/performance/load-test.js
 ### Ambiente de Teste Local
 
 **Pré-requisitos**:
+
 - [PREENCHER: Docker, Docker Compose]
 - [PREENCHER: Node.js 20+]
 - [PREENCHER: Outros]
 
 **Setup**:
+
 ```bash
 # Clone repo
 git clone [REPO_URL]
@@ -694,6 +750,7 @@ npm test
 ```
 
 **Cleanup**:
+
 ```bash
 docker-compose down -v
 ```
@@ -718,21 +775,25 @@ docker-compose down -v
 ### Otimizações Aplicadas
 
 **Database**:
+
 - [PREENCHER: Índices nas colunas X, Y, Z]
 - [PREENCHER: Connection pooling configurado]
 - [PREENCHER: Query optimization com EXPLAIN]
 
 **Cache**:
+
 - [PREENCHER: Cache de queries frequentes]
 - [PREENCHER: Cache de sessions]
 - [PREENCHER: Cache warming strategy]
 
 **Código**:
+
 - [PREENCHER: Algoritmo X otimizado de O(n²) para O(n log n)]
 - [PREENCHER: Lazy loading de dados]
 - [PREENCHER: Streaming de grandes payloads]
 
 **Rede**:
+
 - [PREENCHER: HTTP/2 habilitado]
 - [PREENCHER: Response compression (gzip)]
 - [PREENCHER: Keep-alive connections]
@@ -747,6 +808,7 @@ docker-compose down -v
 ### Limites e Capacidade
 
 **Capacidade Atual**:
+
 - **Max Throughput**: [PREENCHER: 10K req/s]
 - **Max Concurrent Users**: [PREENCHER: 50K]
 - **Max Database Connections**: [PREENCHER: 100]
@@ -789,6 +851,7 @@ docker-compose down -v
 ### Projeção de Crescimento
 
 **Estimativa com Crescimento de 2x Usuários**:
+
 - **Compute**: $800 → $1,400 (+75%)
 - **Database**: $500 → $900 (+80%)
 - **Cache**: $150 → $250 (+67%)
@@ -810,28 +873,33 @@ Security Scan → Deploy Staging → Smoke Tests → Deploy Prod
 ### Stages Detalhadas
 
 #### 1. Code Quality
+
 ```yaml
 lint:
   - ESLint
   - Prettier check
   - TypeScript check
 ```
+
 **Duração**: ~1 min
 
 ---
 
 #### 2. Unit Tests
+
 ```yaml
 test:
   - Run unit tests
   - Generate coverage report
   - Fail if coverage < 80%
 ```
+
 **Duração**: ~3 min
 
 ---
 
 #### 3. Build
+
 ```yaml
 build:
   - npm run build
@@ -839,54 +907,64 @@ build:
   - Tag image with commit SHA
   - Push to ECR/Docker Hub
 ```
+
 **Duração**: ~5 min
 
 ---
 
 #### 4. Integration Tests
+
 ```yaml
 integration:
   - Start test containers (DB, Redis)
   - Run integration tests
   - Stop containers
 ```
+
 **Duração**: ~5 min
 
 ---
 
 #### 5. Security Scan
+
 ```yaml
 security:
   - Snyk scan dependencies
   - Trivy scan Docker image
   - SAST with SonarQube
 ```
+
 **Duração**: ~3 min
 
 ---
 
 #### 6. Deploy Staging
+
 ```yaml
 deploy_staging:
   - Update ECS task definition
   - Deploy to staging
   - Wait for health checks
 ```
+
 **Duração**: ~5 min
 
 ---
 
 #### 7. Smoke Tests
+
 ```yaml
 smoke_tests:
   - Run critical path tests
   - Verify deployment health
 ```
+
 **Duração**: ~2 min
 
 ---
 
 #### 8. Deploy Production (Manual Approval)
+
 ```yaml
 deploy_production:
   - Require manual approval
@@ -894,6 +972,7 @@ deploy_production:
   - Monitor metrics for 30min
   - Auto-rollback if errors > 1%
 ```
+
 **Duração**: ~10 min
 
 ---
@@ -906,21 +985,25 @@ deploy_production:
 ### Triggers
 
 **Staging**:
+
 - Automático em push para `main`
 - Automático em pull request (apenas build e test)
 
 **Produção**:
+
 - Manual via GitHub Release
 - Tag com formato `v*.*.*`
 
 ### Rollback
 
 **Automático**:
+
 - Error rate > 5% por 5 minutos
 - Health check failures > 50%
 - Latência p99 > 5s
 
 **Manual**:
+
 ```bash
 # Via CLI
 aws ecs update-service --service api --task-definition api:PREVIOUS_VERSION
@@ -982,6 +1065,7 @@ aws ecs wait services-stable \
 ### Como Debugar em Produção
 
 **1. Verificar Logs**:
+
 ```bash
 # Via CloudWatch Logs
 aws logs tail /ecs/api --follow
@@ -991,10 +1075,12 @@ kubectl logs -f deployment/api -n production
 ```
 
 **2. Verificar Métricas**:
+
 - Dashboard: [PREENCHER: Link]
 - Verificar erro rate, latência, throughput
 
 **3. Acessar Container** (emergência):
+
 ```bash
 # ECS Exec
 aws ecs execute-command \
@@ -1009,6 +1095,7 @@ kubectl exec -it POD_NAME -n production -- /bin/bash
 ```
 
 **4. Verificar Database**:
+
 ```bash
 # Queries lentas
 SELECT * FROM pg_stat_activity WHERE state = 'active';
@@ -1022,6 +1109,7 @@ SELECT count(*) FROM pg_stat_activity;
 ### Como Investigar Problema de Performance
 
 **1. Identificar Endpoint Lento**:
+
 ```bash
 # APM (ex: DataDog)
 - Verificar traces por endpoint
@@ -1029,6 +1117,7 @@ SELECT count(*) FROM pg_stat_activity;
 ```
 
 **2. Analisar Queries**:
+
 ```sql
 -- PostgreSQL slow query log
 SELECT query, mean_exec_time, calls 
@@ -1038,6 +1127,7 @@ LIMIT 10;
 ```
 
 **3. Profiling** (se necessário):
+
 ```bash
 # Node.js
 node --inspect app.js
@@ -1052,6 +1142,7 @@ python -m cProfile -o output.prof app.py
 ### Como Escalar Manualmente
 
 **Horizontal Scaling**:
+
 ```bash
 # ECS
 aws ecs update-service \
@@ -1064,6 +1155,7 @@ kubectl scale deployment api --replicas=10 -n production
 ```
 
 **Vertical Scaling**:
+
 ```bash
 # Atualizar task definition com mais CPU/RAM
 # Fazer novo deploy
@@ -1089,21 +1181,25 @@ kubectl scale deployment api --replicas=10 -n production
 ## 🔗 Referências
 
 **Documentação Interna**:
+
 - [Arquitetura Detalhada](../../05_building-blocks/005_building-block-view.md)
 - [ADRs Relacionadas](../../09_decisions/009_architectural-decisions.md)
 - [Componentes Internos](../components/CNT-[XXX]_[nome]/)
 
 **Documentação Externa**:
+
 - [Framework Docs](https://example.com)
 - [Database Docs](https://example.com)
 
 **Dashboards e Monitoramento**:
+
 - [Grafana Dashboard](https://grafana.exemplo.com/dashboard/api)
 - [Logs](https://cloudwatch.amazonaws.com/logs/api)
 - [Traces](https://jaeger.exemplo.com/trace/api)
 - [Alertas](https://pagerduty.com/service/api)
 
 **Repositório**:
+
 - [GitHub/GitLab](https://github.com/org/repo)
 - [CI/CD Pipelines](https://github.com/org/repo/actions)
 
@@ -1112,13 +1208,15 @@ kubectl scale deployment api --replicas=10 -n production
 ## 🔗 Navegação
 
 **Hierarquia**:
+
 - ⬆️ **Parent**: [Building Blocks Overview](../005_building-block-view.md)
-- ⬇️ **Children** (Componentes): 
+- ⬇️ **Children** (Componentes):
   - [CMP-XXX Nome](../components/CNT-[XXX]_[nome]/CMP-XXX_nome.md)
   - [Ver todos](../components/CNT-[XXX]_[nome]/)
 
 **Relacionados**:
-- 🌐 **Context**: 
+
+- 🌐 **Context**:
   - Usado por [ACT-XXX](../../03_context/actors/ACT-XXX_nome.md)
   - Integra com [SYS-XXX](../../03_context/systems/SYS-XXX_nome.md)
 - 🎬 **Runtime**: [Cenários de Uso](../../06_runtime/006_runtime-view.md)

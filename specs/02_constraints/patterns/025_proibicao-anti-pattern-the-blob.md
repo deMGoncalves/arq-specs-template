@@ -27,15 +27,15 @@ Viola o Princípio da Responsabilidade Única (SRP) de forma severa, resultando 
 ## Como Detectar
 
 ### Manual
+
 Identificar classes que estão em constante modificação por vários *feature requests* diferentes.
 
 ### Automático
+
 SonarQube: LCOM (Lack of Cohesion in Methods) e WMC (Weighted Methods Per Class) muito altos.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-010]: substitui (SRP - Aplicação Extrema)
-- [ESTRUTURAL-007]: reforça (Limite Máximo de Linhas por Classe)
 
 ---
 

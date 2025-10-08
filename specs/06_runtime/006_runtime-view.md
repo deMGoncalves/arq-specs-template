@@ -12,6 +12,7 @@ Os cenários de execução detalhados e seus respectivos critérios de aceitaç�
 **Localização dos Cenários**: `scenarios/`
 
 **Formato dos Arquivos**:
+
 - `SCN-[NÚMERO]_[nome-do-cenario].md`
 - **Template**: (Reutilizar template do Capítulo 10/anterior)
 - **Rastreabilidade**: Cada SCN deve referenciar um cenário principal (`6.1`) e um componente (`CMP-XXX`).
@@ -29,6 +30,7 @@ Os cenários de execução detalhados e seus respectivos critérios de aceitaç�
 **Consumidores**: [PREENCHER]
 
 **Payload**:
+
 ```json
 [PREENCHER: Estrutura do evento]
 {
@@ -39,6 +41,7 @@ Os cenários de execução detalhados e seus respectivos critérios de aceitaç�
 ```
 
 **Diagrama de Fluxo**:
+
 ```
 [PREENCHER: Diagrama mostrando propagação do evento]
 ```
@@ -50,6 +53,7 @@ Os cenários de execução detalhados e seus respectivos critérios de aceitaç�
 ### [Entidade Principal]: Máquina de Estados
 
 **Diagrama**:
+
 ```mermaid
 [PREENCHER: State diagram]
 
@@ -64,10 +68,12 @@ stateDiagram-v2
 ```
 
 **Estados Possíveis**:
+
 - **[Estado 1]**: [Descrição]
 - **[Estado 2]**: [Descrição]
 
 **Transições**:
+
 | De | Para | Trigger | Validações |
 |----|------|---------|------------|
 | [PREENCHER] | [PREENCHER] | [PREENCHER] | [PREENCHER] |
@@ -83,6 +89,7 @@ stateDiagram-v2
 **Responsabilidade**: [PREENCHER]
 
 **Fluxo**:
+
 1. [PREENCHER]
 2. [PREENCHER]
 

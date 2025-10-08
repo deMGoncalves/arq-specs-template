@@ -27,16 +27,15 @@ A violação do CQS introduz **efeitos colaterais inesperados** e dificulta o ra
 ## Como Detectar
 
 ### Manual
+
 Busca por métodos que retornam um valor, mas que contêm lógica de persistência (`save()`) ou modificação de estado.
 
 ### Automático
+
 ESLint: Regras customizadas que verificam o padrão de nomes de métodos de leitura/escrita e seus retornos.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-036]: reforça (Side Effects)
-- [COMPORTAMENTAL-010]: reforça (SRP)
-- [COMPORTAMENTAL-009]: reforça (LoD)
 
 ---
 

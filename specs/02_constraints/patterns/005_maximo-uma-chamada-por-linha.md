@@ -28,15 +28,15 @@ O encadeamento excessivo (ex: `a.b().c().d()`) viola o Princípio de Demeter (Le
 ## Como Detectar
 
 ### Manual
+
 Busca por dois ou mais pontos (`.`) consecutivos (excluindo ponto flutuante) em uma única linha de instrução.
 
 ### Automático
+
 ESLint: `no-chaining` (com plugins customizados).
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-009]: reforça
-- [ESTRUTURAL-006]: complementa
 
 ---
 

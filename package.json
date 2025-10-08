@@ -1,0 +1,12 @@
+{
+  "name": "arq-specs-template",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "markdownlint-cli": "^0.45.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

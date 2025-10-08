@@ -27,15 +27,15 @@ Proíbe o uso de caminhos relativos de alta profundidade (ex: `../../../../`) e 
 ## Como Detectar
 
 ### Manual
+
 Busca por `../../..` ou caminhos longos de diretório.
 
 ### Automático
+
 ESLint: `no-relative-imports` (ou regras que verificam profundidade).
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-014]: reforça (DIP)
-- [ESTRUTURAL-018]: reforça (ADP)
 
 ---
 

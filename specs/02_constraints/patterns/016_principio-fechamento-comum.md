@@ -27,17 +27,15 @@ O CCP reforça o SRP no nível de pacote, garantindo que as modificações de so
 ## Como Detectar
 
 ### Manual
+
 Analisar o histórico de commits: verificar se um único *feature request* afetou classes espalhadas por vários pacotes.
 
 ### Automático
+
 Análise de métricas de código: ferramentas que rastreiam arquivos alterados por funcionalidade.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-010]: reforça (SRP)
-- [ESTRUTURAL-015]: complementa (Coesão de Pacotes)
-- [ESTRUTURAL-007]: reforça (Limite de Linhas)
-- [ESTRUTURAL-017]: complementa (CRP)
 
 ---
 

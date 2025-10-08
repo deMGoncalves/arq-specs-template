@@ -27,15 +27,15 @@ Melhora a clareza do fluxo de controle, evita a Complexidade Ciclomática desnec
 ## Como Detectar
 
 ### Manual
+
 Busca por ` else ` ou ` else if ` no código.
 
 ### Automático
+
 ESLint: `no-else-return` e `no-lonely-if` com configurações para forçar a saída antecipada.
 
 ## Relacionada com
 
-- [ESTRUTURAL-001]: reforça
-- [COMPORTAMENTAL-008]: reforça
 
 ---
 

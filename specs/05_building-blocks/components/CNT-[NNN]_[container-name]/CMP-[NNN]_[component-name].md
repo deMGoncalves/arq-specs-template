@@ -14,6 +14,7 @@
 **Namespace/Package**: [PREENCHER: ex: src/modules/auth]
 
 **Arquivos Principais**:
+
 ```
 [PREENCHER: Lista de arquivos]
 src/modules/auth/
@@ -35,6 +36,7 @@ src/modules/auth/
 ## 🎯 Responsabilidade
 
 ### Responsabilidade Única (SRP)
+
 [PREENCHER: Qual a ÚNICA responsabilidade deste componente em 1 frase clara]
 
 **Exemplo**: Este componente é responsável por gerenciar o ciclo de vida de autenticação de usuários (login, logout, refresh token).
@@ -42,15 +44,18 @@ src/modules/auth/
 ### O que Faz
 
 **Funcionalidades Principais**:
+
 1. [PREENCHER: Funcionalidade 1 - ex: Validar credenciais de usuário]
 2. [PREENCHER: Funcionalidade 2 - ex: Gerar tokens JWT]
 3. [PREENCHER: Funcionalidade 3 - ex: Renovar tokens expirados]
 
 **Funcionalidades Secundárias**:
+
 - [PREENCHER: Feature adicional 1]
 - [PREENCHER: Feature adicional 2]
 
 ### O que NÃO Faz
+>
 > ⚠️ **Importante**: Escopo explicitamente fora deste componente
 
 - ❌ [PREENCHER: ex: Não gerencia permissões (isso é feito pelo AuthorizationService)]
@@ -92,6 +97,7 @@ src/modules/auth/
 ### Classes/Arquivos Principais
 
 #### 1. [AuthService]
+
 ```typescript
 [PREENCHER: Interface/Signature da classe principal]
 
@@ -116,6 +122,7 @@ export class AuthService {
 ---
 
 #### 2. [AuthController]
+
 ```typescript
 [PREENCHER: Signature dos endpoints]
 
@@ -140,6 +147,7 @@ export class AuthController {
 ---
 
 #### 3. [AuthRepository]
+
 ```typescript
 [PREENCHER: Interface de persistência]
 
@@ -193,6 +201,7 @@ export class AuthResponse {
 | [CMP-ZZZ NotificationService] | Event-driven | Notificar login | Fraco |
 
 **Componentes que Dependem Deste**:
+
 - [CMP-AAA ProfileController] - Para obter usuário autenticado
 - [CMP-BBB AdminGuard] - Para validar token
 
@@ -215,10 +224,12 @@ export class AuthResponse {
 **Descrição**: Autentica usuário com email e senha
 
 **Parâmetros**:
+
 - `credentials.email`: Email do usuário (validado como email)
 - `credentials.password`: Senha do usuário (mínimo 8 caracteres)
 
-**Retorno**: 
+**Retorno**:
+
 ```typescript
 {
   accessToken: string,    // JWT válido por 1h
@@ -229,11 +240,13 @@ export class AuthResponse {
 ```
 
 **Throws**:
+
 - `InvalidCredentialsError`: Email ou senha incorretos
 - `UserInactiveError`: Usuário desativado
 - `TooManyAttemptsError`: Muitas tentativas de login
 
 **Exemplo de Uso**:
+
 ```typescript
 const result = await authService.login({
   email: 'user@example.com',
@@ -244,6 +257,7 @@ console.log(result.accessToken); // eyJhbGc...
 ```
 
 **Validações**:
+
 - Email deve ser válido
 - Senha deve ter no mínimo 8 caracteres
 - Usuário deve existir
@@ -251,6 +265,7 @@ console.log(result.accessToken); // eyJhbGc...
 - Usuário deve estar ativo
 
 **Side Effects**:
+
 - Incrementa contador de logins do usuário
 - Cria sessão no banco
 - Emite evento `UserLoggedIn`
@@ -277,11 +292,13 @@ console.log(result.accessToken); // eyJhbGc...
 ### Regras Implementadas
 
 **Vinculadas a Documentos**:
+
 - [BUS-001: Password Policy](../../../../.rules/BUS-001_password-policy.md) → Senha deve ter mínimo 8 caracteres, 1 maiúscula, 1 número
 - [BUS-002: Login Attempts](../../../../.rules/BUS-002_login-attempts.md) → Máximo 5 tentativas em 15 minutos
 - [BUS-003: Token Expiration](../../../../.rules/BUS-003_token-expiration.md) → Access token: 1h, Refresh: 7d
 
 **Regras Inline** (quando não justifica arquivo separado):
+
 - Email deve ser único no sistema
 - Refresh token só pode ser usado uma vez (rotating tokens)
 - Tokens revogados não podem ser reutilizados
@@ -289,11 +306,13 @@ console.log(result.accessToken); // eyJhbGc...
 ### Validações
 
 **Input Validation** (DTOs):
+
 - `email`: Formato de email válido
 - `password`: Mínimo 8 caracteres
 - `refreshToken`: JWT válido
 
 **Business Validation** (Service):
+
 - Usuário existe
 - Usuário está ativo
 - Senha corresponde
@@ -301,6 +320,7 @@ console.log(result.accessToken); // eyJhbGc...
 - Token não foi revogado
 
 **Database Constraints**:
+
 - `users.email`: UNIQUE
 - `refresh_tokens.token`: UNIQUE
 
@@ -319,11 +339,13 @@ console.log(result.accessToken); // eyJhbGc...
 ### Dados Manipulados
 
 **Entidades**:
+
 - `User` (read/update)
 - `RefreshToken` (create/read/delete)
 - `LoginAttempt` (create/read)
 
 **Operações CRUD**:
+
 | Entidade | Create | Read | Update | Delete |
 |----------|--------|------|--------|--------|
 | User | ❌ | ✅ | ✅ (last_login) | ❌ |
@@ -365,6 +387,7 @@ WHERE token = $1 AND expires_at > NOW() AND revoked_at IS NULL;
 **Escopo**: [PREENCHER: Quando usa transações]
 
 **Exemplo**:
+
 ```typescript
 // Login bem-sucedido usa transação para garantir consistência
 await this.db.transaction(async (trx) => {
@@ -465,6 +488,7 @@ sequenceDiagram
    - Retorna 200 com tokens e dados do usuário
 
 **Pós-condições**:
+
 - Usuário possui tokens válidos
 - Sessão criada no banco
 - Evento de auditoria emitido
@@ -489,6 +513,7 @@ sequenceDiagram
 ```
 
 **Consequências**:
+
 - Incrementa contador de tentativas falhas
 - Retorna erro genérico (não revela se usuário existe)
 - Após 5 tentativas: bloqueia por 15 minutos
@@ -511,6 +536,7 @@ sequenceDiagram
 ```
 
 **Mitigação**:
+
 - Implementar CAPTCHA após 3 tentativas falhas
 - Notificar usuário por email sobre tentativas suspeitas
 - Considerar exponential backoff
@@ -536,6 +562,7 @@ sequenceDiagram
 **Cenários Cobertos**:
 
 **AuthService.login()**:
+
 - ✅ Should login with valid credentials
 - ✅ Should throw InvalidCredentialsError with wrong password
 - ✅ Should throw UserNotFoundError when user doesn't exist
@@ -548,17 +575,20 @@ sequenceDiagram
 - ✅ Should emit UserLoggedIn event
 
 **AuthService.logout()**:
+
 - ✅ Should revoke refresh token
 - ✅ Should emit UserLoggedOut event
 - ✅ Should handle already revoked token
 
 **AuthService.refreshToken()**:
+
 - ✅ Should generate new tokens with valid refresh token
 - ✅ Should throw InvalidTokenError with expired token
 - ✅ Should throw InvalidTokenError with revoked token
 - ✅ Should implement rotating refresh tokens
 
 **Exemplo de Teste**:
+
 ```typescript
 describe('AuthService', () => {
   describe('login', () => {
@@ -614,6 +644,7 @@ describe('AuthService', () => {
 **Quantidade**: [PREENCHER: 15 testes]
 
 **Cenários**:
+
 - ✅ Full login flow with real database
 - ✅ Token refresh flow end-to-end
 - ✅ Logout invalidates token
@@ -621,6 +652,7 @@ describe('AuthService', () => {
 - ✅ Password hashing integration
 
 **Exemplo**:
+
 ```typescript
 describe('AuthController (Integration)', () => {
   it('POST /auth/login should return tokens', async () => {
@@ -655,6 +687,7 @@ describe('AuthController (Integration)', () => {
 ### Testes de Segurança
 
 **Cenários**:
+
 - ✅ Cannot login with SQL injection in email
 - ✅ Rate limiting prevents brute force
 - ✅ Tokens are properly signed and verified
@@ -668,14 +701,17 @@ describe('AuthController (Integration)', () => {
 ### Padrões Aplicados
 
 #### 1. Repository Pattern
+
 **Onde**: `AuthRepository`, `UserRepository`
 
-**Por quê**: 
+**Por quê**:
+
 - Abstrai acesso a dados
 - Facilita testes (mock repositories)
 - Permite trocar implementação de persistência
 
 **Exemplo**:
+
 ```typescript
 // Interface
 interface IUserRepository {
@@ -693,14 +729,17 @@ class PostgresUserRepository implements IUserRepository {
 ---
 
 #### 2. Dependency Injection
+
 **Onde**: Todos os services
 
 **Por quê**:
+
 - Inversão de controle
 - Facilita testes
 - Permite substituir dependências
 
 **Exemplo**:
+
 ```typescript
 class AuthService {
   constructor(
@@ -714,9 +753,11 @@ class AuthService {
 ---
 
 #### 3. DTO (Data Transfer Object)
+
 **Onde**: Toda comunicação entre camadas
 
 **Por quê**:
+
 - Validação de dados
 - Controle de dados expostos
 - Desacoplamento de entidades internas
@@ -724,13 +765,16 @@ class AuthService {
 ---
 
 #### 4. Error Handling Strategy
+
 **Onde**: Custom errors com hierarquia
 
 **Por quê**:
+
 - Erros específicos do domínio
 - Facilita tratamento na camada de apresentação
 
 **Hierarquia**:
+
 ```typescript
 AppError
   └── AuthError
@@ -751,6 +795,7 @@ AppError
 **Complexidade Cognitiva**: [PREENCHER: Média 8, Máx 15]
 
 **Linhas de Código**:
+
 - **Total**: ~1,500 LOC
 - **Service**: ~500 LOC
 - **Controller**: ~200 LOC
@@ -768,7 +813,8 @@ AppError
 | `login()` | 12 | 15 | Múltiplas validações e caminhos | Refatorar em submétodos |
 | `validateToken()` | 8 | 10 | Várias verificações de token | OK, complexidade inerente |
 
-**Ação Planejada**: 
+**Ação Planejada**:
+
 - Extrair `validateLoginAttempts()` de `login()`
 - Extrair `generateTokenPair()` de `login()`
 - Target: Reduzir complexidade de `login()` para < 8
@@ -780,6 +826,7 @@ AppError
 ### Validações de Input
 
 **Camada Controller (DTOs)**:
+
 ```typescript
 class LoginDto {
   @IsEmail()
@@ -794,6 +841,7 @@ class LoginDto {
 ```
 
 **Camada Service (Business)**:
+
 - Verifica se usuário existe
 - Valida status do usuário
 - Verifica tentativas de login
@@ -802,6 +850,7 @@ class LoginDto {
 ### Dados Sensíveis
 
 **Tipos**:
+
 - 🔴 **Senha do usuário**: Nunca armazenada em plain text
 - 🔴 **Tokens JWT**: Contém informações do usuário
 - 🟡 **Email**: PII, deve ser protegido
@@ -809,6 +858,7 @@ class LoginDto {
 **Proteção**:
 
 **Senhas**:
+
 ```typescript
 // Hashing com bcrypt (salt rounds = 10)
 const hash = await bcrypt.hash(password, 10);
@@ -818,6 +868,7 @@ const isValid = await bcrypt.compare(password, hash);
 ```
 
 **Tokens**:
+
 ```typescript
 // JWT assinado com HS256
 const token = jwt.sign(payload, SECRET, { 
@@ -829,6 +880,7 @@ const token = jwt.sign(payload, SECRET, {
 ```
 
 **Logs**:
+
 ```typescript
 // Nunca logar senhas
 logger.info('User login attempt', {
@@ -870,6 +922,7 @@ logger.debug('Token generated', {
 ### Otimizações Aplicadas
 
 **1. Cache de Tokens Validados**:
+
 ```typescript
 // Cache JWT validation por 5 minutos
 const cachedUser = await cache.get(`token:${token}`);
@@ -878,15 +931,19 @@ if (cachedUser) return cachedUser;
 const user = await this.validateToken(token);
 await cache.set(`token:${token}`, user, 300); // 5min TTL
 ```
+
 **Impacto**: Redução de 80% na latência de validação
 
 **2. Database Index em email**:
+
 ```sql
 CREATE INDEX idx_users_email ON users(email);
 ```
+
 **Impacto**: Query de `O(n)` para `O(log n)`
 
 **3. Connection Pooling**:
+
 ```typescript
 pool: {
   min: 5,
@@ -905,6 +962,7 @@ pool: {
 ### Limites
 
 **Capacidade Atual**:
+
 - **Max logins simultâneos**: ~500/s
 - **Max validações simultâneas**: ~2000/s
 
@@ -926,15 +984,18 @@ pool: {
 ### Refatorações Planejadas
 
 **Q2 2024**:
+
 - [ ] Extrair `LoginAttemptsService` (reduzir complexidade)
 - [ ] Adicionar MFA (Two-Factor Authentication)
 - [ ] Implementar "Remember Me" functionality
 
 **Q3 2024**:
+
 - [ ] Migrar de bcrypt para Argon2 (performance)
 - [ ] Implementar OAuth 2.0 providers (Google, GitHub)
 
 **Q4 2024**:
+
 - [ ] Biometric authentication support
 
 ### Débito Técnico
@@ -944,12 +1005,14 @@ pool: {
 **Localização**: `AuthService.validateWithExternalProvider()`
 
 **Impacto**:
+
 - **Disponibilidade**: 🔴 Alto - se provedor externo cai, nossa API trava
 - **Performance**: 🟡 Médio - timeouts longos degradam experiência
 
 **Contexto**: Implementado rapidamente sem considerar falhas de rede
 
 **Plano de Resolução**:
+
 1. Implementar circuit breaker com Opossum
 2. Adicionar fallback para validação local
 3. Monitorar taxa de falhas
@@ -969,11 +1032,13 @@ pool: {
 ### Decisões Técnicas Importantes
 
 **1. Por que bcrypt ao invés de scrypt/Argon2?**
+
 - Bcrypt é battle-tested e amplamente suportado
 - Performance adequada para nossa escala atual
 - Planejamos migrar para Argon2 em Q3 2024
 
 **2. Por que JWT ao invés de Session-based auth?**
+
 - Stateless: facilita escalabilidade horizontal
 - Reduz carga no database
 - Facilita comunicação entre microservices
@@ -982,6 +1047,7 @@ pool: {
 **Referência**: [ADR-005](../../../09_decisions/adrs/ADR-005_jwt-authentication.md)
 
 **3. Por que rotating refresh tokens?**
+
 - Previne token replay attacks
 - Detecta roubo de tokens (dois clientes usando mesmo token)
 - Aumenta segurança sem impactar UX
@@ -991,11 +1057,13 @@ pool: {
 ### Alternativas Consideradas
 
 **Argon2 para password hashing**:
+
 - **Prós**: Mais rápido, mais seguro, vencedor da Password Hashing Competition
 - **Contras**: Menos suporte em diferentes plataformas, menos battle-tested
 - **Decisão**: Usar bcrypt agora, migrar para Argon2 depois de 6 meses de uso
 
 **Session-based authentication**:
+
 - **Prós**: Fácil de invalidar, amplamente conhecido
 - **Contras**: Stateful (requer Redis/DB), não escala bem horizontalmente
 - **Decisão**: Rejeitado, prioridade é escalabilidade
@@ -1003,6 +1071,7 @@ pool: {
 ### Trade-offs
 
 **JWT Stateless vs Revogabilidade**:
+
 - **Escolhemos**: JWT stateless
 - **Ganhamos**: Escalabilidade, performance
 - **Perdemos**: Capacidade de invalidar tokens instantaneamente
@@ -1013,37 +1082,42 @@ pool: {
 ## 🔗 Navegação
 
 **Hierarquia**:
+
 - ⬆️ **Parent Container**: [CNT-003 Backend API](../../containers/CNT-003_backend-api.md)
 - ⬆️ **Building Blocks**: [Overview](../../005_building-block-view.md)
 - ⬇️ **Children**: N/A (componente leaf)
 
 **Componentes Relacionados (mesmo container)**:
+
 - [CMP-011 UserService](./CMP-011_user-service.md) - Usa para buscar dados de usuário
 - [CMP-012 NotificationService](./CMP-012_notification-service.md) - Notifica eventos de autenticação
 - [CMP-013 AuditService](./CMP-013_audit-service.md) - Registra ações de autenticação
 
 **Relacionados em Outras Seções**:
-- 📋 **Regras de Negócio**: 
+
+- 📋 **Regras de Negócio**:
   - [BUS-001 Password Policy](../../../../.rules/BUS-001_password-policy.md)
   - [BUS-002 Login Attempts](../../../../.rules/BUS-002_login-attempts.md)
   - [BUS-003 Token Expiration](../../../../.rules/BUS-003_token-expiration.md)
 - 🎬 **Runtime**: [Login Flow](../../../06_runtime/006_runtime-view.md#cenario-1-login)
 - 🔐 **Segurança**: [Authentication](../../../08_crosscutting/008_crosscutting-concepts.md#82-segurança)
-- 📝 **ADRs**: 
+- 📝 **ADRs**:
   - [ADR-005 JWT Authentication](../../../09_decisions/adrs/ADR-005_jwt-authentication.md)
   - [ADR-008 Rotating Refresh Tokens](../../../09_decisions/adrs/ADR-008_rotating-refresh-tokens.md)
 - 🎯 **Quality**: [Q-003 Security](../../../10_quality/010_quality-requirements.md#q-003)
 - ⚠️ **Débito Técnico**: [TD-015](../../../11_risks/011_risks-and-technical-debt.md#td-015)
-- 📖 **Glossário**: 
+- 📖 **Glossário**:
   - [JWT](../../../12_glossary/012_glossary.md#jwt)
   - [Refresh Token](../../../12_glossary/012_glossary.md#refresh-token)
 
 **Testes**:
+
 - `tests/unit/auth.service.spec.ts`
 - `tests/integration/auth.integration.spec.ts`
 - `tests/e2e/auth.e2e.spec.ts`
 
 **Código**:
+
 - `src/modules/auth/auth.service.ts`
 - `src/modules/auth/auth.controller.ts`
 - `src/modules/auth/auth.repository.ts`

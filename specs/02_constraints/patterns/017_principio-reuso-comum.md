@@ -27,15 +27,15 @@ O CRP ajuda a refinar a granularidade do pacote, garantindo que os clientes não
 ## Como Detectar
 
 ### Manual
+
 Verificar o diretório de `imports` de um cliente e ver quantas classes do pacote importado ele usa ativamente.
 
 ### Automático
+
 Análise de dependências: Ferramentas que mapeiam a porcentagem de classes consumidas dentro de um pacote.
 
 ## Relacionada com
 
-- [ESTRUTURAL-015]: complementa (Enfoca o reuso do pacote)
-- [COMPORTAMENTAL-013]: reforça (ISP)
 
 ---
 

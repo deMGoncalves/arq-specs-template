@@ -8,11 +8,16 @@
 
 ## 🚀 **(CDD): Transforme a Documentação em Conhecimento Acionável**
 
-A maioria dos projetos sofre de "Deriva Arquitetural" porque a documentação é um artefato passivo. O **ARQ-SPECS-TEMPLATE** inverte essa lógica.
+A maioria dos projetos sofre de "Deriva Arquitetural" porque a documentação
+é um artefato passivo. O **ARQ-SPECS-TEMPLATE** inverte essa lógica.
 
-Implementamos o **Context Driven Development (CDD)**: a especificação (`/specs`) não é apenas uma lista de requisitos, mas sim o **mapa completo de contexto** que responde ao *Porquê*, *O Quê* e *Onde* antes mesmo de você escrever a primeira linha de código.
+Implementamos o **Context Driven Development (CDD)**: a especificação (`/specs`)
+não é apenas uma lista de requisitos, mas sim o **mapa completo de contexto**
+que responde ao *Porquê*, *O Quê* e *Onde* antes mesmo de você escrever a
+primeira linha de código.
 
-Nossa metodologia unifica as **quatro** práticas mais sólidas do mercado, garantindo clareza, rastreabilidade e **assistência no ponto de dor**:
+Nossa metodologia unifica as **quatro** práticas mais sólidas do mercado,
+garantindo clareza, rastreabilidade e **assistência no ponto de dor**:
 
 | Fundamento | Foco Principal | O Que Ele Responde |
 | :--- | :--- | :--- |
@@ -25,9 +30,11 @@ Nossa metodologia unifica as **quatro** práticas mais sólidas do mercado, gara
 
 ## ✨ **O Valor Essencial: Governança de Código Explicita**
 
-O maior valor do CDD é traduzir princípios de design abstratos (SOLID, Clean Code) em **regras de código mensuráveis e rastreáveis**.
+O maior valor do CDD é traduzir princípios de design abstratos (SOLID,
+Clean Code) em **regras de código mensuráveis e rastreáveis**.
 
-Nossa camada de governança (`02_constraints/patterns/`) atua como o seu *co-piloto de arquitetura*, garantindo a Qualidade Inerente do projeto.
+Nossa camada de governança (`02_constraints/patterns/`) atua como o seu
+*co-piloto de arquitetura*, garantindo a Qualidade Inerente do projeto.
 
 | Problema Comum | Solução CDD no Template | Ganho Estratégico |
 | :--- | :--- | :--- |
@@ -39,7 +46,8 @@ Nossa camada de governança (`02_constraints/patterns/`) atua como o seu *co-pil
 
 ## 🧭 **Guia de Navegação Rápida (Developer Flow)**
 
-Para o desenvolvedor que acabou de clonar o projeto ou está iniciando uma nova *feature*, este é o caminho para obter o contexto imediato:
+Para o desenvolvedor que acabou de clonar o projeto ou está iniciando uma
+nova *feature*, este é o caminho para obter o contexto imediato:
 
 | Objetivo | Comece em | O que você encontra |
 | :--- | :--- | :--- |
@@ -53,7 +61,8 @@ Para o desenvolvedor que acabou de clonar o projeto ou está iniciando uma nova 
 
 ## 🛠️ **Quick Start: Adote o Padrão CDD**
 
-Você só precisa da pasta `/specs`. Use-a como o ativo de documentação primário do seu repositório.
+Você só precisa da pasta `/specs`. Use-a como o ativo de documentação
+primário do seu repositório.
 
 ### 1. Clonar e Isolar a Estrutura Base
 
@@ -72,17 +81,21 @@ rm -rf spec-template-temp
 
 ### 2\. Configure a Linguagem Ubíqua
 
-Comece preenchendo o **Glossário** (`12_glossary/012_glossary.md`) e os **Arquitetos/Sistemas Externos** (`03_context/`). O contexto de negócio deve sempre vir em primeiro lugar.
+Comece preenchendo o **Glossário** (`12_glossary/012_glossary.md`) e os
+**Arquitetos/Sistemas Externos** (`03_context/`). O contexto de negócio deve
+sempre vir em primeiro lugar.
 
------
+---
 
 ## 🤝 **Contribuições e Comunidade**
 
-Este é um projeto *open source* e cresce com a contribuição da comunidade. Se você encontrou uma melhoria para uma regra de código ou quer adicionar um novo pattern de arquitetura, seu PR é bem-vindo.
+Este é um projeto *open source* e cresce com a contribuição da comunidade.
+Se você encontrou uma melhoria para uma regra de código ou quer adicionar um
+novo pattern de arquitetura, seu PR é bem-vindo.
 
-  * **Guias de Contribuição**: Leia o [CONTRIBUTING.md](https://www.google.com/search?q=CONTRIBUTING.md) para o fluxo de trabalho.
-  * **Código de Conduta**: Revisado no [CODE\_OF\_CONDUCT.md](https://www.google.com/search?q=CODE_OF_CONDUCT.md).
-  * **Licença**: Distribuído sob a [Licença MIT](https://www.google.com/search?q=LICENSE).
+* **Guias de Contribuição**: Leia o [CONTRIBUTING.md](https://www.google.com/search?q=CONTRIBUTING.md) para o fluxo de trabalho.
+* **Código de Conduta**: Revisado no [CODE\_OF\_CONDUCT.md](https://www.google.com/search?q=CODE_OF_CONDUCT.md).
+* **Licença**: Distribuído sob a [Licença MIT](https://www.google.com/search?q=LICENSE).
 
 ### 🔍 **Índices Rápidos**
 
@@ -93,11 +106,11 @@ Este é um projeto *open source* e cresce com a contribuição da comunidade. Se
 | **Visão de Runtime (Fluxos)** | `specs/06_runtime/scenarios/` | [SCN-[NÚMERO]\_[nome-do-cenario].md](https://www.google.com/search?q=specs/06_runtime/scenarios/SCN-%5BN%C3%9AMERO%5D_%5Bnome-do-cenario%5D.md) |
 | **Glossário (Linguagem Ubíqua)** | `specs/12_glossary/` | [012\_glossary.md](https://www.google.com/search?q=specs/12_glossary/012_glossary.md) |
 
------
+---
 
 ## 🔗 **Referências e Links**
 
-  * **[arc42 Official](https://arc42.org/)**
-  * **[C4 Model](https://c4model.com/)**
-  * **[ADR (Architecture Decision Records)](https://adr.github.io/)**
-  * **[BDD (Behavior Driven Development)](https://www.google.com/search?q=https://cucumber.io/docs/bdd/gherkin/)**
+* **[arc42 Official](https://arc42.org/)**
+* **[C4 Model](https://c4model.com/)**
+* **[ADR (Architecture Decision Records)](https://adr.github.io/)**
+* **[BDD (Behavior Driven Development)](https://www.google.com/search?q=https://cucumber.io/docs/bdd/gherkin/)**

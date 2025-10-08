@@ -28,16 +28,15 @@ Argumentos sinalizadores (ex: `process(data, shouldLog: boolean)`) violam o Prin
 ## Como Detectar
 
 ### Manual
+
 Busca por parâmetros de função tipados como `boolean` ou com nomes como `isX`, `shouldY`, `withZ`.
 
 ### Automático
+
 ESLint: `no-flag-args` (regra customizada) ou `max-params`.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-010]: reforça (SRP)
-- [COMPORTAMENTAL-011]: reforça (OCP)
-- [ESTRUTURAL-033]: reforça (Limite de Parâmetros)
 
 ---
 

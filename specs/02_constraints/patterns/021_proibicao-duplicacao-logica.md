@@ -28,15 +28,15 @@ A duplicação cria um débito técnico severo, pois uma alteração exige a mod
 ## Como Detectar
 
 ### Manual
+
 Busca por trechos de código que parecem idênticos, mas têm pequenas variações (duplicação sutil).
 
 ### Automático
+
 SonarQube/ESLint: `no-duplicated-code` (com análise semântica).
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-010]: reforça (SRP é o caminho para o DRY)
-- [ESTRUTURAL-007]: reforça (Limite de Linhas)
 
 ---
 

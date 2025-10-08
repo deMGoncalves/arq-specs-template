@@ -27,15 +27,15 @@ Violações do REP levam a pacotes que são difíceis de versionar e consumir, f
 ## Como Detectar
 
 ### Manual
+
 Verificar se o pacote contém classes que não são utilizadas em conjunto pelos clientes.
 
 ### Automático
+
 Análise de dependências: `dependency-analysis` para identificar classes sem uso.
 
 ## Relacionada com
 
-- [ESTRUTURAL-016]: complementa (Coesão de Pacotes)
-- [COMPORTAMENTAL-010]: reforça (SRP a nível de Classe)
 
 ---
 

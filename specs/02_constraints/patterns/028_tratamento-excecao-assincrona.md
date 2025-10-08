@@ -27,15 +27,15 @@ Em ambientes como Node.js, exceções não tratadas em Promises são fatais e de
 ## Como Detectar
 
 ### Manual
+
 Busca por chamadas de função que retornam Promises sem `await` ou `.catch()` imediatamente após.
 
 ### Automático
+
 ESLint: `no-floating-promises`, `require-await`.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-027]: reforça (Qualidade no Tratamento de Erros)
-- [COMPORTAMENTAL-014]: complementa (DIP em funções de I/O)
 
 ---
 

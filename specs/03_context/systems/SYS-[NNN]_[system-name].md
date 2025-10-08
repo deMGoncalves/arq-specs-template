@@ -27,17 +27,20 @@
 ## 🔗 Integração
 
 ### Tipo de Comunicação
+
 - **Direção**: [Nosso Sistema → Externo | Externo → Nosso Sistema | Bidirecional]
 - **Padrão**: [Síncrono | Assíncrono | Híbrido]
 - **Iniciador**: [Quem inicia a comunicação]
 
 ### Protocolo
+
 - **Tipo**: [REST | SOAP | GraphQL | gRPC | Mensageria | Webhook | FTP | Outro]
 - **Versão API**: [PREENCHER: v1, v2, etc]
 - **Endpoint Base**: [PREENCHER: URL base]
 - **Ambiente Sandbox**: [PREENCHER: URL de teste]
 
 ### Autenticação
+
 - **Método**: [API Key | OAuth 2.0 | JWT | Basic Auth | mTLS | Certificate | Outro]
 - **Escopo/Permissões**: [PREENCHER]
 - **Renovação Credenciais**: [PREENCHER: Como/quando renovar]
@@ -48,9 +51,11 @@
 ## 📊 Dados Trocados
 
 ### Request (Nosso Sistema → Externo)
+
 **Formato**: [JSON | XML | Protocol Buffers | Form-Data | Outro]
 
 **Headers Obrigatórios**:
+
 ```
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -58,6 +63,7 @@ Content-Type: application/json
 ```
 
 **Estrutura de Payload**:
+
 ```json
 [PREENCHER: Exemplo de payload de request]
 {
@@ -70,6 +76,7 @@ Content-Type: application/json
 ```
 
 **Validações**:
+
 - [PREENCHER: Campo obrigatório 1]
 - [PREENCHER: Restrição de valor 2]
 
@@ -78,9 +85,11 @@ Content-Type: application/json
 ---
 
 ### Response (Externo → Nosso Sistema)
+
 **Formato**: [JSON | XML | Protocol Buffers | Outro]
 
 **Status Codes Esperados**:
+
 - `200`: [PREENCHER: Sucesso]
 - `400`: [PREENCHER: Erro de validação]
 - `401`: [PREENCHER: Não autorizado]
@@ -88,6 +97,7 @@ Content-Type: application/json
 - `500`: [PREENCHER: Erro interno]
 
 **Estrutura de Payload de Sucesso**:
+
 ```json
 [PREENCHER: Exemplo de payload de response]
 {
@@ -103,6 +113,7 @@ Content-Type: application/json
 ```
 
 **Estrutura de Payload de Erro**:
+
 ```json
 {
   "status": "error",
@@ -121,7 +132,8 @@ Content-Type: application/json
 
 **Uptime Histórico**: [PREENCHER: ex: 99.95%]
 
-**Tempo de Resposta Esperado**: 
+**Tempo de Resposta Esperado**:
+
 - **p50**: [PREENCHER: ex: 100ms]
 - **p95**: [PREENCHER: ex: 200ms]
 - **p99**: [PREENCHER: ex: 500ms]
@@ -138,7 +150,8 @@ Content-Type: application/json
 
 ## 🔒 Segurança
 
-**Dados Sensíveis Trafegados**: 
+**Dados Sensíveis Trafegados**:
+
 - [PREENCHER: PII, Financeiros, Saúde, etc]
 - [PREENCHER: Detalhes]
 
@@ -146,7 +159,8 @@ Content-Type: application/json
 
 **Criptografia em Repouso**: [PREENCHER: Se aplicável]
 
-**Compliance**: 
+**Compliance**:
+
 - [PREENCHER: LGPD]
 - [PREENCHER: PCI-DSS]
 - [PREENCHER: Outros]
@@ -169,15 +183,18 @@ Content-Type: application/json
 | [PREENCHER: 503] | [Serviço indisponível] | [Fallback + Alert] | Sim |
 
 ### Estratégia de Retry
+
 - **Tentativas**: [PREENCHER: 3 tentativas]
 - **Backoff**: [Exponencial | Linear | Fixo] - [PREENCHER: ex: 1s, 2s, 4s]
 - **Timeout**: [PREENCHER: 30 segundos]
 - **Circuit Breaker**: [Sim | Não] - [PREENCHER: Configuração]
 
 ### Fallback
+
 [PREENCHER: O que fazer quando sistema está indisponível]
 
 **Estratégia**:
+
 - [PREENCHER: ex: Usar cache local]
 - [PREENCHER: ex: Degradação graciosa]
 - [PREENCHER: ex: Sistema alternativo]
@@ -207,6 +224,7 @@ Content-Type: application/json
 **Dashboard**: [PREENCHER: Link para dashboard interno]
 
 **Métricas Principais Monitoradas**:
+
 - **Latência** (p95): [Target: < Xms]
 - **Taxa de Erro**: [Target: < Y%]
 - **Taxa de Sucesso**: [Target: > Z%]
@@ -221,6 +239,7 @@ Content-Type: application/json
 | [PREENCHER] | [Disponibilidade < 99%] | [🔴 Crítico] | [PagerDuty] |
 
 **Logs**:
+
 - **Todas as chamadas**: [Sim | Apenas erros]
 - **Retenção**: [PREENCHER: 90 dias]
 - **Ferramenta**: [PREENCHER: CloudWatch, DataDog, etc]
@@ -230,6 +249,7 @@ Content-Type: application/json
 ## 🔄 Dependências
 
 ### Nosso Sistema Depende Deste Sistema Para
+
 - [PREENCHER: Funcionalidade crítica 1] - **Container**: [CNT-XXX]
 - [PREENCHER: Funcionalidade crítica 2] - **Container**: [CNT-YYY]
 
@@ -238,13 +258,16 @@ Content-Type: application/json
 **Severidade**: [🔴 Crítica | 🟡 Alta | 🟢 Baixa]
 
 **Consequência Imediata**:
+
 - [PREENCHER: O que para de funcionar]
 - [PREENCHER: Impacto no usuário]
 
 **Consequência de Longo Prazo**:
+
 - [PREENCHER: Se ficar indisponível por > 1h]
 
 **Mitigação/Plano B**:
+
 1. [PREENCHER: Ação imediata]
 2. [PREENCHER: Alternativa temporária]
 3. [PREENCHER: Plano de recuperação]
@@ -260,10 +283,12 @@ Content-Type: application/json
 **Endpoint Nosso**: [PREENCHER: https://nosso-sistema/webhooks/sistema-externo]
 
 **Eventos Recebidos**:
+
 - `[EVENTO_1]`: [Descrição e payload]
 - `[EVENTO_2]`: [Descrição e payload]
 
 **Validação**:
+
 - [PREENCHER: Como validamos que webhook é legítimo]
 - [PREENCHER: Signature, IP whitelist, etc]
 
@@ -308,11 +333,13 @@ Content-Type: application/json
 ## 🔗 Navegação
 
 **Hierarquia**:
+
 - ⬆️ **Parent**: [System Context](../003_context-and-scope.md)
 - ⬇️ **Children**: N/A
 
 **Relacionados**:
-- 🏗️ **Containers que Integram**: 
+
+- 🏗️ **Containers que Integram**:
   - [CNT-XXX Nome](../../05_building-blocks/containers/CNT-XXX_nome.md)
 - 🎬 **Cenários de Integração**: [Runtime View](../../06_runtime/006_runtime-view.md#integracao-sistema-X)
 - ⚠️ **Riscos**: [Risks](../../11_risks/011_risks-and-technical-debt.md#R-XXX)

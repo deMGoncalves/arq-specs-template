@@ -27,15 +27,15 @@ Violações do SDP fazem com que módulos de alto nível (mais importantes para 
 ## Como Detectar
 
 ### Manual
+
 Identificar a camada de alto nível (ex: *Domain*) importando classes concretas de camadas externas (ex: *Infrastructure*).
 
 ### Automático
+
 Análise de dependências: Cálculo de métricas de estabilidade (I) do pacote.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-014]: reforça (DIP é o mecanismo principal para aderir ao SDP)
-- [ESTRUTURAL-018]: complementa (Estabilidade de Pacotes)
 
 ---
 

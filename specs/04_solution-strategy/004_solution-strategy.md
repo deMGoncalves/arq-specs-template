@@ -23,6 +23,7 @@
 ## 4.2 Padrões Arquiteturais
 
 ### Arquitetura Escolhida
+
 [PREENCHER: Clean Architecture, Hexagonal, Microservices, Modular Monolith, etc]
 
 **Padrão**: [PREENCHER]
@@ -55,18 +56,21 @@ Exemplo:
 ## 4.3 Decisões de Design
 
 ### Comunicação entre Componentes
+
 [PREENCHER: Síncrona, Assíncrona, Event-Driven, etc]
 
 - **Interna**: [PREENCHER]
 - **Externa**: [PREENCHER]
 
 ### Gerenciamento de Estado
+
 [PREENCHER: Como o estado é gerenciado na aplicação]
 
 - **Frontend**: [PREENCHER]
 - **Backend**: [PREENCHER]
 
 ### Tratamento de Erros
+
 [PREENCHER: Estratégia de error handling]
 
 - **Validação**: [PREENCHER]
@@ -78,19 +82,24 @@ Exemplo:
 ## 4.4 Abordagem para Requisitos de Qualidade
 
 ### Como atingir [Objetivo de Qualidade 1]
+
 [PREENCHER: Estratégia técnica específica]
 
 **Técnicas**:
+
 - [PREENCHER]
 - [PREENCHER]
 
 **Ferramentas**:
+
 - [PREENCHER]
 
 ### Como atingir [Objetivo de Qualidade 2]
+
 [PREENCHER: Repetir estrutura acima]
 
 ### Como atingir [Objetivo de Qualidade 3]
+
 [PREENCHER: Repetir estrutura acima]
 
 ---

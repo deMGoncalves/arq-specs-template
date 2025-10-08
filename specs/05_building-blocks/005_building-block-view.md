@@ -8,6 +8,7 @@
 ## 5.1 Visão Geral (Nível 1)
 
 ### Diagrama de Blocos Principais
+
 [PREENCHER: Diagrama C4 Level 2 - Container Diagram]
 
 ```
@@ -17,12 +18,14 @@
 ### Containers Principais
 
 #### [Nome do Container 1]
+
 - **Tipo**: [Aplicação Web/API/Worker/etc]
 - **Tecnologia**: [PREENCHER]
 - **Responsabilidade**: [PREENCHER]
 - **Dependências**: [PREENCHER]
 
 #### [Nome do Container 2]
+
 [PREENCHER: Repetir estrutura acima]
 
 ---
@@ -30,6 +33,7 @@
 ## 5.2 Decomposição do [Container Principal] (Nível 2)
 
 ### Diagrama de Componentes
+
 [PREENCHER: Diagrama C4 Level 3 - Component Diagram]
 
 ```
@@ -39,6 +43,7 @@
 ### Módulos/Componentes
 
 #### [Nome do Módulo 1]
+
 - **Camada**: [Domain/Application/Infrastructure]
 - **Responsabilidade**: [PREENCHER]
 - **Expõe**: [PREENCHER: Interfaces públicas]
@@ -46,6 +51,7 @@
 - **Regras de negócio**: [PREENCHER ou link para .rules/]
 
 #### [Nome do Módulo 2]
+
 [PREENCHER: Repetir estrutura acima]
 
 ---
@@ -90,16 +96,19 @@ src/
 **Responsabilidade**: [PREENCHER]
 
 **Interfaces Públicas**:
+
 ```typescript
 [PREENCHER: Signature de funções/métodos principais]
 ```
 
 **Dependências**:
+
 - [PREENCHER]
 
 **Regras Aplicáveis**: [Links para .rules/]
 
 ### [Componente Crítico 2]
+
 [PREENCHER: Repetir estrutura acima]
 
 ---
@@ -107,12 +116,15 @@ src/
 ## 5.5 Princípios de Modularização
 
 ### Coesão
+
 [PREENCHER: Como é garantida a coesão dos módulos]
 
 ### Acoplamento
+
 [PREENCHER: Como é minimizado o acoplamento]
 
 ### Encapsulamento
+
 [PREENCHER: O que é público vs privado em cada módulo]
 
 ---

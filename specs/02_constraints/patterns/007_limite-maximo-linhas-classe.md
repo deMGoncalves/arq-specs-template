@@ -28,15 +28,15 @@ A violação do limite de linhas é um forte indicador de que a classe está vio
 ## Como Detectar
 
 ### Manual
+
 Contagem visual ou uso de ferramentas de análise de métricas de arquivo.
 
 ### Automático
+
 SonarQube/ESLint: `max-lines-per-file: 50` e `max-lines-per-method: 5`.
 
 ## Relacionada com
 
-- [ESTRUTURAL-001]: reforça
-- [ESTRUTURAL-004]: reforça
 
 ---
 

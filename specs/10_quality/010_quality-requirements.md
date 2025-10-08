@@ -136,6 +136,7 @@ Medida: [PREENCHER: Como medir]
 **Ferramenta**: [PREENCHER]
 
 **Cenários**:
+
 1. **[Cenário 1]**: [PREENCHER: Descrição e expectativa]
 2. **[Cenário 2]**: [PREENCHER]
 
@@ -146,6 +147,7 @@ Medida: [PREENCHER: Como medir]
 **Ferramenta**: [PREENCHER]
 
 **Profile de Carga**:
+
 - **Usuários simultâneos**: [PREENCHER]
 - **Duração**: [PREENCHER]
 - **Ramp-up**: [PREENCHER]
@@ -159,6 +161,7 @@ Medida: [PREENCHER: Como medir]
 ### Testes de Segurança
 
 **Ferramentas**:
+
 - **SAST**: [PREENCHER: ex: SonarQube]
 - **DAST**: [PREENCHER: ex: OWASP ZAP]
 - **Dependency Check**: [PREENCHER: ex: Snyk]

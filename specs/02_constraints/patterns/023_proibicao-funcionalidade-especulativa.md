@@ -27,15 +27,15 @@ A funcionalidade especulativa aumenta a complexidade e o código morto, desperdi
 ## Como Detectar
 
 ### Manual
+
 Busca por métodos vazios, parâmetros não utilizados, ou código que nunca é chamado (código morto).
 
 ### Automático
+
 SonarQube/ESLint: `no-unused-vars`, `no-empty-function`.
 
 ## Relacionada com
 
-- [ESTRUTURAL-007]: reforça (Limite de Linhas)
-- [ESTRUTURAL-022]: complementa (Simplicidade)
 
 ---
 

@@ -27,15 +27,15 @@ Garante que a validação, formatação e as regras de negócio intrínsecas ao 
 ## Como Detectar
 
 ### Manual
+
 Identificar String ou Number sendo passado como argumento em múltiplos métodos, representando, por exemplo, um *ID* ou *Path*.
 
 ### Automático
+
 TypeScript: Detectar o uso excessivo de `string` ou `number` para campos tipados que deveriam ser classes dedicadas.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-008]: reforça
-- [COMPORTAMENTAL-009]: reforça
 
 ---
 

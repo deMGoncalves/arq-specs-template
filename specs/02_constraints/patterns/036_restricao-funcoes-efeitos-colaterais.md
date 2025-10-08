@@ -28,16 +28,15 @@ Efeitos colaterais inesperados introduzem erros graves e dificultam o raciocíni
 ## Como Detectar
 
 ### Manual
+
 Busca por métodos que retornam um valor de consulta, mas também chamam um `setter` ou modificam um atributo interno/externo.
 
 ### Automático
+
 ESLint: `no-side-effects-in-conditions` e análise de *mutability*.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-009]: reforça
-- [COMPORTAMENTAL-027]: reforça
-- [COMPORTAMENTAL-038]: reforça (CQS)
 
 ---
 

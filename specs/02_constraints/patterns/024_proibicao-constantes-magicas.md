@@ -28,15 +28,15 @@ Constantes mágicas degradam a legibilidade. Uma alteração de valor em vários
 ## Como Detectar
 
 ### Manual
+
 Busca por `string` ou `number` literal dentro de `if`, `switch` ou cálculos de negócio.
 
 ### Automático
+
 SonarQube/ESLint: `no-magic-numbers`, `no-magic-strings`.
 
 ## Relacionada com
 
-- [CRIACIONAL-003]: reforça (Encapsulamento de Primitivos)
-- [ESTRUTURAL-006]: complementa (Nomes Abreviados)
 
 ---
 

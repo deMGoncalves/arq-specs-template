@@ -28,15 +28,15 @@ As coleções nativas violam o SRP se tiverem lógica de manipulação distribu�
 ## Como Detectar
 
 ### Manual
+
 Verificar o uso de `Array.prototype` (map, filter, reduce) em métodos de classes que não sejam *First Class Collections*.
 
 ### Automático
+
 ESLint: Regras personalizadas para proibir o retorno de `Array` em classes de domínio.
 
 ## Relacionada com
 
-- [ESTRUTURAL-007]: reforça
-- [COMPORTAMENTAL-008]: reforça
 
 ---
 

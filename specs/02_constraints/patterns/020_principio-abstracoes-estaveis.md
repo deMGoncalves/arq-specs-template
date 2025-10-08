@@ -27,16 +27,15 @@ O SAP liga a estabilidade do pacote (SDP) à sua abstração (DIP). A violação
 ## Como Detectar
 
 ### Manual
+
 Identificar um módulo de negócio importante (estável) que é composto apenas por classes concretas.
 
 ### Automático
+
 Análise de dependências: Cálculo de métricas de abstração (A), instabilidade (I) e distância (D) do pacote.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-014]: reforça (DIP)
-- [ESTRUTURAL-019]: complementa (SDP)
-- [COMPORTAMENTAL-012]: reforça (LSP)
 
 ---
 

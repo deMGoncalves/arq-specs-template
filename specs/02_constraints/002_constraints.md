@@ -14,6 +14,7 @@
 | T-03 | [PREENCHER] | [PREENCHER] | [PREENCHER] |
 
 ### Tecnologias Obrigatórias
+
 [PREENCHER: Liste tecnologias que DEVEM ser usadas]
 
 - **Linguagem**: [PREENCHER]
@@ -22,9 +23,9 @@
 - **Cloud Provider**: [PREENCHER]
 
 ### Tecnologias Proibidas
+
 [PREENCHER: Liste tecnologias que NÃO PODEM ser usadas]
 
-- [PREENCHER]: [Motivo]
 - [PREENCHER]: [Motivo]
 
 ---
@@ -38,6 +39,7 @@
 | O-03 | [PREENCHER] | [PREENCHER] | [PREENCHER] |
 
 ### Processo de Desenvolvimento
+
 [PREENCHER: Metodologia, cerimônias obrigatórias, etc]
 
 - **Metodologia**: [PREENCHER: Scrum/Kanban/etc]
@@ -55,6 +57,7 @@
 | L-02 | [PREENCHER] | [PREENCHER] | [PREENCHER] |
 
 ### Regulamentações Aplicáveis
+
 [PREENCHER: LGPD, GDPR, PCI-DSS, etc]
 
 - [PREENCHER]: [Descrição e impacto]
@@ -64,6 +67,7 @@
 ## 2.4 Convenções e Padrões
 
 ### Padrões de Código
+
 [PREENCHER: Referência para .rules/ se aplicável]
 
 - **Style Guide**: [PREENCHER]
@@ -71,6 +75,7 @@
 - **Ferramentas**: [PREENCHER: Biome, ESLint, etc]
 
 ### Convenções de Nomenclatura
+
 [PREENCHER]
 
 - **Branches**: [PREENCHER: ex: feature/*, bugfix/*]

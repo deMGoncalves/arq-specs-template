@@ -10,6 +10,7 @@
 ### Entidades Principais
 
 #### [Entidade 1]
+
 ```typescript
 [PREENCHER: Definição da entidade]
 
@@ -19,15 +20,18 @@ interface Entidade1 {
 ```
 
 **Regras de Negócio**:
+
 - [PREENCHER]
 - [PREENCHER]
 
 **Invariantes**:
+
 - [PREENCHER]
 
 ---
 
 #### [Entidade 2]
+
 [PREENCHER: Repetir estrutura acima]
 
 ---
@@ -44,20 +48,24 @@ interface Entidade1 {
 ## 8.2 Segurança
 
 ### Autenticação
+
 [PREENCHER: Como usuários são autenticados]
 
 **Mecanismo**: [PREENCHER: JWT/OAuth/Session/etc]
 
 **Fluxo**:
+
 1. [PREENCHER]
 2. [PREENCHER]
 
 ### Autorização
+
 [PREENCHER: Como permissões são gerenciadas]
 
 **Modelo**: [PREENCHER: RBAC/ABAC/etc]
 
 **Roles**:
+
 - **[Role1]**: [Permissões]
 - **[Role2]**: [Permissões]
 
@@ -83,6 +91,7 @@ interface Entidade1 {
 **Banco Principal**: [PREENCHER]
 
 **Padrões Utilizados**:
+
 - **Repository Pattern**: [Sim/Não]
 - **Unit of Work**: [Sim/Não]
 - **Data Mapper**: [Sim/Não]
@@ -128,6 +137,7 @@ AppError
 ### Estratégia de Logging
 
 **Níveis de Log**:
+
 - **ERROR**: [PREENCHER: Quando usar]
 - **WARN**: [PREENCHER: Quando usar]
 - **INFO**: [PREENCHER: Quando usar]
@@ -136,6 +146,7 @@ AppError
 **Formato**: [PREENCHER: JSON, Plain text, etc]
 
 **Informações Obrigatórias**:
+
 - [PREENCHER: ex: requestId, userId, timestamp]
 
 ### Respostas de Erro da API
@@ -163,9 +174,11 @@ AppError
 - **Database Constraints**: [PREENCHER: Quais]
 
 ### Biblioteca/Framework
+
 [PREENCHER: Zod, Joi, class-validator, etc]
 
 ### Regras de Validação
+
 [PREENCHER: Link para .rules/ se aplicável]
 
 ---
@@ -179,6 +192,7 @@ AppError
 **Formato**: [PREENCHER: JSON, XML, etc]
 
 **Convenções**:
+
 - **Verbos HTTP**: [PREENCHER: Como são usados]
 - **Status Codes**: [PREENCHER: Quando usar cada um]
 - **Paginação**: [PREENCHER: Formato]
@@ -188,10 +202,12 @@ AppError
 **Broker**: [PREENCHER: RabbitMQ/Kafka/SQS/etc]
 
 **Padrões**:
+
 - **Publish/Subscribe**: [PREENCHER: Quando usar]
 - **Request/Reply**: [PREENCHER: Quando usar]
 
 **Formato de Mensagens**:
+
 ```json
 [PREENCHER: Estrutura padrão]
 ```
@@ -274,6 +290,7 @@ AppError
 **O que é auditado**: [PREENCHER]
 
 **Formato de Log de Auditoria**:
+
 ```json
 [PREENCHER]
 ```

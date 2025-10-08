@@ -28,15 +28,15 @@ A exposição direta do estado interno viola o encapsulamento, forçando o códi
 ## Como Detectar
 
 ### Manual
+
 Busca por métodos que contenham prefixos `get` ou `set` seguidos por um nome de propriedade, ou métodos que não possuam lógica de negócio própria.
 
 ### Automático
+
 ESLint: Regras customizadas para identificar padrões de métodos `get/set` vazios ou triviais.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-009]: reforça
-- [CRIACIONAL-003]: complementa
 
 ---
 

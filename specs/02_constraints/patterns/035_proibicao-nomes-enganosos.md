@@ -27,15 +27,15 @@ Nomes enganosos são uma forma de **desinformação** que quebra a confiança do
 ## Como Detectar
 
 ### Manual
+
 Verificar se o nome de uma variável contradiz seu uso ou o tipo real de dado que contém.
 
 ### Automático
+
 ESLint: Regras personalizadas contra notação húngara e para verificar padrões de lista.
 
 ## Relacionada com
 
-- [ESTRUTURAL-006]: complementa
-- [CRIACIONAL-003]: reforça
 
 ---
 

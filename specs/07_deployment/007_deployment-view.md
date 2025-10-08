@@ -8,6 +8,7 @@
 ## 7.1 Infraestrutura Overview
 
 ### Diagrama de Deployment
+
 [PREENCHER: Diagrama C4 Level 4 ou similar]
 
 ```
@@ -25,6 +26,7 @@
 **Região**: [PREENCHER]
 
 **Componentes**:
+
 | Componente | Tecnologia | Quantidade | Configuração |
 |------------|------------|------------|--------------|
 | [PREENCHER: ex: API Server] | [EC2/Container/etc] | [PREENCHER] | [CPU/RAM/Disk] |
@@ -48,9 +50,11 @@
 **Docker Compose**: [Sim/Não]
 
 **Serviços Necessários**:
+
 - [PREENCHER]
 
 **Comandos de Setup**:
+
 ```bash
 [PREENCHER: Comandos para subir ambiente local]
 ```
@@ -72,6 +76,7 @@
 ## 7.4 Pipeline de Deploy
 
 ### Estratégia de Deploy
+
 [PREENCHER: Blue/Green, Canary, Rolling Update, etc]
 
 ### CI/CD
@@ -79,6 +84,7 @@
 **Ferramenta**: [PREENCHER: GitHub Actions/GitLab CI/Jenkins/etc]
 
 **Stages**:
+
 ```
 [PREENCHER: Diagrama do pipeline]
 
@@ -87,6 +93,7 @@ Build → Test → Security Scan → Deploy Staging → Deploy Prod
 ```
 
 **Gatilhos**:
+
 - **Staging**: [PREENCHER: ex: push to main]
 - **Produção**: [PREENCHER: ex: tag release]
 
@@ -106,9 +113,11 @@ Build → Test → Security Scan → Deploy Staging → Deploy Prod
 | Alertas | [PREENCHER] | [PREENCHER] |
 
 ### Dashboards
+
 [PREENCHER: Links para dashboards principais]
 
 ### Alertas Críticos
+
 [PREENCHER: Condições que disparam alertas]
 
 - [PREENCHER]: [Condição] → [Ação]
@@ -131,6 +140,7 @@ Build → Test → Security Scan → Deploy Staging → Deploy Prod
 - **RPO** (Recovery Point Objective): [PREENCHER: ex: 15 minutos]
 
 ### Plano de Disaster Recovery
+
 [PREENCHER: Passos para recuperação em caso de desastre]
 
 1. [PREENCHER]
@@ -145,6 +155,7 @@ Build → Test → Security Scan → Deploy Staging → Deploy Prod
 **Componentes escaláveis**: [PREENCHER]
 
 **Auto-scaling**:
+
 - **Trigger**: [PREENCHER: ex: CPU > 70%]
 - **Min**: [PREENCHER]
 - **Max**: [PREENCHER]

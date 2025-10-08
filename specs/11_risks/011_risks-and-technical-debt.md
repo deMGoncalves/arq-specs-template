@@ -40,11 +40,13 @@ Status: [Ativo | Mitigado | Ocorreu | Descartado]
 
 **Estratégia de Mitigação**:
 [PREENCHER: Ações preventivas]
+
 - [PREENCHER]
 - [PREENCHER]
 
 **Plano de Contingência**:
 [PREENCHER: O que fazer se ocorrer]
+
 1. [PREENCHER]
 2. [PREENCHER]
 
@@ -104,6 +106,7 @@ Status: [Identificado | Planejado | Em Resolução | Resolvido]
 **Localização**: [PREENCHER: Arquivo/módulo/componente]
 
 **Impacto**:
+
 - **Manutenibilidade**: [Alto | Médio | Baixo]
 - **Performance**: [Alto | Médio | Baixo]
 - **Segurança**: [Alto | Médio | Baixo]
@@ -113,6 +116,7 @@ Status: [Identificado | Planejado | Em Resolução | Resolvido]
 **Contexto**: [PREENCHER: Por que foi criado? Foi consciente ou acidental?]
 
 **Plano de Resolução**:
+
 1. [PREENCHER]
 2. [PREENCHER]
 

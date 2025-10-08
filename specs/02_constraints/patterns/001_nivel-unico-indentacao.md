@@ -27,15 +27,15 @@ Reduz a Complexidade Ciclomática (CC), melhorando drasticamente a legibilidade 
 ## Como Detectar
 
 ### Manual
+
 Verificar a existência de um bloco de código aninhado (ex: um `if` dentro de um `for`, ou um `for` dentro de um `if`).
 
 ### Automático
+
 SonarQube/ESLint: `complexity.max-depth: 1`
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-002]: reforça
-- [ESTRUTURAL-007]: complementa
 
 ---
 

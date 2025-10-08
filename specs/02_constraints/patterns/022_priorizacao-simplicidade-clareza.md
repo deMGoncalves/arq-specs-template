@@ -27,15 +27,15 @@ A complexidade desnecessária é um débito que afeta a legibilidade e a manuten
 ## Como Detectar
 
 ### Manual
+
 Verificar se o código exige mais de 5 segundos de análise para entender seu propósito e fluxo de controle.
 
 ### Automático
+
 SonarQube/ESLint: `complexity.max-cycles: 5`.
 
 ## Relacionada com
 
-- [ESTRUTURAL-001]: reforça (1 Nível de Indentação)
-- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

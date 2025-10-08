@@ -27,15 +27,15 @@ Códigos de erro ou valores nulos (ex: `return null`) forçam o cliente a verifi
 ## Como Detectar
 
 ### Manual
+
 Busca por `return null`, `return -1`, ou `catch (e) {}` no código de negócio.
 
 ### Automático
+
 ESLint: `no-return-null`, `no-empty-catch`.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-002]: complementa (Proibição da Cláusula ELSE)
-- [ESTRUTURAL-022]: reforça (Simplicidade no tratamento do fluxo)
 
 ---
 

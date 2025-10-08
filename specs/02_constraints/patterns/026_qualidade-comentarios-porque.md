@@ -28,15 +28,15 @@ Comentários redundantes poluem o código e tendem a ficar desatualizados, crian
 ## Como Detectar
 
 ### Manual
+
 Verificar se o código pode ser lido e compreendido sem a necessidade de ler os comentários.
 
 ### Automático
+
 ESLint: Regras para detectar comentários em linhas de código simples.
 
 ## Relacionada com
 
-- [ESTRUTURAL-006]: reforça (Nomes Abreviados)
-- [ESTRUTURAL-022]: complementa (Simplicidade)
 
 ---
 

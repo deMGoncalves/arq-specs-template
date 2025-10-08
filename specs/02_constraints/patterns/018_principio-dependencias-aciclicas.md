@@ -27,15 +27,15 @@ Dependências circulares criam um nó rígido onde as classes em módulos envolv
 ## Como Detectar
 
 ### Manual
+
 Busca por `import { B } from 'module-b'` em `module-a` e `import { A } from 'module-a'` em `module-b`.
 
 ### Automático
+
 Análise de dependências: `dependency-graph-analysis` (detecta ciclos).
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-014]: reforça (DIP é a solução mais comum para quebrar ciclos ADP)
-- [COMPORTAMENTAL-009]: reforça (Princípio do "Diga, Não Pergunte")
 
 ---
 

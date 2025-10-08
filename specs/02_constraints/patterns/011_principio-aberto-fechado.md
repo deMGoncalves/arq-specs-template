@@ -27,16 +27,15 @@ A violação do OCP leva a código frágil. A conformidade reduz o risco de regr
 ## Como Detectar
 
 ### Manual
+
 Sempre que for necessário adicionar uma nova funcionalidade, verificar se foi preciso modificar a classe base (se sim, OCP violado).
 
 ### Automático
+
 ESLint: Regras que detectam alto número de *switch/if-else* em um método.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-002]: reforça (Proibição da Cláusula ELSE)
-- [COMPORTAMENTAL-012]: depende (LSP é um pré-requisito para o OCP funcionar)
-- [COMPORTAMENTAL-014]: complementa (O uso de Interfaces de ISP ajuda na extensão OCP)
 
 ---
 

@@ -52,26 +52,33 @@ Cada decisão arquitetural segue o formato:
 **Decisores**: [PREENCHER]
 
 ### Contexto
+
 [PREENCHER]
 
 ### Decisão
+
 [PREENCHER]
 
 ### Alternativas Consideradas
+
 [PREENCHER]
 
 ### Consequências
 
 **Positivas**:
+
 - [PREENCHER]
 
 **Negativas**:
+
 - [PREENCHER]
 
 **Riscos**:
+
 - [PREENCHER]
 
 ### Notas de Implementação
+
 [PREENCHER]
 
 ---

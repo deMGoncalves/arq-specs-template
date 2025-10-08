@@ -27,17 +27,15 @@ A violação do SRP causa **baixa coesão** e **alto acoplamento**, tornando as 
 ## Como Detectar
 
 ### Manual
+
 Perguntar: "Se houver uma mudança no requisito X e no requisito Y, esta classe precisa ser alterada em ambas as situações?" (SRP violado se a resposta for sim).
 
 ### Automático
+
 SonarQube: Alta `Cognitive Complexity` e `LCOM (Lack of Cohesion in Methods)` alto.
 
 ## Relacionada com
 
-- [ESTRUTURAL-007]: reforça (Limite Máximo de Linhas por Classe)
-- [ESTRUTURAL-004]: reforça (Uso Obrigatório de Coleções de Primeira Classe)
-- [COMPORTAMENTAL-011]: complementa (Garante que a extensão não quebre a responsabilidade)
-- [ESTRUTURAL-025]: complementa (God Object / The Blob)
 
 ---
 

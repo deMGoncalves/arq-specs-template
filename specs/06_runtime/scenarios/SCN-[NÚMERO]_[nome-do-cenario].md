@@ -30,14 +30,17 @@
 ### Passos (Given When Then)
 
 #### Given (Contexto / Pré-condições)
+
 - Dado que [PREENCHER: O sistema, o ator ou os dados estão em um estado inicial necessário]
 - E que [PREENCHER: Uma condição adicional é verdadeira]
 
 #### When (Ação / Estímulo)
+
 - Quando [PREENCHER: O ator executa a ação que dispara o comportamento (o estímulo)]
 - E [PREENCHER: Uma condição de tempo ou ação secundária ocorre]
 
 #### Then (Resultado / Pós-condições)
+
 - Então [PREENCHER: O sistema deve responder com o resultado esperado (a resposta)]
 - E [PREENCHER: O estado do sistema deve ser atualizado para o novo estado]
 - E [PREENCHER: Uma exceção ou evento específico deve ser lançado/emitido]

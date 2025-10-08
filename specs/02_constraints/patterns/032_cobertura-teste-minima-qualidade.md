@@ -27,15 +27,15 @@ Garante a **confiabilidade** e facilita a refatoração. Código sem testes unit
 ## Como Detectar
 
 ### Manual
+
 Busca por `if` ou `for` dentro de blocos `test()` ou `it()`.
 
 ### Automático
+
 Bun Test Runner/Jest: Configuração de `coverageThresholds`.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-011]: reforça (OCP)
-- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

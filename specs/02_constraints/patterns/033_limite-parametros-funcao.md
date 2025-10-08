@@ -27,15 +27,15 @@ Funções com muitos parâmetros (*Long Parameter List*) aumentam a **complexida
 ## Como Detectar
 
 ### Manual
+
 Identificar assinaturas de métodos com 4 ou mais parâmetros.
 
 ### Automático
+
 Biome/ESLint: `max-params: ["error", 3]`.
 
 ## Relacionada com
 
-- [CRIACIONAL-003]: reforça (Encapsulamento de Primitivos)
-- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 

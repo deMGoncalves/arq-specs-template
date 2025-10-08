@@ -27,14 +27,15 @@ Funções como `eval()` são vetores de ataque para **Execução Remota de Códi
 ## Como Detectar
 
 ### Manual
+
 Busca por `eval`, `new Function`, ou chaves de API *hardcoded*.
 
 ### Automático
+
 ESLint: `no-eval`, `no-implied-eval`.
 
 ## Relacionada com
 
-- [CRIACIONAL-024]: complementa (Constantes Mágicas)
 
 ---
 

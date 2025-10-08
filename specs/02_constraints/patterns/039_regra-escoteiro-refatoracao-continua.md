@@ -27,15 +27,15 @@ Este princípio incentiva a **refatoração contínua e emergente**, prevenindo 
 ## Como Detectar
 
 ### Manual
+
 Code review: Verificar se o desenvolvedor apenas corrigiu o bug, ou se melhorou a qualidade do código circundante.
 
 ### Automático
+
 Análise de *commits*: Verificar se a refatoração está sendo feita em pequenas doses.
 
 ## Relacionada com
 
-- [ESTRUTURAL-022]: reforça (Simplicidade)
-- [ESTRUTURAL-025]: complementa (The Blob)
 
 ---
 

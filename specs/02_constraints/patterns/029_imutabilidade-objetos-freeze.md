@@ -27,15 +27,15 @@ A mutabilidade acidental introduz bugs graves e dificulta o rastreamento da orig
 ## Como Detectar
 
 ### Manual
+
 Verificar a ausência de `Object.freeze()` em métodos *Factory* ou construtores de Entidades.
 
 ### Automático
+
 TypeScript: Uso de `readonly` em propriedades.
 
 ## Relacionada com
 
-- [CRIACIONAL-003]: reforça (Encapsulamento de Primitivos)
-- [COMPORTAMENTAL-008]: reforça (Proibição de Setters)
 
 ---
 

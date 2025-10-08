@@ -28,16 +28,15 @@ Violações do Princípio de Demeter resultam em acoplamento alto e transitivo (
 ## Como Detectar
 
 ### Manual
+
 Busca por encadeamento de chamadas (*dot-chaining*) com três ou mais chamadas consecutivas, indicando conhecimento de objetos aninhados.
 
 ### Automático
+
 ESLint: `no-chaining` com alta profundidade e `no-access-target` (com plugins customizados).
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-008]: reforça
-- [ESTRUTURAL-005]: reforça
-- [COMPORTAMENTAL-012]: reforça (LSP)
 
 ---
 

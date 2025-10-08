@@ -27,16 +27,15 @@ Violações do ISP causam classes anêmicas (com métodos vazios ou lançando ex
 ## Como Detectar
 
 ### Manual
+
 Busca por interfaces com 8 ou mais métodos, ou classes implementadoras que deixam métodos sem funcionalidade.
 
 ### Automático
+
 SonarQube: Alta complexidade acoplada devido a métodos não utilizados.
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-010]: reforça (Classes pequenas tornam a segregação de interfaces mais fácil)
-- [COMPORTAMENTAL-011]: complementa (Interfaces bem segregadas facilitam a extensão OCP)
-- [ESTRUTURAL-017]: complementa (CRP)
 
 ---
 

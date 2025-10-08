@@ -28,16 +28,15 @@ O DIP é crucial para desacoplar a política de negócio da implementação. A v
 ## Como Detectar
 
 ### Manual
+
 Busca por `new NomeConcreto()` dentro do código de *Services* ou *Business Logic*.
 
 ### Automático
+
 ESLint: `no-new-without-abstraction` (com regras customizadas).
 
 ## Relacionada com
 
-- [COMPORTAMENTAL-011]: reforça (Permite a extensão OCP)
-- [ESTRUTURAL-015]: reforça (Princípio de Pacote REP)
-- [CRIACIONAL-003]: complementa (Encapsulamento de Primitivos)
 
 ---
 

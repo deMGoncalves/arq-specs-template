@@ -14,20 +14,24 @@
 ### Forças em Jogo
 
 **Forças Técnicas**:
+
 - [PREENCHER: Força técnica 1]
 - [PREENCHER: Força técnica 2]
 
 **Forças de Negócio**:
+
 - [PREENCHER: Força de negócio 1]
 - [PREENCHER: Força de negócio 2]
 
 **Restrições**:
+
 - [PREENCHER: Restrição 1 - ex: Budget, Prazo]
 - [PREENCHER: Restrição 2 - ex: Tecnologia legada]
 
 ### Contexto Adicional
 
 **Referências Externas**:
+
 - [PREENCHER: Link para RFC, Spike, POC]
 - [PREENCHER: Link para discussão relevante]
 
@@ -44,6 +48,7 @@
 [PREENCHER: Descrição detalhada da solução escolhida]
 
 **Resumo Técnico**:
+
 ```
 [PREENCHER: Pseudo-código, diagrama, ou descrição técnica]
 
@@ -54,6 +59,7 @@ Exemplo:
 ```
 
 **Implementação**:
+
 1. [PREENCHER: Passo 1 de implementação]
 2. [PREENCHER: Passo 2 de implementação]
 3. [PREENCHER: Passo 3 de implementação]
@@ -71,11 +77,13 @@ Exemplo:
 **Descrição**: [PREENCHER]
 
 **Prós**:
+
 - ✅ [PREENCHER: Vantagem 1]
 - ✅ [PREENCHER: Vantagem 2]
 - ✅ [PREENCHER: Vantagem 3]
 
 **Contras**:
+
 - ❌ [PREENCHER: Desvantagem 1]
 - ❌ [PREENCHER: Desvantagem 2]
 - ❌ [PREENCHER: Desvantagem 3]
@@ -89,9 +97,11 @@ Exemplo:
 **Descrição**: [PREENCHER]
 
 **Prós**:
+
 - ✅ [PREENCHER]
 
 **Contras**:
+
 - ❌ [PREENCHER]
 
 **Por que foi rejeitada**: [PREENCHER]
@@ -167,10 +177,12 @@ Exemplo:
 ### Dependências
 
 **Tecnologias/Bibliotecas Novas**:
+
 - [PREENCHER: Nome] - [Versão] - [Por quê]
 - [PREENCHER: Nome] - [Versão] - [Por quê]
 
 **Integrações Externas**:
+
 - [PREENCHER: Sistema X - nova integração necessária]
 
 ### Requisitos de Infraestrutura
@@ -182,14 +194,17 @@ Exemplo:
 ### Migration Path
 
 **Para Sistemas Existentes**:
+
 1. [PREENCHER: Passo 1 de migração]
 2. [PREENCHER: Passo 2 de migração]
 3. [PREENCHER: Passo 3 de migração]
 
 **Rollback Plan**:
+
 - [PREENCHER: Como reverter se necessário]
 
 **Feature Flags**:
+
 - [PREENCHER: Flags necessárias para rollout gradual]
 
 ---
@@ -204,6 +219,7 @@ Exemplo:
 | [PREENCHER] | [PREENCHER] | [PREENCHER] | [YYYY-MM-DD] |
 
 **KPIs de Acompanhamento**:
+
 - [PREENCHER: KPI 1 e como medir]
 - [PREENCHER: KPI 2 e como medir]
 
@@ -219,6 +235,7 @@ Exemplo:
 | 4 | [PREENCHER: ex: Deploy produção] | [YYYY-MM-DD] | [YYYY-MM-DD] | [STATUS] |
 
 **Milestones**:
+
 - [YYYY-MM-DD]: [PREENCHER: Milestone 1]
 - [YYYY-MM-DD]: [PREENCHER: Milestone 2]
 
@@ -249,18 +266,22 @@ Exemplo:
 ## 📚 Referências
 
 **Documentação**:
+
 - [PREENCHER: Link para spike técnico]
 - [PREENCHER: Link para POC]
 - [PREENCHER: Link para RFC]
 
 **Artigos/Papers**:
+
 - [PREENCHER: Artigo que influenciou a decisão]
 
 **Discussões**:
+
 - [PREENCHER: Link para thread no Slack/Teams]
 - [PREENCHER: Link para issue/ticket]
 
 **Código de Exemplo**:
+
 - [PREENCHER: Link para branch/commit de POC]
 
 ---
@@ -270,11 +291,13 @@ Exemplo:
 **Data de Revisão Planejada**: [YYYY-MM-DD]
 
 **Condições para Revisão**:
+
 - [PREENCHER: ex: Após 6 meses de uso]
 - [PREENCHER: ex: Se métrica X não for atingida]
 - [PREENCHER: ex: Se tecnologia Y lançar nova versão]
 
 **Critérios para Deprecation**:
+
 - [PREENCHER: Quando esta decisão deve ser revista]
 
 ---
@@ -282,15 +305,17 @@ Exemplo:
 ## 🔗 Navegação
 
 **Hierarquia**:
+
 - ⬆️ **Parent**: [Architectural Decisions Index](../009_architectural-decisions.md)
 - ⬇️ **Children**: N/A
 
 **Relacionados**:
-- 📋 **ADRs Relacionadas**: 
+
+- 📋 **ADRs Relacionadas**:
   - [ADR-XXX Título](./ADR-XXX_titulo.md) - [Como se relaciona]
-- 🏗️ **Containers Impactados**: 
+- 🏗️ **Containers Impactados**:
   - [CNT-XXX Nome](../../05_building-blocks/containers/CNT-XXX_nome.md)
-- 🔧 **Componentes Impactados**: 
+- 🔧 **Componentes Impactados**:
   - [CMP-XXX Nome](../../05_building-blocks/components/CNT-XXX_container/CMP-XXX_nome.md)
 - 📖 **Conceitos**: [Crosscutting Concepts](../../08_crosscutting/008_crosscutting-concepts.md)
 - ⚠️ **Riscos**: [Risks](../../11_risks/011_risks-and-technical-debt.md)

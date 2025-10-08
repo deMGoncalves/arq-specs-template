@@ -8,6 +8,7 @@
 ## 3.1 Contexto de Negócio
 
 ### Diagrama de Contexto
+
 [PREENCHER: Inserir diagrama C4 Level 1 ou similar]
 
 ```
@@ -35,6 +36,7 @@
 ### Integrações
 
 #### [Nome da Integração 1]
+
 - **Tipo**: [Síncrona/Assíncrona]
 - **Protocolo**: [PREENCHER]
 - **Autenticação**: [PREENCHER]
@@ -43,6 +45,7 @@
 - **Documentação**: [Link]
 
 #### [Nome da Integração 2]
+
 [PREENCHER: Repetir estrutura acima]
 
 ---

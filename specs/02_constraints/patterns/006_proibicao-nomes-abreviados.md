@@ -28,15 +28,15 @@ A clareza do código depende diretamente da clareza dos nomes. Abreviações red
 ## Como Detectar
 
 ### Manual
+
 Busca por nomes de variáveis que sejam incompreensíveis para um leitor novo sem contexto.
 
 ### Automático
+
 ESLint: `naming-convention` com limites mínimos de caracteres.
 
 ## Relacionada com
 
-- [ESTRUTURAL-005]: complementa
-- [CRIACIONAL-003]: reforça
 
 ---
 

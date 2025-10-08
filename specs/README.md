@@ -14,9 +14,9 @@ Ela segue o Framework **arc42** complementado pelo modelo **C4** e pela gestão 
 
 ### Os Três Pilares
 
-  - **arc42 (Estratégia):** Estrutura o conhecimento em 12 seções, garantindo que o escopo e os objetivos sejam definidos.
-  - **C4 Model (Estrutura):** Oferece visualização em 4 níveis de abstração, desde o Contexto (L1) até o Componente (L3).
-  - **ADRs (Evolução):** Preserva o histórico das decisões arquiteturais e seus *trade-offs*.
+- **arc42 (Estratégia):** Estrutura o conhecimento em 12 seções, garantindo que o escopo e os objetivos sejam definidos.
+- **C4 Model (Estrutura):** Oferece visualização em 4 níveis de abstração, desde o Contexto (L1) até o Componente (L3).
+- **ADRs (Evolução):** Preserva o histórico das decisões arquiteturais e seus *trade-offs*.
 
 -----
 
@@ -75,17 +75,17 @@ O SDD exige que a regra técnica seja verificada antes da codificação.
 
 ### 📐 Governança e Regras Técnicas (Pattern Layer)
 
-  - **Padrões de Engenharia (`patterns/`)**: **39** regras documentadas (SRP, DIP, Nomenclatura)
-      - Ver todos em [`02_constraints/patterns/`](./02_constraints/patterns/)
-  - **Decisões de Arquitetura (ADRs)**: **0** decisões registradas (1 template)
-      - Ver todas em [`09_decisions/adrs/`](./09_decisions/adrs/)
+- **Padrões de Engenharia (`patterns/`)**: **39** regras documentadas (SRP, DIP, Nomenclatura)
+  - Ver todos em [`02_constraints/patterns/`](./02_constraints/patterns/)
+- **Decisões de Arquitetura (ADRs)**: **0** decisões registradas (1 template)
+  - Ver todas em [`09_decisions/adrs/`](./09_decisions/adrs/)
 
 ### 📊 Estrutura de Domínio (C4 Model)
 
-  - **Containers (Level 2)**: 0 containers (1 template)
-      - Ver [`05_building-blocks/containers/`](./05_building-blocks/containers/)
-  - **Componentes (Level 3)**: 0 componentes (1 template)
-      - Ver [`05_building-blocks/components/`](./05_building-blocks/components/)
+- **Containers (Level 2)**: 0 containers (1 template)
+  - Ver [`05_building-blocks/containers/`](./05_building-blocks/containers/)
+- **Componentes (Level 3)**: 0 componentes (1 template)
+  - Ver [`05_building-blocks/components/`](./05_building-blocks/components/)
 
 -----
 
@@ -122,23 +122,23 @@ A integridade desta documentação depende da **regra do escoteiro**.
 
 ### Criando Nova Documentação (Princípio da Ordem)
 
-1.  **Identifique o Nível C4:** Actor, System, Container, Component, ADR?
-2.  **Use o template correto:** Siga a convenção de nomenclatura rigorosa: `TIPO-NNN_nome-descritivo.md`.
-3.  **Preencha as Referências Cruzadas:** **Obrigatório** o link `⬆️ Parent` e a referência a `📝 ADR` ou `🎯 Quality` no final do documento.
+1. **Identifique o Nível C4:** Actor, System, Container, Component, ADR?
+2. **Use o template correto:** Siga a convenção de nomenclatura rigorosa: `TIPO-NNN_nome-descritivo.md`.
+3. **Preencha as Referências Cruzadas:** **Obrigatório** o link `⬆️ Parent` e a referência a `📝 ADR` ou `🎯 Quality` no final do documento.
 
 ### Atualizando Documentação Existente (Princípio da Manutenção)
 
-1.  Atualize o campo `Última Atualização`.
-2.  **Verifique os Links:** Garanta que nenhuma alteração quebre as referências cruzadas internas (rastreabilidade).
+1. Atualize o campo `Última Atualização`.
+2. **Verifique os Links:** Garanta que nenhuma alteração quebre as referências cruzadas internas (rastreabilidade).
 
 -----
 
 ## 🔗 **Links de Governança**
 
-  - **Regras de Código (Rulebook)**: Ver [`02_constraints/patterns/`](./02_constraints/patterns/) para SRP, DIP e Clean Code.
-  - [arc42 Official](https://arc42.org/)
-  - [C4 Model](https://c4model.com/)
-  - [ADR Repository](https://adr.github.io/)
+- **Regras de Código (Rulebook)**: Ver [`02_constraints/patterns/`](./02_constraints/patterns/) para SRP, DIP e Clean Code.
+- [arc42 Official](https://arc42.org/)
+- [C4 Model](https://c4model.com/)
+- [ADR Repository](https://adr.github.io/)
 
 -----
 

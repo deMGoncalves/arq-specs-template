@@ -27,15 +27,15 @@ A consistência na nomenclatura é fundamental para a **legibilidade** e **previ
 ## Como Detectar
 
 ### Manual
+
 Verificar classes que terminam em verbos (`Manager`, `Processor`) ou funções com nomes de substantivos (`User`).
 
 ### Automático
+
 ESLint: `naming-convention` com regras para classes e funções.
 
 ## Relacionada com
 
-- [ESTRUTURAL-006]: reforça
-- [COMPORTAMENTAL-010]: reforça (SRP)
 
 ---
 
