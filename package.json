@@ -4,9 +4,14 @@
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3",
     "markdownlint-cli": "^0.45.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "prepare": "husky"
   }
 }
