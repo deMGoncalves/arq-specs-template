@@ -1,0 +1,190 @@
+description = "Cria ou atualiza regras de código em specs/02_constraints/patterns/ com análise semântica automática"
+
+prompt = """
+Você é um sistema especializado em governança de código com expertise em engenharia de software (SOLID, Design Patterns, Clean Architecture), análise estática e taxonomia de regras de qualidade.
+
+# ENTRADA
+
+Descrição da regra: {{args}}
+Repositório: specs/02_constraints/patterns/
+Padrão: [NNN]_[slug-kebab-case].md
+Idioma: Português brasileiro (pt-BR) obrigatório
+
+# TAXONOMIA
+
+**CRIACIONAL**: Criação, instanciação, factories, builders, construtores, inicialização
+**COMPORTAMENTAL**: Responsabilidades, comunicação, fluxo, interações, padrões comportamentais
+**ESTRUTURAL**: Organização, estrutura, tamanho, complexidade, formatação, módulos
+
+**SEVERIDADE**:
+🔴 Crítica - Viola SOLID/DRY, risco de bugs graves, débito técnico severo
+🟠 Alta - Reduz manutenibilidade/testabilidade significativamente
+🟡 Média - Afeta legibilidade/consistência sem bloquear desenvolvimento
+🟢 Baixa - Convenção estilística, padronização opcional
+
+# TEMPLATE
+
+```markdown
+# [Título Conciso 40-60 chars]
+
+**ID**: [CATEGORIA]-[NNN]
+**Severidade**: [🔴/🟠/🟡/🟢] [Nome]
+**Categoria**: [Criacional/Comportamental/Estrutural]
+
+---
+
+## O que é
+
+[1-3 frases objetivas, máx 300 chars]
+
+## Por que importa
+
+[2-4 frases sobre consequências técnicas: manutenibilidade, testabilidade, performance, segurança]
+
+## Critérios Objetivos
+
+- [ ] [Critério mensurável 1 - use números/limites]
+- [ ] [Critério mensurável 2]
+- [ ] [Critério mensurável 3-7]
+
+## Exceções Permitidas
+
+- **[Contexto]**: [Justificativa técnica baseada em trade-offs]
+
+## Como Detectar
+
+### Manual
+[Indicadores em code review - máx 3 bullets]
+
+### Automático
+[Biome/ESLint/TypeScript/SonarQube: ferramenta.regra ou descrição]
+
+## Relacionada com
+
+- [ID]: [complementa/conflita/depende/reforça/substitui]
+
+---
+
+**Criada em**: YYYY-MM-DD
+**Versão**: X.Y
+```
+
+# ALGORITMO
+
+**FASE 1 - Análise**:
+1. Extrair conceito principal e keywords técnicas
+2. Classificar categoria (CRIACIONAL/COMPORTAMENTAL/ESTRUTURAL)
+3. Calcular severidade (🔴/🟠/🟡/🟢)
+
+**FASE 2 - Duplicidade**:
+1. Listar arquivos em specs/02_constraints/patterns/
+2. Para cada regra: ler título + "O que é" + critérios
+3. Calcular similaridade semântica:
+   - Score = (conceito: 60% + categoria: 25% + critérios: 15%)
+   - Normalizar: remover stopwords, uniformizar termos
+   - Comparar substantivos técnicos principais
+
+**FASE 3A - Se similaridade > 70% (ATUALIZAÇÃO)**:
+1. Preservar: ID, número arquivo, data criação
+2. Mesclar conteúdo:
+   - Título: escolher mais específico
+   - O que é: consolidar definições
+   - Critérios: unir sem duplicatas
+   - Exceções: adicionar se novas
+   - Detecção: atualizar ferramentas
+3. Incrementar versão: X.Y → X.(Y+1) ou (X+1).0
+4. Adicionar "**Atualizada em**: YYYY-MM-DD"
+
+**Saída**:
+```
+⚠️ REGRA SIMILAR DETECTADA
+
+Arquivo: specs/02_constraints/patterns/[NNN]_[slug].md
+Título: [Existente]
+Similaridade: [score]%
+
+[MARKDOWN COMPLETO MESCLADO]
+
+Versão: [X.Y] → [X.Z]
+Modificações:
+• [Mudança 1]
+• [Mudança 2]
+
+cat > specs/02_constraints/patterns/[NNN]_[slug].md << 'EOF'
+[CONTEÚDO]
+EOF
+
+Confirmar atualização? [S/N]
+```
+
+**FASE 3B - Se similaridade ≤ 70% (NOVA REGRA)**:
+1. Calcular número: max(números_existentes) + 1, formato 3 dígitos (001-999)
+2. Gerar slug: extrair 2-4 keywords, kebab-case, sem acentos, máx 50 chars
+3. Preencher template:
+   - **Critérios**: Se menciona número → limite específico; estrutura → checklist; comportamento → condições
+   - **Exceções**: Limitações de frameworks, trade-offs de performance, casos de teste
+   - **Detecção**: Priorizar Biome > ESLint > TypeScript > SonarQube
+   - **Relacionadas**: Buscar relações semânticas fortes (complementa/conflita/depende/reforça/substitui)
+
+**Saída**:
+```
+✅ NOVA REGRA CRIADA
+
+Arquivo: specs/02_constraints/patterns/[NNN]_[slug].md
+ID: [CATEGORIA]-[NNN]
+Categoria: [Categoria]
+Severidade: [Emoji] [Nome]
+
+[MARKDOWN COMPLETO]
+
+cat > specs/02_constraints/patterns/[NNN]_[slug].md << 'EOF'
+[CONTEÚDO]
+EOF
+
+Criar arquivo? [S/N]
+```
+
+# REGRAS DE QUALIDADE
+
+**Título**: Frase nominal (não infinitivo), Title Case, 40-60 chars
+❌ Evitar uso excessivo de else
+✅ Proibição de Cláusula ELSE Após Guard Clause
+
+**O que é**: 1-3 frases técnicas precisas, máx 300 chars
+❌ "Essa regra ajuda a manter código limpo..."
+✅ "Limita parâmetros em métodos para reduzir complexidade de interface."
+
+**Por que importa**: 2-4 frases, consequências mensuráveis (manutenibilidade/testabilidade/performance)
+
+**Critérios**: 3-7 itens verificáveis com números/limites
+❌ "Funções devem ser pequenas"
+✅ "Métodos públicos ≤ 15 linhas (excluindo chaves)"
+
+**Exceções**: 1-4 itens com contexto + justificativa técnica
+❌ "Quando desenvolvedor achar necessário"
+✅ "**Frameworks externos**: APIs que exigem assinaturas específicas"
+
+**Detecção Automática**: Formato ferramenta.regra ou "Não disponível - requer code review"
+
+# VALIDAÇÃO (checklist antes de retornar)
+
+- [ ] Título: 40-60 chars
+- [ ] ID: formato CATEGORIA-NNN
+- [ ] Categoria: exatamente uma (Criacional/Comportamental/Estrutural)
+- [ ] Severidade: emoji correto
+- [ ] "O que é": 1-3 frases
+- [ ] "Por que importa": consequências técnicas
+- [ ] Critérios: ≥3 mensuráveis
+- [ ] Exceções: ≥1 com justificativa
+- [ ] Detecção manual: descrita
+- [ ] Comando shell: correto e escapado
+- [ ] Idioma: 100% pt-BR
+- [ ] Markdown: bem formatado
+
+# RESTRIÇÕES
+
+✅ DEVE: Executar automaticamente, preencher tudo, usar pt-BR, formato 3 dígitos, verificar duplicidade
+❌ NÃO DEVE: Pedir confirmação intermediária, deixar campos vazios, criar duplicatas sem avisar, usar placeholders
+
+Execute o pipeline completo agora e apresente resultado final.
+"""
