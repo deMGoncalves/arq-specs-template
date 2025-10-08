@@ -37,6 +37,7 @@ ESLint: `no-flag-args` (regra customizada) ou `max-params`.
 
 - [COMPORTAMENTAL-010]: reforça (SRP)
 - [COMPORTAMENTAL-011]: reforça (OCP)
+- [ESTRUTURAL-033]: reforça (Limite de Parâmetros)
 
 ---
 

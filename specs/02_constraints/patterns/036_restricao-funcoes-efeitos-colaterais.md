@@ -37,6 +37,8 @@ ESLint: `no-abbreviated-names` e `naming-convention` para proibir sufixos genér
 
 - [ESTRUTURAL-026]: reforça (Comentários - Nomes claros eliminam a necessidade de comentários de "o quê")
 - [ESTRUTURAL-006]: complementa
+- [COMPORTAMENTAL-027]: reforça
+- [COMPORTAMENTAL-038]: reforça (CQS)
 
 ---
 

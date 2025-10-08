@@ -36,6 +36,7 @@ SonarQube: Alta complexidade acoplada devido a métodos não utilizados.
 
 - [COMPORTAMENTAL-010]: reforça (Classes pequenas tornam a segregação de interfaces mais fácil)
 - [COMPORTAMENTAL-011]: complementa (Interfaces bem segregadas facilitam a extensão OCP)
+- [ESTRUTURAL-017]: complementa (CRP)
 
 ---
 
