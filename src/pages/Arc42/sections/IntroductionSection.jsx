@@ -24,8 +24,6 @@ const STATUS_BADGE = {
   complete: { variant: "success", label: "🟢 Completo" }
 };
 
-const DEFAULT_STAKEHOLDER_ROLES = ["", "Product Owner", "Tech Lead", "Arquiteto"];
-
 const OVERVIEW_ITEMS = [
   {
     field: "overview",
@@ -69,7 +67,7 @@ function createFeature(index) {
 function createStakeholder(index) {
   return {
     id: `stakeholder-${index + 1}`,
-    role: DEFAULT_STAKEHOLDER_ROLES[index] || "",
+    role: "",
     name: "",
     area: "",
     expectations: "",
