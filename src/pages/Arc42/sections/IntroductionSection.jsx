@@ -68,11 +68,8 @@ function createStakeholder(index) {
   return {
     id: `stakeholder-${index + 1}`,
     role: "",
-    name: "",
     area: "",
-    expectations: "",
-    email: "",
-    phone: ""
+    expectations: ""
   };
 }
 
@@ -120,11 +117,8 @@ function buildIntroductionState(section) {
     ? intro.stakeholders.map((stakeholder) => ({
         id: stakeholder?.id,
         role: stakeholder?.role || "",
-        name: stakeholder?.name || "",
         area: stakeholder?.area || stakeholder?.department || "",
-        expectations: stakeholder?.expectations || "",
-        email: stakeholder?.email || stakeholder?.contact || "",
-        phone: stakeholder?.phone || ""
+        expectations: stakeholder?.expectations || stakeholder?.notes || ""
       }))
     : [];
   return {
@@ -174,11 +168,8 @@ function normalizeIntroductionForSave(state) {
     stakeholders: normalizeArray(state.stakeholders, (stakeholder) => ({
       id: stakeholder.id,
       role: normalizeString(stakeholder.role),
-      name: normalizeString(stakeholder.name),
       area: normalizeString(stakeholder.area),
-      expectations: normalizeString(stakeholder.expectations),
-      email: normalizeString(stakeholder.email),
-      phone: normalizeString(stakeholder.phone)
+      expectations: normalizeString(stakeholder.expectations)
     })),
     qualityGoals: normalizeArray(state.qualityGoals, (goal, index) => ({
       id: goal.id || `quality-goal-${index + 1}`,
@@ -246,11 +237,8 @@ function IntroductionSection({
   const [featureEditorView, setFeatureEditorView] = useState("edit");
   const [stakeholderDraft, setStakeholderDraft] = useState({
     role: "",
-    name: "",
     area: "",
-    expectations: "",
-    email: "",
-    phone: ""
+    expectations: ""
   });
   const [stakeholderEditorView, setStakeholderEditorView] = useState("edit");
 
@@ -296,11 +284,8 @@ function IntroductionSection({
       );
       setStakeholderDraft({
         role: stakeholder?.role || "",
-        name: stakeholder?.name || "",
         area: stakeholder?.area || "",
-        expectations: stakeholder?.expectations || "",
-        email: stakeholder?.email || "",
-        phone: stakeholder?.phone || ""
+        expectations: stakeholder?.expectations || ""
       });
       setStakeholderEditorView("edit");
     }
@@ -400,11 +385,8 @@ function IntroductionSection({
     const newStakeholder = {
       id: generateId("stakeholder"),
       role: "",
-      name: "",
       area: "",
-      expectations: "",
-      email: "",
-      phone: ""
+      expectations: ""
     };
     const nextIndex = formState.stakeholders.length;
 
@@ -414,11 +396,8 @@ function IntroductionSection({
     }));
     setStakeholderDraft({
       role: "",
-      name: "",
       area: "",
-      expectations: "",
-      email: "",
-      phone: ""
+      expectations: ""
     });
     setEditorConfig({
       mode: "stakeholder",
@@ -431,20 +410,17 @@ function IntroductionSection({
   }
 
   function handleOpenStakeholderEditor(stakeholder, index = 0) {
-    const safeName = stakeholder.name?.trim();
+    const safeRole = stakeholder.role?.trim();
     setEditorConfig({
       mode: "stakeholder",
       stakeholderId: stakeholder.id,
-      title: safeName ? `Stakeholder: ${safeName}` : "Stakeholder",
+      title: safeRole ? `Stakeholder: ${safeRole}` : "Stakeholder",
       index
     });
     setStakeholderDraft({
       role: stakeholder.role || "",
-      name: stakeholder.name || "",
       area: stakeholder.area || "",
-      expectations: stakeholder.expectations || "",
-      email: stakeholder.email || "",
-      phone: stakeholder.phone || ""
+      expectations: stakeholder.expectations || ""
     });
     setStakeholderEditorView("edit");
   }
@@ -589,20 +565,14 @@ function IntroductionSection({
       : false;
   const trimmedStakeholderDraft = {
     role: stakeholderDraft.role.trim(),
-    name: stakeholderDraft.name.trim(),
     area: stakeholderDraft.area.trim(),
-    expectations: stakeholderDraft.expectations.trim(),
-    email: stakeholderDraft.email.trim(),
-    phone: stakeholderDraft.phone.trim()
+    expectations: stakeholderDraft.expectations.trim()
   };
   const stakeholderHasChanges =
     editorConfig?.mode === "stakeholder" && currentStakeholder
       ? trimmedStakeholderDraft.role !== (currentStakeholder.role || "").trim() ||
-        trimmedStakeholderDraft.name !== (currentStakeholder.name || "").trim() ||
         trimmedStakeholderDraft.area !== (currentStakeholder.area || "").trim() ||
-        trimmedStakeholderDraft.expectations !== (currentStakeholder.expectations || "").trim() ||
-        trimmedStakeholderDraft.email !== (currentStakeholder.email || "").trim() ||
-        trimmedStakeholderDraft.phone !== (currentStakeholder.phone || "").trim()
+        trimmedStakeholderDraft.expectations !== (currentStakeholder.expectations || "").trim()
       : false;
   const editorHasChanges = editorConfig
     ? editorConfig.mode === "markdown"
@@ -643,11 +613,8 @@ function IntroductionSection({
       const hasContent = stakeholder
         ? [
             stakeholder.role,
-            stakeholder.name,
             stakeholder.area,
-            stakeholder.expectations,
-            stakeholder.email,
-            stakeholder.phone
+            stakeholder.expectations
           ].some((value) => normalizeString(value))
         : false;
       if (!hasContent) {
@@ -667,11 +634,8 @@ function IntroductionSection({
     setFeatureEditorView("edit");
     setStakeholderDraft({
       role: "",
-      name: "",
       area: "",
-      expectations: "",
-      email: "",
-      phone: ""
+      expectations: ""
     });
     setStakeholderEditorView("edit");
   }
@@ -716,11 +680,8 @@ function IntroductionSection({
             ? {
                 ...stakeholder,
                 role: trimmedStakeholderDraft.role,
-                name: trimmedStakeholderDraft.name,
                 area: trimmedStakeholderDraft.area,
-                expectations: trimmedStakeholderDraft.expectations,
-                email: trimmedStakeholderDraft.email,
-                phone: trimmedStakeholderDraft.phone
+                expectations: trimmedStakeholderDraft.expectations
               }
             : stakeholder
         )
@@ -937,7 +898,7 @@ function IntroductionSection({
         <CardHeader>
           <CardTitle>1.3 Stakeholders</CardTitle>
           <CardDescription>
-            Identifique papéis, expectativas e como contatar cada pessoa-chave.
+            Identifique papéis, áreas de atuação e expectativas que direcionam o produto.
           </CardDescription>
         </CardHeader>
         <CardContent className="mt-6 space-y-6">
@@ -953,7 +914,7 @@ function IntroductionSection({
                 <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-border bg-muted/20 p-8 text-center">
                   <Badge variant="outline">Stakeholders</Badge>
                   <p className="text-sm text-muted-foreground">
-                    Nenhum stakeholder cadastrado. Clique em “Novo stakeholder” para registrar papéis e expectativas.
+                    Nenhum stakeholder cadastrado. Clique em “Novo stakeholder” para documentar papéis, áreas e expectativas.
                   </p>
                   <Button size="sm" variant="outline" onClick={handleAddStakeholder}>
                     <Plus className="mr-2 h-4 w-4" /> Novo stakeholder
@@ -976,18 +937,18 @@ function IntroductionSection({
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="space-y-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <p className="text-sm font-semibold text-foreground">
-                            {stakeholder.name?.trim() ||
-                              stakeholder.role?.trim() ||
-                              `Stakeholder ${index + 1}`}
+                        <p className="text-sm font-semibold text-foreground">
+                          {stakeholder.role?.trim() || `Stakeholder ${index + 1}`}
+                        </p>
+                        {stakeholder.area?.trim() ? (
+                          <Badge variant="outline">{stakeholder.area.trim()}</Badge>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">
+                            Informe a área para reforçar o contexto organizacional.
                           </p>
-                          {stakeholder.area?.trim() ? (
-                            <Badge variant="outline">{stakeholder.area.trim()}</Badge>
-                          ) : null}
-                        </div>
+                        )}
                         <p className="text-xs text-muted-foreground">
-                          Clique para editar papel, área, expectativas e canais de contato.
+                          Clique para editar papel, área e expectativas de envolvimento.
                         </p>
                       </div>
                       <Button
@@ -1004,28 +965,10 @@ function IntroductionSection({
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
-                    <div className="mt-3 grid gap-3 text-xs text-muted-foreground sm:grid-cols-2">
-                      <div>
-                        <p className="font-semibold text-foreground">Papel</p>
-                        <p>{stakeholder.role?.trim() || "Não informado"}</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-foreground">Responsável</p>
-                        <p>{stakeholder.name?.trim() || "Não informado"}</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-foreground">E-mail</p>
-                        <p>{stakeholder.email?.trim() || "—"}</p>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-foreground">Telefone</p>
-                        <p>{stakeholder.phone?.trim() || "—"}</p>
-                      </div>
-                    </div>
                     <div className="mt-3">
                       <MarkdownPreview
                         value={stakeholder.expectations}
-                        emptyMessage="Capture expectativas, indicadores de sucesso e preferências de comunicação."
+                        emptyMessage="Capture expectativas, compromissos e indicadores de sucesso esperados."
                       />
                     </div>
                   </div>
@@ -1483,22 +1426,6 @@ function IntroductionSection({
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="stakeholder-name" className="text-sm font-semibold text-foreground">
-                    Nome
-                  </Label>
-                  <Input
-                    id="stakeholder-name"
-                    value={stakeholderDraft.name}
-                    onChange={(event) =>
-                      setStakeholderDraft((current) => ({
-                        ...current,
-                        name: event.target.value
-                      }))
-                    }
-                    placeholder="Ex: Ana Ribeiro"
-                  />
-                </div>
-                <div className="space-y-2">
                   <Label htmlFor="stakeholder-area" className="text-sm font-semibold text-foreground">
                     Área
                   </Label>
@@ -1512,38 +1439,6 @@ function IntroductionSection({
                       }))
                     }
                     placeholder="Ex: Estratégia Corporativa"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="stakeholder-email" className="text-sm font-semibold text-foreground">
-                    E-mail
-                  </Label>
-                  <Input
-                    id="stakeholder-email"
-                    value={stakeholderDraft.email}
-                    onChange={(event) =>
-                      setStakeholderDraft((current) => ({
-                        ...current,
-                        email: event.target.value
-                      }))
-                    }
-                    placeholder="Ex: ana.ribeiro@empresa.com"
-                  />
-                </div>
-                <div className="space-y-2 md:col-span-2">
-                  <Label htmlFor="stakeholder-phone" className="text-sm font-semibold text-foreground">
-                    Telefone
-                  </Label>
-                  <Input
-                    id="stakeholder-phone"
-                    value={stakeholderDraft.phone}
-                    onChange={(event) =>
-                      setStakeholderDraft((current) => ({
-                        ...current,
-                        phone: event.target.value
-                      }))
-                    }
-                    placeholder="Ex: +55 (11) 91234-5678"
                   />
                 </div>
               </div>
