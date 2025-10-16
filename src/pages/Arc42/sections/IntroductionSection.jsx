@@ -1699,7 +1699,7 @@ function IntroductionSection({
             </div>
           ) : isQualityGoalEditor ? (
             <div className="space-y-4" id="quality-goal-editor">
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="space-y-3">
                 <div className="space-y-2">
                   <Label htmlFor="quality-goal-title" className="text-sm font-semibold text-foreground">
                     Título do objetivo
