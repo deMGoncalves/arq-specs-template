@@ -1138,7 +1138,7 @@ function IntroductionSection({
 
       <Card>
         <CardHeader>
-          <CardTitle>1.4 Objetivos de Qualidade (Top 3)</CardTitle>
+          <CardTitle>1.4 Objetivos de Qualidade</CardTitle>
           <CardDescription>
             Liste os objetivos prioritários, por que importam e como serão medidos.
           </CardDescription>
