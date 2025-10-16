@@ -24,11 +24,7 @@ const arc42Sections = [
         scalability: ""
       },
       stakeholders: [],
-      qualityGoals: [
-        { id: "quality-goal-1", title: "", motivation: "", metric: "", target: "" },
-        { id: "quality-goal-2", title: "", motivation: "", metric: "", target: "" },
-        { id: "quality-goal-3", title: "", motivation: "", metric: "", target: "" }
-      ],
+      qualityGoals: [],
       references: ""
     },
     notes: "",

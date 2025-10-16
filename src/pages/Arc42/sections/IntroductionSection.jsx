@@ -121,6 +121,21 @@ function buildIntroductionState(section) {
         expectations: stakeholder?.expectations || stakeholder?.notes || ""
       }))
     : [];
+  const normalizedQualityGoals = Array.isArray(intro.qualityGoals)
+    ? intro.qualityGoals
+        .map((goal) => ({
+          id: goal?.id,
+          title: goal?.title || goal?.name || "",
+          metric: goal?.metric || goal?.measurement || "",
+          target: goal?.target || goal?.goal || "",
+          motivation: goal?.motivation || goal?.rationale || ""
+        }))
+        .filter((goal) =>
+          [goal.title, goal.metric, goal.target, goal.motivation].some((value) =>
+            normalizeString(value)
+          )
+        )
+    : [];
   return {
     status: intro.status || "not-started",
     lastUpdated: intro.lastUpdated || "",
@@ -135,7 +150,7 @@ function buildIntroductionState(section) {
       scalability: intro.nonFunctional?.scalability || ""
     },
     stakeholders: ensureWithDefaults(normalizedStakeholders, 0, createStakeholder),
-    qualityGoals: ensureWithDefaults(intro.qualityGoals, 3, createQualityGoal),
+    qualityGoals: ensureWithDefaults(normalizedQualityGoals, 0, createQualityGoal),
     references: intro.references || ""
   };
 }
@@ -177,7 +192,9 @@ function normalizeIntroductionForSave(state) {
       motivation: normalizeString(goal.motivation),
       metric: normalizeString(goal.metric),
       target: normalizeString(goal.target)
-    })),
+    })).filter((goal) =>
+      [goal.title, goal.metric, goal.target, goal.motivation].some(Boolean)
+    ),
     references: normalizeString(state.references)
   };
 }
@@ -241,6 +258,13 @@ function IntroductionSection({
     expectations: ""
   });
   const [stakeholderEditorView, setStakeholderEditorView] = useState("edit");
+  const [qualityGoalDraft, setQualityGoalDraft] = useState({
+    title: "",
+    metric: "",
+    target: "",
+    motivation: ""
+  });
+  const [qualityGoalEditorView, setQualityGoalEditorView] = useState("edit");
 
   const baselineIntroduction = useMemo(
     () => buildIntroductionState(section),
@@ -288,6 +312,17 @@ function IntroductionSection({
         expectations: stakeholder?.expectations || ""
       });
       setStakeholderEditorView("edit");
+    } else if (editorConfig.mode === "quality-goal") {
+      const qualityGoal = formState.qualityGoals.find(
+        (item) => item.id === editorConfig.qualityGoalId
+      );
+      setQualityGoalDraft({
+        title: qualityGoal?.title || "",
+        metric: qualityGoal?.metric || "",
+        target: qualityGoal?.target || "",
+        motivation: qualityGoal?.motivation || ""
+      });
+      setQualityGoalEditorView("edit");
     }
   }, [editorConfig, formState]);
 
@@ -440,13 +475,64 @@ function IntroductionSection({
     }
   }
 
-  function handleQualityGoalChange(goalId, field, value) {
+  function handleAddQualityGoal() {
+    const newQualityGoal = {
+      id: generateId("quality-goal"),
+      title: "",
+      metric: "",
+      target: "",
+      motivation: ""
+    };
+    const nextIndex = formState.qualityGoals.length;
+
     setFormState((current) => ({
       ...current,
-      qualityGoals: current.qualityGoals.map((goal) =>
-        goal.id === goalId ? { ...goal, [field]: value } : goal
-      )
+      qualityGoals: [...current.qualityGoals, newQualityGoal]
     }));
+    setQualityGoalDraft({
+      title: "",
+      metric: "",
+      target: "",
+      motivation: ""
+    });
+    setEditorConfig({
+      mode: "quality-goal",
+      qualityGoalId: newQualityGoal.id,
+      title: "Objetivo de qualidade",
+      isNew: true,
+      index: nextIndex
+    });
+    setQualityGoalEditorView("edit");
+  }
+
+  function handleOpenQualityGoalEditor(goal, index = 0) {
+    const safeTitle = goal.title?.trim();
+    setEditorConfig({
+      mode: "quality-goal",
+      qualityGoalId: goal.id,
+      title: safeTitle ? `Objetivo de qualidade: ${safeTitle}` : "Objetivo de qualidade",
+      index
+    });
+    setQualityGoalDraft({
+      title: goal.title || "",
+      metric: goal.metric || "",
+      target: goal.target || "",
+      motivation: goal.motivation || ""
+    });
+    setQualityGoalEditorView("edit");
+  }
+
+  function handleRemoveQualityGoal(goalId) {
+    setFormState((current) => ({
+      ...current,
+      qualityGoals: current.qualityGoals.filter((goal) => goal.id !== goalId)
+    }));
+    if (
+      editorConfig?.mode === "quality-goal" &&
+      editorConfig.qualityGoalId === goalId
+    ) {
+      handleCloseEditor();
+    }
   }
 
   function handleAddActionItem() {
@@ -552,6 +638,12 @@ function IntroductionSection({
           (stakeholder) => stakeholder.id === editorConfig.stakeholderId
         )
       : null;
+  const currentQualityGoal =
+    editorConfig?.mode === "quality-goal"
+      ? formState.qualityGoals.find(
+          (goal) => goal.id === editorConfig.qualityGoalId
+        )
+      : null;
   const trimmedFeatureDraft = {
     name: featureDraft.name.trim(),
     description: featureDraft.description.trim(),
@@ -574,6 +666,19 @@ function IntroductionSection({
         trimmedStakeholderDraft.area !== (currentStakeholder.area || "").trim() ||
         trimmedStakeholderDraft.expectations !== (currentStakeholder.expectations || "").trim()
       : false;
+  const trimmedQualityGoalDraft = {
+    title: qualityGoalDraft.title.trim(),
+    metric: qualityGoalDraft.metric.trim(),
+    target: qualityGoalDraft.target.trim(),
+    motivation: qualityGoalDraft.motivation.trim()
+  };
+  const qualityGoalHasChanges =
+    editorConfig?.mode === "quality-goal" && currentQualityGoal
+      ? trimmedQualityGoalDraft.title !== (currentQualityGoal.title || "").trim() ||
+        trimmedQualityGoalDraft.metric !== (currentQualityGoal.metric || "").trim() ||
+        trimmedQualityGoalDraft.target !== (currentQualityGoal.target || "").trim() ||
+        trimmedQualityGoalDraft.motivation !== (currentQualityGoal.motivation || "").trim()
+      : false;
   const editorHasChanges = editorConfig
     ? editorConfig.mode === "markdown"
       ? editorValue !== markdownInitialValue
@@ -581,11 +686,14 @@ function IntroductionSection({
         ? featureHasChanges
         : editorConfig.mode === "stakeholder"
           ? stakeholderHasChanges
-          : false
+          : editorConfig.mode === "quality-goal"
+            ? qualityGoalHasChanges
+            : false
     : false;
   const isMarkdownEditor = editorConfig?.mode === "markdown";
   const isFeatureEditor = editorConfig?.mode === "feature";
   const isStakeholderEditor = editorConfig?.mode === "stakeholder";
+  const isQualityGoalEditor = editorConfig?.mode === "quality-goal";
 
   function handleCloseEditor() {
     if (editorConfig?.mode === "feature" && editorConfig.isNew) {
@@ -627,6 +735,28 @@ function IntroductionSection({
       }
     }
 
+    if (editorConfig?.mode === "quality-goal" && editorConfig.isNew) {
+      const goal = formState.qualityGoals.find(
+        (item) => item.id === editorConfig.qualityGoalId
+      );
+      const hasContent = goal
+        ? [
+            goal.title,
+            goal.metric,
+            goal.target,
+            goal.motivation
+          ].some((value) => normalizeString(value))
+        : false;
+      if (!hasContent) {
+        setFormState((current) => ({
+          ...current,
+          qualityGoals: current.qualityGoals.filter(
+            (item) => item.id !== editorConfig.qualityGoalId
+          )
+        }));
+      }
+    }
+
     setEditorConfig(null);
     setEditorValue("");
     setEditorView("edit");
@@ -638,6 +768,13 @@ function IntroductionSection({
       expectations: ""
     });
     setStakeholderEditorView("edit");
+    setQualityGoalDraft({
+      title: "",
+      metric: "",
+      target: "",
+      motivation: ""
+    });
+    setQualityGoalEditorView("edit");
   }
 
   function handleSaveEditor() {
@@ -684,6 +821,26 @@ function IntroductionSection({
                 expectations: trimmedStakeholderDraft.expectations
               }
             : stakeholder
+        )
+      }));
+      handleCloseEditor();
+      return;
+    }
+
+    if (editorConfig.mode === "quality-goal") {
+      const { qualityGoalId } = editorConfig;
+      setFormState((current) => ({
+        ...current,
+        qualityGoals: current.qualityGoals.map((goal) =>
+          goal.id === qualityGoalId
+            ? {
+                ...goal,
+                title: trimmedQualityGoalDraft.title,
+                metric: trimmedQualityGoalDraft.metric,
+                target: trimmedQualityGoalDraft.target,
+                motivation: trimmedQualityGoalDraft.motivation
+              }
+            : goal
         )
       }));
       handleCloseEditor();
@@ -986,64 +1143,89 @@ function IntroductionSection({
             Liste os objetivos prioritários, por que importam e como serão medidos.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {formState.qualityGoals.map((goal, index) => (
-            <div
-              key={goal.id}
-              className="rounded-lg border border-border p-4"
-            >
-              <p className="text-sm font-semibold text-foreground">
-                {["🥇", "🥈", "🥉"][index] || "🎯"} Objetivo Prioritário {index + 1}
-              </p>
-              <div className="mt-3 grid gap-4 lg:grid-cols-3">
-                <div className="lg:col-span-1 space-y-2">
-                  <Label htmlFor={`${goal.id}-title`}>Título</Label>
-                  <Input
-                    id={`${goal.id}-title`}
-                    value={goal.title}
-                    onChange={(event) =>
-                      handleQualityGoalChange(goal.id, "title", event.target.value)
-                    }
-                  />
-                </div>
-                <div className="lg:col-span-1 space-y-2">
-                  <Label htmlFor={`${goal.id}-metric`}>Métrica</Label>
-                  <Input
-                    id={`${goal.id}-metric`}
-                    value={goal.metric}
-                    onChange={(event) =>
-                      handleQualityGoalChange(goal.id, "metric", event.target.value)
-                    }
-                  />
-                </div>
-                <div className="lg:col-span-1 space-y-2">
-                  <Label htmlFor={`${goal.id}-target`}>Meta</Label>
-                  <Input
-                    id={`${goal.id}-target`}
-                    value={goal.target}
-                    onChange={(event) =>
-                      handleQualityGoalChange(goal.id, "target", event.target.value)
-                    }
-                  />
-                </div>
-                <div className="lg:col-span-3 space-y-2">
-                  <Label htmlFor={`${goal.id}-motivation`}>Motivação</Label>
-                  <Textarea
-                    id={`${goal.id}-motivation`}
-                    value={goal.motivation}
-                    onChange={(event) =>
-                      handleQualityGoalChange(
-                        goal.id,
-                        "motivation",
-                        event.target.value
-                      )
-                    }
-                    rows={3}
-                  />
-                </div>
-              </div>
+        <CardContent className="mt-6 space-y-6">
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-end gap-3">
+              <Button type="button" size="sm" variant="outline" onClick={handleAddQualityGoal}>
+                <Plus className="mr-2 h-4 w-4" />
+                Novo objetivo
+              </Button>
             </div>
-          ))}
+            <div className="space-y-3">
+              {formState.qualityGoals.length === 0 ? (
+                <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-border bg-muted/20 p-8 text-center">
+                  <Badge variant="outline">Objetivos de qualidade</Badge>
+                  <p className="text-sm text-muted-foreground">
+                    Nenhum objetivo cadastrado. Utilize “Novo objetivo” para registrar metas prioritárias e seus indicadores.
+                  </p>
+                  <Button size="sm" variant="outline" onClick={handleAddQualityGoal}>
+                    <Plus className="mr-2 h-4 w-4" /> Novo objetivo
+                  </Button>
+                </div>
+              ) : (
+                formState.qualityGoals.map((goal, index) => {
+                  const goalTitle = goal.title?.trim() || `Objetivo ${index + 1}`;
+                  const metric = goal.metric?.trim();
+                  const target = goal.target?.trim();
+                  return (
+                    <div
+                      key={goal.id}
+                      className="group cursor-pointer rounded-lg border border-border bg-muted/20 p-4 transition hover:border-brand-500/60 hover:bg-card"
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => handleOpenQualityGoalEditor(goal, index)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          handleOpenQualityGoalEditor(goal, index);
+                        }
+                      }}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="space-y-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="text-sm font-semibold text-foreground">
+                              {goalTitle}
+                            </p>
+                            {metric ? <Badge variant="outline">{metric}</Badge> : null}
+                          </div>
+                          {target ? (
+                            <p className="text-xs text-muted-foreground">Meta: {target}</p>
+                          ) : (
+                            <p className="text-xs text-muted-foreground">
+                              Informe a meta para deixar o objetivo mensurável.
+                            </p>
+                          )}
+                          <p className="text-xs text-muted-foreground">
+                            Clique para revisar título, métrica, meta e motivação detalhada.
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            handleRemoveQualityGoal(goal.id);
+                          }}
+                          aria-label="Remover objetivo de qualidade"
+                          className="text-muted-foreground hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <div className="mt-3">
+                        <MarkdownPreview
+                          value={goal.motivation}
+                          emptyMessage="Descreva a motivação: riscos mitigados, expectativas de stakeholders e critérios de aceitação."
+                        />
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
         </CardContent>
       </Card>
 
@@ -1269,8 +1451,10 @@ function IntroductionSection({
         description={isFeatureEditor
           ? "Defina nome, criticidade e narrativa. A descrição aceita Markdown."
           : isStakeholderEditor
-            ? "Atualize papel, contatos e expectativas. A seção de expectativas aceita Markdown."
-            : "Use Markdown para destacar termos (**negrito**, _itálico_, listas com '-')."}
+            ? "Atualize papel, área e expectativas. A seção de expectativas aceita Markdown."
+            : isQualityGoalEditor
+              ? "Documente objetivo, métrica, meta e motivação. A motivação aceita Markdown."
+              : "Use Markdown para destacar termos (**negrito**, _itálico_, listas com '-')."}
         footer={(
           <div className="flex flex-wrap items-center justify-end gap-2">
             {isFeatureEditor ? (
@@ -1289,6 +1473,16 @@ function IntroductionSection({
                 variant="ghost"
                 className="text-destructive hover:text-destructive"
                 onClick={() => editorConfig?.stakeholderId && handleRemoveStakeholder(editorConfig.stakeholderId)}
+              >
+                Remover
+              </Button>
+            ) : null}
+            {isQualityGoalEditor ? (
+              <Button
+                type="button"
+                variant="ghost"
+                className="text-destructive hover:text-destructive"
+                onClick={() => editorConfig?.qualityGoalId && handleRemoveQualityGoal(editorConfig.qualityGoalId)}
               >
                 Remover
               </Button>
@@ -1497,6 +1691,119 @@ function IntroductionSection({
                   <div className="rounded-lg border border-dashed border-border p-4">
                     <MarkdownPreview
                       value={stakeholderDraft.expectations}
+                      emptyMessage="Pré-visualização disponível após adicionar conteúdo."
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : isQualityGoalEditor ? (
+            <div className="space-y-4" id="quality-goal-editor">
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="space-y-2">
+                  <Label htmlFor="quality-goal-title" className="text-sm font-semibold text-foreground">
+                    Título do objetivo
+                  </Label>
+                  <Input
+                    id="quality-goal-title"
+                    value={qualityGoalDraft.title}
+                    onChange={(event) =>
+                      setQualityGoalDraft((current) => ({
+                        ...current,
+                        title: event.target.value
+                      }))
+                    }
+                    placeholder="Ex: Disponibilidade contínua"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="quality-goal-metric" className="text-sm font-semibold text-foreground">
+                    Métrica acompanhada
+                  </Label>
+                  <Input
+                    id="quality-goal-metric"
+                    value={qualityGoalDraft.metric}
+                    onChange={(event) =>
+                      setQualityGoalDraft((current) => ({
+                        ...current,
+                        metric: event.target.value
+                      }))
+                    }
+                    placeholder="Ex: Tempo médio fora do ar"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="quality-goal-target" className="text-sm font-semibold text-foreground">
+                    Meta desejada
+                  </Label>
+                  <Input
+                    id="quality-goal-target"
+                    value={qualityGoalDraft.target}
+                    onChange={(event) =>
+                      setQualityGoalDraft((current) => ({
+                        ...current,
+                        target: event.target.value
+                      }))
+                    }
+                    placeholder="Ex: &lt; 10 minutos/mês"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-3">
+                  <Label htmlFor="quality-goal-motivation" className="text-sm font-semibold text-foreground">
+                    Motivação
+                  </Label>
+                  <div className="inline-flex items-center gap-1 rounded-md border border-border bg-muted/40 p-1">
+                    <button
+                      type="button"
+                      className={cn(
+                        "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
+                        qualityGoalEditorView === "edit"
+                          ? "bg-brand-500 text-white shadow-soft"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                      onClick={() => setQualityGoalEditorView("edit")}
+                    >
+                      Escrita
+                    </button>
+                    <button
+                      type="button"
+                      className={cn(
+                        "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
+                        qualityGoalEditorView === "preview"
+                          ? "bg-brand-500 text-white shadow-soft"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                      onClick={() => setQualityGoalEditorView("preview")}
+                    >
+                      Pré-visualização
+                    </button>
+                  </div>
+                </div>
+                {qualityGoalEditorView === "edit" ? (
+                  <>
+                    <Textarea
+                      id="quality-goal-motivation"
+                      value={qualityGoalDraft.motivation}
+                      onChange={(event) =>
+                        setQualityGoalDraft((current) => ({
+                          ...current,
+                          motivation: event.target.value
+                        }))
+                      }
+                      rows={12}
+                      className="min-h-[220px]"
+                      placeholder="Explique o porquê do objetivo, impactos esperados e como validar o resultado."
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Aceita Markdown para bullets, destaques e referências cruzadas.
+                    </p>
+                  </>
+                ) : (
+                  <div className="rounded-lg border border-dashed border-border p-4">
+                    <MarkdownPreview
+                      value={qualityGoalDraft.motivation}
                       emptyMessage="Pré-visualização disponível após adicionar conteúdo."
                     />
                   </div>
