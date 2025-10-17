@@ -4,7 +4,7 @@ const chapterSections = [
   {
     id: "SCN-001",
     order: "01",
-    slug: "visao-geral-e-objetivos",
+    slug: "overview-and-objectives",
     title: "Visão Geral e Objetivos",
     description:
       "Introduz a solução, seu propósito, o contexto inicial e os objetivos estratégicos que orientarão o blueprint.",
@@ -34,7 +34,7 @@ const chapterSections = [
   {
     id: "SCN-002",
     order: "02",
-    slug: "restricoes-e-diretrizes",
+    slug: "restrictions-and-guidelines",
     title: "Restrições e Diretrizes",
     description:
       "Registra limitações impostas, padrões obrigatórios e decisões corporativas que moldam o design.",
@@ -48,7 +48,7 @@ const chapterSections = [
   {
     id: "SCN-003",
     order: "03",
-    slug: "escopo-e-contexto",
+    slug: "system-scope-and-context",
     title: "Escopo do Sistema e Contexto",
     description:
       "Delimita fronteiras, atores envolvidos e integrações com sistemas externos, tanto de negócio quanto técnicos.",
@@ -62,7 +62,7 @@ const chapterSections = [
   {
     id: "SCN-004",
     order: "04",
-    slug: "estrategia-arquitetural",
+    slug: "architectural-strategy",
     title: "Estratégia Arquitetural",
     description:
       "Resume decisões de alto nível, princípios e diretrizes que guiam a evolução da solução.",
@@ -76,7 +76,7 @@ const chapterSections = [
   {
     id: "SCN-005",
     order: "05",
-    slug: "visao-estrutural",
+    slug: "structural-view-components",
     title: "Visão Estrutural (Componentes)",
     description:
       "Detalha a decomposição estática em containers e componentes, destacando responsabilidades e interações.",
@@ -90,7 +90,7 @@ const chapterSections = [
   {
     id: "SCN-006",
     order: "06",
-    slug: "visao-de-comportamento",
+    slug: "behavioral-view-scenarios",
     title: "Visão de Comportamento (Cenários)",
     description:
       "Apresenta os principais fluxos dinâmicos, cenários de uso e narrativas BDD que demonstram o comportamento esperado.",
@@ -104,7 +104,7 @@ const chapterSections = [
   {
     id: "SCN-007",
     order: "07",
-    slug: "visao-de-implantacao",
+    slug: "deployment-view",
     title: "Visão de Implantação",
     description:
       "Descreve os ambientes, topologias e pipelines de entrega que dão suporte à solução.",
@@ -118,7 +118,7 @@ const chapterSections = [
   {
     id: "SCN-008",
     order: "08",
-    slug: "conceitos-transversais",
+    slug: "crosscutting-concepts",
     title: "Conceitos Transversais",
     description:
       "Reúne decisões de design reutilizáveis e políticas que permeiam múltiplas partes do sistema.",
@@ -132,7 +132,7 @@ const chapterSections = [
   {
     id: "SCN-009",
     order: "09",
-    slug: "registro-de-decisoes",
+    slug: "decision-log",
     title: "Registro de Decisões",
     description:
       "Mantém o histórico das ADRs com contexto, decisão, justificativa e consequências.",
@@ -146,7 +146,7 @@ const chapterSections = [
   {
     id: "SCN-010",
     order: "10",
-    slug: "qualidade-e-cenarios",
+    slug: "quality-and-scenarios",
     title: "Qualidade e Cenários",
     description:
       "Define atributos de qualidade alvo e os cenários de aceitação que validam cada característica.",
@@ -160,7 +160,7 @@ const chapterSections = [
   {
     id: "SCN-011",
     order: "11",
-    slug: "riscos-e-divida-tecnica",
+    slug: "risks-and-technical-debt",
     title: "Riscos e Dívida Técnica",
     description:
       "Lista riscos conhecidos, incertezas e itens de dívida técnica com respectivas estratégias de mitigação.",
@@ -174,7 +174,7 @@ const chapterSections = [
   {
     id: "SCN-012",
     order: "12",
-    slug: "glossario-de-termos",
+    slug: "glossary-of-terms",
     title: "Glossário de Termos",
     description:
       "Define terminologias, acrônimos e nomenclaturas do domínio para manter entendimento comum.",

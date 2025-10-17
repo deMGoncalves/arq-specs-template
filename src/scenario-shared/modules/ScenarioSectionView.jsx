@@ -1,10 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppActions, useAppData } from "../../workspace-state/containers/AppDataProvider.jsx";
-import IntroductionSection from "../../SCN-001_visao-geral-e-objetivos/modules/IntroductionSection.jsx";
+import IntroductionSection from "../../overview-and-objectives/modules/IntroductionSection.jsx";
 import GenericScenarioSection from "./GenericScenarioSection.jsx";
 
-function ScenarioSectionView({ sectionId }) {
+function ScenarioSectionView({ sectionId, slug }) {
   const navigate = useNavigate();
   const {
     chapters = [],
@@ -16,18 +16,22 @@ function ScenarioSectionView({ sectionId }) {
   const chapterSource = chapters.length ? chapters : arc42;
   const { updateChapter } = useAppActions();
 
+  const normalizedId = sectionId;
   const fallbackArcId = (() => {
-    if (!sectionId || !sectionId.startsWith("SCN-")) {
-      return sectionId;
+    if (!normalizedId || !normalizedId.startsWith("SCN-")) {
+      return normalizedId;
     }
-    const numeric = parseInt(sectionId.slice(4), 10);
+    const numeric = parseInt(normalizedId.slice(4), 10);
     if (Number.isNaN(numeric)) {
-      return sectionId;
+      return normalizedId;
     }
     return `arc42-${numeric.toString().padStart(2, "0")}`;
   })();
 
-  let section = chapterSource.find((item) => item.id === sectionId);
+  let section = chapterSource.find((item) => item.id === normalizedId);
+  if (!section && slug) {
+    section = chapterSource.find((item) => item.slug === slug);
+  }
   if (!section && fallbackArcId && fallbackArcId !== sectionId) {
     section = chapterSource.find((item) => item.id === fallbackArcId);
   }
@@ -42,7 +46,8 @@ function ScenarioSectionView({ sectionId }) {
     () =>
       adrs.filter((adr) => {
         const links = adr.links?.chapters || adr.links?.arc42 || [];
-        return links.includes(section?.id || fallbackArcId);
+        const targetId = section?.id || fallbackArcId;
+        return targetId ? links.includes(targetId) : false;
       }),
     [adrs, section?.id, fallbackArcId]
   );
@@ -51,7 +56,8 @@ function ScenarioSectionView({ sectionId }) {
     () =>
       bdd.filter((feature) => {
         const linked = feature.linkedChapters || feature.linkedArc42 || [];
-        return linked.includes(section?.id || fallbackArcId);
+        const targetId = section?.id || fallbackArcId;
+        return targetId ? linked.includes(targetId) : false;
       }),
     [bdd, section?.id, fallbackArcId]
   );
@@ -59,14 +65,16 @@ function ScenarioSectionView({ sectionId }) {
   const relatedContainers = useMemo(() => {
     return (c4.containers || []).filter((container) => {
       const linked = container.linkedChapters || container.linkedArc42 || [];
-      return linked.includes(section?.id || fallbackArcId);
+      const targetId = section?.id || fallbackArcId;
+      return targetId ? linked.includes(targetId) : false;
     });
   }, [c4.containers, section?.id, fallbackArcId]);
 
   const relatedComponents = useMemo(() => {
     return (c4.components || []).filter((component) => {
       const linked = component.linkedChapters || component.linkedArc42 || [];
-      return linked.includes(section?.id || fallbackArcId);
+      const targetId = section?.id || fallbackArcId;
+      return targetId ? linked.includes(targetId) : false;
     });
   }, [c4.components, section?.id, fallbackArcId]);
 

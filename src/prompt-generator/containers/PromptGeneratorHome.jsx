@@ -10,7 +10,8 @@ const CHAPTERS = [
     description:
       "Introduz a solução, seu propósito, contexto inicial e objetivos prioritários.",
     status: "Disponível",
-    target: "/scenarios/SCN-001",
+    slug: "overview-and-objectives",
+    target: "/scenarios/overview-and-objectives",
     ready: true
   },
   {
@@ -20,7 +21,8 @@ const CHAPTERS = [
     description:
       "Registra requisitos mandatórios, padrões corporativos e tecnologias obrigatórias.",
     status: "Disponível",
-    target: "/scenarios/SCN-002",
+    slug: "restrictions-and-guidelines",
+    target: "/scenarios/restrictions-and-guidelines",
     ready: true
   },
   {
@@ -30,7 +32,8 @@ const CHAPTERS = [
     description:
       "Delimita fronteiras, atores envolvidos e integrações com ambientes externos.",
     status: "Disponível",
-    target: "/scenarios/SCN-003",
+    slug: "system-scope-and-context",
+    target: "/scenarios/system-scope-and-context",
     ready: true
   },
   {
@@ -40,7 +43,8 @@ const CHAPTERS = [
     description:
       "Resume decisões de alto nível e a abordagem adotada para cumprir metas de negócio.",
     status: "Disponível",
-    target: "/scenarios/SCN-004",
+    slug: "architectural-strategy",
+    target: "/scenarios/architectural-strategy",
     ready: true
   },
   {
@@ -50,7 +54,8 @@ const CHAPTERS = [
     description:
       "Detalha a decomposição estática em módulos, containers e componentes C4.",
     status: "Disponível",
-    target: "/scenarios/SCN-005",
+    slug: "structural-view-components",
+    target: "/scenarios/structural-view-components",
     ready: true
   },
   {
@@ -60,7 +65,8 @@ const CHAPTERS = [
     description:
       "Apresenta cenários dinâmicos de uso e fluxos BDD que demonstram o comportamento esperado.",
     status: "Disponível",
-    target: "/scenarios/SCN-006",
+    slug: "behavioral-view-scenarios",
+    target: "/scenarios/behavioral-view-scenarios",
     ready: true
   },
   {
@@ -70,7 +76,8 @@ const CHAPTERS = [
     description:
       "Descreve topologias, ambientes e o mapeamento de software para infraestrutura.",
     status: "Disponível",
-    target: "/scenarios/SCN-007",
+    slug: "deployment-view",
+    target: "/scenarios/deployment-view",
     ready: true
   },
   {
@@ -80,7 +87,8 @@ const CHAPTERS = [
     description:
       "Explora decisões globais e padrões reutilizados, como segurança, observabilidade e camadas comuns.",
     status: "Disponível",
-    target: "/scenarios/SCN-008",
+    slug: "crosscutting-concepts",
+    target: "/scenarios/crosscutting-concepts",
     ready: true
   },
   {
@@ -90,7 +98,8 @@ const CHAPTERS = [
     description:
       "Mantém o log das ADRs com contexto, decisão, consequências e vínculos entre artefatos.",
     status: "Disponível",
-    target: "/scenarios/SCN-009",
+    slug: "decision-log",
+    target: "/scenarios/decision-log",
     ready: true
   },
   {
@@ -100,7 +109,8 @@ const CHAPTERS = [
     description:
       "Documenta atributos de qualidade alvo e os cenários que validam cada característica.",
     status: "Disponível",
-    target: "/scenarios/SCN-010",
+    slug: "quality-and-scenarios",
+    target: "/scenarios/quality-and-scenarios",
     ready: true
   },
   {
@@ -110,7 +120,8 @@ const CHAPTERS = [
     description:
       "Lista riscos, incertezas e dívidas técnicas, junto das estratégias de mitigação.",
     status: "Disponível",
-    target: "/scenarios/SCN-011",
+    slug: "risks-and-technical-debt",
+    target: "/scenarios/risks-and-technical-debt",
     ready: true
   },
   {
@@ -120,7 +131,8 @@ const CHAPTERS = [
     description:
       "Define terminologias, acrônimos e nomenclaturas do domínio para entendimento comum.",
     status: "Disponível",
-    target: "/scenarios/SCN-012",
+    slug: "glossary-of-terms",
+    target: "/scenarios/glossary-of-terms",
     ready: true
   }
 ];
