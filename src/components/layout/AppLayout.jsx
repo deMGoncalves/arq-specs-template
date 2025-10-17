@@ -12,14 +12,11 @@ function AppLayout() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <p className="text-xs uppercase tracking-[0.16em] text-brand-600">
-              {meta.productName} • v{meta.version}
+              v0
             </p>
             <h1 className="text-xl font-semibold text-foreground">
-              Arc42 Workspace
+              Blueprint
             </h1>
-            <p className="text-sm text-muted-foreground">
-              Documente e atualize apenas a seção <code>01_introduction</code> disponível em <code>specs/</code>.
-            </p>
           </div>
           <div className="flex items-center gap-2">
             <Button
