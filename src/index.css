@@ -165,6 +165,15 @@ body {
   margin-bottom: 12px;
 }
 
+.chapter-beta {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: #38bdf8;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
 .chapter-subtitle {
   max-width: 680px;
   color: rgba(203, 213, 225, 0.86);

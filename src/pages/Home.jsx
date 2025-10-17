@@ -105,7 +105,7 @@ function Home() {
       <header className="chapter-header">
         <div>
           <p className="chapter-eyebrow">Arc42 Blueprint</p>
-          <h1 className="chapter-title">Capítulos do blueprint arquitetural</h1>
+          <h1 className="chapter-title">Capítulos do blueprint arquitetural <span className="chapter-beta">@beta</span></h1>
           <p className="chapter-subtitle">
             Comece pela introdução e objetivos. Os demais capítulos ficarão disponíveis à medida que evoluirmos a automação do blueprint.
           </p>
