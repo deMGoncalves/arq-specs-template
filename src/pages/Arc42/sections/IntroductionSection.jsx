@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Plus, Trash2 } from "lucide-react";
+import { ExternalLink, Plus, Trash2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -851,12 +851,6 @@ function IntroductionSection({
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-col gap-2">
-          <Button variant="ghost" size="sm">
-            <Link to="/arc42" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Voltar
-            </Link>
-          </Button>
           <h1 className="text-2xl font-semibold text-foreground">
             {section.order}. {section.title}
           </h1>
