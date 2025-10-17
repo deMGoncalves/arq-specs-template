@@ -3,7 +3,6 @@ import { Card, CardContent } from "../ui/card.jsx";
 import { Button } from "../ui/button.jsx";
 import { Badge } from "../ui/badge.jsx";
 import { Separator } from "../ui/separator.jsx";
-import { ScrollArea } from "../ui/scroll-area.jsx";
 import { useAppActions } from "../../context/AppDataContext.jsx";
 
 function AppLayout() {
@@ -30,17 +29,15 @@ function AppLayout() {
         </div>
         <Separator className="terminal-separator" />
         <CardContent className="terminal-body">
-          <ScrollArea className="terminal-scroll">
-            <div className="terminal-session">
-              <div className="terminal-line">
-                <span className="terminal-prompt">blueprint@local:~$</span>
-                <span className="terminal-command">open arc42-01</span>
-              </div>
-              <div className="terminal-content">
-                <Outlet />
-              </div>
+          <div className="terminal-session">
+            <div className="terminal-line">
+              <span className="terminal-prompt">blueprint@local:~$</span>
+              <span className="terminal-command">open arc42-01</span>
             </div>
-          </ScrollArea>
+            <div className="terminal-content">
+              <Outlet />
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

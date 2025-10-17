@@ -128,19 +128,10 @@ body {
   border: none;
 }
 
+
 .terminal-body {
   padding: 0 !important;
   background: linear-gradient(180deg, rgba(5, 7, 15, 0.95), rgba(3, 4, 9, 0.98));
-}
-
-.terminal-scroll {
-  max-height: calc(100vh - 200px);
-}
-
-@media (max-width: 1024px) {
-  .terminal-scroll {
-    max-height: calc(100vh - 160px);
-  }
 }
 
 .terminal-session {
