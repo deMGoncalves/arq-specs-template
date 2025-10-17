@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 249 250 251;
+  --foreground: 15 23 42;
+  --muted: 241 245 249;
+  --muted-foreground: 100 116 139;
+  --card: 255 255 255;
+  --card-foreground: 15 23 42;
+  --border: 226 232 240;
+  --input: 209 213 219;
+  --ring: 79 70 229;
+  --radius: 0.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 15 23 42;
+    --foreground: 226 232 240;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;
+    --card: 15 23 42;
+    --card-foreground: 226 232 240;
+    --border: 51 65 85;
+    --input: 71 85 105;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+}
+
+.terminal-root {
+  min-height: 100vh;
+  padding: 32px 16px;
+  background: radial-gradient(140% 140% at 50% 0%, #1f2937 0%, #04060d 70%);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .terminal-root {
+    padding: 20px 12px;
+  }
+}
+
+.terminal-shell {
+  width: 100%;
+  max-width: 1100px;
+  background: #05070f;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 42px 120px rgba(8, 12, 25, 0.45);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 28px;
+  background: linear-gradient(135deg, rgba(13, 16, 29, 0.95), rgba(28, 32, 45, 0.92));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+  gap: 16px;
+}
+
+.terminal-header__window {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono, "JetBrains Mono", "Fira Code", monospace);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: #cbd5f5;
+  text-transform: lowercase;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  display: inline-block;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+.terminal-dot--red {
+  background: #ff6363;
+}
+
+.terminal-dot--yellow {
+  background: #fdbc40;
+}
+
+.terminal-dot--green {
+  background: #34c759;
+}
+
+.terminal-title {
+  font-weight: 600;
+  color: rgba(203, 213, 225, 0.9);
+}
+
+.terminal-badge {
+  border-color: rgba(125, 211, 252, 0.4) !important;
+  background: rgba(13, 148, 136, 0.15) !important;
+  color: #5eead4 !important;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.terminal-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.terminal-separator {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0) 0%, rgba(148, 163, 184, 0.32) 20%, rgba(148, 163, 184, 0.32) 80%, rgba(148, 163, 184, 0) 100%) !important;
+  border: none;
+}
+
+.terminal-body {
+  padding: 0 !important;
+  background: linear-gradient(180deg, rgba(5, 7, 15, 0.95), rgba(3, 4, 9, 0.98));
+}
+
+.terminal-scroll {
+  max-height: calc(100vh - 200px);
+}
+
+@media (max-width: 1024px) {
+  .terminal-scroll {
+    max-height: calc(100vh - 160px);
+  }
+}
+
+.terminal-session {
+  padding: 32px;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.95rem;
+  color: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .terminal-session {
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+}
+
+.terminal-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #34d399;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+}
+
+.terminal-prompt {
+  color: #5eead4;
+}
+
+.terminal-command {
+  color: #94a3b8;
+}
+
+.terminal-content {
+  margin-top: 24px;
+}
+
+.bg-background {
+  background-color: rgb(var(--background));
+}
+
+.bg-muted {
+  background-color: rgb(var(--muted));
+}
+
+.text-muted-foreground {
+  color: rgb(var(--muted-foreground));
+}
+
+.bg-card {
+  background-color: rgb(var(--card));
+}
+
+.text-card-foreground {
+  color: rgb(var(--card-foreground));
+}
+
+.border-border {
+  border-color: rgb(var(--border));
+}
+
+.shadow-soft {
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: rgba(100, 116, 139, 0.4);
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(148, 163, 184, 0.1);
+}

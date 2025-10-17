@@ -1,38 +1,48 @@
 import { Outlet } from "react-router-dom";
+import { Card, CardContent } from "../ui/card.jsx";
 import { Button } from "../ui/button.jsx";
-import { useAppActions, useAppData } from "../../context/AppDataContext.jsx";
+import { Badge } from "../ui/badge.jsx";
+import { Separator } from "../ui/separator.jsx";
+import { ScrollArea } from "../ui/scroll-area.jsx";
+import { useAppActions } from "../../context/AppDataContext.jsx";
 
 function AppLayout() {
-  const { meta } = useAppData();
   const { resetWorkspace } = useAppActions();
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card/80 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1">
-            <p className="text-xs uppercase tracking-[0.16em] text-brand-600">
+    <div className="terminal-root">
+      <Card className="terminal-shell">
+        <div className="terminal-header">
+          <div className="terminal-header__window">
+            <span className="terminal-dot terminal-dot--red" />
+            <span className="terminal-dot terminal-dot--yellow" />
+            <span className="terminal-dot terminal-dot--green" />
+            <span className="terminal-title">blueprint@local:~</span>
+            <Badge variant="outline" className="terminal-badge">
               v0
-            </p>
-            <h1 className="text-xl font-semibold text-foreground">
-              Blueprint
-            </h1>
+            </Badge>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={resetWorkspace}
-              className="justify-start"
-            >
+          <div className="terminal-header__actions">
+            <Button variant="ghost" size="sm" onClick={resetWorkspace}>
               Restaurar template
             </Button>
           </div>
         </div>
-      </header>
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-8">
-        <Outlet />
-      </main>
+        <Separator className="terminal-separator" />
+        <CardContent className="terminal-body">
+          <ScrollArea className="terminal-scroll">
+            <div className="terminal-session">
+              <div className="terminal-line">
+                <span className="terminal-prompt">blueprint@local:~$</span>
+                <span className="terminal-command">open arc42-01</span>
+              </div>
+              <div className="terminal-content">
+                <Outlet />
+              </div>
+            </div>
+          </ScrollArea>
+        </CardContent>
+      </Card>
     </div>
   );
 }
