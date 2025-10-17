@@ -69,6 +69,18 @@ body {
   font-weight: 600;
 }
 
+.app-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.app-beta {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: #38bdf8;
+}
+
 .app-main {
   flex: 1;
   width: min(100%, 1440px);
