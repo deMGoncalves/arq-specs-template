@@ -69,17 +69,6 @@ body {
   font-weight: 600;
 }
 
-.app-logo {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.app-beta {
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  color: #38bdf8;
-}
 
 .app-main {
   flex: 1;
@@ -175,15 +164,6 @@ body {
   font-weight: 600;
   color: #f8fafc;
   margin-bottom: 12px;
-}
-
-.chapter-beta {
-  font-family: var(--font-mono, "JetBrains Mono", monospace);
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  color: #38bdf8;
-  padding-left: 10px;
-  text-transform: uppercase;
 }
 
 .chapter-subtitle {

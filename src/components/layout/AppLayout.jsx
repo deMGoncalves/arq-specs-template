@@ -8,9 +8,7 @@ function AppLayout() {
     <div className="terminal-root">
       <div className="app-shell">
         <header className="app-bar" onDoubleClick={resetWorkspace}>
-          <span className="app-logo">
-            blueprint <span className="app-beta">@beta</span>
-          </span>
+          <span className="app-logo">blueprint</span>
         </header>
         <main className="app-main">
           <Outlet />
