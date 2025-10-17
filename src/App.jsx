@@ -1,31 +1,31 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./app-shell/containers/AppLayout.jsx";
-import Arc42Home from "./arc42-overview/containers/Arc42Home.jsx";
-import Arc42OverviewPage from "./arc42-overview/containers/Arc42OverviewPage.jsx";
-import Arc42SectionRoute from "./arc42-shared/containers/Arc42SectionRoute.jsx";
-import IntroducaoPage from "./arc42-01-introducao/containers/IntroducaoPage.jsx";
-import RestricoesPage from "./arc42-02-restricoes/containers/RestricoesPage.jsx";
-import ContextoPage from "./arc42-03-contexto/containers/ContextoPage.jsx";
-import EstrategiaPage from "./arc42-04-estrategia/containers/EstrategiaPage.jsx";
-import BlocosPage from "./arc42-05-blocos/containers/BlocosPage.jsx";
-import C4Workspace from "./arc42-05-blocos/containers/C4Workspace.jsx";
-import ExportCenter from "./arc42-05-blocos/containers/ExportCenter.jsx";
-import SpecsStructure from "./arc42-05-blocos/containers/SpecsStructure.jsx";
-import ComportamentoPage from "./arc42-06-comportamento/containers/ComportamentoPage.jsx";
-import BddWorkspace from "./arc42-06-comportamento/containers/BddWorkspace.jsx";
-import FeatureCreatePage from "./arc42-06-comportamento/containers/FeatureCreatePage.jsx";
-import FeatureEditPage from "./arc42-06-comportamento/containers/FeatureEditPage.jsx";
-import ImplantacaoPage from "./arc42-07-implantacao/containers/ImplantacaoPage.jsx";
-import ConceitosPage from "./arc42-08-conceitos/containers/ConceitosPage.jsx";
-import DecisoesPage from "./arc42-09-decisoes/containers/DecisoesPage.jsx";
-import AdrBoardPage from "./arc42-09-decisoes/containers/AdrBoardPage.jsx";
-import AdrCreatePage from "./arc42-09-decisoes/containers/AdrCreatePage.jsx";
-import AdrEditPage from "./arc42-09-decisoes/containers/AdrEditPage.jsx";
-import QualidadePage from "./arc42-10-qualidade/containers/QualidadePage.jsx";
-import RiscosPage from "./arc42-11-riscos/containers/RiscosPage.jsx";
-import GlossarioPage from "./arc42-12-glossario/containers/GlossarioPage.jsx";
-import Arc42Dashboard from "./arc42-overview/containers/Arc42Dashboard.jsx";
-import PromptBuilder from "./arc42-overview/containers/PromptBuilder.jsx";
+import PromptGeneratorHome from "./prompt-generator/containers/PromptGeneratorHome.jsx";
+import ChaptersOverviewPage from "./prompt-generator/containers/ChaptersOverviewPage.jsx";
+import WorkspaceDashboard from "./prompt-generator/containers/WorkspaceDashboard.jsx";
+import PromptBuilder from "./prompt-generator/containers/PromptBuilder.jsx";
+import ScenarioSectionRoute from "./scenario-shared/containers/ScenarioSectionRoute.jsx";
+import VisaoGeralObjetivosPage from "./SCN-001_visao-geral-e-objetivos/containers/VisaoGeralObjetivosPage.jsx";
+import RestricoesDiretrizesPage from "./SCN-002_restricoes-e-diretrizes/containers/RestricoesDiretrizesPage.jsx";
+import EscopoContextoPage from "./SCN-003_escopo-e-contexto/containers/EscopoContextoPage.jsx";
+import EstrategiaArquiteturalPage from "./SCN-004_estrategia-arquitetural/containers/EstrategiaArquiteturalPage.jsx";
+import VisaoEstruturalPage from "./SCN-005_visao-estrutural/containers/VisaoEstruturalPage.jsx";
+import C4Workspace from "./SCN-005_visao-estrutural/containers/C4Workspace.jsx";
+import ExportCenter from "./SCN-005_visao-estrutural/containers/ExportCenter.jsx";
+import SpecsStructure from "./SCN-005_visao-estrutural/containers/SpecsStructure.jsx";
+import VisaoComportamentoPage from "./SCN-006_visao-de-comportamento/containers/VisaoComportamentoPage.jsx";
+import BddWorkspace from "./SCN-006_visao-de-comportamento/containers/BddWorkspace.jsx";
+import FeatureCreatePage from "./SCN-006_visao-de-comportamento/containers/FeatureCreatePage.jsx";
+import FeatureEditPage from "./SCN-006_visao-de-comportamento/containers/FeatureEditPage.jsx";
+import VisaoImplantacaoPage from "./SCN-007_visao-de-implantacao/containers/VisaoImplantacaoPage.jsx";
+import ConceitosTransversaisPage from "./SCN-008_conceitos-transversais/containers/ConceitosTransversaisPage.jsx";
+import RegistroDecisoesPage from "./SCN-009_registro-de-decisoes/containers/RegistroDecisoesPage.jsx";
+import AdrBoardPage from "./SCN-009_registro-de-decisoes/containers/AdrBoardPage.jsx";
+import AdrCreatePage from "./SCN-009_registro-de-decisoes/containers/AdrCreatePage.jsx";
+import AdrEditPage from "./SCN-009_registro-de-decisoes/containers/AdrEditPage.jsx";
+import QualidadeCenariosPage from "./SCN-010_qualidade-e-cenarios/containers/QualidadeCenariosPage.jsx";
+import RiscosDividaPage from "./SCN-011_riscos-e-divida-tecnica/containers/RiscosDividaPage.jsx";
+import GlossarioTermosPage from "./SCN-012_glossario-de-termos/containers/GlossarioTermosPage.jsx";
 import { AppDataProvider } from "./workspace-state/containers/AppDataProvider.jsx";
 
 function App() {
@@ -34,33 +34,33 @@ function App() {
       <AppDataProvider>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Arc42Home />} />
-            <Route path="arc42" element={<Navigate to="/arc42/overview" replace />} />
-            <Route path="arc42/overview" element={<Arc42OverviewPage />} />
-            <Route path="arc42/overview/dashboard" element={<Arc42Dashboard />} />
-            <Route path="arc42/arc42-01" element={<IntroducaoPage />} />
-            <Route path="arc42/arc42-01/prompt" element={<PromptBuilder />} />
-            <Route path="arc42/arc42-02" element={<RestricoesPage />} />
-            <Route path="arc42/arc42-03" element={<ContextoPage />} />
-            <Route path="arc42/arc42-04" element={<EstrategiaPage />} />
-            <Route path="arc42/arc42-05" element={<BlocosPage />} />
-            <Route path="arc42/arc42-05/c4" element={<C4Workspace />} />
-            <Route path="arc42/arc42-05/export" element={<ExportCenter />} />
-            <Route path="arc42/arc42-05/specs" element={<SpecsStructure />} />
-            <Route path="arc42/arc42-06" element={<ComportamentoPage />} />
-            <Route path="arc42/arc42-06/bdd" element={<BddWorkspace />} />
-            <Route path="arc42/arc42-06/bdd/new" element={<FeatureCreatePage />} />
-            <Route path="arc42/arc42-06/bdd/:featureId" element={<FeatureEditPage />} />
-            <Route path="arc42/arc42-07" element={<ImplantacaoPage />} />
-            <Route path="arc42/arc42-08" element={<ConceitosPage />} />
-            <Route path="arc42/arc42-09" element={<DecisoesPage />} />
-            <Route path="arc42/arc42-09/adrs" element={<AdrBoardPage />} />
-            <Route path="arc42/arc42-09/adrs/new" element={<AdrCreatePage />} />
-            <Route path="arc42/arc42-09/adrs/:adrId" element={<AdrEditPage />} />
-            <Route path="arc42/arc42-10" element={<QualidadePage />} />
-            <Route path="arc42/arc42-11" element={<RiscosPage />} />
-            <Route path="arc42/arc42-12" element={<GlossarioPage />} />
-            <Route path="arc42/:sectionId" element={<Arc42SectionRoute />} />
+            <Route index element={<PromptGeneratorHome />} />
+            <Route path="scenarios" element={<Navigate to="/scenarios/overview" replace />} />
+            <Route path="scenarios/overview" element={<ChaptersOverviewPage />} />
+            <Route path="scenarios/overview/dashboard" element={<WorkspaceDashboard />} />
+            <Route path="scenarios/SCN-001" element={<VisaoGeralObjetivosPage />} />
+            <Route path="scenarios/SCN-001/prompt" element={<PromptBuilder />} />
+            <Route path="scenarios/SCN-002" element={<RestricoesDiretrizesPage />} />
+            <Route path="scenarios/SCN-003" element={<EscopoContextoPage />} />
+            <Route path="scenarios/SCN-004" element={<EstrategiaArquiteturalPage />} />
+            <Route path="scenarios/SCN-005" element={<VisaoEstruturalPage />} />
+            <Route path="scenarios/SCN-005/c4" element={<C4Workspace />} />
+            <Route path="scenarios/SCN-005/export" element={<ExportCenter />} />
+            <Route path="scenarios/SCN-005/specs" element={<SpecsStructure />} />
+            <Route path="scenarios/SCN-006" element={<VisaoComportamentoPage />} />
+            <Route path="scenarios/SCN-006/bdd" element={<BddWorkspace />} />
+            <Route path="scenarios/SCN-006/bdd/new" element={<FeatureCreatePage />} />
+            <Route path="scenarios/SCN-006/bdd/:featureId" element={<FeatureEditPage />} />
+            <Route path="scenarios/SCN-007" element={<VisaoImplantacaoPage />} />
+            <Route path="scenarios/SCN-008" element={<ConceitosTransversaisPage />} />
+            <Route path="scenarios/SCN-009" element={<RegistroDecisoesPage />} />
+            <Route path="scenarios/SCN-009/adrs" element={<AdrBoardPage />} />
+            <Route path="scenarios/SCN-009/adrs/new" element={<AdrCreatePage />} />
+            <Route path="scenarios/SCN-009/adrs/:adrId" element={<AdrEditPage />} />
+            <Route path="scenarios/SCN-010" element={<QualidadeCenariosPage />} />
+            <Route path="scenarios/SCN-011" element={<RiscosDividaPage />} />
+            <Route path="scenarios/SCN-012" element={<GlossarioTermosPage />} />
+            <Route path="scenarios/:chapterId" element={<ScenarioSectionRoute />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>

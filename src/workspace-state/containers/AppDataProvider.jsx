@@ -20,7 +20,7 @@ function touchMeta(meta = {}) {
 
 function sanitizeLinks(links = {}) {
   return {
-    arc42: ensureArray(links.arc42),
+    chapters: ensureArray(links.chapters),
     c4: ensureArray(links.c4),
     bdd: ensureArray(links.bdd)
   };
@@ -29,15 +29,15 @@ function sanitizeLinks(links = {}) {
 export function AppDataProvider({ children }) {
   const [state, setState] = useLocalStorage(STORAGE_KEY, initialData);
 
-  const updateArc42Section = useCallback((sectionId, updates) => {
+  const updateChapter = useCallback((chapterId, updates) => {
     setState((prev) => {
-      const arc42 = prev.arc42.map((section) =>
-        section.id === sectionId ? { ...section, ...updates } : section
+      const chapters = prev.chapters.map((section) =>
+        section.id === chapterId ? { ...section, ...updates } : section
       );
 
       return {
         ...prev,
-        arc42,
+        chapters,
         meta: touchMeta(prev.meta)
       };
     });
@@ -126,7 +126,7 @@ export function AppDataProvider({ children }) {
                 then: []
               }
             ],
-        linkedArc42: ensureArray(payload.linkedArc42),
+        linkedChapters: ensureArray(payload.linkedChapters),
         linkedComponents: ensureArray(payload.linkedComponents),
         linkedAdrs: ensureArray(payload.linkedAdrs),
         ...payload
@@ -147,9 +147,9 @@ export function AppDataProvider({ children }) {
           ? {
               ...feature,
               ...updates,
-              linkedArc42: updates.linkedArc42
-                ? ensureArray(updates.linkedArc42)
-                : feature.linkedArc42,
+              linkedChapters: updates.linkedChapters
+                ? ensureArray(updates.linkedChapters)
+                : feature.linkedChapters,
               linkedComponents: updates.linkedComponents
                 ? ensureArray(updates.linkedComponents)
                 : feature.linkedComponents,
@@ -215,7 +215,7 @@ export function AppDataProvider({ children }) {
     setState((prev) => {
       const exists = prev.c4.containers.some((item) => item.id === container.id);
       const containerWithDefaults = {
-        linkedArc42: ensureArray(container.linkedArc42),
+          linkedChapters: ensureArray(container.linkedChapters),
         linkedAdrs: ensureArray(container.linkedAdrs),
         linkedFeatures: ensureArray(container.linkedFeatures),
         ...container,
@@ -284,7 +284,7 @@ export function AppDataProvider({ children }) {
   const upsertC4Component = useCallback((component) => {
     setState((prev) => {
       const componentWithDefaults = {
-        linkedArc42: ensureArray(component.linkedArc42),
+        linkedChapters: ensureArray(component.linkedChapters),
         linkedAdrs: ensureArray(component.linkedAdrs),
         linkedFeatures: ensureArray(component.linkedFeatures),
         ...component,
@@ -361,7 +361,7 @@ export function AppDataProvider({ children }) {
 
   const actions = useMemo(
     () => ({
-      updateArc42Section,
+      updateChapter,
       addAdr,
       updateAdr,
       removeAdr,
@@ -377,7 +377,7 @@ export function AppDataProvider({ children }) {
       resetWorkspace
     }),
     [
-      updateArc42Section,
+      updateChapter,
       addAdr,
       updateAdr,
       removeAdr,
