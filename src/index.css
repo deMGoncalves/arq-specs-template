@@ -69,7 +69,6 @@ body {
   font-weight: 600;
 }
 
-
 .app-main {
   flex: 1;
   width: min(100%, 1440px);
@@ -166,16 +165,6 @@ body {
   margin-bottom: 12px;
 }
 
-.chapter-highlight {
-  display: inline-block;
-  background: linear-gradient(90deg, #38bdf8 0%, #22d3ee 45%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-  letter-spacing: 0.08em;
-}
-
 .chapter-subtitle {
   max-width: 680px;
   color: rgba(203, 213, 225, 0.86);
@@ -187,14 +176,34 @@ body {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-auto-rows: 1fr;
 }
 
 .chapter-card {
   background: rgba(15, 23, 42, 0.72);
+  height: 100%;
   border: 1px solid rgba(148, 163, 184, 0.18);
   box-shadow: 0 32px 50px rgba(2, 6, 23, 0.28);
   backdrop-filter: blur(14px);
   transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.chapter-card-link {
+  display: block;
+  text-decoration: none;
+}
+
+.chapter-card-link .chapter-card {
+  cursor: pointer;
+}
+
+.chapter-card-link:focus-visible .chapter-card {
+  outline: 2px solid rgba(59, 130, 246, 0.8);
+  outline-offset: 6px;
+}
+
+.chapter-card__content {
+  padding-bottom: 24px;
 }
 
 .chapter-card:hover {
@@ -240,10 +249,45 @@ body {
   line-height: 1.6;
 }
 
-.chapter-card__footer {
+.prompt-card {
+  background: rgba(15, 23, 42, 0.64);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 32px 50px rgba(2, 6, 23, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.prompt-code {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prompt-code__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.prompt-code__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+.prompt-textarea {
+  min-height: 240px;
+  font-family: var(--font-mono, "JetBrains Mono", "Fira Code", monospace);
+  background: rgba(15, 23, 42, 0.36);
+  color: #e2e8f0;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  resize: vertical;
+}
+
+.prompt-textarea:focus-visible {
+  border-color: rgba(94, 234, 212, 0.4);
 }
 
 @media (max-width: 768px) {
