@@ -341,7 +341,6 @@ function IntroductionSection({
   const [newNote, setNewNote] = useState("");
   const [editingNoteIndex, setEditingNoteIndex] = useState(null);
   const [actionItems, setActionItems] = useState(section.actionItems || []);
-  const [newAction, setNewAction] = useState("");
   const [isDirty, setIsDirty] = useState(false);
   const skipDirtyCheck = useRef(false);
   const [editorConfig, setEditorConfig] = useState(null);
@@ -755,18 +754,6 @@ function IntroductionSection({
       setNewNote("");
       setEditingNoteIndex(null);
     }
-  }
-
-  function handleAddActionItem() {
-    if (!newAction.trim()) {
-      return;
-    }
-    setActionItems((current) => [...current, newAction.trim()]);
-    setNewAction("");
-  }
-
-  function handleRemoveActionItem(value) {
-    setActionItems((current) => current.filter((item) => item !== value));
   }
 
   function handleSave() {
@@ -1646,42 +1633,6 @@ function IntroductionSection({
                 </div>
               ))
             )}
-          </div>
-          <div className="space-y-3">
-            <Label>Próximas ações</Label>
-            <div className="flex gap-2">
-              <Input
-                value={newAction}
-                placeholder="Ex: Validar objetivo de qualidade com o time de produto"
-                onChange={(event) => setNewAction(event.target.value)}
-              />
-              <Button type="button" variant="outline" onClick={handleAddActionItem}>
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {actionItems.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  Adicione atividades para evoluir a introdução.
-                </p>
-              ) : null}
-              {actionItems.map((item) => (
-                <Badge
-                  key={item}
-                  variant="neutral"
-                  className="group inline-flex items-center gap-2"
-                >
-                  {item}
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveActionItem(item)}
-                    className="text-muted-foreground transition group-hover:text-foreground"
-                  >
-                    <Trash2 className="h-3 w-3" />
-                  </button>
-                </Badge>
-              ))}
-            </div>
           </div>
         </CardContent>
       </Card>
