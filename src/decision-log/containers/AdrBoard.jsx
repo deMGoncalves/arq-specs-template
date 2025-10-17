@@ -21,11 +21,13 @@ const statusMap = {
 };
 
 function AdrBoard() {
-  const { adrs, arc42, bdd, c4 } = useAppData();
+  const { adrs, chapters = [], arc42 = [], bdd, c4 } = useAppData();
   const navigate = useNavigate();
 
-  const arc42ById = Object.fromEntries(
-    arc42.map((section) => [section.id, `${section.order}. ${section.title}`])
+  const chapterSource = chapters.length ? chapters : arc42;
+
+  const chapterById = Object.fromEntries(
+    chapterSource.map((section) => [section.id, `${section.order}. ${section.title}`])
   );
   const featureById = Object.fromEntries(
     bdd.map((feature) => [feature.id, `${feature.reference} • ${feature.title}`])
@@ -43,7 +45,7 @@ function AdrBoard() {
             Rastreie o histórico de decisões e os artefatos impactados.
           </p>
         </div>
-        <Button size="sm" onClick={() => navigate("/arc42/arc42-09/adrs/new")}>
+        <Button size="sm" onClick={() => navigate("/scenarios/decision-log/adrs/new")}>
           <GitBranchPlus className="mr-2 h-4 w-4" />
           Nova ADR
         </Button>
@@ -89,9 +91,9 @@ function AdrBoard() {
                     Referências cruzadas
                   </p>
                   <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                    {adr.links.arc42.map((sectionId) => (
+                    {(adr.links.chapters || adr.links.arc42 || []).map((sectionId) => (
                       <Badge key={sectionId} variant="outline">
-                        {arc42ById[sectionId] || sectionId}
+                        {chapterById[sectionId] || sectionId}
                       </Badge>
                     ))}
                     {adr.links.c4.map((itemId) => (
@@ -110,7 +112,7 @@ function AdrBoard() {
               <CardFooter className="justify-end">
                 <Button variant="outline" size="sm">
                   <Link
-                    to={`/arc42/arc42-09/adrs/${adr.id}`}
+                    to={`/scenarios/decision-log/adrs/${adr.id}`}
                     className="flex w-full items-center justify-center"
                   >
                     Editar ADR

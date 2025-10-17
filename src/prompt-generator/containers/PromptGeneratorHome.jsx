@@ -142,11 +142,11 @@ function PromptGeneratorHome() {
     <section className="chapter-wrapper">
       <header className="chapter-header">
         <div>
-          <p className="chapter-eyebrow">Blueprint • arc42</p>
+          <p className="chapter-eyebrow">Blueprint • Chapters</p>
           <h1 className="chapter-title">PROMPT Generator</h1>
           <p className="chapter-subtitle">
-            Cada cartão direciona para o capítulo equivalente ao arc42 clássico, agora
-            organizado por contexto → containers → módulos dentro deste workspace.
+            Cada cartão direciona para o capítulo correspondente deste workspace,
+            organizado por contexto → containers → módulos.
           </p>
         </div>
       </header>

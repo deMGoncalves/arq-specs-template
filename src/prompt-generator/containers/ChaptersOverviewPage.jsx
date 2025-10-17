@@ -16,22 +16,23 @@ const INTRO_STATUS_BADGE = {
   complete: { variant: "success", label: "Completo" }
 };
 
-function Arc42Overview() {
-  const { arc42 } = useAppData();
+function ChaptersOverviewPage() {
+  const { chapters = [], arc42 = [] } = useAppData();
+  const chapterSource = chapters.length ? chapters : arc42;
 
   return (
     <div className="space-y-6">
       <div className="space-y-3">
         <h1 className="text-2xl font-semibold text-foreground">
-          Arc42 Knowledge Base
+          Chapters Knowledge Base
         </h1>
         <p className="text-sm text-muted-foreground">
-          Navegue pelas seções em <code>specs/</code>; cada atualização aqui alimenta os artefatos C4, ADRs e cenários BDD gerados localmente.
+          Navegue pelos capítulos em <code>specs/</code>; cada atualização aqui alimenta os artefatos C4, ADRs e cenários BDD gerados localmente.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        {arc42.map((section) => {
+        {chapterSource.map((section) => {
           const introductionStatus = section.introduction?.status;
           const badgeConfig = introductionStatus
             ? INTRO_STATUS_BADGE[introductionStatus] || INTRO_STATUS_BADGE["not-started"]
@@ -49,7 +50,7 @@ function Arc42Overview() {
           return (
             <Link
               key={section.id}
-              to={`/arc42/${section.id}`}
+              to={`/scenarios/${section.slug || section.id}`}
               className="group block focus-visible:outline-none"
             >
               <Card className="flex h-full flex-col transition duration-200 hover:-translate-y-0.5 hover:border-brand-500 hover:shadow-soft focus-visible:-translate-y-0.5 focus-visible:border-brand-500 focus-visible:ring-2 focus-visible:ring-brand-500/60 group-hover:-translate-y-0.5 group-hover:border-brand-500 group-hover:shadow-soft group-focus-visible:-translate-y-0.5 group-focus-visible:border-brand-500 group-focus-visible:shadow-soft">
@@ -100,4 +101,4 @@ function Arc42Overview() {
   );
 }
 
-export default Arc42Overview;
+export default ChaptersOverviewPage;

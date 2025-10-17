@@ -5,20 +5,21 @@ import { useAppActions, useAppData } from "../../workspace-state/containers/AppD
 import { cn } from "../../lib/utils.js";
 
 const titles = [
-  { match: /^\/$/, label: "Arc42 Overview" },
-  { match: /^\/arc42\/overview/, label: "Arc42 Overview" },
-  { match: /^\/arc42\/arc42-01/, label: "01 • Introdução" },
-  { match: /^\/arc42\/arc42-02/, label: "02 • Restrições" },
-  { match: /^\/arc42\/arc42-03/, label: "03 • Contexto" },
-  { match: /^\/arc42\/arc42-04/, label: "04 • Estratégia" },
-  { match: /^\/arc42\/arc42-05/, label: "05 • Blocos" },
-  { match: /^\/arc42\/arc42-06/, label: "06 • Comportamento" },
-  { match: /^\/arc42\/arc42-07/, label: "07 • Implantação" },
-  { match: /^\/arc42\/arc42-08/, label: "08 • Conceitos" },
-  { match: /^\/arc42\/arc42-09/, label: "09 • Decisões" },
-  { match: /^\/arc42\/arc42-10/, label: "10 • Qualidade" },
-  { match: /^\/arc42\/arc42-11/, label: "11 • Riscos" },
-  { match: /^\/arc42\/arc42-12/, label: "12 • Glossário" }
+  { match: /^\/$/, label: "Chapters Overview" },
+  { match: /^\/scenarios\/overview/, label: "Chapters Overview" },
+  { match: /^\/scenarios\/overview-and-objectives/, label: "01 • Visão Geral e Objetivos" },
+  { match: /^\/scenarios\/restrictions-and-guidelines/, label: "02 • Restrições e Diretrizes" },
+  { match: /^\/scenarios\/system-scope-and-context/, label: "03 • Escopo e Contexto" },
+  { match: /^\/scenarios\/architectural-strategy/, label: "04 • Estratégia Arquitetural" },
+  { match: /^\/scenarios\/structural-view-components/, label: "05 • Visão Estrutural" },
+  { match: /^\/scenarios\/behavioral-view-scenarios/, label: "06 • Visão de Comportamento" },
+  { match: /^\/scenarios\/behavioral-view-scenarios\/bdd/, label: "06 • BDD Workbench" },
+  { match: /^\/scenarios\/deployment-view/, label: "07 • Visão de Implantação" },
+  { match: /^\/scenarios\/crosscutting-concepts/, label: "08 • Conceitos Transversais" },
+  { match: /^\/scenarios\/decision-log/, label: "09 • Registro de Decisões" },
+  { match: /^\/scenarios\/quality-and-scenarios/, label: "10 • Qualidade e Cenários" },
+  { match: /^\/scenarios\/risks-and-technical-debt/, label: "11 • Riscos e Dívida Técnica" },
+  { match: /^\/scenarios\/glossary-of-terms/, label: "12 • Glossário de Termos" }
 ];
 
 function Topbar() {
@@ -62,7 +63,7 @@ function Topbar() {
           </Button>
           <Button variant="outline" size="sm">
             <Link
-              to="/arc42/arc42-05/export"
+              to="/scenarios/structural-view-components/export"
               className="flex w-full items-center justify-center gap-2"
             >
               <UploadCloud className="h-4 w-4" />

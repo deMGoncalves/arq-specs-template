@@ -7,12 +7,12 @@ import { Textarea } from "../../shared/modules/ui/textarea.jsx";
 
 const CHAPTERS = [
   {
-    id: "arc42-01",
+    id: "overview-and-objectives",
     order: "01",
     title: "Visão Geral e Objetivos",
     description: "Apresenta a solução, o propósito, o contexto inicial e os objetivos prioritários.",
     status: "Disponível",
-    target: "/arc42/arc42-01",
+    target: "/scenarios/overview-and-objectives",
     ready: true
   },
   {

@@ -27,7 +27,7 @@ const statusOptions = [
 function AdrEditor({ mode = "create" }) {
   const navigate = useNavigate();
   const { adrId } = useParams();
-  const { adrs, arc42, c4, bdd } = useAppData();
+  const { adrs, chapters = [], arc42 = [], c4, bdd } = useAppData();
   const { addAdr, updateAdr } = useAppActions();
 
   const editingAdr = adrs.find((adr) => adr.id === adrId);
@@ -37,7 +37,7 @@ function AdrEditor({ mode = "create" }) {
       return {
         ...editingAdr,
         links: {
-          arc42: editingAdr.links.arc42,
+          chapters: editingAdr.links.chapters || editingAdr.links.arc42 || [],
           c4: editingAdr.links.c4,
           bdd: editingAdr.links.bdd
         }
@@ -54,7 +54,7 @@ function AdrEditor({ mode = "create" }) {
       consequences: "",
       specPath: "",
       links: {
-        arc42: [],
+        chapters: [],
         c4: [],
         bdd: []
       }
@@ -63,17 +63,19 @@ function AdrEditor({ mode = "create" }) {
 
   useEffect(() => {
     if (mode === "edit" && !editingAdr) {
-      navigate("/arc42/arc42-09/adrs");
+      navigate("/scenarios/decision-log/adrs");
     }
   }, [mode, editingAdr, navigate]);
 
-  const arc42Options = useMemo(
+  const chapterSource = chapters.length ? chapters : arc42;
+
+  const chapterOptions = useMemo(
     () =>
-      arc42.map((section) => ({
+      chapterSource.map((section) => ({
         value: section.id,
         label: `${section.order}. ${section.title}`
       })),
-    [arc42]
+    [chapterSource]
   );
 
   const c4Options = useMemo(
@@ -129,14 +131,14 @@ function AdrEditor({ mode = "create" }) {
     } else {
       addAdr({ ...form });
     }
-    navigate("/arc42/arc42-09/adrs");
+    navigate("/scenarios/decision-log/adrs");
   }
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Button variant="ghost" size="sm">
-          <Link to="/arc42/arc42-09/adrs" className="flex items-center gap-2">
+          <Link to="/scenarios/decision-log/adrs" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             Voltar
           </Link>
@@ -150,7 +152,7 @@ function AdrEditor({ mode = "create" }) {
         <CardHeader>
           <CardTitle>{mode === "edit" ? "Editar ADR" : "Nova ADR"}</CardTitle>
           <CardDescription>
-            Capture contexto, decisão, consequências e links para arc42, C4 e BDD.
+            Capture contexto, decisão, consequências e links para capítulos, C4 e BDD.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -222,18 +224,18 @@ function AdrEditor({ mode = "create" }) {
           <hr className="border-border" />
           <div className="grid gap-4 md:grid-cols-3">
             <div className="space-y-2">
-              <Label>arc42 impactado</Label>
+              <Label>Capítulos vinculados</Label>
               <div className="space-y-2 text-sm">
-                {arc42Options.map((option) => (
+                {chapterOptions.map((option) => (
                   <label
                     key={option.value}
                     className="flex items-center justify-between gap-2 rounded-lg border border-border px-3 py-2"
                   >
                     <span>{option.label}</span>
                     <Checkbox
-                      checked={form.links.arc42.includes(option.value)}
+                      checked={(form.links.chapters || form.links.arc42 || []).includes(option.value)}
                       onChange={(event) =>
-                        toggleLink("arc42", option.value, event.target.checked)
+                        toggleLink("chapters", option.value, event.target.checked)
                       }
                     />
                   </label>

@@ -19,74 +19,75 @@ import { cn, formatDate } from "../../lib/utils.js";
 
 const navigation = [
   {
-    to: "/arc42/overview",
+    to: "/scenarios/overview",
     label: "Visão Geral",
     icon: LayoutDashboard
   },
   {
-    to: "/arc42/arc42-01",
-    label: "01 • Introdução",
+    to: "/scenarios/overview-and-objectives",
+    label: "01 • Visão Geral e Objetivos",
     icon: Map
   },
   {
-    to: "/arc42/arc42-02",
-    label: "02 • Restrições",
+    to: "/scenarios/restrictions-and-guidelines",
+    label: "02 • Restrições e Diretrizes",
     icon: ShieldCheck
   },
   {
-    to: "/arc42/arc42-03",
-    label: "03 • Contexto",
+    to: "/scenarios/system-scope-and-context",
+    label: "03 • Escopo e Contexto",
     icon: Users
   },
   {
-    to: "/arc42/arc42-04",
-    label: "04 • Estratégia",
+    to: "/scenarios/architectural-strategy",
+    label: "04 • Estratégia Arquitetural",
     icon: Lightbulb
   },
   {
-    to: "/arc42/arc42-05",
-    label: "05 • Blocos",
+    to: "/scenarios/structural-view-components",
+    label: "05 • Visão Estrutural",
     icon: Boxes
   },
   {
-    to: "/arc42/arc42-06",
-    label: "06 • Comportamento",
+    to: "/scenarios/behavioral-view-scenarios",
+    label: "06 • Visão de Comportamento",
     icon: Workflow
   },
   {
-    to: "/arc42/arc42-07",
-    label: "07 • Implantação",
+    to: "/scenarios/deployment-view",
+    label: "07 • Visão de Implantação",
     icon: Server
   },
   {
-    to: "/arc42/arc42-08",
-    label: "08 • Conceitos",
+    to: "/scenarios/crosscutting-concepts",
+    label: "08 • Conceitos Transversais",
     icon: Layers3
   },
   {
-    to: "/arc42/arc42-09",
-    label: "09 • Decisões",
+    to: "/scenarios/decision-log",
+    label: "09 • Registro de Decisões",
     icon: GitBranch
   },
   {
-    to: "/arc42/arc42-10",
-    label: "10 • Qualidade",
+    to: "/scenarios/quality-and-scenarios",
+    label: "10 • Qualidade e Cenários",
     icon: Gauge
   },
   {
-    to: "/arc42/arc42-11",
-    label: "11 • Riscos",
+    to: "/scenarios/risks-and-technical-debt",
+    label: "11 • Riscos e Dívida Técnica",
     icon: AlertTriangle
   },
   {
-    to: "/arc42/arc42-12",
-    label: "12 • Glossário",
+    to: "/scenarios/glossary-of-terms",
+    label: "12 • Glossário de Termos",
     icon: BookOpen
   }
 ];
 
 function Sidebar() {
-  const { meta, arc42 } = useAppData();
+  const { meta, chapters = [], arc42 = [] } = useAppData();
+  const chapterSource = chapters.length ? chapters : arc42;
 
   return (
     <aside className="hidden w-72 border-r border-border bg-card/80 backdrop-blur-md lg:flex lg:flex-col">
@@ -125,8 +126,10 @@ function Sidebar() {
           <p>{formatDate(meta.lastUpdated)}</p>
         </div>
         <div>
-          <span className="font-semibold text-foreground">Cobertura arc42</span>
-          <p>{arc42.filter((section) => section.notes).length} / {arc42.length} seções documentadas</p>
+          <span className="font-semibold text-foreground">Cobertura capítulos</span>
+          <p>
+            {chapterSource.filter((section) => section.notes).length} / {chapterSource.length} seções documentadas
+          </p>
         </div>
       </div>
     </aside>

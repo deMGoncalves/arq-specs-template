@@ -41,9 +41,10 @@ function StatCard({ title, value, description, icon: Icon, link }) {
 }
 
 function Dashboard() {
-  const { meta, arc42, adrs, bdd, c4, risks, quality } = useAppData();
+  const { meta, chapters = [], arc42 = [], adrs, bdd, c4, risks, quality } = useAppData();
+  const chapterSource = chapters.length ? chapters : arc42;
 
-  const documentedSections = arc42.filter(
+  const documentedSections = chapterSource.filter(
     (section) => section.notes && section.notes.trim().length > 0
   );
 
@@ -60,7 +61,7 @@ function Dashboard() {
 
   const upcomingRisks = risks.slice(0, 3);
 
-  const arc42Highlights = arc42.slice(0, 4);
+  const chapterHighlights = chapterSource.slice(0, 4);
 
   return (
     <div className="space-y-6">
@@ -76,45 +77,45 @@ function Dashboard() {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          title="Seções arc42 registradas"
-          value={`${documentedSections.length}/${arc42.length}`}
-          description="Cobertura do arc42"
+          title="Capítulos registrados"
+          value={`${documentedSections.length}/${chapterSource.length}`}
+          description="Cobertura dos capítulos"
           icon={Map}
-          link="/arc42/overview"
+          link="/scenarios/overview"
         />
         <StatCard
           title="ADRs ativas"
           value={adrs.length}
           description={`${openAdrs.length} em aberto`}
           icon={GitBranch}
-          link="/arc42/arc42-09"
+          link="/scenarios/decision-log"
         />
         <StatCard
           title="Cenários BDD"
           value={scenarios.length}
           description={`${bdd.length} features mapeadas`}
           icon={Workflow}
-          link="/arc42/arc42-06"
+          link="/scenarios/behavioral-view-scenarios"
         />
         <StatCard
           title="Cobertura decisões → BDD"
           value={`${coverage}%`}
           description="ADRs vinculadas a cenários"
           icon={Layers3}
-          link="/arc42/arc42-06"
+          link="/scenarios/behavioral-view-scenarios"
         />
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Highlights arc42</CardTitle>
+            <CardTitle>Highlights de capítulos</CardTitle>
             <CardDescription>
               Seções mais recentes para revisar com o time.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {arc42Highlights.map((section) => (
+            {chapterHighlights.map((section) => (
               <div key={section.id} className="rounded-lg border border-border p-4">
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -141,10 +142,10 @@ function Dashboard() {
                 <div className="mt-4 flex justify-end">
                   <Button variant="ghost" size="sm">
                     <Link
-                      to={`/arc42/${section.id}`}
+                      to={`/scenarios/${section.slug || section.id}`}
                       className="flex w-full items-center justify-center"
                     >
-                      Editar seção
+                      Editar capítulo
                     </Link>
                   </Button>
                 </div>
@@ -157,7 +158,7 @@ function Dashboard() {
           <CardHeader>
             <CardTitle>Riscos e Qualidade</CardTitle>
             <CardDescription>
-              Itens de vigilância contínua mapeados no arc42.
+              Itens de vigilância contínua mapeados pelos capítulos.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">

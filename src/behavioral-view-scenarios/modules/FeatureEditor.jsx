@@ -20,7 +20,8 @@ import { generateId } from "../../lib/utils.js";
 function FeatureEditor({ mode = "create" }) {
   const navigate = useNavigate();
   const { featureId } = useParams();
-  const { bdd, arc42, c4, adrs } = useAppData();
+  const { bdd, chapters = [], arc42 = [], c4, adrs } = useAppData();
+  const chapterSource = chapters.length ? chapters : arc42;
   const { addFeature, updateFeature, removeFeature } = useAppActions();
 
   const editingFeature = bdd.find((feature) => feature.id === featureId);
@@ -46,7 +47,7 @@ function FeatureEditor({ mode = "create" }) {
       narrative: "",
       businessGoals: [],
       businessGoalsText: "",
-      linkedArc42: [],
+      linkedChapters: [],
       linkedComponents: [],
       linkedAdrs: [],
       scenarios: [
@@ -63,17 +64,17 @@ function FeatureEditor({ mode = "create" }) {
 
   useEffect(() => {
     if (mode === "edit" && !editingFeature) {
-      navigate("/arc42/arc42-06/bdd");
+      navigate("/scenarios/behavioral-view-scenarios/bdd");
     }
   }, [mode, editingFeature, navigate]);
 
-  const arc42Options = useMemo(
+  const chapterOptions = useMemo(
     () =>
-      arc42.map((section) => ({
+      chapterSource.map((section) => ({
         value: section.id,
         label: `${section.order}. ${section.title}`
       })),
-    [arc42]
+    [chapterSource]
   );
 
   const componentOptions = useMemo(
@@ -147,7 +148,7 @@ function FeatureEditor({ mode = "create" }) {
   function handleDeleteFeature() {
     if (mode === "edit" && editingFeature) {
       removeFeature(editingFeature.id);
-      navigate("/arc42/arc42-06/bdd");
+      navigate("/scenarios/behavioral-view-scenarios/bdd");
     }
   }
 
@@ -167,7 +168,7 @@ function FeatureEditor({ mode = "create" }) {
             .map((item) => item.trim())
             .filter(Boolean)
         : [],
-      linkedArc42: form.linkedArc42,
+      linkedChapters: form.linkedChapters || form.linkedArc42 || [],
       linkedComponents: form.linkedComponents,
       linkedAdrs: form.linkedAdrs,
       scenarios: form.scenarios.map((scenario) => ({
@@ -190,14 +191,14 @@ function FeatureEditor({ mode = "create" }) {
     } else {
       addFeature(normalized);
     }
-    navigate("/arc42/arc42-06/bdd");
+    navigate("/scenarios/behavioral-view-scenarios/bdd");
   }
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Button variant="ghost" size="sm">
-          <Link to="/arc42/arc42-06/bdd" className="flex items-center gap-2">
+          <Link to="/scenarios/behavioral-view-scenarios/bdd" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             Voltar
           </Link>
@@ -268,18 +269,18 @@ function FeatureEditor({ mode = "create" }) {
           <hr className="border-border" />
           <div className="grid gap-4 md:grid-cols-3">
             <div className="space-y-2">
-              <Label>Seções arc42</Label>
+              <Label>Capítulos</Label>
               <div className="space-y-2 text-sm">
-                {arc42Options.map((option) => (
+                {chapterOptions.map((option) => (
                   <label
                     key={option.value}
                     className="flex items-center justify-between gap-2 rounded-lg border border-border px-3 py-2"
                   >
                     <span>{option.label}</span>
                     <Checkbox
-                      checked={form.linkedArc42.includes(option.value)}
+                      checked={(form.linkedChapters || form.linkedArc42 || []).includes(option.value)}
                       onChange={(event) =>
-                        toggleLink("linkedArc42", option.value, event.target.checked)
+                        toggleLink("linkedChapters", option.value, event.target.checked)
                       }
                     />
                   </label>

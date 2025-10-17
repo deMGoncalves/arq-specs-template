@@ -14,10 +14,11 @@ import { useAppData } from "../../workspace-state/containers/AppDataProvider.jsx
 
 function BddWorkspace() {
   const navigate = useNavigate();
-  const { bdd, arc42, c4, adrs } = useAppData();
+  const { bdd, chapters = [], arc42 = [], c4, adrs } = useAppData();
+  const chapterSource = chapters.length ? chapters : arc42;
 
-  const arc42ById = Object.fromEntries(
-    arc42.map((section) => [section.id, `${section.order}. ${section.title}`])
+  const chapterById = Object.fromEntries(
+    chapterSource.map((section) => [section.id, `${section.order}. ${section.title}`])
   );
 
   const c4ById = Object.fromEntries(
@@ -32,10 +33,10 @@ function BddWorkspace() {
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold text-foreground">BDD Workbench</h1>
           <p className="text-sm text-muted-foreground">
-            Transforme contexto em cenários verificáveis, vinculando arc42, C4 e ADRs.
+            Transforme contexto em cenários verificáveis, vinculando capítulos, C4 e ADRs.
           </p>
         </div>
-        <Button size="sm" onClick={() => navigate("/arc42/arc42-06/bdd/new")}>
+        <Button size="sm" onClick={() => navigate("/scenarios/behavioral-view-scenarios/bdd/new")}>
           <PlusCircle className="mr-2 h-4 w-4" />
           Nova feature
         </Button>
@@ -68,12 +69,12 @@ function BddWorkspace() {
               </div>
               <div className="space-y-2">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Seções arc42
+                  Capítulos vinculados
                 </p>
                 <div className="flex flex-wrap gap-2 text-xs">
-                  {feature.linkedArc42.map((sectionId) => (
+                  {(feature.linkedChapters || feature.linkedArc42 || []).map((sectionId) => (
                     <Badge key={sectionId} variant="outline">
-                      {arc42ById[sectionId] || sectionId}
+                      {chapterById[sectionId] || sectionId}
                     </Badge>
                   ))}
                 </div>
@@ -121,7 +122,7 @@ function BddWorkspace() {
             <CardFooter className="justify-end">
               <Button variant="outline" size="sm">
                 <Link
-                  to={`/arc42/arc42-06/bdd/${feature.id}`}
+                  to={`/scenarios/behavioral-view-scenarios/bdd/${feature.id}`}
                   className="flex w-full items-center justify-center"
                 >
                   Editar feature
