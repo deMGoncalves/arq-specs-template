@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./app-shell/containers/AppLayout.jsx";
+import Arc42Home from "./arc42-overview/containers/Arc42Home.jsx";
 import Arc42OverviewPage from "./arc42-overview/containers/Arc42OverviewPage.jsx";
 import Arc42SectionRoute from "./arc42-shared/containers/Arc42SectionRoute.jsx";
 import IntroducaoPage from "./arc42-01-introducao/containers/IntroducaoPage.jsx";
@@ -33,7 +34,7 @@ function App() {
       <AppDataProvider>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Navigate to="/arc42/overview" replace />} />
+            <Route index element={<Arc42Home />} />
             <Route path="arc42" element={<Navigate to="/arc42/overview" replace />} />
             <Route path="arc42/overview" element={<Arc42OverviewPage />} />
             <Route path="arc42/overview/dashboard" element={<Arc42Dashboard />} />
