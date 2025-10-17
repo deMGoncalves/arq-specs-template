@@ -46,7 +46,7 @@ const emptyC4Model = {
 
 export const initialData = {
   meta: {
-    productName: "CDD Specs Studio",
+    productName: "Blueprint",
     version: "0.1.0",
     lastUpdated: new Date().toISOString(),
     description:

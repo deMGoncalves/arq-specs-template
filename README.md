@@ -108,6 +108,36 @@ novo pattern de arquitetura, seu PR é bem-vindo.
 
 ---
 
+## 🧑‍💻 **Blueprint (React)**
+
+Para transformar a pasta `@specs/` em um aplicativo interativo, este repositório agora inclui uma SPA construída com **React**, **React Router** e **shadcn/ui**, persistindo tudo em `localStorage`.
+
+### Como executar
+
+```bash
+bun install
+bun run dev
+```
+
+O servidor Vite sobe em `http://localhost:5173` (use `bun run dev -- --host` para expor na rede).
+
+### O que você encontra na aplicação
+
+* **Arc42 Knowledge Map**: edite cada seção do arc42, guarde notas e ações e visualize os artefatos vinculados (ADRs, cenários BDD, elementos C4).
+* **C4 Workspace**: mantenha containers e componentes sincronizados com as decisões e cenários. Tudo fica alinhado ao arc42 automaticamente.
+* **ADR Decision Log**: registre decisões arquiteturais, status e trade-offs, ligando-as às seções do arc42, aos elementos C4 e aos cenários BDD.
+* **BDD Workbench**: escreva features e cenários Gherkin vinculados aos componentes e às decisões para manter os critérios de aceite vivos.
+* **Export Center**: exporte/importa o workspace em JSON (ideal para versionar junto com a pasta `specs/`).
+* **Specs Overview**: visualize como os dados da aplicação se materializam na estrutura `specs/`.
+
+### Persistência e ciclo de vida
+
+* Todos os dados ficam salvos em `localStorage` (`cdd-specs-workspace`).
+* Use o centro de exportação para gerar backups e sincronizar com outros membros do time.
+* O botão **Restaurar Template** devolve o estado padrão definido em `src/data/initialData.js`.
+
+---
+
 ## 🔗 **Referências e Links**
 
 * **[arc42 Official](https://arc42.org/)**
