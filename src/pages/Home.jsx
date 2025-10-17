@@ -104,10 +104,12 @@ function Home() {
     <section className="chapter-wrapper">
       <header className="chapter-header">
         <div>
-          <p className="chapter-eyebrow">Arc42 Blueprint</p>
-          <h1 className="chapter-title">Capítulos do blueprint arquitetural</h1>
+          <p className="chapter-eyebrow">Blueprint arc42</p>
+          <h1 className="chapter-title">
+            Uma jornada pelos <span className="chapter-highlight">12 capítulos essenciais</span>
+          </h1>
           <p className="chapter-subtitle">
-            Comece pela introdução e objetivos. Os demais capítulos ficarão disponíveis à medida que evoluirmos a automação do blueprint.
+            Explore cada módulo do blueprint arc42 com clareza progressiva. A Introdução está pronta para uso; os demais capítulos surgirão conforme evoluirmos a experiência.
           </p>
         </div>
       </header>
