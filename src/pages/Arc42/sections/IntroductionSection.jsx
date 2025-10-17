@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ExternalLink, Plus, Trash2 } from "lucide-react";
+import { Download, ExternalLink, FileText, Plus, Trash2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle
 } from "../../../components/ui/card.jsx";
-import { Button } from "../../../components/ui/button.jsx";
+import { Button, buttonVariants } from "../../../components/ui/button.jsx";
 import { Input } from "../../../components/ui/input.jsx";
 import { Label } from "../../../components/ui/label.jsx";
 import { Textarea } from "../../../components/ui/textarea.jsx";
@@ -53,6 +53,53 @@ function generateId(prefix) {
     return `${prefix}-${crypto.randomUUID()}`;
   }
   return `${prefix}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function formatFileSize(bytes) {
+  const numericValue = Number(bytes);
+  if (!Number.isFinite(numericValue) || numericValue <= 0) {
+    return "0 B";
+  }
+  const units = ["B", "KB", "MB", "GB"];
+  let size = numericValue;
+  let unitIndex = 0;
+
+  while (size >= 1024 && unitIndex < units.length - 1) {
+    size /= 1024;
+    unitIndex += 1;
+  }
+
+  const formatted =
+    unitIndex === 0 ? Math.round(size).toString() : size.toFixed(1);
+  return `${formatted.replace(".0", "")} ${units[unitIndex]}`;
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error || new Error("Falha ao ler arquivo"));
+    reader.readAsDataURL(file);
+  });
+}
+
+function createReferenceFromLegacyText(text, lastUpdated) {
+  const safeText = String(text || "");
+  if (!safeText.trim()) {
+    return null;
+  }
+  let size = safeText.length;
+  if (typeof TextEncoder !== "undefined") {
+    size = new TextEncoder().encode(safeText).length;
+  }
+  return {
+    id: generateId("reference"),
+    name: "referencias.txt",
+    size,
+    type: "text/plain",
+    data: `data:text/plain;charset=utf-8,${encodeURIComponent(safeText)}`,
+    uploadedAt: lastUpdated || new Date().toISOString()
+  };
 }
 
 function createFeature(index) {
@@ -136,6 +183,23 @@ function buildIntroductionState(section) {
           )
         )
     : [];
+  const legacyReference = createReferenceFromLegacyText(intro.references, intro.lastUpdated);
+  const normalizedReferences = Array.isArray(intro.references)
+    ? intro.references
+        .map((reference, index) => ({
+          id: reference?.id || generateId("reference"),
+          name: reference?.name || `referencia-${index + 1}`,
+          size: Number(reference?.size) || 0,
+          type: reference?.type || "",
+          data: reference?.data || "",
+          uploadedAt: reference?.uploadedAt || reference?.createdAt || ""
+        }))
+        .filter(
+          (reference) => normalizeString(reference.name) && normalizeString(reference.data)
+        )
+    : legacyReference
+      ? [legacyReference]
+      : [];
   return {
     status: intro.status || "not-started",
     lastUpdated: intro.lastUpdated || "",
@@ -151,7 +215,7 @@ function buildIntroductionState(section) {
     },
     stakeholders: ensureWithDefaults(normalizedStakeholders, 0, createStakeholder),
     qualityGoals: ensureWithDefaults(normalizedQualityGoals, 0, createQualityGoal),
-    references: intro.references || ""
+    references: normalizedReferences
   };
 }
 
@@ -195,7 +259,20 @@ function normalizeIntroductionForSave(state) {
     })).filter((goal) =>
       [goal.title, goal.metric, goal.target, goal.motivation].some(Boolean)
     ),
-    references: normalizeString(state.references)
+    references: Array.isArray(state.references)
+      ? state.references
+          .map((reference, index) => ({
+            id: reference.id || `reference-${index + 1}`,
+            name: normalizeString(reference.name),
+            size: Number(reference.size) || 0,
+            type: normalizeString(reference.type),
+            data: typeof reference.data === "string" ? reference.data : "",
+            uploadedAt: reference.uploadedAt || ""
+          }))
+          .filter(
+            (reference) => reference.name && reference.data
+          )
+      : []
   };
 }
 
@@ -265,6 +342,9 @@ function IntroductionSection({
     motivation: ""
   });
   const [qualityGoalEditorView, setQualityGoalEditorView] = useState("edit");
+  const fileInputRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const baselineIntroduction = useMemo(
     () => buildIntroductionState(section),
@@ -533,6 +613,77 @@ function IntroductionSection({
     ) {
       handleCloseEditor();
     }
+  }
+
+  function handleReferencePicker() {
+    fileInputRef.current?.click();
+  }
+
+  async function handleReferenceUpload(fileList) {
+    const files = Array.from(fileList || []);
+    if (!files.length) {
+      return;
+    }
+    setIsUploading(true);
+    try {
+      const uploads = await Promise.all(
+        files.map(async (file) => {
+          const data = await readFileAsDataUrl(file);
+          return {
+            id: generateId("reference"),
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            data,
+            uploadedAt: new Date().toISOString()
+          };
+        })
+      );
+      setFormState((current) => ({
+        ...current,
+        references: [...current.references, ...uploads]
+      }));
+    } catch (error) {
+      console.error("Falha ao processar upload de referências", error);
+    } finally {
+      setIsUploading(false);
+    }
+  }
+
+  function handleReferenceInputChange(event) {
+    handleReferenceUpload(event.target.files);
+    event.target.value = "";
+  }
+
+  function handleReferenceDrop(event) {
+    event.preventDefault();
+    setIsDragging(false);
+    if (isUploading) {
+      return;
+    }
+    handleReferenceUpload(event.dataTransfer.files);
+  }
+
+  function handleReferenceDragOver(event) {
+    event.preventDefault();
+    if (!isDragging) {
+      setIsDragging(true);
+    }
+  }
+
+  function handleReferenceDragLeave(event) {
+    event.preventDefault();
+    if (event.currentTarget.contains(event.relatedTarget)) {
+      return;
+    }
+    setIsDragging(false);
+  }
+
+  function handleReferenceRemove(referenceId) {
+    setFormState((current) => ({
+      ...current,
+      references: current.references.filter((reference) => reference.id !== referenceId)
+    }));
   }
 
   function handleAddActionItem() {
@@ -1230,13 +1381,109 @@ function IntroductionSection({
             Aponte documentos externos, RFCs ou fontes que embasam esta visão.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <Textarea
-            value={formState.references}
-            onChange={(event) => handleFieldChange("references", event.target.value)}
-            rows={3}
-            placeholder="Cole URLs, caminhos de repositório ou documentos relacionados."
-          />
+        <CardContent className="space-y-4">
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={handleReferencePicker}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleReferencePicker();
+              }
+            }}
+            onDrop={handleReferenceDrop}
+            onDragOver={handleReferenceDragOver}
+            onDragLeave={handleReferenceDragLeave}
+            className={cn(
+              "flex min-h-[160px] flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-muted/20 text-center transition",
+              isDragging ? "border-brand-500 bg-brand-50/60 text-brand-600" : "hover:border-brand-500/60 hover:bg-card"
+            )}
+          >
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              className="hidden"
+              onChange={handleReferenceInputChange}
+            />
+            <p className="text-sm font-semibold text-foreground">
+              Arraste e solte arquivos ou clique para selecionar
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Anexe PDFs, imagens ou documentos que reforcem o racional arquitetural.
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isUploading}
+              onClick={(event) => {
+                event.stopPropagation();
+                handleReferencePicker();
+              }}
+            >
+              {isUploading ? "Processando..." : "Selecionar arquivos"}
+            </Button>
+          </div>
+          <div className="space-y-3">
+            {formState.references.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                Nenhum arquivo anexado ainda. Utilize o upload para manter rastreabilidade com as fontes consultadas.
+              </p>
+            ) : (
+              formState.references.map((reference) => (
+                <div
+                  key={reference.id}
+                  className="flex items-center justify-between gap-4 rounded-lg border border-border bg-muted/30 p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 rounded-md bg-card p-2">
+                      <FileText className="h-4 w-4 text-brand-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">
+                        {reference.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {formatFileSize(reference.size)} • {reference.type || "Tipo desconhecido"}
+                      </p>
+                      {reference.uploadedAt ? (
+                        <p className="text-xs text-muted-foreground">
+                          Enviado em {formatDate(reference.uploadedAt)}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {reference.data ? (
+                      <a
+                        href={reference.data}
+                        download={reference.name}
+                        className={cn(
+                          buttonVariants({ variant: "ghost", size: "icon" }),
+                          "text-muted-foreground hover:text-brand-600"
+                        )}
+                        aria-label={`Baixar ${reference.name}`}
+                      >
+                        <Download className="h-4 w-4" />
+                      </a>
+                    ) : null}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleReferenceRemove(reference.id)}
+                      aria-label={`Remover ${reference.name}`}
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
         </CardContent>
       </Card>
 
