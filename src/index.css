@@ -34,7 +34,7 @@ body {
   color: rgb(var(--foreground));
 }
 
-.terminal-root {
+.dashboard-screen {
   min-height: 100vh;
   padding: 32px 16px;
   background: radial-gradient(160% 120% at 50% -10%, #0f172a 0%, #020617 70%);
@@ -43,52 +43,26 @@ body {
 }
 
 @media (max-width: 768px) {
-  .terminal-root {
+  .dashboard-screen {
     padding: 20px 12px;
   }
 }
 
-.app-shell {
-  min-height: calc(100vh - 64px);
-  display: flex;
-  flex-direction: column;
+.context-container {
   width: 100%;
-}
-
-.app-bar {
-  width: 100%;
-  padding: 18px 32px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(6, 10, 19, 0.92);
-  backdrop-filter: blur(18px);
-  font-family: var(--font-mono, "JetBrains Mono", "Fira Code", monospace);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  color: #60a5fa;
-  font-weight: 600;
-}
-
-.app-main {
-  flex: 1;
-  width: min(100%, 1440px);
+  max-width: 1440px;
   margin: 0 auto;
   padding: 32px 40px 60px;
 }
 
 @media (max-width: 1024px) {
-  .app-main {
+  .context-container {
     padding: 28px 24px 48px;
   }
 }
 
 @media (max-width: 768px) {
-  .app-bar {
-    padding: 14px 20px;
-    font-size: 0.8rem;
-  }
-
-  .app-main {
+  .context-container {
     padding: 24px 16px 40px;
   }
 }
