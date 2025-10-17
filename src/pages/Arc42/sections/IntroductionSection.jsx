@@ -158,6 +158,28 @@ function ensureWithDefaults(list, size, factory) {
   });
 }
 
+function buildNoteItems(rawNotes) {
+  if (!rawNotes) {
+    return [];
+  }
+  if (Array.isArray(rawNotes)) {
+    return rawNotes
+      .map((note) => normalizeString(note))
+      .filter(Boolean);
+  }
+  return String(rawNotes)
+    .split("\n")
+    .map((item) => normalizeString(item))
+    .filter(Boolean);
+}
+
+function serializeNoteItems(items) {
+  return items
+    .map((item) => normalizeString(item))
+    .filter(Boolean)
+    .join("\n");
+}
+
 function buildIntroductionState(section) {
   const intro = section.introduction || {};
   const normalizedStakeholders = Array.isArray(intro.stakeholders)
@@ -315,7 +337,9 @@ function IntroductionSection({
   onUpdate
 }) {
   const [formState, setFormState] = useState(() => buildIntroductionState(section));
-  const [notes, setNotes] = useState(section.notes || "");
+  const [noteItems, setNoteItems] = useState(() => buildNoteItems(section.notes));
+  const [newNote, setNewNote] = useState("");
+  const [editingNoteIndex, setEditingNoteIndex] = useState(null);
   const [actionItems, setActionItems] = useState(section.actionItems || []);
   const [newAction, setNewAction] = useState("");
   const [isDirty, setIsDirty] = useState(false);
@@ -354,10 +378,20 @@ function IntroductionSection({
     () => JSON.stringify(baselineIntroduction),
     [baselineIntroduction]
   );
+  const baselineNotes = useMemo(
+    () => buildNoteItems(section.notes),
+    [section.notes]
+  );
+  const baselineNotesSerialized = useMemo(
+    () => JSON.stringify(baselineNotes),
+    [baselineNotes]
+  );
 
   useEffect(() => {
     setFormState(baselineIntroduction);
-    setNotes(section.notes || "");
+    setNoteItems(buildNoteItems(section.notes));
+    setNewNote("");
+    setEditingNoteIndex(null);
     setActionItems(section.actionItems || []);
   }, [baselineIntroduction, section]);
 
@@ -414,19 +448,21 @@ function IntroductionSection({
     }
 
     const serializedCurrent = JSON.stringify(formState);
-    const originalNotes = section.notes || "";
+    const currentNotesSerialized = JSON.stringify(
+      noteItems.map((item) => item.trim()).filter(Boolean)
+    );
     const originalActions = section.actionItems || [];
     const hasChanges =
       serializedCurrent !== baselineSerialized ||
-      originalNotes !== notes ||
+      currentNotesSerialized !== baselineNotesSerialized ||
       JSON.stringify(originalActions) !== JSON.stringify(actionItems);
     setIsDirty(hasChanges);
   }, [
     formState,
-    notes,
+    noteItems,
     actionItems,
     baselineSerialized,
-    section.notes,
+    baselineNotesSerialized,
     section.actionItems
   ]);
 
@@ -686,6 +722,41 @@ function IntroductionSection({
     }));
   }
 
+  function handleSubmitNote() {
+    const value = newNote.trim();
+    if (!value) {
+      return;
+    }
+    if (editingNoteIndex !== null) {
+      setNoteItems((current) =>
+        current.map((item, index) => (index === editingNoteIndex ? value : item))
+      );
+    } else {
+      setNoteItems((current) => [...current, value]);
+    }
+    setNewNote("");
+    setEditingNoteIndex(null);
+  }
+
+  function handleEditNote(index) {
+    const note = noteItems[index];
+    setNewNote(note);
+    setEditingNoteIndex(index);
+  }
+
+  function handleCancelNoteEdit() {
+    setNewNote("");
+    setEditingNoteIndex(null);
+  }
+
+  function handleRemoveNote(index) {
+    setNoteItems((current) => current.filter((_, itemIndex) => itemIndex !== index));
+    if (editingNoteIndex === index) {
+      setNewNote("");
+      setEditingNoteIndex(null);
+    }
+  }
+
   function handleAddActionItem() {
     if (!newAction.trim()) {
       return;
@@ -700,11 +771,12 @@ function IntroductionSection({
 
   function handleSave() {
     const trimmedActions = actionItems.map((item) => item.trim()).filter(Boolean);
-    const trimmedNotes = notes.trim();
+    const normalizedNotes = serializeNoteItems(noteItems);
+    const cleanedNoteItems = buildNoteItems(normalizedNotes);
     const normalizedIntroduction = normalizeIntroductionForSave(formState);
     const derivedStatus = determineAutoStatus(
       normalizedIntroduction,
-      trimmedNotes,
+      normalizedNotes,
       trimmedActions
     );
     const lastUpdated = new Date().toISOString();
@@ -716,7 +788,7 @@ function IntroductionSection({
       status: derivedStatus,
       lastUpdated
     }));
-    setNotes(trimmedNotes);
+    setNoteItems(cleanedNoteItems);
     setActionItems(trimmedActions);
 
     onUpdate({
@@ -725,7 +797,7 @@ function IntroductionSection({
         status: derivedStatus,
         lastUpdated
       },
-      notes: trimmedNotes,
+      notes: normalizedNotes,
       actionItems: trimmedActions
     });
     setIsDirty(false);
@@ -733,7 +805,8 @@ function IntroductionSection({
 
   function handleMarkComplete() {
     const trimmedActions = actionItems.map((item) => item.trim()).filter(Boolean);
-    const trimmedNotes = notes.trim();
+    const normalizedNotes = serializeNoteItems(noteItems);
+    const cleanedNoteItems = buildNoteItems(normalizedNotes);
     const normalizedIntroduction = normalizeIntroductionForSave(formState);
     const lastUpdated = new Date().toISOString();
 
@@ -744,7 +817,7 @@ function IntroductionSection({
       status: "complete",
       lastUpdated
     }));
-    setNotes(trimmedNotes);
+    setNoteItems(cleanedNoteItems);
     setActionItems(trimmedActions);
 
     onUpdate({
@@ -753,7 +826,7 @@ function IntroductionSection({
         status: "complete",
         lastUpdated
       },
-      notes: trimmedNotes,
+      notes: normalizedNotes,
       actionItems: trimmedActions
     });
     setIsDirty(false);
@@ -762,7 +835,7 @@ function IntroductionSection({
   const normalizedCurrent = normalizeIntroductionForSave(formState);
   const autoStatusPreview = determineAutoStatus(
     normalizedCurrent,
-    notes,
+    serializeNoteItems(noteItems),
     actionItems
   );
   const statusDisplay = STATUS_BADGE[formState.status] || STATUS_BADGE["not-started"];
@@ -1496,13 +1569,83 @@ function IntroductionSection({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="introduction-notes">Notas principais</Label>
+            <Label htmlFor="introduction-new-note">
+              {editingNoteIndex !== null ? "Editar nota selecionada" : "Adicionar nova nota"}
+            </Label>
             <Textarea
-              id="introduction-notes"
-              value={notes}
-              onChange={(event) => setNotes(event.target.value)}
+              id="introduction-new-note"
+              value={newNote}
+              onChange={(event) => setNewNote(event.target.value)}
               rows={3}
+              placeholder="Ex: Alinhar expectativas com o time de vendas na próxima coletiva."
             />
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleSubmitNote}
+                disabled={!newNote.trim()}
+              >
+                {editingNoteIndex !== null ? "Atualizar nota" : "Adicionar nota"}
+              </Button>
+              {editingNoteIndex !== null ? (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCancelNoteEdit}
+                >
+                  Cancelar edição
+                </Button>
+              ) : null}
+            </div>
+          </div>
+          <div className="space-y-3">
+            {noteItems.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                Nenhuma nota registrada ainda. Capture aprendizados rápidos, riscos emergentes ou lembretes relacionados à introdução.
+              </p>
+            ) : (
+              noteItems.map((note, index) => (
+                <div
+                  key={`note-${index}`}
+                  className="space-y-2 rounded-lg border border-border bg-muted/30 p-4"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Nota {index + 1}</p>
+                      <p className="text-xs text-muted-foreground">
+                        Clique em editar para ajustar o texto ou remover se a nota deixar de fazer sentido.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleEditNote(index)}
+                      >
+                        Editar
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleRemoveNote(index)}
+                        aria-label={`Remover nota ${index + 1}`}
+                        className="text-muted-foreground hover:text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="rounded-md border border-dashed border-border bg-card/70 p-3">
+                    <MarkdownPreview value={note} emptyMessage="Nota vazia" />
+                  </div>
+                </div>
+              ))
+            )}
           </div>
           <div className="space-y-3">
             <Label>Próximas ações</Label>
