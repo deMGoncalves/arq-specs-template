@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function ArchitecturalStrategyIndex() {
+function ArchitecturalStrategy() {
   return <Navigate to="/" replace />;
 }
 
-export default ArchitecturalStrategyIndex;
+export default ArchitecturalStrategy;

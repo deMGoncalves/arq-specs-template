@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function CrosscuttingConceptsIndex() {
+function CrosscuttingConcepts() {
   return <Navigate to="/" replace />;
 }
 
-export default CrosscuttingConceptsIndex;
+export default CrosscuttingConcepts;

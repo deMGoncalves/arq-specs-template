@@ -4,7 +4,7 @@ import { useAppActions, useAppData } from "../../dashboard/containers/WorkspaceP
 import Container from "../modules/Container.jsx";
 import IntroductionSection from "../modules/IntroductionSection.jsx";
 
-function OverviewObjectivesPage() {
+function OverviewObjectives() {
   const { chapters = [], arc42 = [] } = useAppData();
   const { updateChapter } = useAppActions();
   const chapterSource = chapters.length ? chapters : arc42;
@@ -39,4 +39,4 @@ function OverviewObjectivesPage() {
   );
 }
 
-export default OverviewObjectivesPage;
+export default OverviewObjectives;

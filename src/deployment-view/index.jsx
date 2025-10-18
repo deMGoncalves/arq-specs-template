@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function DeploymentViewIndex() {
+function DeploymentView() {
   return <Navigate to="/" replace />;
 }
 
-export default DeploymentViewIndex;
+export default DeploymentView;

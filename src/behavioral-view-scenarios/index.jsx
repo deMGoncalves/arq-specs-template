@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function BehavioralViewScenariosIndex() {
+function BehavioralViewScenarios() {
   return <Navigate to="/" replace />;
 }
 
-export default BehavioralViewScenariosIndex;
+export default BehavioralViewScenarios;

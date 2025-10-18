@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function StructuralViewComponentsIndex() {
+function StructuralViewComponents() {
   return <Navigate to="/" replace />;
 }
 
-export default StructuralViewComponentsIndex;
+export default StructuralViewComponents;

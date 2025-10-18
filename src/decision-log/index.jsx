@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function DecisionLogIndex() {
+function DecisionLog() {
   return <Navigate to="/" replace />;
 }
 
-export default DecisionLogIndex;
+export default DecisionLog;

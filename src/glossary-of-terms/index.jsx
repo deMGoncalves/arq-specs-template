@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function GlossaryOfTermsIndex() {
+function GlossaryOfTerms() {
   return <Navigate to="/" replace />;
 }
 
-export default GlossaryOfTermsIndex;
+export default GlossaryOfTerms;

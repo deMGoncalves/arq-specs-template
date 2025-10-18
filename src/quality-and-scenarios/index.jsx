@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function QualityAndScenariosIndex() {
+function QualityAndScenarios() {
   return <Navigate to="/" replace />;
 }
 
-export default QualityAndScenariosIndex;
+export default QualityAndScenarios;

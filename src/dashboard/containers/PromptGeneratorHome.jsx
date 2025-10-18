@@ -138,7 +138,7 @@ const CHAPTERS = [
   }
 ];
 
-function PromptGeneratorHome() {
+function PromptGenerator() {
   return (
     <div className="dashboard-screen">
       <Container className="chapter-wrapper">
@@ -192,4 +192,4 @@ function PromptGeneratorHome() {
   );
 }
 
-export default PromptGeneratorHome;
+export default PromptGenerator;

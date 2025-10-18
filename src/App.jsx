@@ -1,35 +1,35 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PromptGeneratorHome from "./dashboard/containers/PromptGeneratorHome.jsx";
-import OverviewObjectivesPage from "./overview-and-objectives/containers/OverviewObjectivesPage.jsx";
-import RestrictionsGuidelinesIndex from "./restrictions-and-guidelines/index.jsx";
-import SystemScopeAndContextIndex from "./system-scope-and-context/index.jsx";
-import ArchitecturalStrategyIndex from "./architectural-strategy/index.jsx";
-import StructuralViewComponentsIndex from "./structural-view-components/index.jsx";
-import BehavioralViewScenariosIndex from "./behavioral-view-scenarios/index.jsx";
-import DeploymentViewIndex from "./deployment-view/index.jsx";
-import CrosscuttingConceptsIndex from "./crosscutting-concepts/index.jsx";
-import DecisionLogIndex from "./decision-log/index.jsx";
-import QualityAndScenariosIndex from "./quality-and-scenarios/index.jsx";
-import RisksAndTechnicalDebtIndex from "./risks-and-technical-debt/index.jsx";
-import GlossaryOfTermsIndex from "./glossary-of-terms/index.jsx";
+import PromptGenerator from "./dashboard/containers/PromptGeneratorHome.jsx";
+import OverviewObjectives from "./overview-and-objectives/containers/OverviewObjectivesPage.jsx";
+import RestrictionsAndGuidelines from "./restrictions-and-guidelines/index.jsx";
+import SystemScopeAndContext from "./system-scope-and-context/index.jsx";
+import ArchitecturalStrategy from "./architectural-strategy/index.jsx";
+import StructuralViewComponents from "./structural-view-components/index.jsx";
+import BehavioralViewScenarios from "./behavioral-view-scenarios/index.jsx";
+import DeploymentView from "./deployment-view/index.jsx";
+import CrosscuttingConcepts from "./crosscutting-concepts/index.jsx";
+import DecisionLog from "./decision-log/index.jsx";
+import QualityAndScenarios from "./quality-and-scenarios/index.jsx";
+import RisksAndTechnicalDebt from "./risks-and-technical-debt/index.jsx";
+import GlossaryOfTerms from "./glossary-of-terms/index.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PromptGeneratorHome />} />
-        <Route path="/scenarios/overview-and-objectives" element={<OverviewObjectivesPage />} />
-        <Route path="/scenarios/restrictions-and-guidelines" element={<RestrictionsGuidelinesIndex />} />
-        <Route path="/scenarios/system-scope-and-context" element={<SystemScopeAndContextIndex />} />
-        <Route path="/scenarios/architectural-strategy" element={<ArchitecturalStrategyIndex />} />
-        <Route path="/scenarios/structural-view-components" element={<StructuralViewComponentsIndex />} />
-        <Route path="/scenarios/behavioral-view-scenarios" element={<BehavioralViewScenariosIndex />} />
-        <Route path="/scenarios/deployment-view" element={<DeploymentViewIndex />} />
-        <Route path="/scenarios/crosscutting-concepts" element={<CrosscuttingConceptsIndex />} />
-        <Route path="/scenarios/decision-log" element={<DecisionLogIndex />} />
-        <Route path="/scenarios/quality-and-scenarios" element={<QualityAndScenariosIndex />} />
-        <Route path="/scenarios/risks-and-technical-debt" element={<RisksAndTechnicalDebtIndex />} />
-        <Route path="/scenarios/glossary-of-terms" element={<GlossaryOfTermsIndex />} />
+        <Route path="/" element={<PromptGenerator />} />
+        <Route path="/scenarios/overview-and-objectives" element={<OverviewObjectives />} />
+        <Route path="/scenarios/restrictions-and-guidelines" element={<RestrictionsAndGuidelines />} />
+        <Route path="/scenarios/system-scope-and-context" element={<SystemScopeAndContext />} />
+        <Route path="/scenarios/architectural-strategy" element={<ArchitecturalStrategy />} />
+        <Route path="/scenarios/structural-view-components" element={<StructuralViewComponents />} />
+        <Route path="/scenarios/behavioral-view-scenarios" element={<BehavioralViewScenarios />} />
+        <Route path="/scenarios/deployment-view" element={<DeploymentView />} />
+        <Route path="/scenarios/crosscutting-concepts" element={<CrosscuttingConcepts />} />
+        <Route path="/scenarios/decision-log" element={<DecisionLog />} />
+        <Route path="/scenarios/quality-and-scenarios" element={<QualityAndScenarios />} />
+        <Route path="/scenarios/risks-and-technical-debt" element={<RisksAndTechnicalDebt />} />
+        <Route path="/scenarios/glossary-of-terms" element={<GlossaryOfTerms />} />
       </Routes>
     </BrowserRouter>
   );

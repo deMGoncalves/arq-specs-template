@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function SystemScopeAndContextIndex() {
+function SystemScopeAndContext() {
   return <Navigate to="/" replace />;
 }
 
-export default SystemScopeAndContextIndex;
+export default SystemScopeAndContext;

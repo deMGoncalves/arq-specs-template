@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function RestrictionsAndGuidelinesIndex() {
+function RestrictionsAndGuidelines() {
   return <Navigate to="/" replace />;
 }
 
-export default RestrictionsAndGuidelinesIndex;
+export default RestrictionsAndGuidelines;

@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
-function RisksAndTechnicalDebtIndex() {
+function RisksAndTechnicalDebt() {
   return <Navigate to="/" replace />;
 }
 
-export default RisksAndTechnicalDebtIndex;
+export default RisksAndTechnicalDebt;
