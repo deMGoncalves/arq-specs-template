@@ -1,12 +1,12 @@
 import { forwardRef } from "react";
-import { cn } from "../../../lib/utils.js";
+import { cn } from "@/lib/utils.js";
 
 const Card = forwardRef(function Card({ className, ...props }, ref) {
   return (
     <div
       ref={ref}
       className={cn(
-        "rounded-xl border border-border bg-card text-card-foreground shadow-sm",
+        "rounded-xl border bg-card text-card-foreground shadow-sm",
         className
       )}
       {...props}
@@ -21,7 +21,7 @@ const CardHeader = forwardRef(function CardHeader(
   return (
     <div
       ref={ref}
-      className={cn("flex flex-col gap-1.5 px-6 pt-6", className)}
+      className={cn("flex flex-col gap-1.5 p-6", className)}
       {...props}
     />
   );
@@ -31,7 +31,7 @@ const CardTitle = forwardRef(function CardTitle({ className, ...props }, ref) {
   return (
     <h3
       ref={ref}
-      className={cn("text-lg font-semibold leading-tight", className)}
+      className={cn("text-lg font-semibold leading-tight tracking-tight", className)}
       {...props}
     />
   );
@@ -55,7 +55,7 @@ const CardContent = forwardRef(function CardContent(
   ref
 ) {
   return (
-    <div ref={ref} className={cn("px-6 pb-6", className)} {...props} />
+    <div ref={ref} className={cn("px-6 pb-6 pt-0", className)} {...props} />
   );
 });
 
@@ -66,7 +66,7 @@ const CardFooter = forwardRef(function CardFooter(
   return (
     <div
       ref={ref}
-      className={cn("flex items-center justify-between px-6 pb-6", className)}
+      className={cn("flex items-center gap-4 px-6 pb-6 pt-0", className)}
       {...props}
     />
   );

@@ -12,6 +12,12 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@radix-ui/react-checkbox": "^1.1.0",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "lucide-react": "^0.370.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -26,6 +32,7 @@
     "markdownlint-cli": "^0.45.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.13",
+    "tailwindcss-animate": "^1.0.7",
     "vite": "^5.4.2"
   }
 }

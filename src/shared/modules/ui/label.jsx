@@ -1,17 +1,18 @@
-import { cn } from "../../../lib/utils.js";
+import { forwardRef } from "react";
+import * as LabelPrimitive from "@radix-ui/react-label";
+import { cn } from "@/lib/utils.js";
 
-function Label({ className, children, htmlFor }) {
+const Label = forwardRef(function Label({ className, ...props }, ref) {
   return (
-    <label
-      htmlFor={htmlFor}
+    <LabelPrimitive.Root
+      ref={ref}
       className={cn(
-        "text-sm font-medium text-foreground",
+        "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
         className
       )}
-    >
-      {children}
-    </label>
+      {...props}
+    />
   );
-}
+});
 
 export { Label };

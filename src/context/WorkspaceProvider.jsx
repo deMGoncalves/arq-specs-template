@@ -6,7 +6,7 @@ import {
 } from "react";
 import { initialData, STORAGE_KEY } from "./workspaceInitialData.js";
 import { useLocalStorage } from "../shared/modules/hooks/useLocalStorage.js";
-import { ensureArray, generateId } from "../lib/utils.js";
+import { ensureArray, generateId } from "@/lib/utils.js";
 
 const DataContext = createContext(initialData);
 const ActionsContext = createContext({});

@@ -16,7 +16,7 @@ import { Badge } from "../../shared/modules/ui/badge.jsx";
 import { Checkbox } from "../../shared/modules/ui/checkbox.jsx";
 import { Drawer } from "../../shared/modules/ui/drawer.jsx";
 import MarkdownPreview from "../../shared/modules/MarkdownPreview.jsx";
-import { cn, formatDate } from "../../lib/utils.js";
+import { cn, formatDate } from "@/lib/utils.js";
 
 const STATUS_BADGE = {
   "not-started": { variant: "outline", label: "🔴 Não iniciado" },
@@ -1729,7 +1729,7 @@ function IntroductionSection({
                       className={cn(
                         "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
                         featureEditorView === "edit"
-                          ? "bg-brand-500 text-white shadow-soft"
+                          ? "bg-brand-500 text-white shadow-md"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                       onClick={() => setFeatureEditorView("edit")}
@@ -1741,7 +1741,7 @@ function IntroductionSection({
                       className={cn(
                         "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
                         featureEditorView === "preview"
-                          ? "bg-brand-500 text-white shadow-soft"
+                          ? "bg-brand-500 text-white shadow-md"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                       onClick={() => setFeatureEditorView("preview")}
@@ -1846,7 +1846,7 @@ function IntroductionSection({
                       className={cn(
                         "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
                         stakeholderEditorView === "edit"
-                          ? "bg-brand-500 text-white shadow-soft"
+                          ? "bg-brand-500 text-white shadow-md"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                       onClick={() => setStakeholderEditorView("edit")}
@@ -1858,7 +1858,7 @@ function IntroductionSection({
                       className={cn(
                         "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
                         stakeholderEditorView === "preview"
-                          ? "bg-brand-500 text-white shadow-soft"
+                          ? "bg-brand-500 text-white shadow-md"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                       onClick={() => setStakeholderEditorView("preview")}
@@ -1957,9 +1957,9 @@ function IntroductionSection({
                     <button
                       type="button"
                       className={cn(
-                        "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
-                        qualityGoalEditorView === "edit"
-                          ? "bg-brand-500 text-white shadow-soft"
+                      "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
+                      qualityGoalEditorView === "edit"
+                        ? "bg-brand-500 text-white shadow-md"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                       onClick={() => setQualityGoalEditorView("edit")}
@@ -1969,9 +1969,9 @@ function IntroductionSection({
                     <button
                       type="button"
                       className={cn(
-                        "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
-                        qualityGoalEditorView === "preview"
-                          ? "bg-brand-500 text-white shadow-soft"
+                      "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
+                      qualityGoalEditorView === "preview"
+                        ? "bg-brand-500 text-white shadow-md"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                       onClick={() => setQualityGoalEditorView("preview")}
@@ -2021,7 +2021,7 @@ function IntroductionSection({
                     className={cn(
                       "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
                       editorView === "edit"
-                        ? "bg-brand-500 text-white shadow-soft"
+                        ? "bg-brand-500 text-white shadow-md"
                         : "text-muted-foreground hover:text-foreground"
                     )}
                     onClick={() => setEditorView("edit")}
@@ -2033,7 +2033,7 @@ function IntroductionSection({
                     className={cn(
                       "rounded-sm px-3 py-1 text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500",
                       editorView === "preview"
-                        ? "bg-brand-500 text-white shadow-soft"
+                        ? "bg-brand-500 text-white shadow-md"
                         : "text-muted-foreground hover:text-foreground"
                     )}
                     onClick={() => setEditorView("preview")}

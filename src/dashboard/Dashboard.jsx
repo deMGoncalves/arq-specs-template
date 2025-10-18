@@ -137,20 +137,26 @@ const CHAPTERS = [
 
 function Dashboard() {
   return (
-    <div className="dashboard-screen">
-      <div className="context-container chapter-wrapper">
-        <header className="chapter-header">
-          <div>
-            <p className="chapter-eyebrow">Blueprint • Chapters</p>
-            <h1 className="chapter-title">PROMPT Generator</h1>
-            <p className="chapter-subtitle">
+    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(160%_120%_at_50%_-10%,rgba(15,23,42,0.92)_0%,rgba(2,6,23,1)_70%)]" />
+      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-6 py-16 md:px-10 lg:px-12">
+        <header className="flex flex-col gap-5 text-slate-100">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-slate-400">
+            Blueprint • Chapters
+          </p>
+          <div className="space-y-4">
+            <h1 className="text-4xl font-semibold tracking-tight text-slate-50 sm:text-5xl">
+              PROMPT Generator
+            </h1>
+            <p className="max-w-3xl text-base leading-relaxed text-slate-300">
               Cada cartão direciona para o capítulo correspondente deste workspace,
-              organizado por contexto → containers → módulos.
+              organizado por contexto → containers → módulos. Use-os para navegar
+              pelas visões essenciais do blueprint.
             </p>
           </div>
         </header>
 
-        <div className="chapter-grid">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {CHAPTERS.map((chapter) => (
             <Chapter key={chapter.id} chapter={chapter} />
           ))}
