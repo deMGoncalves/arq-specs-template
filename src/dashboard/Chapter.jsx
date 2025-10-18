@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/modules/ui/card.jsx";
-import { Badge } from "@/shared/modules/ui/badge.jsx";
-import { cn } from "@/lib/utils.js";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.jsx";
+import { Badge } from "@/components/ui/badge.jsx";
+import { cn } from "@/utils";
 
 function Chapter({ chapter }) {
   const isDisabled = !chapter.ready;

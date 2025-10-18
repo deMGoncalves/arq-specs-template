@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Check } from "lucide-react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { cn } from "@/lib/utils.js";
+import { cn } from "@/utils";
 
 const Checkbox = forwardRef(function Checkbox(
   { className, ...props },

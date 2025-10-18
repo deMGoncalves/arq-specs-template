@@ -1,4 +1,4 @@
-import { generateId } from "./utils.js";
+import { generateId } from "./index.js";
 
 const HEADING_ALIASES = {
   overview: [

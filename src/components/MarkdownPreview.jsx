@@ -1,4 +1,4 @@
-import { renderMarkdown } from "../../lib/markdown.js";
+import { renderMarkdown } from "@/utils/markdown";
 
 function MarkdownPreview({ value, emptyMessage = "Ainda não há conteúdo." }) {
   const html = renderMarkdown(value);

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils.js";
+import { cn } from "@/utils";
 
 const BASE_CLASSES =
   "mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-10 md:px-10 lg:px-12";

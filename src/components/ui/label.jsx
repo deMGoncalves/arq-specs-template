@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
-import { cn } from "@/lib/utils.js";
+import { cn } from "@/utils";
 
 const Label = forwardRef(function Label({ className, ...props }, ref) {
   return (

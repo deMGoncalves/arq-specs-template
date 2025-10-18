@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle
-} from "../../shared/modules/ui/card.jsx";
-import { Badge } from "../../shared/modules/ui/badge.jsx";
+} from "@/components/ui/card.jsx";
+import { Badge } from "@/components/ui/badge.jsx";
 import { useAppData } from "../../context/WorkspaceProvider.jsx";
 import ContextContainer from "../modules/Container.jsx";
 

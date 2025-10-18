@@ -6,9 +6,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle
-} from "../../shared/modules/ui/card.jsx";
-import { Button } from "../../shared/modules/ui/button.jsx";
-import { Textarea } from "../../shared/modules/ui/textarea.jsx";
+} from "@/components/ui/card.jsx";
+import { Button } from "@/components/ui/button.jsx";
+import { Textarea } from "@/components/ui/textarea.jsx";
 import { useAppActions, useAppData } from "../../context/WorkspaceProvider.jsx";
 import ContextContainer from "../modules/Container.jsx";
 

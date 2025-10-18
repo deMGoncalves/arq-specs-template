@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { cn } from "@/lib/utils.js";
+import { cn } from "@/utils";
 
 function Drawer({ open, onClose, title, description, children, footer }) {
   function handleOpenChange(nextOpen) {

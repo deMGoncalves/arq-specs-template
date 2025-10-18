@@ -7,17 +7,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "../../shared/modules/ui/card.jsx";
-import { Textarea } from "../../shared/modules/ui/textarea.jsx";
-import { Input } from "../../shared/modules/ui/input.jsx";
-import { Button } from "../../shared/modules/ui/button.jsx";
-import { Badge } from "../../shared/modules/ui/badge.jsx";
-import { Checkbox } from "../../shared/modules/ui/checkbox.jsx";
-import { Label } from "../../shared/modules/ui/label.jsx";
-import { Separator } from "../../shared/modules/ui/separator.jsx";
-import { ScrollArea } from "../../shared/modules/ui/scroll-area.jsx";
+} from "@/components/ui/card.jsx";
+import { Textarea } from "@/components/ui/textarea.jsx";
+import { Input } from "@/components/ui/input.jsx";
+import { Button } from "@/components/ui/button.jsx";
+import { Badge } from "@/components/ui/badge.jsx";
+import { Checkbox } from "@/components/ui/checkbox.jsx";
+import { Label } from "@/components/ui/label.jsx";
+import { Separator } from "@/components/ui/separator.jsx";
+import { ScrollArea } from "@/components/ui/scroll-area.jsx";
 import { useAppActions, useAppData } from "../../context/WorkspaceProvider.jsx";
-import { generateId } from "@/lib/utils.js";
+import { generateId } from "@/utils";
 import ContextContainer from "../modules/Container.jsx";
 
 function selectOptions(options, selected, onToggle) {

@@ -5,8 +5,8 @@ import {
   useMemo
 } from "react";
 import { initialData, STORAGE_KEY } from "./workspaceInitialData.js";
-import { useLocalStorage } from "../shared/modules/hooks/useLocalStorage.js";
-import { ensureArray, generateId } from "@/lib/utils.js";
+import { useLocalStorage } from "@/hooks/useLocalStorage.js";
+import { ensureArray, generateId } from "@/utils";
 
 const DataContext = createContext(initialData);
 const ActionsContext = createContext({});

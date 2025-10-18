@@ -7,16 +7,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle
-} from "../../shared/modules/ui/card.jsx";
-import { Button, buttonVariants } from "../../shared/modules/ui/button.jsx";
-import { Input } from "../../shared/modules/ui/input.jsx";
-import { Label } from "../../shared/modules/ui/label.jsx";
-import { Textarea } from "../../shared/modules/ui/textarea.jsx";
-import { Badge } from "../../shared/modules/ui/badge.jsx";
-import { Checkbox } from "../../shared/modules/ui/checkbox.jsx";
-import { Drawer } from "../../shared/modules/ui/drawer.jsx";
-import MarkdownPreview from "../../shared/modules/MarkdownPreview.jsx";
-import { cn, formatDate } from "@/lib/utils.js";
+} from "@/components/ui/card.jsx";
+import { Button, buttonVariants } from "@/components/ui/button.jsx";
+import { Input } from "@/components/ui/input.jsx";
+import { Label } from "@/components/ui/label.jsx";
+import { Textarea } from "@/components/ui/textarea.jsx";
+import { Badge } from "@/components/ui/badge.jsx";
+import { Checkbox } from "@/components/ui/checkbox.jsx";
+import { Drawer } from "@/components/ui/drawer.jsx";
+import MarkdownPreview from "@/components/MarkdownPreview.jsx";
+import { cn, formatDate } from "@/utils";
 
 const STATUS_BADGE = {
   "not-started": { variant: "outline", label: "🔴 Não iniciado" },
