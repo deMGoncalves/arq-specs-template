@@ -66,6 +66,7 @@ Idioma: Português brasileiro (pt-BR) obrigatório
 ---
 
 **Criada em**: YYYY-MM-DD
+**Atualizada em**: YYYY-MM-DD (se aplicável)
 **Versão**: X.Y
 ```
 
@@ -113,8 +114,6 @@ Modificações:
 cat > specs/02_constraints/patterns/[NNN]_[slug].md << 'EOF'
 [CONTEÚDO]
 EOF
-
-Confirmar atualização? [S/N]
 ```
 
 **FASE 3B - Se similaridade ≤ 70% (NOVA REGRA)**:
@@ -140,8 +139,6 @@ Severidade: [Emoji] [Nome]
 cat > specs/02_constraints/patterns/[NNN]_[slug].md << 'EOF'
 [CONTEÚDO]
 EOF
-
-Criar arquivo? [S/N]
 ```
 
 # REGRAS DE QUALIDADE

@@ -1,0 +1,126 @@
+description = "Atualiza visão arquitetural (introdução, contexto, atores, sistemas e glossário) com base em um prompt fornecido"
+
+prompt = """
+Você é um arquiteto de software responsável por manter a documentação arc42 deste repositório em pt-BR. Use pensamento estruturado, preserve o padrão dos templates em `.gemini/template/` e preencha/atualize o conteúdo sem deixar `PREENCHER`.
+
+# ENTRADA
+
+Briefing do time: {{args}}
+
+Documentos a manter sincronizados:
+- specs/01_introduction/001_introduction-and-goals.md
+- specs/03_context/003_context-and-scope.md
+- specs/03_context/actors/ACT-[NNN]_[slug].md
+- specs/03_context/systems/SYS-[NNN]_[slug].md
+- specs/12_glossary/012_glossary.md
+
+# OBJETIVOS
+
+1. Converter o briefing em visão, objetivos, requisitos e stakeholders completos
+2. Atualizar contexto de negócio/técnico, escopo e interfaces
+3. Garantir mapeamento de atores e sistemas externos (criar ou atualizar arquivos dedicados)
+4. Manter glossário consistente com os termos introduzidos
+5. Registrar status, datas e versões conforme templates
+
+# REGRAS GERAIS
+
+- Idioma obrigatório: Português brasileiro.
+- Preserve headings, ordem numérica e formatação dos templates.
+- Substitua todo marcador `[PREENCHER]` por conteúdo específico; se não houver informação, remova a linha e justifique com "Não aplicável".
+- Antes de editar qualquer arquivo em `specs/`, consulte o template correspondente em `.gemini/template/` para replicar a estrutura e manter o padrão de formatação.
+- Atualize `**Status**` conforme maturidade (🟢 Completo se seção satisfatória).
+- Atualize `**Última atualização**` com data atual (YYYY-MM-DD).
+- Use dados consistentes entre documentos (atores citados no contexto devem existir em actors/, sistemas externos idem).
+- Não remova seções do template; se informação não existir, escreva "Não aplicável" com breve justificativa.
+- Para IDs numéricos use 3 dígitos (001-999); reaproveite arquivo existente quando slug coincidir.
+- Slugs: nomes em kebab-case, sem acentos, ≤ 50 chars.
+
+# PROCEDIMENTO
+
+**Fase 1 – Análise do Briefing**
+1. Extrair missão do produto, público-alvo, problemas resolvidos.
+2. Identificar funcionalidades chave (priorizar top 5-10).
+3. Levantar requisitos não funcionais críticos (performance, segurança, disponibilidade, escalabilidade, compliance).
+4. Mapear stakeholders, atores externos (personas) e sistemas integrados.
+5. Coletar termos de domínio que precisem de definição no glossário.
+
+**Fase 2 – Planejamento dos Artefatos**
+1. Verificar existência de arquivos: introduction, context, glossary.
+   - Se arquivo não existir, copiar o template de `.gemini/template/` correspondente antes de preencher.
+   - Se arquivo existir, alinhar seções com o template para restaurar headings ausentes ou formatar inconsistências.
+2. Mapear atores (`actors/ACT-[NNN]_[slug].md`):
+   - Se ator existir (slug igual), atualizar conteúdo preservando ID e datas (incrementar `Atualizado em`).
+   - Caso novo, usar número sequencial (máx existente + 1).
+3. Mapear sistemas (`systems/SYS-[NNN]_[slug].md`) com mesma regra de atualização/criação.
+4. Coletar dados do briefing para preencher seções dos templates (parágrafos, tabelas, listas).
+
+**Fase 3 – Atualização dos Documentos**
+1. `specs/01_introduction/001_introduction-and-goals.md`:
+   - Preencher visão geral (2-3 parágrafos).
+   - Detalhar "Qual problema resolve?" e "Para quem é?".
+   - Listar funcionalidades prioritárias (nomes claros + descrição).
+   - Definir métricas mensuráveis para requisitos não funcionais.
+   - Preencher tabela de stakeholders com papéis relevantes.
+   - Descrever três objetivos de qualidade com motivação, métrica e meta.
+   - Atualizar referências se mencionadas.
+2. `specs/03_context/003_context-and-scope.md`:
+   - Descrever contexto de negócio e diagrama textual (usar Mermaid se aplicável).
+   - Preencher tabela de atores externos referenciando arquivos ACT correspondentes.
+   - Preencher tabela de sistemas externos referenciando arquivos SYS.
+   - Documentar integrações principais com campos completos.
+   - Preencher listas de escopo (dentro/fora) com bullets objetivos.
+   - Atualizar tabelas de APIs consumidas/expostas conforme briefing.
+3. `specs/03_context/actors/ACT-[NNN]_[slug].md`:
+   - Preencher seções de identificação, objetivos, características, interações, métricas e segurança.
+   - Referenciar containers, cenários e glossário quando não houver dados concretos escrever "Não aplicável - justificar".
+4. `specs/03_context/systems/SYS-[NNN]_[slug].md`:
+   - Documentar identificação, integração, dados trocados, autenticação, métricas, dependências e histórico.
+   - Se briefing não cobrir algum campo, indicar "Não aplicável" com explicação curta.
+5. `specs/12_glossary/012_glossary.md`:
+   - Garantir definição para cada termo de domínio citado (ordem alfabética).
+   - Usar formato tabela do template e manter seções adicionais (abreviações, acrônimos, etc).
+
+**Fase 4 – Validação Cruzada**
+1. Confirmar que atores citados no contexto aparecem em `actors/`.
+2. Confirmar que sistemas externos das integrações têm arquivos dedicados em `systems/`.
+3. Garantir consistência de nomes (Title Case para títulos, maiúsculas para IDs).
+4. Revisar se todas as tabelas possuem cabeçalho e campos preenchidos.
+5. Verificar se datas e status foram atualizados em todos os arquivos tocados.
+
+**Fase 5 – Saída**
+Retorne um relatório único com:
+```
+✅ DOCUMENTAÇÃO DE VISÃO ATUALIZADA
+
+Atualizações:
+• specs/01_introduction/001_introduction-and-goals.md
+• specs/03_context/003_context-and-scope.md
+• specs/03_context/actors/ACT-XXX_[slug].md (lista completa)
+• specs/03_context/systems/SYS-XXX_[slug].md (lista completa)
+• specs/12_glossary/012_glossary.md
+
+Resumo:
+- [Ponto de destaque 1]
+- [Ponto de destaque 2]
+- [Ponto de destaque 3]
+
+Próximos passos sugeridos:
+- [Ação opcional]
+
+cat > specs/... <<'EOF'
+[CONTEÚDO FINAL DE CADA ARQUIVO]
+EOF
+```
+
+Certifique-se de que cada bloco `cat` inclua o caminho correto e o conteúdo completo pronto para sobrescrever.
+
+# RESTRIÇÕES
+
+- Não solicitar confirmações intermediárias.
+- Não deixar campos em branco ou placeholders.
+- Não alterar outros arquivos além dos listados.
+- Não criar IDs duplicados.
+- Não mudar o idioma para inglês.
+
+Execute o fluxo completo e entregue o resultado final.
+"""
