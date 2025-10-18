@@ -1,5 +1,4 @@
-import Container from "./modules/Container.jsx";
-import ChapterGrid from "./modules/ChapterGrid.jsx";
+import Chapter from "./Chapter.jsx";
 
 const CHAPTERS = [
   {
@@ -139,7 +138,7 @@ const CHAPTERS = [
 function Dashboard() {
   return (
     <div className="dashboard-screen">
-      <Container className="chapter-wrapper">
+      <div className="context-container chapter-wrapper">
         <header className="chapter-header">
           <div>
             <p className="chapter-eyebrow">Blueprint • Chapters</p>
@@ -151,8 +150,12 @@ function Dashboard() {
           </div>
         </header>
 
-        <ChapterGrid chapters={CHAPTERS} />
-      </Container>
+        <div className="chapter-grid">
+          {CHAPTERS.map((chapter) => (
+            <Chapter key={chapter.id} chapter={chapter} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

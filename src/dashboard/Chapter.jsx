@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Card, CardDescription, CardHeader, CardTitle } from "../../shared/modules/ui/card.jsx";
-import { Badge } from "../../shared/modules/ui/badge.jsx";
+import { Card, CardDescription, CardHeader, CardTitle } from "../shared/modules/ui/card.jsx";
+import { Badge } from "../shared/modules/ui/badge.jsx";
 
-function ChapterCard({ chapter }) {
-  const card = (
+function Chapter({ chapter }) {
+  const content = (
     <Card className={`chapter-card ${chapter.ready ? "" : "chapter-card--disabled"}`}>
       <CardHeader>
         <div className="chapter-card__top">
@@ -23,16 +23,16 @@ function ChapterCard({ chapter }) {
   if (!chapter.ready) {
     return (
       <div className="chapter-card-placeholder">
-        {card}
+        {content}
       </div>
     );
   }
 
   return (
     <Link to={chapter.target} className="chapter-card-link">
-      {card}
+      {content}
     </Link>
   );
 }
 
-export default ChapterCard;
+export default Chapter;

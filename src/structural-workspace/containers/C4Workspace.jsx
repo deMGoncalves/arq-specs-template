@@ -16,7 +16,7 @@ import { Checkbox } from "../../shared/modules/ui/checkbox.jsx";
 import { Label } from "../../shared/modules/ui/label.jsx";
 import { Separator } from "../../shared/modules/ui/separator.jsx";
 import { ScrollArea } from "../../shared/modules/ui/scroll-area.jsx";
-import { useAppActions, useAppData } from "../../dashboard/containers/WorkspaceProvider.jsx";
+import { useAppActions, useAppData } from "../../context/WorkspaceProvider.jsx";
 import { generateId } from "../../lib/utils.js";
 import ContextContainer from "../modules/Container.jsx";
 

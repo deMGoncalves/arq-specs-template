@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { Navigate } from "react-router-dom";
-import { useAppActions, useAppData } from "../../dashboard/containers/WorkspaceProvider.jsx";
+import { useAppActions, useAppData } from "../../context/WorkspaceProvider.jsx";
 import Container from "../modules/Container.jsx";
 import IntroductionSection from "../modules/IntroductionSection.jsx";
 

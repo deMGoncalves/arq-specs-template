@@ -9,7 +9,7 @@ import {
 } from "../../shared/modules/ui/card.jsx";
 import { Button } from "../../shared/modules/ui/button.jsx";
 import { Textarea } from "../../shared/modules/ui/textarea.jsx";
-import { useAppActions, useAppData } from "../../dashboard/containers/WorkspaceProvider.jsx";
+import { useAppActions, useAppData } from "../../context/WorkspaceProvider.jsx";
 import ContextContainer from "../modules/Container.jsx";
 
 function ExportCenter() {
