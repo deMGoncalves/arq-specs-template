@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Card, CardDescription, CardHeader, CardTitle } from "../../shared/modules/ui/card.jsx";
-import { Badge } from "../../shared/modules/ui/badge.jsx";
-import Container from "../modules/Container.jsx";
+import { Card, CardDescription, CardHeader, CardTitle } from "../shared/modules/ui/card.jsx";
+import { Badge } from "../shared/modules/ui/badge.jsx";
+import Container from "./modules/Container.jsx";
 
 const CHAPTERS = [
   {
@@ -138,7 +138,7 @@ const CHAPTERS = [
   }
 ];
 
-function PromptGenerator() {
+function Dashboard() {
   return (
     <div className="dashboard-screen">
       <Container className="chapter-wrapper">
@@ -192,4 +192,4 @@ function PromptGenerator() {
   );
 }
 
-export default PromptGenerator;
+export default Dashboard;

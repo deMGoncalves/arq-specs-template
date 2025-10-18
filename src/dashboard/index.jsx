@@ -1,1 +1,1 @@
-export { default } from "./containers/PromptGeneratorHome.jsx";
+export { default } from "./Dashboard.jsx";

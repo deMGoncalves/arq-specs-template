@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PromptGenerator from "./dashboard";
+import Dashboard from "./dashboard";
 import OverviewObjectives from "./overview-and-objectives";
 import RestrictionsAndGuidelines from "./restrictions-and-guidelines";
 import SystemScopeAndContext from "./system-scope-and-context";
@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PromptGenerator />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/scenarios/overview-and-objectives" element={<OverviewObjectives />} />
         <Route path="/scenarios/restrictions-and-guidelines" element={<RestrictionsAndGuidelines />} />
         <Route path="/scenarios/system-scope-and-context" element={<SystemScopeAndContext />} />
