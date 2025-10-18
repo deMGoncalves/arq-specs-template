@@ -1,8 +1,33 @@
-import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+function collectClasses(value, acc) {
+  if (!value) {
+    return;
+  }
+
+  if (typeof value === "string" || typeof value === "number") {
+    acc.push(String(value));
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item) => collectClasses(item, acc));
+    return;
+  }
+
+  if (typeof value === "object") {
+    Object.entries(value).forEach(([key, shouldInclude]) => {
+      if (shouldInclude) {
+        acc.push(key);
+      }
+    });
+  }
+}
+
 export function cn(...inputs) {
-  return twMerge(clsx(inputs));
+  const classes = [];
+  inputs.forEach((input) => collectClasses(input, classes));
+  return twMerge(classes.join(" "));
 }
 
 export function formatDate(value) {
@@ -35,4 +60,3 @@ export function ensureArray(value) {
 
   return Array.isArray(value) ? value : [value];
 }
-
