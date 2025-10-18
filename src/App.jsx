@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PromptGenerator from "./dashboard/containers/PromptGeneratorHome.jsx";
-import OverviewObjectives from "./overview-and-objectives/containers/OverviewObjectivesPage.jsx";
-import RestrictionsAndGuidelines from "./restrictions-and-guidelines/index.jsx";
-import SystemScopeAndContext from "./system-scope-and-context/index.jsx";
-import ArchitecturalStrategy from "./architectural-strategy/index.jsx";
-import StructuralViewComponents from "./structural-view-components/index.jsx";
-import BehavioralViewScenarios from "./behavioral-view-scenarios/index.jsx";
-import DeploymentView from "./deployment-view/index.jsx";
-import CrosscuttingConcepts from "./crosscutting-concepts/index.jsx";
-import DecisionLog from "./decision-log/index.jsx";
-import QualityAndScenarios from "./quality-and-scenarios/index.jsx";
-import RisksAndTechnicalDebt from "./risks-and-technical-debt/index.jsx";
-import GlossaryOfTerms from "./glossary-of-terms/index.jsx";
+import PromptGenerator from "./dashboard";
+import OverviewObjectives from "./overview-and-objectives";
+import RestrictionsAndGuidelines from "./restrictions-and-guidelines";
+import SystemScopeAndContext from "./system-scope-and-context";
+import ArchitecturalStrategy from "./architectural-strategy";
+import StructuralViewComponents from "./structural-view-components";
+import BehavioralViewScenarios from "./behavioral-view-scenarios";
+import DeploymentView from "./deployment-view";
+import CrosscuttingConcepts from "./crosscutting-concepts";
+import DecisionLog from "./decision-log";
+import QualityAndScenarios from "./quality-and-scenarios";
+import RisksAndTechnicalDebt from "./risks-and-technical-debt";
+import GlossaryOfTerms from "./glossary-of-terms";
 
 function App() {
   return (
