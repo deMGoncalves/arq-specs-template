@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import { Card, CardDescription, CardHeader, CardTitle } from "../shared/modules/ui/card.jsx";
-import { Badge } from "../shared/modules/ui/badge.jsx";
 import Container from "./modules/Container.jsx";
+import ChapterGrid from "./modules/ChapterGrid.jsx";
 
 const CHAPTERS = [
   {
@@ -153,40 +151,7 @@ function Dashboard() {
           </div>
         </header>
 
-        <div className="chapter-grid">
-          {CHAPTERS.map((chapter) => {
-            const card = (
-              <Card className={`chapter-card ${chapter.ready ? "" : "chapter-card--disabled"}`}>
-                <CardHeader>
-                  <div className="chapter-card__top">
-                    <span className="chapter-order">{chapter.order}</span>
-                    <Badge variant="outline" className="chapter-status">
-                      {chapter.status}
-                    </Badge>
-                  </div>
-                  <CardTitle className="chapter-card__title">{chapter.title}</CardTitle>
-                  <CardDescription className="chapter-card__description">
-                    {chapter.description}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            );
-
-            if (chapter.ready) {
-              return (
-                <Link key={chapter.id} to={chapter.target} className="chapter-card-link">
-                  {card}
-                </Link>
-              );
-            }
-
-            return (
-              <div key={chapter.id} className="chapter-card-placeholder">
-                {card}
-              </div>
-            );
-          })}
-        </div>
+        <ChapterGrid chapters={CHAPTERS} />
       </Container>
     </div>
   );
