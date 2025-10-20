@@ -1,37 +1,74 @@
-# Repository Guidelines
+# Documentation-First Agents Handbook
 
-## Project Structure & Module Organization
-- React 18 app lives in `src/` with pages under `src/pages`, shared UI in `src/components`, hooks in `src/hooks`, and utilities in `src/lib`.
-- Context providers belong in `src/context` and must end with `Provider` (e.g., `WorkspaceProvider.jsx`); review existing providers before wiring new state.
-- Specs sit in `specs/`; keep numbering intact and never import runtime code there.
-- Assets stay with their owning module; Vite entry points remain `src/main.jsx` and `index.html`.
+Este manual define como qualquer agente (humano ou IA) deve operar dentro do repositório **Documentation-First Approach**. Tudo começa e termina em `specs/`; o código só acontece quando a documentação estiver alinhada e aprovada.
 
-## Build, Test, and Development Commands
-- `bun install` installs dependencies from `bun.lockb`; prefer reinstalling over manual edits.
-- `bun run dev` starts Vite with HMR; use for local iteration.
-- `bun run build` generates the optimized production bundle; follow with `bun run preview` to serve the latest build.
-- `bun run lint:specs` validates architectural documents; run after editing anything in `specs/`.
+---
 
-## Coding Style & Naming Conventions
-- Use ES modules, double quotes, and two-space indentation; keep one statement per line.
-- Components follow PascalCase, hooks start with `use`, and providers end with `Provider`.
-- Keep Tailwind classes inline until repetition warrants extraction.
+## 0. Mandato inegociável
 
-## Testing Guidelines
-- Test with `bun test`; the suite uses Vitest and React Testing Library.
-- Co-locate feature tests beside targets, e.g., `src/pages/__tests__/ExamplePage.test.jsx`.
-- Document manual verification steps for UI changes and raise coverage thresholds when adding instrumentation.
+- Use `README.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` e `GEMINI.md` como referência principal.
+- Consulte o template correspondente em `.gemini/template/` antes de editar qualquer artefato de `specs/`.
+- Mantenha `specs/12_glossary/012_glossary.md` consistente com qualquer novo termo, sigla ou conceito.
+- Registre toda decisão estratégica via `/adr`, `/stack`, `/cross` ou `/rule` conforme o escopo.
 
-## Commit & Pull Request Guidelines
-- Follow Conventional Commits (e.g., `feat: add session timeout banner`); reference spec IDs when touching `specs/`.
-- Keep runtime and spec diffs in separate PRs; outline intent, reproduction steps, screenshots for UI updates, and residual risks.
-- Rebase before requesting review and link ADR threads when deviating from defaults.
+---
 
-## Security & Configuration Tips
-- Never commit secrets or `.env`; update `.env.example` for new variables.
-- Address dependency alerts quickly and record trade-offs in ADRs when necessary.
+## 1. Esboçar a proposta (Draft Change Proposal)
 
-## Agent Workflow Notes
-- Validate changes with `bun run dev` and `bun test` before handing off.
-- Stage only relevant files; do not revert user changes.
-- Avoid destructive commands (`git reset --hard`, `git checkout --`) unless explicitly requested.
+1. Clarifique objetivo, motivação, métricas de sucesso e restrições.
+2. Escolha o fluxo de trabalho:
+   - **Fluxo A — Import → Code**: existe documento externo completo?
+   - **Fluxo B — Vision → Stack → Plan → Feature → Build → Code**: evolução incremental.
+3. Liste artefatos de `specs/` impactados e riscos conhecidos.
+4. Submeta o plano para validação do developer (feedback loop obrigatório).
+
+Nenhum arquivo deve ser alterado antes da aprovação explícita.
+
+---
+
+## 2. Alinhar e refinar as specs (Review & Align)
+
+1. Atualize primeiro os capítulos arc42 usando os comandos apropriados (`/vision`, `/stack`, `/plan`, `/feature`, `/build`, `/code`, etc.).
+2. Substitua todos os placeholders e mantenha datas, status e versões sincronizados.
+3. Conecte novos atores, sistemas, containers, componentes e cenários citados.
+4. Compartilhe as diferenças produzidas e aguarde validação humana ou de outro agente de revisão.
+
+---
+
+## 3. Planejar tarefas de implementação (Plan Tasks)
+
+1. Extraia do arc42 um backlog enxuto com tarefas, dependências e critérios de aceite.
+2. Ordene as tarefas por impacto e bloqueadores.
+3. Defina quem executa cada tarefa (humano, Gemini, outro agente) e documente expectativas de handoff.
+
+---
+
+## 4. Implementar e refinar (Implement & Refine)
+
+1. Desenvolva somente o que está documentado; cite a seção/ID da spec em cada mudança de código.
+2. Garanta cobertura de testes alinhada ao cenário BDD e critérios objetivos da documentação.
+3. Atualize `specs/11_risks/011_risks-and-technical-debt.md` com novos riscos, status de mitigação e próximos passos.
+4. Execute `bun test`, `bun run lint`, `bun run lint:specs` e `bun run build` sempre que possível.
+
+---
+
+## 5. Arquivar, comunicar e fechar (Archive & Update)
+
+1. Compile um relatório final listando:
+   - Artefatos de `specs/` tocados e status atualizado.
+   - Commits/PRs recomendados ou publicados.
+   - Métricas de impacto (tempo economizado, ROI projetado, SLOs atingidos).
+2. Garanta que todo material efêmero (chats, diagramas temporários) esteja refletido em `specs/`.
+3. Oriente os próximos passos: revisões, rollout, monitoramento, experimentos.
+
+---
+
+## Postura constante
+
+- Idioma padrão: português brasileiro técnico.
+- Seja transparente sobre suposições, dados e fontes.
+- Se faltar informação, peça antes de executar.
+- Respeite o Código de Conduta e promova colaboração assíncrona.
+- Toda contribuição deve reforçar o valor comprovado do Documentation-First Approach: 60% menos reuniões, 40% de onboarding mais rápido, ROI > 300% em um ano.
+
+Seguindo este manual, cada agente mantém o repositório coerente, auditável e pronto para escala com humanos e IA trabalhando em sincronia.
