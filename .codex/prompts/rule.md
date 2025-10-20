@@ -3,7 +3,6 @@ description: Cria ou atualiza uma regra de código (pattern) com critérios obje
 ---
 
 # Rule
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -113,7 +112,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

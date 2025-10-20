@@ -3,7 +3,6 @@ description: Cria e detalha uma entidade externa (Pessoa ou Sistema) que interag
 ---
 
 # Actor
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -117,7 +116,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

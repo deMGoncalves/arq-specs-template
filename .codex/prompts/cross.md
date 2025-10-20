@@ -3,7 +3,6 @@ description: Refina conceitos que afetam toda a arquitetura, como modelo de dom�
 ---
 
 # Cross
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -109,7 +108,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

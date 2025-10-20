@@ -1,6 +1,7 @@
 {
+  "contextFileName": "AGENTS.md",
   "general": {
-    "vimMode": true,
-    "preferredEditor": "neovim"
+    "preferredEditor": "neovim",
+    "vimMode": true
   }
 }

@@ -3,7 +3,6 @@ description: Absorve uma fonte externa (ex: documento de requisitos) para preenc
 ---
 
 # Import
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -94,7 +93,7 @@ Você é um arquiteto de software responsável por orquestrar a atualização co
 
 ### Entrada
 
-Fonte do conhecimento (arquivo): {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

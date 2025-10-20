@@ -3,7 +3,6 @@ description: Cria ou detalha um bloco de construção de alto nível (ex: API we
 ---
 
 # Container
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -114,7 +113,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

@@ -3,7 +3,6 @@ description: Cria um novo Cenário BDD (SCN) para uma funcionalidade, ligando-o 
 ---
 
 # Feature
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -115,7 +114,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

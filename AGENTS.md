@@ -2,12 +2,11 @@
 
 Este manual define como qualquer agente (humano ou IA) deve operar dentro do repositório **Documentation-First Approach**. Tudo começa e termina em `specs/`; o código só acontece quando a documentação estiver alinhada e aprovada.
 
----
 
 ## 0. Mandato inegociável
 
 - Use `README.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` e `GEMINI.md` como referência principal.
-- Consulte o template correspondente em `.gemini/template/` antes de editar qualquer artefato de `specs/`.
+- Consulte o template correspondente em `.gemini/template/` ou `.cursor/template/` antes de editar qualquer artefato de `specs/`, de acordo com o agente em uso.
 - Mantenha `specs/12_glossary/012_glossary.md` consistente com qualquer novo termo, sigla ou conceito.
 - Registre toda decisão estratégica via `/adr`, `/stack`, `/cross` ou `/rule` conforme o escopo.
 

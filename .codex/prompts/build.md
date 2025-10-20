@@ -3,7 +3,6 @@ description: Define a estratégia de deploy, pipeline, RTO/RPO e os requisitos d
 ---
 
 # Build
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -119,7 +118,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

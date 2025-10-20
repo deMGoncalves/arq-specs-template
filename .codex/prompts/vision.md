@@ -3,7 +3,6 @@ description: Define a visão, objetivos, escopo e termos iniciais do projeto.
 ---
 
 # Vision
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 
@@ -135,7 +134,7 @@ Verificações sugeridas:
 
 ### Entrada
 
-Briefing do time: {{args}}
+Briefing do time: $ARGUMENTS
 
 ### Artefatos
 

@@ -21,7 +21,7 @@ Obrigado por considerar uma contribuição para o **Documentation-First Approach
 ## Passo a passo para uma contribuição
 
 1. **Abra uma issue** descrevendo objetivo, métricas e riscos percebidos. Anexe qualquer documento de apoio.
-2. **Atualize a documentação** usando o fluxo escolhido. Verifique sempre os templates em `.gemini/template/` antes de editar qualquer artefato.
+2. **Atualize a documentação** usando o fluxo escolhido. Verifique sempre os templates em `.gemini/template/` ou `.cursor/template/` antes de editar qualquer artefato.
 3. **Revise o resultado**:
    - Substitua todo `PREENCHER`.
    - Atualize status, datas e versões nos arquivos tocados.

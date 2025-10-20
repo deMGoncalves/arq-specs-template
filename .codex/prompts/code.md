@@ -3,7 +3,6 @@ description: Orquestra o código-fonte e testes, aplicando a governança via dou
 ---
 
 # Code
-<!-- markdownlint-disable MD012 MD029 MD031 MD032 MD036 -->
 
 ## User Input
 

@@ -17,7 +17,10 @@ Agentes de IA só são tão bons quanto a base documental que os alimenta. Sem u
 Este repositório é um boilerplate Documentation-First. Ao iniciar um novo projeto, copie apenas os artefatos relacionados ao agente que pretende operar localmente:
 
 - **Gemini CLI**: duplique a pasta `./.gemini/` e o arquivo `GEMINI.md` (se estiver versionado como `.GEMINI.md`, renomeie ao importar).
+- **Cursor IDE/CLI**: duplique a pasta `./.cursor/` (prompts e templates) e mantenha os artefatos em `.cursor/template/` sincronizados com o conteúdo de `specs/`.
 - **Codex CLI**: duplique a pasta `./.codex/` e o arquivo `AGENTS.md`, preservando a estrutura de prompts e o manual de operação.
+
+Adotamos o padrão [AGENTS.md](https://agents.md/) para organizar instruções de agentes: “README.md files are for humans: quick starts, project descriptions, and contribution guidelines.” O `AGENTS.md` deste repositório expande essas diretrizes para o contexto Documentation-First.
 
 Outros agentes devem seguir o mesmo padrão (`@pasta-do-agente/` + guia principal em Markdown). Após copiar, ajuste IDs, datas e status para refletir o contexto do novo repositório.
 
