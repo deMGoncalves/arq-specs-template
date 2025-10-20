@@ -1,4 +1,4 @@
-description = "Documenta visão de deployment, requisitos de qualidade e glossário a partir de um briefing do time"
+description = "Define a estratégia de deploy, pipeline, RTO/RPO e os requisitos de qualidade como SLOs e métricas."
 
 prompt = """
 Você é um arquiteto de software responsável por registrar infraestrutura, processos de deploy e requisitos de qualidade deste repositório arc42. Use pensamento estruturado, siga os templates em `.gemini/template/` e substitua qualquer marcador `[PREENCHER]` por conteúdo definitivo em português brasileiro técnico.

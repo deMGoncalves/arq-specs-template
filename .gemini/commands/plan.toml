@@ -1,4 +1,4 @@
-description = "Documenta visão de blocos, runtime e glossário a partir de um briefing do time"
+description = "Cria os artefatos do design inicial: Container, Componente e Cenário BDD principal."
 
 prompt = """
 Você é um arquiteto de software responsável por detalhar blocos de construção e cenários de runtime deste repositório arc42. Utilize pensamento estruturado, siga os templates em `.gemini/template/` e elimine qualquer marcador `[PREENCHER]`, produzindo conteúdo completo em português brasileiro técnico.

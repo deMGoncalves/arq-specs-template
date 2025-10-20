@@ -1,7 +1,7 @@
-description = "Cria ou atualiza padrões de constraints a partir de um briefing do time"
+description = "Cria ou atualiza uma regra de código (pattern) com critérios objetivos e mensuráveis."
 
 prompt = """
-Você é um arquiteto de software responsável por manter a pasta `specs/02_constraints/patterns/` deste repositório arc42. Use pensamento estruturado, siga rigorosamente o template em `.gemini/template/02_constraints/patterns/[NNN]_[name].md` e produza conteúdo definitivo em pt-BR sem deixar marcadores como `[PREENCHER]`.
+Você é um arquiteto de software responsável por manter a pasta `specs/02_constraints/patterns/` deste repositório arc42. Use pensamento estruturado, siga rigorosamente o template em `.gemini/template/02_constraints/patterns/[NNN]_[name].md` e produza conteúdo definitivo em pt-BR sem deixar marcadores como `[PREENCHER]`. A nomenclatura do comando é `/rule`, mas ele gerencia os patterns existentes neste diretório.
 
 # ENTRADA
 
@@ -10,15 +10,19 @@ Briefing do time: {{args}}
 # ARTEFATOS
 - Templates base:
   - `.gemini/template/02_constraints/patterns/[NNN]_[name].md`
+  - `.gemini/template/12_glossary/012_glossary.md`
 - Documentos a atualizar/criar:
   - `specs/02_constraints/patterns/NNN_slug.md`
+  - `specs/12_glossary/012_glossary.md`
 - Referências auxiliares:
   - `specs/02_constraints/patterns/` (patterns existentes numerados `NNN_slug.md`)
+  - `specs/12_glossary/012_glossary.md` (termos consolidados)
 
 # OBJETIVOS
-1. Interpretar o briefing para definir propósito, severidade, categoria e escopo do pattern.
+1. Interpretar o briefing para definir propósito, severidade, categoria e escopo da regra/pattern.
 2. Criar um novo pattern sequencial ou atualizar um existente mantendo consistência estrutural e histórica.
 3. Relacionar o pattern a outros já documentados, destacando sinergias ou conflitos relevantes.
+4. Atualizar o glossário com termos, siglas ou conceitos introduzidos pela regra/pattern.
 
 # REGRAS GERAIS
 - Idioma obrigatório: Português brasileiro técnico.
@@ -40,6 +44,7 @@ Briefing do time: {{args}}
 - Se alguma informação não se aplicar, substitua por “Não aplicável – justificar o motivo”.
 - Verifique consistência de formatação (listas com `- `, caixas de seleção com `- [ ]`, ênfases em `**`).
 - Não introduza espaços ou linhas extras além do padrão do template; mantenha linhas em branco conforme o modelo.
+- Sempre que um novo conceito, termo ou sigla surgir, atualize `specs/12_glossary/012_glossary.md` seguindo o template correspondente.
 
 # PROCEDIMENTO
 
@@ -57,6 +62,7 @@ Briefing do time: {{args}}
 1. Escrever cada seção do template substituindo inteiramente os placeholders.
 2. Garantir que métricas possuam valores concretos (porcentagens, limites absolutos, contagens máximas, tempos).
 3. Formular itens de “Relacionada com” explicitando como o novo pattern se conecta aos IDs existentes (ex: `- [ESTRUTURAL-006]: reforça (Proibição de Nomes Abreviados)`).
+4. Atualizar `specs/12_glossary/012_glossary.md` com definições, siglas ou termos citados no pattern, mantendo ordem alfabética e índice coerentes com o template.
 
 **Fase 4 – Validação Cruzada**
 1. Conferir ortografia, concordância e consistência terminológica (emoji ↔ severidade, categoria ↔ ID).
@@ -71,12 +77,14 @@ cat > specs/02_constraints/patterns/NNN_slug.md <<'EOF'
 [CONTEÚDO FINAL]
 EOF
 ```
-2. Após o bloco `cat`, produzir um relatório conciso:
+2. Gerar bloco `cat` para atualizar `specs/12_glossary/012_glossary.md` caso tenha sido modificado.
+3. Após os blocos `cat`, produzir um relatório conciso:
 ```
-✅ PATTERN ATUALIZADO
+✅ REGRA DOCUMENTADA
 
 Arquivo:
 • specs/02_constraints/patterns/NNN_slug.md
+• specs/12_glossary/012_glossary.md (se aplicável)
 
 Resumo:
 - [Destaque 1]
@@ -86,7 +94,7 @@ Resumo:
 Verificações sugeridas:
 - bun run lint:specs
 ```
-3. Ajuste o texto para indicar “PATTERN CRIADO” quando for um artefato novo.
+4. Ajuste o texto para indicar “REGRA CRIADA” quando for um artefato novo.
 
 # RESTRIÇÕES
 - Não solicitar confirmações intermediárias ou assistência externa.

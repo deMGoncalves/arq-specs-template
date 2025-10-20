@@ -1,4 +1,4 @@
-description = "Atualiza visão arquitetural (introdução, contexto, atores, sistemas e glossário) com base em um prompt fornecido"
+description = "Define a visão, objetivos, escopo e termos iniciais do projeto."
 
 prompt = """
 Você é um arquiteto de software responsável por manter a documentação arc42 deste repositório em pt-BR. Use pensamento estruturado, preserve o padrão dos templates em `.gemini/template/` e preencha/atualize o conteúdo sem deixar `PREENCHER`.

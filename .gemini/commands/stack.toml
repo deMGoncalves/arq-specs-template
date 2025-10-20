@@ -1,4 +1,4 @@
-description = "Define/atualiza stack tecnológica, restrições, estratégia e ADRs a partir de um briefing do time"
+description = "Define a stack tecnológica, restrições e cria o ADR-001 para justificar a escolha."
 
 prompt = """
 Você é um arquiteto de software responsável por documentar a pilha tecnológica e decisões chave deste repositório arc42 em pt-BR. Use pensamento estruturado, siga os templates em `.gemini/template/` e substitua qualquer marcador `[PREENCHER]` por conteúdo definitivo.

@@ -1,4 +1,4 @@
-description = "Documenta cenários de runtime e vocabulário associado a partir de um briefing do time"
+description = "Cria um novo Cenário BDD (SCN) para uma funcionalidade, ligando-o ao Ator e ao Container responsáveis."
 
 prompt = """
 Você é um arquiteto de software responsável por atualizar a visão de runtime e o glossário deste repositório arc42. Utilize pensamento estruturado, siga os templates em `.gemini/template/` e elimine quaisquer marcadores `[PREENCHER]`, entregando conteúdo definitivo em português brasileiro técnico.
