@@ -1,0 +1,13 @@
+[book]
+title = "Documentation-First Specs"
+authors = ["Equipe Documentation-First"]
+language = "pt-br"
+multilingual = false
+src = "specs"
+
+[build]
+build-dir = "docs"
+
+[output.html]
+default-theme = "rust"
+preferred-dark-theme = "navy"

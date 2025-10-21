@@ -12,6 +12,8 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "doc": "mdbook serve --open",
+    "doc:build": "mdbook build"
   }
 }
