@@ -1,0 +1,40 @@
+{
+  "$schema": "https://claude.ai/schemas/settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "/vision|/actor|/container|/component|/feature|/plan|/build|/cross",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/validate-specs.sh",
+            "timeout": 30,
+            "description": "Validate specification health after documentation commands"
+          }
+        ]
+      },
+      {
+        "matcher": "/code",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/check-quality-rules.sh",
+            "timeout": 60,
+            "description": "Check quality rules compliance after code generation"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/sync-changes.sh",
+            "timeout": 20,
+            "description": "Check for active changes to sync"
+          }
+        ]
+      }
+    ]
+  }
+}

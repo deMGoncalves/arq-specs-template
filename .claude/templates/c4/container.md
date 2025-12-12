@@ -1,464 +1,464 @@
-# Container: [Container Name]
+# Container: [Nome do Container]
 
-**Template ID**: TPL-C4-002
+**ID do Template**: TPL-C4-002
 **ID**: CNT-[XXX]
-**Version**: 2.0.0
-**Category**: C4 Model
-**Level**: C4 Level 2 (Container)
-**Type**: Container (C4 Level 2)
-**Status**: [Draft | Active | Deprecated]
-**Used By**: analyst (Phase 3: Specification), architect (Phase 2: Design)
-**Last Updated**: 2025-11-17
+**Versão**: 2.0.0
+**Categoria**: Modelo C4
+**Nível**: C4 Nível 2 (Container)
+**Tipo**: Container (C4 Nível 2)
+**Status**: [Rascunho | Ativo | Depreciado]
+**Usado Por**: analyst (Fase 3: Especificação), architect (Fase 2: Design)
+**Última Atualização**: 2025-11-17
 
 ---
 
-## Overview
+## Visão Geral
 
-**Name**: [Container Name]
+**Nome**: [Nome do Container]
 
-**Purpose**: [One-line description of what this container does]
+**Propósito**: [Descrição de uma linha do que este container faz]
 
-**Example**:
-> API Server that provides RESTful endpoints for product catalog, shopping cart, and order management.
+**Exemplo**:
+> Servidor de API que fornece endpoints RESTful para catálogo de produtos, carrinho de compras e gestão de pedidos.
 
 ---
 
-## Technology Stack
+## Stack Tecnológica
 
-**Primary Technology**: [Language/Framework/Platform]
+**Tecnologia Principal**: [Linguagem/Framework/Plataforma]
 
-**Version**: [Version number]
+**Versão**: [Número da versão]
 
-**Runtime**: [Environment details]
+**Runtime**: [Detalhes do ambiente]
 
-**Example**:
-- **Primary**: Node.js + TypeScript + Express
-- **Version**: Node.js 20.x, TypeScript 5.x
+**Exemplo**:
+- **Principal**: Node.js + TypeScript + Express
+- **Versão**: Node.js 20.x, TypeScript 5.x
 - **Runtime**: AWS ECS Fargate (2 vCPU, 4GB RAM)
 
 ---
 
-## Responsibilities
+## Responsabilidades
 
-List the main responsibilities of this container:
+Liste as principais responsabilidades deste container:
 
-1. **[Responsibility 1]**: [Description]
-2. **[Responsibility 2]**: [Description]
-3. **[Responsibility 3]**: [Description]
+1. **[Responsabilidade 1]**: [Descrição]
+2. **[Responsabilidade 2]**: [Descrição]
+3. **[Responsabilidade 3]**: [Descrição]
 
-**Example**:
-1. **API Endpoints**: Expose REST API for clients (web, mobile)
-2. **Business Logic**: Execute business rules and validations
-3. **Data Access**: Query and persist data to database
-4. **External Integration**: Call external APIs (Stripe, Auth0, SendGrid)
-
----
-
-## Dependencies
-
-### Internal Dependencies (Other Containers)
-
-| Container ID | Name | Relationship | Protocol |
-|--------------|------|--------------|----------|
-| [CNT-XXX] | [Name] | [Type] | [Protocol] |
-
-**Example**:
-
-| Container ID | Name | Relationship | Protocol |
-|--------------|------|--------------|----------|
-| CNT-003 | PostgreSQL Database | Data storage | PostgreSQL wire protocol |
-| CNT-004 | Redis Cache | Caching | Redis protocol |
-| CNT-005 | Background Worker | Async jobs | Internal event bus |
+**Exemplo**:
+1. **Endpoints de API**: Expor REST API para clientes (web, mobile)
+2. **Lógica de Negócio**: Executar regras de negócio e validações
+3. **Acesso a Dados**: Consultar e persistir dados no banco de dados
+4. **Integração Externa**: Chamar APIs externas (Stripe, Auth0, SendGrid)
 
 ---
 
-### External Dependencies (External Systems)
+## Dependências
 
-| System | Purpose | Protocol | SLA | Fallback |
-|--------|---------|----------|-----|----------|
-| [Name] | [Purpose] | [Protocol] | [SLA] | [Strategy] |
+### Dependências Internas (Outros Containers)
 
-**Example**:
+| Container ID | Nome | Relacionamento | Protocolo |
+|--------------|------|----------------|-----------|
+| [CNT-XXX] | [Nome] | [Tipo] | [Protocolo] |
 
-| System | Purpose | Protocol | SLA | Fallback |
-|--------|---------|----------|-----|----------|
-| Auth0 | Authentication | HTTPS/OIDC | 99.9% | Cached tokens (2h) |
-| Stripe | Payments | HTTPS/REST | 99.99% | Queue payments, retry |
-| SendGrid | Email | HTTPS/REST | 99.95% | Queue emails, non-blocking |
-| AWS S3 | File storage | HTTPS/S3 API | 99.9% | CDN cache, placeholders |
+**Exemplo**:
+
+| Container ID | Nome | Relacionamento | Protocolo |
+|--------------|------|----------------|-----------|
+| CNT-003 | Banco de Dados PostgreSQL | Armazenamento de dados | Protocolo PostgreSQL |
+| CNT-004 | Cache Redis | Caching | Protocolo Redis |
+| CNT-005 | Background Worker | Jobs assíncronos | Event bus interno |
+
+---
+
+### Dependências Externas (Sistemas Externos)
+
+| Sistema | Propósito | Protocolo | SLA | Fallback |
+|---------|-----------|-----------|-----|----------|
+| [Nome] | [Propósito] | [Protocolo] | [SLA] | [Estratégia] |
+
+**Exemplo**:
+
+| Sistema | Propósito | Protocolo | SLA | Fallback |
+|---------|-----------|-----------|-----|----------|
+| Auth0 | Autenticação | HTTPS/OIDC | 99.9% | Tokens em cache (2h) |
+| Stripe | Pagamentos | HTTPS/REST | 99.99% | Enfileirar pagamentos, retry |
+| SendGrid | Email | HTTPS/REST | 99.95% | Enfileirar emails, não-bloqueante |
+| AWS S3 | Armazenamento de arquivos | HTTPS/S3 API | 99.9% | Cache CDN, placeholders |
 
 ---
 
 ## Interfaces
 
-### Inbound (APIs Exposed)
+### Entrada (APIs Expostas)
 
-#### API 1: [Name]
+#### API 1: [Nome]
 
-**Protocol**: [HTTP/REST | WebSocket | gRPC | GraphQL]
+**Protocolo**: [HTTP/REST | WebSocket | gRPC | GraphQL]
 
-**Base URL**: `[URL]`
+**URL Base**: `[URL]`
 
-**Authentication**: [Method]
-
-**Endpoints**:
-
-| Method | Path | Description | Auth Required |
-|--------|------|-------------|---------------|
-| [GET] | [/path] | [Description] | [Yes/No] |
-
-**Example**:
-
-**Protocol**: HTTP/REST (JSON)
-
-**Base URL**: `https://api.example.com/v1`
-
-**Authentication**: JWT Bearer token (optional for public endpoints)
+**Autenticação**: [Método]
 
 **Endpoints**:
 
-| Method | Path | Description | Auth Required |
-|--------|------|-------------|---------------|
-| GET | /products | List products (paginated) | No |
-| GET | /products/{id} | Get product details | No |
-| POST | /cart | Add item to cart | Yes |
-| GET | /cart | View cart | Yes |
-| POST | /orders | Create order | Yes |
-| GET | /orders/{id} | Get order status | Yes |
+| Método | Caminho | Descrição | Auth Obrigatória |
+|--------|---------|-----------|------------------|
+| [GET] | [/path] | [Descrição] | [Sim/Não] |
 
-**Rate Limits**:
-- Anonymous: 100 req/hour
-- Authenticated: 1,000 req/hour
+**Exemplo**:
 
-**Error Format** (RFC 7807):
+**Protocolo**: HTTP/REST (JSON)
+
+**URL Base**: `https://api.example.com/v1`
+
+**Autenticação**: Token JWT Bearer (opcional para endpoints públicos)
+
+**Endpoints**:
+
+| Método | Caminho | Descrição | Auth Obrigatória |
+|--------|---------|-----------|------------------|
+| GET | /products | Listar produtos (paginado) | Não |
+| GET | /products/{id} | Obter detalhes do produto | Não |
+| POST | /cart | Adicionar item ao carrinho | Sim |
+| GET | /cart | Ver carrinho | Sim |
+| POST | /orders | Criar pedido | Sim |
+| GET | /orders/{id} | Obter status do pedido | Sim |
+
+**Limites de Taxa**:
+- Anônimo: 100 req/hora
+- Autenticado: 1.000 req/hora
+
+**Formato de Erro** (RFC 7807):
 ```json
 {
   "type": "https://api.example.com/errors/validation",
-  "title": "Validation Failed",
+  "title": "Validação Falhou",
   "status": 400,
-  "detail": "Email format is invalid",
+  "detail": "Formato de email é inválido",
   "instance": "/users"
 }
 ```
 
 ---
 
-### Outbound (APIs Consumed)
+### Saída (APIs Consumidas)
 
-List external APIs this container calls:
+Liste APIs externas que este container chama:
 
-| API | Purpose | Endpoint | Auth |
-|-----|---------|----------|------|
-| [Name] | [Purpose] | [URL] | [Method] |
+| API | Propósito | Endpoint | Auth |
+|-----|-----------|----------|------|
+| [Nome] | [Propósito] | [URL] | [Método] |
 
-**Example**:
+**Exemplo**:
 
-| API | Purpose | Endpoint | Auth |
-|-----|---------|----------|------|
-| Auth0 | Verify JWT | `https://auth.example.com/userinfo` | Bearer token |
-| Stripe | Create payment | `https://api.stripe.com/v1/payment_intents` | API Key |
-| SendGrid | Send email | `https://api.sendgrid.com/v3/mail/send` | API Key |
-
----
-
-## Data Model
-
-### Database Tables (if applicable)
-
-| Table | Purpose | Key Columns |
-|-------|---------|-------------|
-| [table_name] | [Purpose] | [Columns] |
-
-**Example**:
-
-| Table | Purpose | Key Columns |
-|-------|---------|-------------|
-| products | Product catalog | id, sku, name, price, stock |
-| orders | Customer orders | id, user_id, status, total, created_at |
-| order_items | Order line items | id, order_id, product_id, quantity, price |
-| users | User accounts | id, email, created_at |
-
-**Schema Details**: See `docs/database/schema.md`
+| API | Propósito | Endpoint | Auth |
+|-----|-----------|----------|------|
+| Auth0 | Verificar JWT | `https://auth.example.com/userinfo` | Bearer token |
+| Stripe | Criar pagamento | `https://api.stripe.com/v1/payment_intents` | API Key |
+| SendGrid | Enviar email | `https://api.sendgrid.com/v3/mail/send` | API Key |
 
 ---
 
-### Cache Keys (if applicable)
+## Modelo de Dados
 
-| Key Pattern | Purpose | TTL |
-|-------------|---------|-----|
-| [pattern] | [Purpose] | [Duration] |
+### Tabelas do Banco de Dados (se aplicável)
 
-**Example**:
+| Tabela | Propósito | Colunas-Chave |
+|--------|-----------|---------------|
+| [table_name] | [Propósito] | [Colunas] |
 
-| Key Pattern | Purpose | TTL |
-|-------------|---------|-----|
-| `product:{id}` | Cached product details | 1 hour |
-| `cart:{userId}` | User shopping cart | 24 hours |
-| `session:{token}` | User session | 2 hours |
+**Exemplo**:
+
+| Tabela | Propósito | Colunas-Chave |
+|--------|-----------|---------------|
+| products | Catálogo de produtos | id, sku, name, price, stock |
+| orders | Pedidos de clientes | id, user_id, status, total, created_at |
+| order_items | Itens de linha do pedido | id, order_id, product_id, quantity, price |
+| users | Contas de usuário | id, email, created_at |
+
+**Detalhes do Schema**: Ver `docs/database/schema.md`
 
 ---
 
-## Configuration
+### Chaves de Cache (se aplicável)
 
-### Environment Variables
+| Padrão de Chave | Propósito | TTL |
+|-----------------|-----------|-----|
+| [padrão] | [Propósito] | [Duração] |
 
-| Variable | Description | Required | Default | Example |
-|----------|-------------|----------|---------|---------|
-| [VAR_NAME] | [Description] | [Yes/No] | [Value] | [Example] |
+**Exemplo**:
 
-**Example**:
+| Padrão de Chave | Propósito | TTL |
+|-----------------|-----------|-----|
+| `product:{id}` | Detalhes de produto em cache | 1 hora |
+| `cart:{userId}` | Carrinho de compras do usuário | 24 horas |
+| `session:{token}` | Sessão de usuário | 2 horas |
 
-| Variable | Description | Required | Default | Example |
-|----------|-------------|----------|---------|---------|
-| PORT | HTTP port | No | 3000 | 8080 |
-| DATABASE_URL | PostgreSQL connection string | Yes | - | `postgresql://...` |
-| REDIS_URL | Redis connection string | Yes | - | `redis://...` |
-| AUTH0_DOMAIN | Auth0 domain | Yes | - | `example.auth0.com` |
-| STRIPE_API_KEY | Stripe secret key | Yes | - | `sk_live_...` |
-| LOG_LEVEL | Logging level | No | info | debug |
+---
+
+## Configuração
+
+### Variáveis de Ambiente
+
+| Variável | Descrição | Obrigatória | Padrão | Exemplo |
+|----------|-----------|-------------|--------|---------|
+| [VAR_NAME] | [Descrição] | [Sim/Não] | [Valor] | [Exemplo] |
+
+**Exemplo**:
+
+| Variável | Descrição | Obrigatória | Padrão | Exemplo |
+|----------|-----------|-------------|--------|---------|
+| PORT | Porta HTTP | Não | 3000 | 8080 |
+| DATABASE_URL | String de conexão PostgreSQL | Sim | - | `postgresql://...` |
+| REDIS_URL | String de conexão Redis | Sim | - | `redis://...` |
+| AUTH0_DOMAIN | Domínio Auth0 | Sim | - | `example.auth0.com` |
+| STRIPE_API_KEY | Chave secreta Stripe | Sim | - | `sk_live_...` |
+| LOG_LEVEL | Nível de logging | Não | info | debug |
 
 ---
 
 ## Deployment
 
-### Infrastructure
+### Infraestrutura
 
-**Platform**: [AWS ECS | Kubernetes | Docker | VM]
+**Plataforma**: [AWS ECS | Kubernetes | Docker | VM]
 
-**Scaling**:
-- **Min Instances**: [X]
-- **Max Instances**: [Y]
-- **Auto-scale Trigger**: [Metric] > [Threshold]
+**Escalabilidade**:
+- **Instâncias Mín**: [X]
+- **Instâncias Máx**: [Y]
+- **Gatilho de Auto-scale**: [Métrica] > [Limiar]
 
-**Resources**:
+**Recursos**:
 - **CPU**: [X] vCPU
-- **Memory**: [Y] GB
-- **Disk**: [Z] GB
+- **Memória**: [Y] GB
+- **Disco**: [Z] GB
 
-**Example**:
+**Exemplo**:
 
-**Platform**: AWS ECS Fargate
+**Plataforma**: AWS ECS Fargate
 
-**Scaling**:
-- **Min Instances**: 2
-- **Max Instances**: 20
-- **Auto-scale Trigger**: CPU > 70% or Memory > 80%
+**Escalabilidade**:
+- **Instâncias Mín**: 2
+- **Instâncias Máx**: 20
+- **Gatilho de Auto-scale**: CPU > 70% ou Memória > 80%
 
-**Resources**:
+**Recursos**:
 - **CPU**: 2 vCPU
-- **Memory**: 4 GB
-- **Disk**: 10 GB (ephemeral)
+- **Memória**: 4 GB
+- **Disco**: 10 GB (efêmero)
 
 ---
 
-### Networking
+### Rede
 
-**Ports**:
-- [Port]: [Purpose]
+**Portas**:
+- [Porta]: [Propósito]
 
-**Example**:
+**Exemplo**:
 - 3000: HTTP API
-- 9090: Metrics (Prometheus)
+- 9090: Métricas (Prometheus)
 
 **Load Balancer**:
-- Type: Application Load Balancer (ALB)
-- Health Check: GET /health every 30s
+- Tipo: Application Load Balancer (ALB)
+- Health Check: GET /health a cada 30s
 - Timeout: 5s
 
 ---
 
-### Monitoring
+### Monitoramento
 
 **Logs**:
-- **Format**: JSON (structured)
-- **Destination**: CloudWatch Logs
-- **Retention**: 7 days
+- **Formato**: JSON (estruturado)
+- **Destino**: CloudWatch Logs
+- **Retenção**: 7 dias
 
-**Metrics**:
-- **CPU Usage**: % utilization
-- **Memory Usage**: % utilization
-- **Request Rate**: req/s
-- **Error Rate**: errors/s
-- **Response Time**: p50, p95, p99
+**Métricas**:
+- **Uso de CPU**: % utilização
+- **Uso de Memória**: % utilização
+- **Taxa de Requisições**: req/s
+- **Taxa de Erros**: erros/s
+- **Tempo de Resposta**: p50, p95, p99
 
-**Alerts**:
-- Error rate > 1% → PagerDuty
-- Response time p95 > 1s → Slack
+**Alertas**:
+- Taxa de erro > 1% → PagerDuty
+- Tempo de resposta p95 > 1s → Slack
 - CPU > 90% → Email
 
 ---
 
-## Quality Attributes
+## Atributos de Qualidade
 
 ### Performance
 
-- **Response Time**: p95 < [X]ms, p99 < [Y]ms
+- **Tempo de Resposta**: p95 < [X]ms, p99 < [Y]ms
 - **Throughput**: [X] req/s
-- **Concurrent Connections**: [X]
+- **Conexões Concorrentes**: [X]
 
-**Example**:
-- **Response Time**: p95 < 200ms, p99 < 500ms
-- **Throughput**: 5,000 req/s
-- **Concurrent Connections**: 10,000
+**Exemplo**:
+- **Tempo de Resposta**: p95 < 200ms, p99 < 500ms
+- **Throughput**: 5.000 req/s
+- **Conexões Concorrentes**: 10.000
 
 ---
 
-### Availability
+### Disponibilidade
 
 - **SLA**: [X]% uptime
-- **RTO**: < [X] minutes
-- **RPO**: < [X] minutes
+- **RTO**: < [X] minutos
+- **RPO**: < [X] minutos
 
-**Example**:
-- **SLA**: 99.9% uptime (~43 min downtime/month)
-- **RTO**: < 5 minutes (auto-restart)
+**Exemplo**:
+- **SLA**: 99.9% uptime (~43 min downtime/mês)
+- **RTO**: < 5 minutos (auto-restart)
 - **RPO**: N/A (stateless)
 
 ---
 
-### Security
+### Segurança
 
-- **TLS**: Version [X]
-- **Authentication**: [Method]
-- **Input Validation**: [Yes/No]
-- **Rate Limiting**: [Limits]
-- **Secrets Management**: [Method]
+- **TLS**: Versão [X]
+- **Autenticação**: [Método]
+- **Validação de Input**: [Sim/Não]
+- **Rate Limiting**: [Limites]
+- **Gestão de Secrets**: [Método]
 
-**Example**:
-- **TLS**: 1.3 (enforced)
-- **Authentication**: JWT Bearer tokens
-- **Input Validation**: Joi schemas on all inputs
-- **Rate Limiting**: 1,000 req/hour per user
-- **Secrets Management**: AWS Secrets Manager
-
----
-
-## Components
-
-List main components within this container (C4 Level 3):
-
-| Component ID | Name | Purpose |
-|--------------|------|---------|
-| [CMP-XXX] | [Name] | [Purpose] |
-
-**Example**:
-
-| Component ID | Name | Purpose |
-|--------------|------|---------|
-| CMP-001 | Auth Service | Handle authentication/authorization |
-| CMP-002 | Product Service | Manage product catalog |
-| CMP-003 | Cart Service | Manage shopping carts |
-| CMP-004 | Order Service | Process orders |
-| CMP-005 | Payment Service | Integrate with Stripe |
-
-**Details**: See `specs/05_building-blocks/components/CMP-*`
+**Exemplo**:
+- **TLS**: 1.3 (forçado)
+- **Autenticação**: Tokens JWT Bearer
+- **Validação de Input**: Schemas Joi em todos os inputs
+- **Rate Limiting**: 1.000 req/hora por usuário
+- **Gestão de Secrets**: AWS Secrets Manager
 
 ---
 
-## Testing
+## Componentes
 
-### Test Strategy
+Liste componentes principais dentro deste container (C4 Nível 3):
 
-- **Unit Tests**: [X]% coverage
-- **Integration Tests**: [Scope]
-- **E2E Tests**: [Critical paths]
+| Component ID | Nome | Propósito |
+|--------------|------|-----------|
+| [CMP-XXX] | [Nome] | [Propósito] |
 
-**Example**:
-- **Unit Tests**: 80% coverage (business logic)
-- **Integration Tests**: API endpoints + database
-- **E2E Tests**: Checkout flow (happy path)
+**Exemplo**:
 
-### Test Data
+| Component ID | Nome | Propósito |
+|--------------|------|-----------|
+| CMP-001 | Auth Service | Lidar com autenticação/autorização |
+| CMP-002 | Product Service | Gerenciar catálogo de produtos |
+| CMP-003 | Cart Service | Gerenciar carrinhos de compra |
+| CMP-004 | Order Service | Processar pedidos |
+| CMP-005 | Payment Service | Integrar com Stripe |
 
-- **Development**: Fake data (Faker.js)
-- **Staging**: Anonymized production data
-- **Production**: Real data
+**Detalhes**: Ver `specs/05_building-blocks/components/CMP-*`
 
 ---
 
-## Migration Notes
+## Testes
 
-### From Version [X] to [Y]
+### Estratégia de Testes
 
-- **Breaking Changes**: [List]
-- **Migration Steps**: [Steps]
-- **Rollback Plan**: [Plan]
+- **Testes Unitários**: [X]% cobertura
+- **Testes de Integração**: [Escopo]
+- **Testes E2E**: [Caminhos críticos]
 
-**Example**:
+**Exemplo**:
+- **Testes Unitários**: 80% cobertura (lógica de negócio)
+- **Testes de Integração**: Endpoints de API + banco de dados
+- **Testes E2E**: Fluxo de checkout (caminho feliz)
 
-### From v1.0 to v2.0
+### Dados de Teste
 
-- **Breaking Changes**:
+- **Desenvolvimento**: Dados fake (Faker.js)
+- **Staging**: Dados de produção anonimizados
+- **Produção**: Dados reais
+
+---
+
+## Notas de Migração
+
+### Da Versão [X] para [Y]
+
+- **Mudanças Quebradas**: [Lista]
+- **Passos de Migração**: [Passos]
+- **Plano de Rollback**: [Plano]
+
+**Exemplo**:
+
+### Da v1.0 para v2.0
+
+- **Mudanças Quebradas**:
   - API: `/api/v1/products` → `/api/v2/products`
-  - Response format changed (camelCase → snake_case)
+  - Formato de resposta mudou (camelCase → snake_case)
 
-- **Migration Steps**:
-  1. Deploy v2.0 alongside v1.0 (both versions running)
-  2. Update clients to use `/api/v2`
-  3. Monitor for 1 week
-  4. Deprecate `/api/v1` (return 410 Gone)
+- **Passos de Migração**:
+  1. Deployar v2.0 junto com v1.0 (ambas versões rodando)
+  2. Atualizar clientes para usar `/api/v2`
+  3. Monitorar por 1 semana
+  4. Depreciar `/api/v1` (retornar 410 Gone)
 
-- **Rollback Plan**: Traffic back to v1.0 via ALB rules
+- **Plano de Rollback**: Tráfego de volta para v1.0 via regras ALB
 
 ---
 
-## Related Documents
+## Documentos Relacionados
 
-- [Architecture Overview](../../arc42/01_introduction.md)
-- [Component Details](../components/CMP-*)
-- [API Documentation](docs/api.md)
+- [Visão Geral da Arquitetura](../../arc42/01_introduction.md)
+- [Detalhes de Componentes](../components/CMP-*)
+- [Documentação da API](docs/api.md)
 - [Runbook](docs/runbook.md)
 
 ---
 
-## Related Templates
+## Templates Relacionados
 
-### Prerequisites
-- **system-context.md** (TPL-C4-001) - System Context diagram must exist first
+### Pré-requisitos
+- **system-context.md** (TPL-C4-001) - Diagrama de Contexto do Sistema deve existir primeiro
 
-### Follows This Template
-- **component.md** (TPL-C4-003) - Zoom into containers to show components (C4 Level 3)
+### Segue Este Template
+- **component.md** (TPL-C4-003) - Zoom nos containers para mostrar componentes (C4 Nível 3)
 
-### Part Of
-- **arc42/05_building-blocks.md** (TPL-ARC42-05) - Arc42 Chapter 5: Building Blocks
+### Parte De
+- **arc42/05_building-blocks.md** (TPL-ARC42-05) - Capítulo 5 do Arc42: Building Blocks
 
-### See Also
-- **arc42/04_solution-strategy.md** (TPL-ARC42-04) - Solution strategy and technology choices
-- **arc42/07_deployment.md** (TPL-ARC42-07) - Deployment view
-- **design.md** (TPL-WORKFLOW-002) - Architecture design document
-
----
-
-## Workflow Integration
-
-**Phase**: 2 (Architecture) or 3 (Specification)
-
-**Primary Skill**:
-- **analyst** - Creates as part of spec.md (Phase 3)
-- **architect** - Creates as part of design.md for HIGH complexity (Phase 2)
-
-**Output Location**:
-- `changes/[change-id]/design.md` (if Phase 2)
-- `specs/05_building-blocks/containers/CNT-*.md` (if Phase 3)
-
-**Prerequisites**:
-- System Context diagram created (C4 Level 1)
-- System boundaries defined
-
-**Next Steps**:
-- Create Component diagrams for complex containers (C4 Level 3)
-- Define runtime scenarios (Arc42 Chapter 6)
+### Veja Também
+- **arc42/04_solution-strategy.md** (TPL-ARC42-04) - Estratégia de solução e escolhas de tecnologia
+- **arc42/07_deployment.md** (TPL-ARC42-07) - Visão de deployment
+- **design.md** (TPL-WORKFLOW-002) - Documento de design de arquitetura
 
 ---
 
-## Change History
+## Integração com Workflow
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 2.0.0 | 2025-11-17 | Template Standardization | Added Template ID, Related Templates, Workflow Integration |
-| 1.0.0 | [Date] | [Name] | Initial version |
+**Fase**: 2 (Arquitetura) ou 3 (Especificação)
+
+**Skill Principal**:
+- **analyst** - Cria como parte do spec.md (Fase 3)
+- **architect** - Cria como parte do design.md para complexidade HIGH (Fase 2)
+
+**Localização de Output**:
+- `changes/[change-id]/design.md` (se Fase 2)
+- `specs/05_building-blocks/containers/CNT-*.md` (se Fase 3)
+
+**Pré-requisitos**:
+- Diagrama de Contexto do Sistema criado (C4 Nível 1)
+- Limites do sistema definidos
+
+**Próximos Passos**:
+- Criar diagramas de Componente para containers complexos (C4 Nível 3)
+- Definir cenários de runtime (Capítulo 6 do Arc42)
+
+---
+
+## Histórico de Mudanças
+
+| Versão | Data | Autor | Mudanças |
+|--------|------|-------|----------|
+| 2.0.0 | 2025-11-17 | Padronização de Templates | Adicionado Template ID, Templates Relacionados, Integração com Workflow |
+| 1.0.0 | [Data] | [Nome] | Versão inicial |
 
 ---
 
 **Parent**: [05. Building Blocks](../../arc42/05_building-blocks.md)
-**Type**: Container (C4 Level 2)
+**Tipo**: Container (C4 Nível 2)

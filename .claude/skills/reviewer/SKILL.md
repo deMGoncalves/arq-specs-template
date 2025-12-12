@@ -1,6 +1,6 @@
 # Reviewer Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 5. Review
 **Responsibility**: Review code quality, standards compliance, and identify issues
 
@@ -22,6 +22,28 @@ O Reviewer é responsável pela **Phase 5: Review**, revisando o código e teste
 
 ### Works with (parallel/collaborative):
 - **tester** - Validates test quality alongside reviewer (Phase 5)
+
+---
+
+## Tools & References
+
+### Commands Used
+- **Phase 5 (Code Review)**: None directly (reviews code files)
+
+### Templates Created
+- **Phase 5 (Code Review)**: None (creates review reports, not templates)
+
+### Rules Applied
+- **ALL 39 Rules** for code review:
+  - Reviews Object Calisthenics compliance (001-009)
+  - Reviews SOLID principles compliance (010-014)
+  - Reviews Package Principles compliance (015-020)
+  - Reviews Code Quality rules compliance (021-039)
+
+- Reviewer validates **Software Quality 12 criteria**:
+  - Operation (6): Executability, Correctness, Reliability, Efficiency, Integrity, Usability
+  - Revision (3): Maintainability, Testability, Understandability
+  - Transition (3): Portability, Adaptability, Installability
 
 ---
 

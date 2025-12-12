@@ -1,0 +1,364 @@
+Você é o agente documenter especializado em documentação de APIs. Documente a seguinte API:
+
+API: {{API_NAME}}
+ENDPOINTS: {{ENDPOINTS}}
+SCHEMAS: {{SCHEMAS}}
+
+Sua tarefa:
+1. Gerar documentação OpenAPI 3.0 completa
+2. Documentar todos os endpoints com exemplos
+3. Documentar schemas de request/response
+4. Adicionar exemplos de código em múltiplas linguagens
+5. Documentar códigos de erro
+6. Gerar README de integração
+
+Use esta estrutura:
+
+## Documentação da API: {{API_NAME}}
+
+### Visão Geral
+
+**URL Base**: `{{BASE_URL}}`
+**Versão**: {{VERSION}}
+**Autenticação**: {{AUTH_METHOD}}
+
+### Autenticação
+
+```http
+Authorization: Bearer {{JWT_TOKEN}}
+```
+
+**Como obter token**:
+```bash
+curl -X POST {{BASE_URL}}/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "password123"
+  }'
+```
+
+**Response**:
+```json
+{
+  "access_token": "eyJhbGci...",
+  "refresh_token": "eyJhbGci...",
+  "expires_in": 7200
+}
+```
+
+---
+
+## Endpoints
+
+### {{ENDPOINT_1}}
+
+**Descrição**: [Descrição clara do que o endpoint faz]
+
+**Method**: `{{METHOD}}`
+**Path**: `{{PATH}}`
+**Autenticação**: [Obrigatória | Opcional | Não requerida]
+
+#### Request
+
+**Headers**:
+```http
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+```
+
+**Path Parameters**:
+| Nome | Tipo | Obrigatório | Descrição |
+|------|------|-------------|-----------|
+| {{param}} | {{type}} | {{required}} | {{description}} |
+
+**Query Parameters**:
+| Nome | Tipo | Obrigatório | Padrão | Descrição |
+|------|------|-------------|--------|-----------|
+| {{param}} | {{type}} | {{required}} | {{default}} | {{description}} |
+
+**Body Schema**:
+```json
+{
+  "{{field}}": "{{type}}",  // {{description}}
+  "{{field}}": "{{type}}"   // {{description}}
+}
+```
+
+#### Response
+
+**Success (200 OK)**:
+```json
+{
+  "{{field}}": "{{value}}",
+  "{{field}}": "{{value}}"
+}
+```
+
+**Response Schema**:
+| Campo | Tipo | Nullable | Descrição |
+|-------|------|----------|-----------|
+| {{field}} | {{type}} | {{nullable}} | {{description}} |
+
+#### Erros
+
+| Código | Descrição | Response |
+|--------|-----------|----------|
+| 400 | Bad Request | `{"error": {"code": "VALIDATION_ERROR", "message": "..."}}` |
+| 401 | Unauthorized | `{"error": {"code": "AUTH_ERROR", "message": "..."}}` |
+| 404 | Not Found | `{"error": {"code": "NOT_FOUND", "message": "..."}}` |
+| 500 | Internal Error | `{"error": {"code": "INTERNAL_ERROR", "message": "..."}}` |
+
+#### Exemplos
+
+**cURL**:
+```bash
+curl -X {{METHOD}} {{BASE_URL}}{{PATH}} \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer {{TOKEN}}" \
+  -d '{
+    "{{field}}": "{{value}}"
+  }'
+```
+
+**JavaScript (Fetch)**:
+```javascript
+const response = await fetch('{{BASE_URL}}{{PATH}}', {
+  method: '{{METHOD}}',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify({
+    {{field}}: '{{value}}'
+  })
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+**Python (Requests)**:
+```python
+import requests
+
+url = '{{BASE_URL}}{{PATH}}'
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {token}'
+}
+data = {
+    '{{field}}': '{{value}}'
+}
+
+response = requests.{{method}}(url, json=data, headers=headers)
+print(response.json())
+```
+
+**TypeScript (Axios)**:
+```typescript
+import axios from 'axios';
+
+const response = await axios.{{method}}<ResponseType>(
+  '{{BASE_URL}}{{PATH}}',
+  {
+    {{field}}: '{{value}}'
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  }
+);
+
+console.log(response.data);
+```
+
+---
+
+## Schemas
+
+### {{SCHEMA_NAME}}
+
+**Descrição**: [Descrição do schema]
+
+```json
+{
+  "{{field}}": {
+    "type": "{{type}}",
+    "required": {{boolean}},
+    "nullable": {{boolean}},
+    "description": "{{description}}",
+    "example": "{{example}}",
+    "validation": {
+      "min": {{min}},
+      "max": {{max}},
+      "pattern": "{{regex}}"
+    }
+  }
+}
+```
+
+---
+
+## Rate Limiting
+
+**Limites**:
+- Anônimo: 100 requisições/hora
+- Autenticado: 1000 requisições/hora
+- VIP: 10000 requisições/hora
+
+**Headers de Rate Limit**:
+```http
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1699999999
+```
+
+**Resposta quando limite excedido (429)**:
+```json
+{
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Você excedeu 1000 requisições por hora",
+    "retry_after": 3600
+  }
+}
+```
+
+---
+
+## Webhooks
+
+### {{WEBHOOK_EVENT}}
+
+**Evento**: `{{event_name}}`
+**Descrição**: [Quando este webhook é enviado]
+
+**Payload**:
+```json
+{
+  "event": "{{event_name}}",
+  "timestamp": "2025-11-17T10:30:00Z",
+  "data": {
+    "{{field}}": "{{value}}"
+  }
+}
+```
+
+**Autenticação**:
+- HMAC-SHA256 signature no header `X-Signature`
+- Validar signature antes de processar
+
+**Exemplo de validação**:
+```typescript
+import crypto from 'crypto';
+
+function validateWebhook(
+  payload: string,
+  signature: string,
+  secret: string
+): boolean {
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+
+  return signature === expectedSignature;
+}
+```
+
+---
+
+## Códigos de Erro
+
+| Código | Mensagem | Descrição | Ação |
+|--------|----------|-----------|------|
+| AUTH_001 | Invalid credentials | Credenciais inválidas | Verificar email/senha |
+| AUTH_002 | Token expired | Token JWT expirou | Usar refresh token |
+| VALIDATION_001 | Invalid email format | Email inválido | Corrigir formato |
+| RESOURCE_001 | Resource not found | Recurso não existe | Verificar ID |
+| RATE_LIMIT_001 | Rate limit exceeded | Limite de taxa excedido | Aguardar reset |
+
+---
+
+## Paginação
+
+**Query Parameters**:
+- `page`: Número da página (padrão: 1)
+- `limit`: Itens por página (padrão: 20, max: 100)
+
+**Response**:
+```json
+{
+  "data": [ /* items */ ],
+  "pagination": {
+    "page": 1,
+    "limit": 20,
+    "total": 150,
+    "total_pages": 8,
+    "has_next": true,
+    "has_prev": false
+  }
+}
+```
+
+---
+
+## Ordenação
+
+**Query Parameter**: `sort`
+
+**Formato**: `{{field}}:{{direction}}`
+
+**Exemplos**:
+- `sort=created_at:desc` - Ordenar por data de criação (mais recente primeiro)
+- `sort=name:asc` - Ordenar por nome (A-Z)
+
+---
+
+## Filtros
+
+**Query Parameters**:
+- `filter[{{field}}]={{value}}` - Filtrar por campo específico
+- `search={{query}}` - Busca full-text
+
+**Exemplos**:
+```
+GET /api/products?filter[category]=electronics&filter[price_min]=100
+GET /api/users?search=maria&sort=created_at:desc
+```
+
+---
+
+## Changelog
+
+### v2.0.0 (2025-11-01)
+- ✨ Adicionado endpoint `/users/profile`
+- 🔧 Alterado: Rate limit aumentado para 1000 req/h
+- 🐛 Corrigido: Paginação não funcionava corretamente
+
+### v1.0.0 (2025-10-01)
+- 🎉 Release inicial
+
+---
+
+## SDKs Oficiais
+
+- **JavaScript/TypeScript**: `npm install {{api-name}}-sdk`
+- **Python**: `pip install {{api-name}}-sdk`
+- **Go**: `go get github.com/{{org}}/{{api-name}}-sdk`
+
+---
+
+## Suporte
+
+- 📧 Email: api-support@example.com
+- 💬 Discord: https://discord.gg/{{api-name}}
+- 📚 Documentação completa: https://docs.example.com
+
+---
+
+**Formato de Output**:
+Gere a documentação completa em Markdown, incluindo todos os endpoints, exemplos e schemas. Seja detalhado e preciso.

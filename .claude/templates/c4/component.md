@@ -1,66 +1,66 @@
-# Component: [Component Name]
+# Componente: [Nome do Componente]
 
-**Template ID**: TPL-C4-003
+**ID do Template**: TPL-C4-003
 **ID**: CMP-[XXX]
-**Version**: 2.0.0
-**Category**: C4 Model
-**Level**: C4 Level 3 (Component)
-**Type**: Component (C4 Level 3)
-**Container**: [CNT-XXX] [Container Name]
-**Status**: [Draft | Active | Deprecated]
-**Used By**: analyst (Phase 3: Specification), architect (Phase 2: Design)
-**Last Updated**: 2025-11-17
+**Versão**: 2.0.0
+**Categoria**: Modelo C4
+**Nível**: C4 Nível 3 (Componente)
+**Tipo**: Componente (C4 Nível 3)
+**Container**: [CNT-XXX] [Nome do Container]
+**Status**: [Rascunho | Ativo | Depreciado]
+**Usado Por**: analyst (Fase 3: Especificação), architect (Fase 2: Design)
+**Última Atualização**: 2025-11-17
 
 ---
 
-## Overview
+## Visão Geral
 
-**Name**: [Component Name]
+**Nome**: [Nome do Componente]
 
-**Purpose**: [One-line description of what this component does]
+**Propósito**: [Descrição de uma linha do que este componente faz]
 
-**Example**:
-> Authentication Service that handles user login, token generation, and authorization checks.
-
----
-
-## Responsibilities
-
-List the main responsibilities of this component:
-
-1. **[Responsibility 1]**: [Description]
-2. **[Responsibility 2]**: [Description]
-3. **[Responsibility 3]**: [Description]
-
-**Example**:
-1. **User Login**: Validate credentials against Auth0
-2. **Token Generation**: Issue JWT tokens with appropriate claims
-3. **Authorization**: Check user permissions for protected resources
-4. **Token Refresh**: Handle token refresh flow
+**Exemplo**:
+> Serviço de Autenticação que lida com login de usuário, geração de tokens e verificações de autorização.
 
 ---
 
-## Technology
+## Responsabilidades
 
-**Language**: [Programming language]
+Liste as principais responsabilidades deste componente:
 
-**Framework/Library**: [Framework]
+1. **[Responsabilidade 1]**: [Descrição]
+2. **[Responsabilidade 2]**: [Descrição]
+3. **[Responsabilidade 3]**: [Descrição]
 
-**Pattern**: [Design pattern]
-
-**Example**:
-- **Language**: TypeScript
-- **Framework**: None (pure Node.js)
-- **Pattern**: Layered (Controller → Service → Repository)
+**Exemplo**:
+1. **Login de Usuário**: Validar credenciais contra Auth0
+2. **Geração de Token**: Emitir tokens JWT com claims apropriados
+3. **Autorização**: Verificar permissões de usuário para recursos protegidos
+4. **Atualização de Token**: Lidar com fluxo de refresh de token
 
 ---
 
-## Public Interface
+## Tecnologia
 
-### Class/Module Definition
+**Linguagem**: [Linguagem de programação]
+
+**Framework/Biblioteca**: [Framework]
+
+**Padrão**: [Padrão de design]
+
+**Exemplo**:
+- **Linguagem**: TypeScript
+- **Framework**: Nenhum (Node.js puro)
+- **Padrão**: Em Camadas (Controller → Service → Repository)
+
+---
+
+## Interface Pública
+
+### Definição de Classe/Módulo
 
 ```typescript
-// Example interface
+// Exemplo de interface
 interface AuthService {
   login(email: string, password: string): Promise<Result<AuthToken>>;
   refresh(refreshToken: string): Promise<Result<AuthToken>>;
@@ -71,157 +71,157 @@ interface AuthService {
 
 ---
 
-### Methods/Functions
+### Métodos/Funções
 
-#### Method 1: [Name]
+#### Método 1: [Nome]
 
-**Signature**: `[method signature]`
+**Assinatura**: `[assinatura do método]`
 
-**Purpose**: [What it does]
+**Propósito**: [O que faz]
 
-**Parameters**:
-- `[param1]`: [Type] - [Description]
-- `[param2]`: [Type] - [Description]
+**Parâmetros**:
+- `[param1]`: [Tipo] - [Descrição]
+- `[param2]`: [Tipo] - [Descrição]
 
-**Returns**: `[Return type]` - [Description]
+**Retorna**: `[Tipo de retorno]` - [Descrição]
 
-**Errors**:
-- `[Error1]`: [When it occurs]
-- `[Error2]`: [When it occurs]
+**Erros**:
+- `[Error1]`: [Quando ocorre]
+- `[Error2]`: [Quando ocorre]
 
-**Example**:
+**Exemplo**:
 
-#### Method: login
+#### Método: login
 
-**Signature**: `login(email: string, password: string): Promise<Result<AuthToken>>`
+**Assinatura**: `login(email: string, password: string): Promise<Result<AuthToken>>`
 
-**Purpose**: Authenticate user and generate JWT token
+**Propósito**: Autenticar usuário e gerar token JWT
 
-**Parameters**:
-- `email`: string - User email address
-- `password`: string - User password (plain text, will be verified against hash)
+**Parâmetros**:
+- `email`: string - Endereço de email do usuário
+- `password`: string - Senha do usuário (texto plano, será verificada contra hash)
 
-**Returns**: `Promise<Result<AuthToken>>` - Success with token OR error
+**Retorna**: `Promise<Result<AuthToken>>` - Sucesso com token OU erro
 
-**Errors**:
-- `INVALID_CREDENTIALS`: Email or password incorrect
-- `ACCOUNT_LOCKED`: Too many failed login attempts
-- `ACCOUNT_DISABLED`: User account is disabled
+**Erros**:
+- `INVALID_CREDENTIALS`: Email ou senha incorretos
+- `ACCOUNT_LOCKED`: Muitas tentativas de login falhas
+- `ACCOUNT_DISABLED`: Conta de usuário está desabilitada
 
-**Behavior**:
+**Comportamento**:
 ```gherkin
-Given user exists with email "user@example.com"
-And password is "SecurePass123"
-When login(email, password) is called
-Then verify credentials with Auth0
-And generate JWT token (2h TTL)
-And return success with token
+Given usuário existe com email "user@example.com"
+And senha é "SecurePass123"
+When login(email, password) é chamado
+Then verificar credenciais com Auth0
+And gerar token JWT (2h TTL)
+And retornar sucesso com token
 ```
 
 ---
 
-#### Method 2: refresh
+#### Método 2: refresh
 
-**Signature**: `refresh(refreshToken: string): Promise<Result<AuthToken>>`
+**Assinatura**: `refresh(refreshToken: string): Promise<Result<AuthToken>>`
 
-**Purpose**: Exchange refresh token for new access token
+**Propósito**: Trocar refresh token por novo access token
 
-**Parameters**:
-- `refreshToken`: string - Valid refresh token
+**Parâmetros**:
+- `refreshToken`: string - Refresh token válido
 
-**Returns**: New access token OR error
+**Retorna**: Novo access token OU erro
 
-**Errors**:
-- `INVALID_REFRESH_TOKEN`: Token is invalid or expired
-- `REFRESH_TOKEN_REVOKED`: Token has been revoked
-
----
-
-#### Method 3: verify
-
-**Signature**: `verify(token: string): Promise<Result<UserClaims>>`
-
-**Purpose**: Verify JWT token and extract claims
-
-**Parameters**:
-- `token`: string - JWT token to verify
-
-**Returns**: User claims (userId, email, roles) OR error
-
-**Errors**:
-- `TOKEN_EXPIRED`: Token has expired
-- `INVALID_TOKEN`: Token signature is invalid
+**Erros**:
+- `INVALID_REFRESH_TOKEN`: Token é inválido ou expirou
+- `REFRESH_TOKEN_REVOKED`: Token foi revogado
 
 ---
 
-#### Method 4: logout
+#### Método 3: verify
 
-**Signature**: `logout(token: string): Promise<Result<void>>`
+**Assinatura**: `verify(token: string): Promise<Result<UserClaims>>`
 
-**Purpose**: Revoke token (add to blacklist)
+**Propósito**: Verificar token JWT e extrair claims
 
-**Parameters**:
-- `token`: string - Token to revoke
+**Parâmetros**:
+- `token`: string - Token JWT para verificar
 
-**Returns**: Success OR error
+**Retorna**: Claims de usuário (userId, email, roles) OU erro
 
-**Errors**:
-- `TOKEN_ALREADY_REVOKED`: Token is already revoked
-
----
-
-## Dependencies
-
-### Internal Dependencies
-
-List other components this component depends on:
-
-| Component ID | Name | Usage |
-|--------------|------|-------|
-| [CMP-XXX] | [Name] | [How it's used] |
-
-**Example**:
-
-| Component ID | Name | Usage |
-|--------------|------|-------|
-| CMP-010 | User Repository | Fetch user data from database |
-| CMP-011 | Cache Service | Cache tokens to reduce Auth0 calls |
+**Erros**:
+- `TOKEN_EXPIRED`: Token expirou
+- `INVALID_TOKEN`: Assinatura do token é inválida
 
 ---
 
-### External Dependencies
+#### Método 4: logout
 
-List external services/libraries this component depends on:
+**Assinatura**: `logout(token: string): Promise<Result<void>>`
 
-| Dependency | Purpose | Version |
-|------------|---------|---------|
-| [Name] | [Purpose] | [Version] |
+**Propósito**: Revogar token (adicionar à blacklist)
 
-**Example**:
+**Parâmetros**:
+- `token`: string - Token a revogar
 
-| Dependency | Purpose | Version |
-|------------|---------|---------|
-| Auth0 SDK | OAuth 2.0 integration | ^3.0.0 |
-| jsonwebtoken | JWT generation/verification | ^9.0.0 |
-| bcrypt | Password hashing | ^5.1.0 |
+**Retorna**: Sucesso OU erro
+
+**Erros**:
+- `TOKEN_ALREADY_REVOKED`: Token já foi revogado
 
 ---
 
-## Data Structures
+## Dependências
 
-### Input/Output Types
+### Dependências Internas
+
+Liste outros componentes dos quais este componente depende:
+
+| Component ID | Nome | Uso |
+|--------------|------|-----|
+| [CMP-XXX] | [Nome] | [Como é usado] |
+
+**Exemplo**:
+
+| Component ID | Nome | Uso |
+|--------------|------|-----|
+| CMP-010 | Repositório de Usuários | Buscar dados de usuário do banco de dados |
+| CMP-011 | Serviço de Cache | Cachear tokens para reduzir chamadas ao Auth0 |
+
+---
+
+### Dependências Externas
+
+Liste serviços/bibliotecas externos dos quais este componente depende:
+
+| Dependência | Propósito | Versão |
+|-------------|-----------|--------|
+| [Nome] | [Propósito] | [Versão] |
+
+**Exemplo**:
+
+| Dependência | Propósito | Versão |
+|-------------|-----------|--------|
+| SDK Auth0 | Integração OAuth 2.0 | ^3.0.0 |
+| jsonwebtoken | Geração/verificação de JWT | ^9.0.0 |
+| bcrypt | Hashing de senha | ^5.1.0 |
+
+---
+
+## Estruturas de Dados
+
+### Tipos de Entrada/Saída
 
 ```typescript
-// Example types
+// Exemplos de tipos
 interface LoginRequest {
-  email: string;      // Format: email, max 255 chars
-  password: string;   // Min 8 chars
+  email: string;      // Formato: email, máx 255 caracteres
+  password: string;   // Mín 8 caracteres
 }
 
 interface AuthToken {
-  accessToken: string;   // JWT token
+  accessToken: string;   // Token JWT
   refreshToken: string;  // Refresh token
-  expiresIn: number;     // Seconds until expiration (7200)
+  expiresIn: number;     // Segundos até expiração (7200)
   tokenType: "Bearer";
 }
 
@@ -229,51 +229,51 @@ interface UserClaims {
   userId: string;     // UUID
   email: string;
   roles: string[];    // ["customer"] | ["admin"]
-  iat: number;        // Issued at (Unix timestamp)
-  exp: number;        // Expires at (Unix timestamp)
+  iat: number;        // Issued at (timestamp Unix)
+  exp: number;        // Expires at (timestamp Unix)
 }
 ```
 
 ---
 
-## Error Handling
+## Tratamento de Erros
 
-### Error Codes
+### Códigos de Erro
 
-| Code | Description | HTTP Status | Recovery |
-|------|-------------|-------------|----------|
-| [CODE] | [Description] | [Status] | [Strategy] |
+| Código | Descrição | Status HTTP | Recuperação |
+|--------|-----------|-------------|-------------|
+| [CODE] | [Descrição] | [Status] | [Estratégia] |
 
-**Example**:
+**Exemplo**:
 
-| Code | Description | HTTP Status | Recovery |
-|------|-------------|-------------|----------|
-| AUTH_001 | Invalid credentials | 401 | Retry with correct credentials |
-| AUTH_002 | Token expired | 401 | Refresh token |
-| AUTH_003 | Account locked | 403 | Contact support OR wait 1 hour |
-| AUTH_004 | Invalid refresh token | 401 | Re-authenticate |
-
----
-
-## Business Logic
-
-### Business Rules
-
-1. **[Rule 1]**: [Description]
-2. **[Rule 2]**: [Description]
-
-**Example**:
-1. **Password Requirements**: Min 8 chars, 1 uppercase, 1 number, 1 special char
-2. **Token Expiration**: Access tokens expire after 2 hours
-3. **Account Lockout**: Lock account after 5 failed login attempts within 15 minutes
-4. **Refresh Token**: Valid for 30 days, can only be used once
+| Código | Descrição | Status HTTP | Recuperação |
+|--------|-----------|-------------|-------------|
+| AUTH_001 | Credenciais inválidas | 401 | Tentar novamente com credenciais corretas |
+| AUTH_002 | Token expirado | 401 | Fazer refresh do token |
+| AUTH_003 | Conta bloqueada | 403 | Contatar suporte OU aguardar 1 hora |
+| AUTH_004 | Refresh token inválido | 401 | Reautenticar |
 
 ---
 
-### Validation Rules
+## Lógica de Negócio
+
+### Regras de Negócio
+
+1. **[Regra 1]**: [Descrição]
+2. **[Regra 2]**: [Descrição]
+
+**Exemplo**:
+1. **Requisitos de Senha**: Mín 8 caracteres, 1 maiúscula, 1 número, 1 caractere especial
+2. **Expiração de Token**: Access tokens expiram após 2 horas
+3. **Bloqueio de Conta**: Bloquear conta após 5 tentativas de login falhas em 15 minutos
+4. **Refresh Token**: Válido por 30 dias, pode ser usado apenas uma vez
+
+---
+
+### Regras de Validação
 
 ```typescript
-// Example validation schema
+// Exemplo de schema de validação
 const loginSchema = Joi.object({
   email: Joi.string().email().max(255).required(),
   password: Joi.string().min(8).required()
@@ -282,213 +282,213 @@ const loginSchema = Joi.object({
 
 ---
 
-## State Management
+## Gerenciamento de Estado
 
-**Stateless**: [Yes/No]
+**Stateless**: [Sim/Não]
 
-**If stateful**:
-- State storage: [Where state is stored]
-- State lifecycle: [When created/destroyed]
+**Se stateful**:
+- Armazenamento de estado: [Onde o estado é armazenado]
+- Ciclo de vida do estado: [Quando criado/destruído]
 
-**Example**:
-**Stateless**: Yes (JWT tokens are self-contained)
+**Exemplo**:
+**Stateless**: Sim (tokens JWT são auto-contidos)
 
-**Exception**: Token blacklist (revoked tokens) stored in Redis with TTL
+**Exceção**: Blacklist de tokens (tokens revogados) armazenada no Redis com TTL
 
 ---
 
 ## Performance
 
-### Caching Strategy
+### Estratégia de Caching
 
-| Data | Cache | TTL | Invalidation |
-|------|-------|-----|--------------|
-| [What] | [Where] | [Duration] | [When] |
+| Dados | Cache | TTL | Invalidação |
+|-------|-------|-----|-------------|
+| [O Que] | [Onde] | [Duração] | [Quando] |
 
-**Example**:
+**Exemplo**:
 
-| Data | Cache | TTL | Invalidation |
-|------|-------|-----|--------------|
-| User claims | Redis | 2 hours | Token expiration |
-| Auth0 public keys | Memory | 24 hours | Manual or TTL |
-| Revoked tokens | Redis | Token TTL | Automatic (TTL) |
-
----
-
-### Performance Targets
-
-- **Response Time**: p95 < [X]ms
-- **Throughput**: [X] operations/s
-
-**Example**:
-- **Response Time**: p95 < 50ms (verify), p95 < 200ms (login)
-- **Throughput**: 1,000 verifications/s, 100 logins/s
+| Dados | Cache | TTL | Invalidação |
+|-------|-------|-----|-------------|
+| Claims de usuário | Redis | 2 horas | Expiração do token |
+| Chaves públicas Auth0 | Memória | 24 horas | Manual ou TTL |
+| Tokens revogados | Redis | TTL do token | Automática (TTL) |
 
 ---
 
-## Security
+### Metas de Performance
 
-### Authentication
+- **Tempo de Resposta**: p95 < [X]ms
+- **Throughput**: [X] operações/s
 
-How this component authenticates:
-- [Method]
-
-### Authorization
-
-How this component authorizes:
-- [Method]
-
-### Data Protection
-
-- **Sensitive Data**: [What data is sensitive]
-- **Protection**: [How it's protected]
-
-**Example**:
-
-### Authentication
-- Calls Auth0 API with client credentials
-- Verifies JWT signature using Auth0 public keys
-
-### Authorization
-- Checks JWT claims for required roles
-- Example: Admin endpoints require `roles: ["admin"]`
-
-### Data Protection
-- **Sensitive Data**: Passwords, tokens, user emails
-- **Protection**:
-  - Passwords: Never stored (Auth0 handles)
-  - Tokens: HTTP-only cookies (web), secure storage (mobile)
-  - Emails: Encrypted at rest (database-level)
-  - Logs: Redact sensitive fields
+**Exemplo**:
+- **Tempo de Resposta**: p95 < 50ms (verify), p95 < 200ms (login)
+- **Throughput**: 1.000 verificações/s, 100 logins/s
 
 ---
 
-## Testing
+## Segurança
 
-### Unit Tests
+### Autenticação
 
-**Coverage**: [X]%
+Como este componente autentica:
+- [Método]
 
-**Key Test Cases**:
-1. [Test case 1]
-2. [Test case 2]
+### Autorização
 
-**Example**:
+Como este componente autoriza:
+- [Método]
 
-**Coverage**: 90%
+### Proteção de Dados
 
-**Key Test Cases**:
-1. Login with valid credentials → success with token
-2. Login with invalid password → AUTH_001 error
-3. Login with locked account → AUTH_003 error
-4. Verify valid token → success with claims
-5. Verify expired token → AUTH_002 error
-6. Refresh with valid token → success with new token
-7. Refresh with revoked token → AUTH_004 error
+- **Dados Sensíveis**: [Quais dados são sensíveis]
+- **Proteção**: [Como são protegidos]
 
----
+**Exemplo**:
 
-### Integration Tests
+### Autenticação
+- Chama API Auth0 com credenciais de cliente
+- Verifica assinatura JWT usando chaves públicas Auth0
 
-**Scope**: [What is tested]
+### Autorização
+- Verifica claims JWT para roles requeridos
+- Exemplo: Endpoints admin requerem `roles: ["admin"]`
 
-**Example**:
-- Login flow end-to-end (including Auth0 call)
-- Token verification against Auth0 public keys
-- Token refresh flow
-- Account lockout after 5 failed attempts
-
----
-
-### Mocking Strategy
-
-**Mocked Dependencies**:
-- [Dependency 1]: [Mock strategy]
-
-**Example**:
-- **Auth0 API**: Mocked with test doubles (return pre-defined responses)
-- **Redis**: Use in-memory Redis instance for tests
-- **Database**: Use test database with fixtures
+### Proteção de Dados
+- **Dados Sensíveis**: Senhas, tokens, emails de usuário
+- **Proteção**:
+  - Senhas: Nunca armazenadas (Auth0 gerencia)
+  - Tokens: Cookies HTTP-only (web), armazenamento seguro (mobile)
+  - Emails: Criptografados em repouso (nível de banco de dados)
+  - Logs: Redação de campos sensíveis
 
 ---
 
-## Configuration
+## Testes
 
-### Parameters
+### Testes Unitários
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| [PARAM] | [Type] | [Yes/No] | [Value] | [Description] |
+**Cobertura**: [X]%
 
-**Example**:
+**Casos de Teste-Chave**:
+1. [Caso de teste 1]
+2. [Caso de teste 2]
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| AUTH0_DOMAIN | string | Yes | - | Auth0 tenant domain |
-| AUTH0_CLIENT_ID | string | Yes | - | Auth0 application client ID |
-| AUTH0_CLIENT_SECRET | string | Yes | - | Auth0 application secret |
-| JWT_SECRET | string | Yes | - | Secret for JWT signing (if self-signed) |
-| TOKEN_EXPIRATION | number | No | 7200 | Access token expiration (seconds) |
-| REFRESH_TOKEN_EXPIRATION | number | No | 2592000 | Refresh token expiration (30 days) |
-| MAX_LOGIN_ATTEMPTS | number | No | 5 | Max failed logins before lockout |
-| LOCKOUT_DURATION | number | No | 3600 | Account lockout duration (seconds) |
+**Exemplo**:
+
+**Cobertura**: 90%
+
+**Casos de Teste-Chave**:
+1. Login com credenciais válidas → sucesso com token
+2. Login com senha inválida → erro AUTH_001
+3. Login com conta bloqueada → erro AUTH_003
+4. Verificar token válido → sucesso com claims
+5. Verificar token expirado → erro AUTH_002
+6. Refresh com token válido → sucesso com novo token
+7. Refresh com token revogado → erro AUTH_004
 
 ---
 
-## Observability
+### Testes de Integração
+
+**Escopo**: [O que é testado]
+
+**Exemplo**:
+- Fluxo de login end-to-end (incluindo chamada Auth0)
+- Verificação de token contra chaves públicas Auth0
+- Fluxo de refresh de token
+- Bloqueio de conta após 5 tentativas falhas
+
+---
+
+### Estratégia de Mocking
+
+**Dependências Mockadas**:
+- [Dependência 1]: [Estratégia de mock]
+
+**Exemplo**:
+- **API Auth0**: Mockada com test doubles (retorna respostas pré-definidas)
+- **Redis**: Usar instância Redis em memória para testes
+- **Banco de Dados**: Usar banco de dados de teste com fixtures
+
+---
+
+## Configuração
+
+### Parâmetros
+
+| Parâmetro | Tipo | Obrigatório | Padrão | Descrição |
+|-----------|------|-------------|--------|-----------|
+| [PARAM] | [Tipo] | [Sim/Não] | [Valor] | [Descrição] |
+
+**Exemplo**:
+
+| Parâmetro | Tipo | Obrigatório | Padrão | Descrição |
+|-----------|------|-------------|--------|-----------|
+| AUTH0_DOMAIN | string | Sim | - | Domínio do tenant Auth0 |
+| AUTH0_CLIENT_ID | string | Sim | - | ID do cliente da aplicação Auth0 |
+| AUTH0_CLIENT_SECRET | string | Sim | - | Secret da aplicação Auth0 |
+| JWT_SECRET | string | Sim | - | Secret para assinatura JWT (se auto-assinado) |
+| TOKEN_EXPIRATION | number | Não | 7200 | Expiração do access token (segundos) |
+| REFRESH_TOKEN_EXPIRATION | number | Não | 2592000 | Expiração do refresh token (30 dias) |
+| MAX_LOGIN_ATTEMPTS | number | Não | 5 | Máx tentativas de login falhas antes de bloquear |
+| LOCKOUT_DURATION | number | Não | 3600 | Duração do bloqueio de conta (segundos) |
+
+---
+
+## Observabilidade
 
 ### Logs
 
-**Key Events to Log**:
-- [Event 1]: [Log level]
-- [Event 2]: [Log level]
+**Eventos-Chave para Logar**:
+- [Evento 1]: [Nível de log]
+- [Evento 2]: [Nível de log]
 
-**Example**:
-- User login success: INFO `{"event": "login_success", "userId": "USR-123"}`
-- User login failed: WARN `{"event": "login_failed", "email": "user@example.com", "reason": "invalid_password"}`
-- Account locked: ERROR `{"event": "account_locked", "email": "user@example.com"}`
-- Token verified: DEBUG `{"event": "token_verified", "userId": "USR-123"}`
-
----
-
-### Metrics
-
-**Key Metrics**:
-- [Metric 1]: [Description]
-- [Metric 2]: [Description]
-
-**Example**:
-- `auth.login.success`: Counter (successful logins)
-- `auth.login.failed`: Counter (failed logins by reason)
-- `auth.token.verified`: Counter (token verifications)
-- `auth.token.expired`: Counter (expired token attempts)
-- `auth.lockout`: Counter (account lockouts)
-- `auth.login.duration`: Histogram (login latency)
+**Exemplo**:
+- Login de usuário bem-sucedido: INFO `{"event": "login_success", "userId": "USR-123"}`
+- Login de usuário falhou: WARN `{"event": "login_failed", "email": "user@example.com", "reason": "invalid_password"}`
+- Conta bloqueada: ERROR `{"event": "account_locked", "email": "user@example.com"}`
+- Token verificado: DEBUG `{"event": "token_verified", "userId": "USR-123"}`
 
 ---
 
-## Code Structure
+### Métricas
 
-### File Organization
+**Métricas-Chave**:
+- [Métrica 1]: [Descrição]
+- [Métrica 2]: [Descrição]
+
+**Exemplo**:
+- `auth.login.success`: Counter (logins bem-sucedidos)
+- `auth.login.failed`: Counter (logins falhos por razão)
+- `auth.token.verified`: Counter (verificações de token)
+- `auth.token.expired`: Counter (tentativas de token expirado)
+- `auth.lockout`: Counter (bloqueios de conta)
+- `auth.login.duration`: Histogram (latência de login)
+
+---
+
+## Estrutura de Código
+
+### Organização de Arquivos
 
 ```
 src/components/auth/
-├── index.ts                # Public exports
-├── auth.service.ts         # Main service
-├── auth.controller.ts      # HTTP controllers
-├── auth.types.ts           # TypeScript types
-├── auth.validator.ts       # Input validation
-├── auth.errors.ts          # Custom errors
-├── auth.test.ts            # Unit tests
-└── auth.integration.test.ts # Integration tests
+├── index.ts                # Exports públicos
+├── auth.service.ts         # Serviço principal
+├── auth.controller.ts      # Controllers HTTP
+├── auth.types.ts           # Tipos TypeScript
+├── auth.validator.ts       # Validação de input
+├── auth.errors.ts          # Erros customizados
+├── auth.test.ts            # Testes unitários
+└── auth.integration.test.ts # Testes de integração
 ```
 
 ---
 
-### Key Classes/Functions
+### Classes/Funções-Chave
 
 ```typescript
-// Example structure
+// Exemplo de estrutura
 export class AuthService {
   constructor(
     private auth0Client: Auth0Client,
@@ -497,103 +497,103 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string): Promise<Result<AuthToken>> {
-    // Implementation
+    // Implementação
   }
 
   async refresh(refreshToken: string): Promise<Result<AuthToken>> {
-    // Implementation
+    // Implementação
   }
 
   async verify(token: string): Promise<Result<UserClaims>> {
-    // Implementation
+    // Implementação
   }
 
   async logout(token: string): Promise<Result<void>> {
-    // Implementation
+    // Implementação
   }
 
   private async checkLockout(email: string): Promise<boolean> {
-    // Check if account is locked
+    // Verificar se conta está bloqueada
   }
 
   private async incrementFailedAttempts(email: string): Promise<void> {
-    // Increment failed login counter
+    // Incrementar contador de tentativas falhas
   }
 }
 ```
 
 ---
 
-## Migration Notes
+## Notas de Migração
 
-### Breaking Changes
+### Mudanças Quebradas
 
-- [Version X → Y]: [Description]
+- [Versão X → Y]: [Descrição]
 
-**Example**:
-- **v1.0 → v2.0**: Changed token format from opaque to JWT
-  - Migration: Invalidate all v1.0 tokens, users must re-authenticate
-
----
-
-## Related Documents
-
-- [Container: API Server](../containers/CNT-001_api-server.md)
-- [Scenario: User Login](../../arc42/06_runtime/scenarios/SCN-001_login.md)
-- [ADR: Use Auth0](../../arc42/09_decisions/adr/ADR-003_use-auth0.md)
+**Exemplo**:
+- **v1.0 → v2.0**: Mudou formato de token de opaco para JWT
+  - Migração: Invalidar todos os tokens v1.0, usuários devem reautenticar
 
 ---
 
-## Related Templates
+## Documentos Relacionados
 
-### Prerequisites
-- **container.md** (TPL-C4-002) - Parent container must be defined first
-- **system-context.md** (TPL-C4-001) - System context provides overall structure
-
-### Follows This Template
-- None (C4 Level 3 is typically the lowest level, C4 Level 4 is optional code-level)
-
-### Part Of
-- **arc42/05_building-blocks.md** (TPL-ARC42-05) - Arc42 Chapter 5: Building Blocks (detailed view)
-
-### See Also
-- **bdd/scenario.md** (TPL-BDD-001) - BDD scenarios map to component behavior
-- **arc42/06_runtime.md** (TPL-ARC42-06) - Runtime view shows component interactions
-- **tasks.md** (TPL-WORKFLOW-003) - Implementation tasks decomposed from components
+- [Container: Servidor de API](../containers/CNT-001_api-server.md)
+- [Cenário: Login de Usuário](../../arc42/06_runtime/scenarios/SCN-001_login.md)
+- [ADR: Usar Auth0](../../arc42/09_decisions/adr/ADR-003_use-auth0.md)
 
 ---
 
-## Workflow Integration
+## Templates Relacionados
 
-**Phase**: 2 (Architecture) or 3 (Specification)
+### Pré-requisitos
+- **container.md** (TPL-C4-002) - Container pai deve ser definido primeiro
+- **system-context.md** (TPL-C4-001) - Contexto do sistema fornece estrutura geral
 
-**Primary Skill**:
-- **analyst** - Creates as part of spec.md (Phase 3)
-- **architect** - Creates as part of design.md for HIGH complexity (Phase 2)
+### Segue Este Template
+- Nenhum (C4 Nível 3 é tipicamente o nível mais baixo, C4 Nível 4 é código opcional)
 
-**Output Location**:
-- `changes/[change-id]/design.md` (if Phase 2)
-- `specs/05_building-blocks/components/CMP-*.md` (if Phase 3)
+### Parte De
+- **arc42/05_building-blocks.md** (TPL-ARC42-05) - Capítulo 5 do Arc42: Building Blocks (visão detalhada)
 
-**Prerequisites**:
-- Container diagram created (C4 Level 2)
-- Component responsibilities identified
-
-**Next Steps**:
-- Define BDD scenarios for component behavior
-- Create task decomposition (orchestrator → tasks.md)
-- Implement components (developer)
+### Veja Também
+- **bdd/scenario.md** (TPL-BDD-001) - Cenários BDD mapeiam comportamento do componente
+- **arc42/06_runtime.md** (TPL-ARC42-06) - Visão de runtime mostra interações entre componentes
+- **tasks.md** (TPL-WORKFLOW-003) - Tarefas de implementação decompostas dos componentes
 
 ---
 
-## Change History
+## Integração com Workflow
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 2.0.0 | 2025-11-17 | Template Standardization | Added Template ID, Related Templates, Workflow Integration |
-| 1.0.0 | [Date] | [Name] | Initial version |
+**Fase**: 2 (Arquitetura) ou 3 (Especificação)
+
+**Skill Principal**:
+- **analyst** - Cria como parte do spec.md (Fase 3)
+- **architect** - Cria como parte do design.md para complexidade HIGH (Fase 2)
+
+**Localização de Output**:
+- `changes/[change-id]/design.md` (se Fase 2)
+- `specs/05_building-blocks/components/CMP-*.md` (se Fase 3)
+
+**Pré-requisitos**:
+- Diagrama de Container criado (C4 Nível 2)
+- Responsabilidades de componentes identificadas
+
+**Próximos Passos**:
+- Definir cenários BDD para comportamento do componente
+- Criar decomposição de tarefas (orchestrator → tasks.md)
+- Implementar componentes (developer)
 
 ---
 
-**Parent**: [CNT-XXX] [Container Name]
-**Type**: Component (C4 Level 3)
+## Histórico de Mudanças
+
+| Versão | Data | Autor | Mudanças |
+|--------|------|--------|----------|
+| 2.0.0 | 2025-11-17 | Padronização de Templates | Adicionado Template ID, Templates Relacionados, Integração com Workflow |
+| 1.0.0 | [Data] | [Nome] | Versão inicial |
+
+---
+
+**Parent**: [CNT-XXX] [Nome do Container]
+**Tipo**: Componente (C4 Nível 3)

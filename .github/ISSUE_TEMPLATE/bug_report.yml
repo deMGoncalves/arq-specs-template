@@ -1,0 +1,98 @@
+name: 🐛 Relatório de Bug
+description: Reportar um bug ou comportamento inesperado
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por dedicar tempo para reportar um bug! Por favor, preencha o formulário abaixo.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do Bug
+      description: Uma descrição clara e concisa do bug
+      placeholder: O que deu errado?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para Reproduzir
+      description: Passos para reproduzir o comportamento
+      placeholder: |
+        1. Criar specs com /vision ...
+        2. Executar /code ...
+        3. Observar erro
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento Esperado
+      description: O que deveria ter acontecido?
+      placeholder: Descreva o comportamento esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamento Atual
+      description: O que realmente aconteceu?
+      placeholder: Descreva o comportamento atual
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Componente
+      description: Qual componente está afetado?
+      options:
+        - Commands (comandos slash)
+        - Skills (agentes)
+        - Templates
+        - Rules (regras)
+        - Hooks
+        - Documentation (documentação)
+        - Other (outro)
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versão
+      description: Qual versão você está usando?
+      placeholder: "3.0.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Detalhes do seu ambiente
+      placeholder: |
+        - SO: macOS 13.0
+        - Versão do Claude Code: 1.0.0
+        - Versão do Node.js: 20.0.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Quaisquer logs relevantes ou mensagens de erro
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto Adicional
+      description: Qualquer outro contexto, screenshots ou informações

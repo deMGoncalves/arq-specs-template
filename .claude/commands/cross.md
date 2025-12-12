@@ -4,6 +4,165 @@ description: Refina conceitos que afetam toda a arquitetura, como modelo de dom�
 
 # Cross
 
+**ID**: CMD-011
+**Categoria**: 🏗️ Infrastructure
+**Prioridade**: 🟡 P1 (Importante)
+**Fase**: 3-4
+**Arc42 Chapters**: 8, 12
+
+---
+
+## 🎯 O que Faz
+
+Documenta **conceitos transversais** que afetam múltiplos containers/componentes:
+- Modelo de domínio (entidades, value objects, agregados)
+- Segurança (autenticação, autorização, criptografia)
+- Tratamento de erros e logging
+- Persistência, transações e integração
+- Testes, configuração, i18n
+
+Complementa building blocks (CMD-004/CMD-005) com aspectos que atravessam a arquitetura.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Após definir building blocks (CMD-004)
+- Antes de implementar código (CMD-013)
+
+### Recomendado
+- Para padronizar abordagens transversais
+- Quando múltiplos containers compartilham conceitos
+
+### Opcional
+- Projetos triviais sem conceitos compartilhados
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-002 (stack)**: Define tecnologias base
+- **CMD-004 (container)**: Define o que será afetado
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-010 (build)**: Operacionaliza conceitos (logs, métricas)
+- **CMD-013 (code)**: Implementa práticas documentadas
+
+### Arquivos Criados
+- `specs/08_crosscutting/008_crosscutting-concepts.md`
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Conceitos | Exemplo |
+|--------------|-------|-----------|---------|
+| **LOW** | 15-25 min | 1-3 | Logging standards básicos |
+| **MEDIUM** | 25-40 min | 4-7 | DDD + Segurança + Persistência |
+| **HIGH** | 40-60 min | 8-10 | Arquitetura completa multi-concern |
+
+## 💡 Exemplos
+
+### Exemplo 1: Logging Padrão (LOW)
+
+**Input**:
+```bash
+/cross Logging estruturado com Winston, níveis: ERROR/WARN/INFO/DEBUG, formato JSON
+```
+
+**Output**:
+```markdown
+8.6 Logging e Auditoria:
+- Winston (transporte: console + file)
+- Formato: JSON com timestamp, level, message, context
+- Níveis: ERROR (prod), INFO (staging), DEBUG (dev)
+- Não logar: senhas, tokens, PII
+```
+
+### Exemplo 2: DDD + Segurança (MEDIUM)
+
+**Input**:
+```bash
+/cross Entidades: User, Order, Payment. Value objects: Email, CPF. Segurança: JWT com refresh token, bcrypt para senhas
+```
+
+**Output**:
+```markdown
+8.1 Modelo de Domínio:
+- Entidades: User (id, email, password), Order (id, items), Payment (id, status)
+- Value Objects: Email (validação RFC 5322), CPF (validação dígitos)
+
+8.2 Segurança:
+- Autenticação: JWT (access 15min, refresh 7d)
+- Passwords: bcrypt rounds=10
+- Headers: Authorization: Bearer <token>
+```
+
+### Exemplo 3: Arquitetura Completa (HIGH)
+
+**Input**:
+```bash
+/cross DDD tático completo, OAuth2+OIDC, Postgres transações ACID, RabbitMQ eventos, i18n pt-BR/en-US, Prometheus métricas
+```
+
+**Output**:
+```markdown
+8.1 Domínio: Agregados (User, Order, Product), Repositories, Domain Events
+8.2 Segurança: OAuth2 Authorization Code + OIDC (Auth0)
+8.3 Persistência: Postgres 15, Prisma ORM, transações SERIALIZABLE
+8.4 Comunicação: RabbitMQ exchanges (topic), retry 3x, DLQ
+8.5 Testes: Vitest unit (80%), Playwright e2e (críticos)
+8.7 Configuração: dotenv, 12-factor, secrets via AWS SSM
+8.8 i18n: next-intl, namespaces por módulo
+8.9 Monitoramento: Prometheus + Grafana, SLIs response_time, error_rate
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Quantos conceitos documentar?"
+
+**Solução**: Priorize por impacto:
+- **Crítico**: Segurança, persistência, tratamento de erros
+- **Importante**: Logging, testes, configuração
+- **Opcional**: i18n (se não internacional), UX patterns
+
+### Problema 2: "Cross vs Building Blocks?"
+
+**Solução**: Critério de decisão:
+- **Building Blocks (CMD-004/005)**: O QUE (containers/componentes)
+- **Crosscutting (CMD-011)**: COMO (práticas aplicadas a vários blocos)
+
+Exemplo:
+- `specs/05_building-blocks/containers/CNT-001_api.md` → container API
+- `specs/08_crosscutting/008_crosscutting-concepts.md#8.2` → autenticação aplicada na API e outros containers
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-002 (stack)**: [Pré-requisito] Stack define conceitos disponíveis
+- **CMD-004 (container)**: [Pré-requisito] Containers afetados
+- **CMD-010 (build)**: [Pós-ação] Operacionaliza logs/métricas
+- **CMD-013 (code)**: [Pós-ação] Implementa conceitos
+
+### Skills
+- **SKL-001 (analyst)**: Documenta cross na Phase 3
+- **SKL-002 (architect)**: Define conceitos HIGH complexity
+
+### Rules
+- **029 (Error Handling)**: Cross 8.6 deve documentar estratégia
+- **033 (Logging)**: Cross 8.6 define padrões
+- Todas as 39 rules aplicam via crosscutting
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

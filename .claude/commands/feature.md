@@ -4,6 +4,147 @@ description: Cria um novo Cenário BDD (SCN) para uma funcionalidade, ligando-o 
 
 # Feature
 
+**ID**: CMD-008
+**Categoria**: 🎬 Runtime
+**Prioridade**: 🔴 P0 (Crítico)
+**Fase**: 3
+**Arc42 Chapters**: 6, 12
+
+---
+
+## 🎯 O que Faz
+
+Cria **cenários BDD** (Behavior-Driven Development) em formato Gherkin:
+- Fluxos principais (happy path)
+- Especificação executável (Given/When/Then)
+- Ligação com atores (ACT-XXX) e containers (CNT-XXX)
+
+Cada cenário recebe ID único (SCN-XXX) e pode ser automatizado como teste.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Para toda funcionalidade que será implementada
+- Antes de escrever código (CMD-013)
+
+### Recomendado
+- Para documentar comportamento esperado
+- Como base para testes automatizados
+
+### Opcional
+- Nunca (sempre documentar comportamento)
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-003 (actor)**: Define atores que usarão a feature
+- **CMD-004 (container)**: Define containers que implementam
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-009 (flow)**: Documentar fluxos alternativos/erros
+- **CMD-013 (code)**: Implementar cenário
+
+### Arquivos Criados
+- `specs/06_runtime/scenarios/SCN-[NNN]_[slug].md`
+- `specs/06_runtime/006_runtime-view.md` (atualizado)
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Cenários | Exemplo |
+|--------------|-------|----------|---------|
+| **LOW** | 10-15 min | 1-2 | CRUD simples |
+| **MEDIUM** | 15-30 min | 3-5 | Workflow com validações |
+| **HIGH** | 30-60 min | 6-10 | Processo multi-step complexo |
+
+## 💡 Exemplos
+
+### Exemplo 1: Login (LOW)
+
+**Input**:
+```bash
+/feature Usuário faz login com email e senha
+```
+
+**Output**:
+```gherkin
+Cenário: Login bem-sucedido
+  Dado que o usuário está na página de login
+  E o usuário fornece email "user@example.com"
+  E o usuário fornece senha "SecurePass123"
+  Quando o usuário clica em "Entrar"
+  Então o sistema valida as credenciais
+  E o sistema cria uma sessão JWT
+  E o usuário é redirecionado para /dashboard
+```
+
+### Exemplo 2: Checkout (HIGH)
+
+**Input**:
+```bash
+/feature Cliente completa checkout com pagamento via cartão de crédito
+```
+
+**Output**:
+```gherkin
+Cenário: Checkout com cartão válido
+  Dado que o cliente tem 3 itens no carrinho (total R$ 299,99)
+  E o cliente fornece endereço de entrega válido
+  E o cliente seleciona "Cartão de Crédito"
+  E o cliente fornece cartão Visa válido (4111...)
+  Quando o cliente confirma o pagamento
+  Então o sistema processa via Stripe API
+  E o pedido muda para status "Pago"
+  E um email de confirmação é enviado
+  E o estoque é decrementado
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Como escrever bom Gherkin?"
+
+**Solução**: Regras:
+- **Given**: Estado inicial (setup)
+- **When**: Ação do usuário
+- **Then**: Resultado esperado
+- Evitar detalhes de implementação
+
+### Problema 2: "Quantos cenários criar?"
+
+**Solução**:
+- **1 cenário**: Happy path (feature)
+- **2-5 cenários**: Fluxos alternativos (flow)
+- **Evitar**: Explosion combinatória (use flow para edge cases)
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-003 (actor)**: [Pré-requisito] Define atores
+- **CMD-004 (container)**: [Pré-requisito] Define implementação
+- **CMD-009 (flow)**: [Complementar] Fluxos alternativos
+- **CMD-013 (code)**: [Pós-ação] Implementação
+
+### Skills
+- **SKL-001 (analyst)**: Cria features na Phase 3
+- **SKL-007 (tester)**: Valida cenários automatizados
+
+### Rules
+- **035 (Testes)**: Cenários BDD → testes automatizados
+- **036 (Coverage)**: ≥80% cenários cobertos
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

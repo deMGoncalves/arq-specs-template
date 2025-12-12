@@ -1,0 +1,56 @@
+Você é o agente analyst na Fase 1 (Discovery). Analise a seguinte requisição de feature:
+
+REQUISIÇÃO: {{FEATURE_REQUEST}}
+
+Sua tarefa:
+1. Extrair requisitos principais
+2. Identificar atores envolvidos
+3. Determinar complexidade (LOW/MEDIUM/HIGH)
+4. Listar contextos delimitados afetados
+5. Identificar pontos de integração
+6. Estimar escopo de implementação
+
+Use esta estrutura:
+
+## Análise de Feature
+
+### Requisitos Principais
+- [Requisito 1]
+- [Requisito 2]
+- [Requisito 3]
+
+### Atores
+- [Ator 1]: [Papel e interações]
+- [Ator 2]: [Papel e interações]
+
+### Avaliação de Complexidade
+**Pontuação**: [1-16]
+**Classificação**: [LOW/MEDIUM/HIGH]
+
+**Critérios**:
+- Contextos Delimitados: [contagem]
+- Arquivos Estimados: [contagem]
+- Dependências Externas: [sim/não]
+- Mudanças de Schema de Banco: [sim/não]
+- Decisões Arquiteturais: [contagem]
+
+### Contextos Delimitados Afetados
+- [Contexto 1]: [Impacto]
+- [Contexto 2]: [Impacto]
+
+### Pontos de Integração
+- [Sistema 1]: [Protocolo, troca de dados]
+- [Sistema 2]: [Protocolo, troca de dados]
+
+### Escopo de Implementação
+**LOC Estimado**: [faixa]
+**Tempo Estimado**: [faixa]
+**Fases Necessárias**: [1, 3, 4-7] ou [1-7 todas]
+
+### Riscos & Preocupações
+- [Risco 1]
+- [Risco 2]
+
+### Recomendações
+- [Recomendação 1]
+- [Recomendação 2]

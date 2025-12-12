@@ -1,0 +1,89 @@
+name: ✨ Sugestão de Funcionalidade
+description: Sugerir uma nova funcionalidade ou melhoria
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por sugerir uma nova funcionalidade! Ajude-nos a entender suas necessidades.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema
+      description: Que problema esta funcionalidade resolve?
+      placeholder: Eu fico frustrado quando...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solução Proposta
+      description: Como você resolveria este problema?
+      placeholder: Descreva sua solução ideal
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Componente
+      description: Qual componente seria afetado?
+      options:
+        - Commands (novo comando slash)
+        - Skills (novo agente ou melhoria)
+        - Templates (novo template)
+        - Rules (nova regra de qualidade)
+        - Hooks (nova automação)
+        - Documentation (documentação)
+        - Architecture (arquitetura)
+        - Other (outro)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexidade Estimada
+      description: Quão complexa você acha que é esta funcionalidade?
+      options:
+        - Low (poucas horas)
+        - Medium (poucos dias)
+        - High (semanas)
+        - Unknown (desconhecida)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas Consideradas
+      description: Quais alternativas você considerou?
+      placeholder: Descreva soluções alternativas
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Exemplos
+      description: Forneça exemplos, mockups ou referências
+      placeholder: |
+        Exemplo de comando:
+        /meucomando arg1 arg2
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribuição
+      description: Você gostaria de contribuir com esta funcionalidade?
+      options:
+        - label: Estou disposto a implementar esta funcionalidade
+        - label: Preciso de ajuda para implementar
+        - label: Posso apenas fornecer feedback/testes
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto Adicional
+      description: Qualquer outro contexto ou screenshots

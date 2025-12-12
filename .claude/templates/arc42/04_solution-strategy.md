@@ -1,11 +1,11 @@
-# 04. Solution Strategy
+# 04. Estratégia de Solução
 
-**Template ID**: TPL-ARC42-04
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 4 (Solution Strategy)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-04
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 4 (Estratégia de Solução)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
@@ -13,264 +13,264 @@
 
 ---
 
-## Technology Decisions
+## Decisões Tecnológicas
 
-### Backend Stack
+### Stack Backend
 
-**Choice**: Node.js + TypeScript + Express
+**Escolha**: Node.js + TypeScript + Express
 
-**Rationale**:
-- Team expertise (5 developers, 3+ years experience)
-- Fast development (NPM ecosystem)
-- Shared code with frontend (TypeScript)
+**Fundamentação**:
+- Expertise do time (5 desenvolvedores, 3+ anos de experiência)
+- Desenvolvimento rápido (ecossistema NPM)
+- Código compartilhado com frontend (TypeScript)
 
 **Trade-offs**:
-- ✅ Rapid development
-- ✅ Large ecosystem
-- ❌ CPU-intensive tasks slower than Go/Rust
+- ✅ Desenvolvimento rápido
+- ✅ Ecossistema grande
+- ❌ Tarefas CPU-intensivas mais lentas que Go/Rust
 
 ---
 
-### Frontend Stack
+### Stack Frontend
 
-**Choice**: React + TypeScript + Next.js
+**Escolha**: React + TypeScript + Next.js
 
-**Rationale**:
-- Team expertise
-- SEO requirements (SSR via Next.js)
-- Component reusability
+**Fundamentação**:
+- Expertise do time
+- Requisitos de SEO (SSR via Next.js)
+- Reusabilidade de componentes
 
 ---
 
-### Database
+### Banco de Dados
 
-**Choice**: PostgreSQL 14+
+**Escolha**: PostgreSQL 14+
 
-**Rationale**:
-- ACID compliance (required for transactions)
-- JSON support (JSONB)
-- Team expertise
+**Fundamentação**:
+- Conformidade ACID (necessária para transações)
+- Suporte JSON (JSONB)
+- Expertise do time
 
 **Trade-offs**:
-- ✅ Strong consistency
-- ✅ Rich query capabilities
-- ❌ Horizontal scaling requires sharding
+- ✅ Consistência forte
+- ✅ Capacidades ricas de query
+- ❌ Escalabilidade horizontal requer sharding
 
 ---
 
 ### Caching
 
-**Choice**: Redis
+**Escolha**: Redis
 
-**Rationale**:
-- Fast (in-memory)
-- Data structures (sorted sets for rankings)
-- Pub/sub (for real-time features)
-
----
-
-### Search
-
-**Choice**: Elasticsearch
-
-**Rationale**:
-- Full-text search
-- Faceted filtering
-- Relevance scoring
+**Fundamentação**:
+- Rápido (in-memory)
+- Estruturas de dados (sorted sets para rankings)
+- Pub/sub (para features em tempo real)
 
 ---
 
-## Architectural Patterns
+### Busca
 
-### Pattern 1: Modular Monolith
+**Escolha**: Elasticsearch
 
-**Decision**: Start with modular monolith, NOT microservices
+**Fundamentação**:
+- Busca full-text
+- Filtragem por facetas
+- Pontuação de relevância
 
-**Rationale**:
-- Small team (5 developers)
-- Tight timeline (6 months)
-- Simpler operations
-- Can split later (modules map to future services)
+---
 
-**Structure**:
+## Padrões Arquiteturais
+
+### Padrão 1: Monolito Modular
+
+**Decisão**: Começar com monolito modular, NÃO microsserviços
+
+**Fundamentação**:
+- Time pequeno (5 desenvolvedores)
+- Cronograma apertado (6 meses)
+- Operações mais simples
+- Pode dividir depois (módulos mapeiam para serviços futuros)
+
+**Estrutura**:
 ```
 src/
 ├── modules/
-│   ├── auth/          # Authentication module
-│   ├── products/      # Product catalog
-│   ├── cart/          # Shopping cart
-│   ├── orders/        # Order processing
-│   └── payments/      # Payment integration
+│   ├── auth/          # Módulo de autenticação
+│   ├── products/      # Catálogo de produtos
+│   ├── cart/          # Carrinho de compras
+│   ├── orders/        # Processamento de pedidos
+│   └── payments/      # Integração de pagamentos
 ```
 
 ---
 
-### Pattern 2: Layered Architecture
+### Padrão 2: Arquitetura em Camadas
 
-**Layers**:
-1. **Presentation** (API routes, controllers)
-2. **Application** (use cases, orchestration)
-3. **Domain** (business logic, entities)
-4. **Infrastructure** (database, external APIs)
+**Camadas**:
+1. **Apresentação** (rotas de API, controllers)
+2. **Aplicação** (casos de uso, orquestração)
+3. **Domínio** (lógica de negócio, entidades)
+4. **Infraestrutura** (banco de dados, APIs externas)
 
-**Rules**:
-- Dependencies point inward (Infrastructure → Domain, NOT Domain → Infrastructure)
-- Domain has NO external dependencies
-
----
-
-### Pattern 3: Event-Driven (Async)
-
-**Use for**: Non-critical, async operations
-
-**Events**:
-- `order.created` → Send confirmation email
-- `payment.succeeded` → Update order status
-- `product.updated` → Invalidate cache
-
-**Implementation**: Internal event bus (EventEmitter) + external webhooks
+**Regras**:
+- Dependências apontam para dentro (Infraestrutura → Domínio, NÃO Domínio → Infraestrutura)
+- Domínio NÃO tem dependências externas
 
 ---
 
-## Decomposition Strategy
+### Padrão 3: Orientado a Eventos (Assíncrono)
 
-### Module Boundaries
+**Usar para**: Operações não críticas, assíncronas
 
-Modules based on **bounded contexts** (DDD):
+**Eventos**:
+- `order.created` → Enviar email de confirmação
+- `payment.succeeded` → Atualizar status do pedido
+- `product.updated` → Invalidar cache
 
-#### 1. Auth Module
-- **Responsibility**: User authentication, authorization
-- **External Deps**: Auth0
-- **Data**: Users, sessions, tokens
-
-#### 2. Products Module
-- **Responsibility**: Product catalog, search
-- **External Deps**: Elasticsearch, S3 (images)
-- **Data**: Products, categories, inventory
-
-#### 3. Cart Module
-- **Responsibility**: Shopping cart management
-- **External Deps**: Redis (session storage)
-- **Data**: Cart items (temporary)
-
-#### 4. Orders Module
-- **Responsibility**: Order processing, tracking
-- **External Deps**: None (core domain)
-- **Data**: Orders, order items, status history
-
-#### 5. Payments Module
-- **Responsibility**: Payment processing
-- **External Deps**: Stripe
-- **Data**: Payment intents, transactions
+**Implementação**: Event bus interno (EventEmitter) + webhooks externos
 
 ---
 
-## Quality Attributes Strategy
+## Estratégia de Decomposição
+
+### Limites de Módulos
+
+Módulos baseados em **bounded contexts** (DDD):
+
+#### 1. Módulo Auth
+- **Responsabilidade**: Autenticação de usuários, autorização
+- **Deps Externas**: Auth0
+- **Dados**: Usuários, sessões, tokens
+
+#### 2. Módulo Products
+- **Responsabilidade**: Catálogo de produtos, busca
+- **Deps Externas**: Elasticsearch, S3 (imagens)
+- **Dados**: Produtos, categorias, inventário
+
+#### 3. Módulo Cart
+- **Responsabilidade**: Gestão de carrinho de compras
+- **Deps Externas**: Redis (armazenamento de sessão)
+- **Dados**: Itens do carrinho (temporários)
+
+#### 4. Módulo Orders
+- **Responsabilidade**: Processamento de pedidos, rastreamento
+- **Deps Externas**: Nenhuma (domínio core)
+- **Dados**: Pedidos, itens de pedido, histórico de status
+
+#### 5. Módulo Payments
+- **Responsabilidade**: Processamento de pagamentos
+- **Deps Externas**: Stripe
+- **Dados**: Payment intents, transações
+
+---
+
+## Estratégia de Atributos de Qualidade
 
 ### Performance
 
-**Target**: p95 < 200ms, p99 < 500ms
+**Meta**: p95 < 200ms, p99 < 500ms
 
-**Strategies**:
-- **Caching**: Redis (product catalog, user sessions)
-- **Database**: Indexes on frequently queried columns
-- **API**: Pagination (limit 100 items/page)
-- **CDN**: CloudFront for static assets
-
----
-
-### Scalability
-
-**Target**: 100K concurrent users, 10K req/s
-
-**Strategies**:
-- **Horizontal**: Stateless app servers (scale with ECS)
-- **Database**: Read replicas (3x), connection pooling
-- **Cache**: Redis cluster (sharding)
-- **CDN**: CloudFront (offload static content)
+**Estratégias**:
+- **Caching**: Redis (catálogo de produtos, sessões de usuário)
+- **Banco de Dados**: Índices em colunas frequentemente consultadas
+- **API**: Paginação (limite 100 itens/página)
+- **CDN**: CloudFront para assets estáticos
 
 ---
 
-### Availability
+### Escalabilidade
 
-**Target**: 99.9% uptime (~8.7h downtime/year)
+**Meta**: 100K usuários concorrentes, 10K req/s
 
-**Strategies**:
-- **Multi-AZ**: Deploy across 2 availability zones
-- **Health checks**: ELB health checks every 30s
-- **Auto-recovery**: ECS restarts failed containers
-- **Graceful degradation**: Read-only mode if DB unavailable
-
----
-
-### Security
-
-**Strategies**:
-- **Auth**: OAuth 2.0 (Auth0), JWT tokens (2h TTL)
-- **Encryption**: TLS 1.3 (in-transit), AES-256 (at-rest)
-- **Input validation**: Joi schemas, SQL injection prevention
-- **Rate limiting**: 1000 req/hour per user
-- **Secrets**: AWS Secrets Manager (no hardcoded keys)
+**Estratégias**:
+- **Horizontal**: Servidores de app stateless (escalar com ECS)
+- **Banco de Dados**: Read replicas (3x), connection pooling
+- **Cache**: Cluster Redis (sharding)
+- **CDN**: CloudFront (descarregar conteúdo estático)
 
 ---
 
-## Top Decisions
+### Disponibilidade
 
-### Decision 1: Modular Monolith vs Microservices
+**Meta**: 99,9% de uptime (~8,7h downtime/ano)
 
-**Choice**: Modular Monolith
-
-**Rationale**: Small team, tight deadline, operational simplicity
-
-**Consequences**:
-- ✅ Faster development
-- ✅ Simpler deployment
-- ❌ Limited independent scalability
-
-**Future**: Can split into microservices when team grows (modules → services)
+**Estratégias**:
+- **Multi-AZ**: Deploy em 2 zonas de disponibilidade
+- **Health checks**: Health checks ELB a cada 30s
+- **Auto-recuperação**: ECS reinicia containers falhos
+- **Degradação graciosa**: Modo somente leitura se BD indisponível
 
 ---
 
-### Decision 2: PostgreSQL vs NoSQL
+### Segurança
 
-**Choice**: PostgreSQL
-
-**Rationale**: ACID requirements (payments), complex queries (reports)
-
-**Consequences**:
-- ✅ Strong consistency
-- ✅ Relational queries
-- ❌ Horizontal scaling complexity
+**Estratégias**:
+- **Auth**: OAuth 2.0 (Auth0), tokens JWT (2h TTL)
+- **Criptografia**: TLS 1.3 (em trânsito), AES-256 (em repouso)
+- **Validação de input**: Schemas Joi, prevenção de SQL injection
+- **Rate limiting**: 1000 req/hora por usuário
+- **Secrets**: AWS Secrets Manager (sem chaves hardcoded)
 
 ---
 
-### Decision 3: Build vs Buy (Auth, Payment)
+## Decisões Principais
 
-**Choice**: Buy (Auth0, Stripe)
+### Decisão 1: Monolito Modular vs Microsserviços
 
-**Rationale**: Time-to-market, security, compliance
+**Escolha**: Monolito Modular
 
-**Consequences**:
-- ✅ Faster launch (saved 3 months)
-- ✅ Better security (proven services)
+**Fundamentação**: Time pequeno, prazo apertado, simplicidade operacional
+
+**Consequências**:
+- ✅ Desenvolvimento mais rápido
+- ✅ Deploy mais simples
+- ❌ Escalabilidade independente limitada
+
+**Futuro**: Pode dividir em microsserviços quando o time crescer (módulos → serviços)
+
+---
+
+### Decisão 2: PostgreSQL vs NoSQL
+
+**Escolha**: PostgreSQL
+
+**Fundamentação**: Requisitos ACID (pagamentos), queries complexas (relatórios)
+
+**Consequências**:
+- ✅ Consistência forte
+- ✅ Queries relacionais
+- ❌ Complexidade de escalabilidade horizontal
+
+---
+
+### Decisão 3: Build vs Buy (Auth, Payment)
+
+**Escolha**: Buy (Auth0, Stripe)
+
+**Fundamentação**: Time-to-market, segurança, conformidade
+
+**Consequências**:
+- ✅ Lançamento mais rápido (economizou 3 meses)
+- ✅ Melhor segurança (serviços comprovados)
 - ❌ Vendor lock-in
-- ❌ Monthly costs ($5K/mo)
+- ❌ Custos mensais (R$ 5K/mês)
 
 ---
 
-## Architecture Diagram (High-Level)
+## Diagrama de Arquitetura (Alto Nível)
 
 ```
 ┌─────────────────────────────────────────────────┐
-│              Load Balancer (ALB)                │
+│           Load Balancer (ALB)                   │
 └───────────────────┬─────────────────────────────┘
                     │
       ┌─────────────┴─────────────┐
       │                           │
       ↓                           ↓
 ┌──────────────┐          ┌──────────────┐
-│  App Server  │          │  App Server  │
-│   (Node.js)  │          │   (Node.js)  │
+│ App Server   │          │ App Server   │
+│  (Node.js)   │          │  (Node.js)   │
 │              │          │              │
 │  - Auth      │          │  - Auth      │
 │  - Products  │          │  - Products  │
@@ -286,10 +286,10 @@ Modules based on **bounded contexts** (DDD):
       ↓          ↓          ↓
 ┌──────────┐ ┌───────┐ ┌─────────────┐
 │PostgreSQL│ │ Redis │ │Elasticsearch│
-│ (Primary)│ │(Cache)│ │  (Search)   │
+│(Primário)│ │(Cache)│ │   (Busca)   │
 └──────────┘ └───────┘ └─────────────┘
 ```
 
 ---
 
-**Previous**: [03. Context](03_context.md) | **Next**: [05. Building Blocks](05_building-blocks.md)
+**Anterior**: [03. Contexto](03_context.md) | **Próximo**: [05. Building Blocks](05_building-blocks.md)

@@ -1,6 +1,6 @@
 # Orchestrator Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 3.5 Task Decomposition
 **Responsibility**: Decompose specifications into atomic implementation tasks
 
@@ -35,6 +35,29 @@ O Orchestrator é responsável pela **Phase 3.5: Task Decomposition**, a fase MA
 
 ---
 
+## Tools & References
+
+### Commands Used
+- **Phase 3.5 (Task Decomposition)**:
+  - `/code` - References code structure for task decomposition
+  - Indirectly uses all commands via spec.md analysis
+
+### Templates Created
+- **Phase 3.5 (Task Decomposition)**:
+  - `templates/changes/tasks.md` → `changes/[id]/tasks.md`
+
+### Rules Applied
+- **Decomposition Rules**:
+  - **Rule 007** (Max 200 lines per class): Tasks create classes ≤200 lines
+  - **Rule 033** (Max 3 params): Tasks enforce parameter limits
+  - **Rule 010** (SRP): Each task has single responsibility
+  - **Rule 021** (DRY): Tasks avoid duplication
+  - **Rule 032** (Test coverage ≥80%): Each task includes tests
+
+- Orchestrator ensures each task respects all 39 rules
+
+---
+
 ## When to Use
 
 ### Trigger
@@ -46,7 +69,7 @@ O Orchestrator é responsável pela **Phase 3.5: Task Decomposition**, a fase MA
 - `changes/[change-id]/spec.md` (approved)
 - `changes/[change-id]/proposal.md` (context)
 - `changes/[change-id]/design.md` (if HIGH complexity)
-- `.claude/constitution.md` (principles)
+- `.claude/specs/ (quality rules, architectural principles)` (principles)
 
 ### Output Produced
 - `changes/[change-id]/tasks.md` with complete task breakdown
@@ -245,7 +268,7 @@ function createComponentTasks(components: DDDComponent[], scenario: BDDScenario)
       ],
       contextToLoad: {
         files: [
-          'constitution.md (DDD section)',
+          'specs/ (quality rules, architectural principles) (DDD section)',
           'proposal.md',
           'design.md (if exists)',
           `spec.md (APENAS requirement: ${scenario.feature})`,
@@ -282,7 +305,7 @@ function createComponentTasks(components: DDDComponent[], scenario: BDDScenario)
       ],
       contextToLoad: {
         files: [
-          'constitution.md (Integration-First Testing)',
+          'specs/ (quality rules, architectural principles) (Integration-First Testing)',
           'proposal.md',
           'design.md (database schema)',
           `spec.md (APENAS requirement: ${scenario.feature})`,
@@ -322,7 +345,7 @@ function createComponentTasks(components: DDDComponent[], scenario: BDDScenario)
       ],
       contextToLoad: {
         files: [
-          'constitution.md',
+          'specs/ (quality rules, architectural principles)',
           'proposal.md',
           'design.md',
           `spec.md (APENAS requirement com TODOS scenarios)`,
@@ -350,7 +373,7 @@ function createComponentTasks(components: DDDComponent[], scenario: BDDScenario)
 - changes/[change-id]/spec.md (FULL - to extract BDD scenarios)
 - changes/[change-id]/proposal.md (context)
 - changes/[change-id]/design.md (if HIGH complexity)
-- constitution.md (principles, especially DDD Tactical)
+- specs/ (quality rules, architectural principles) (principles, especially DDD Tactical)
 
 # Understand:
 - What are the BDD scenarios?
@@ -468,7 +491,7 @@ THIS IS CRITICAL TO PREVENT HALLUCINATIONS
 
 Example for TASK-003 (Factory):
 **Context to Load** (~500 lines):
-- constitution.md (DDD section) - ~200 lines
+- specs/ (quality rules, architectural principles) (DDD section) - ~200 lines
 - proposal.md - ~100 lines
 - design.md (if exists) - ~150 lines
 - spec.md (APENAS the Requirement for this scenario) - ~100 lines
@@ -597,7 +620,7 @@ Do NOT skip tasks or work out of order."
 ✅ **DO**:
 ```markdown
 **Context to Load** (~500 lines):
-- constitution.md (DDD section only) - ~200 lines
+- specs/ (quality rules, architectural principles) (DDD section only) - ~200 lines
 - proposal.md - ~100 lines
 - spec.md (ONLY this requirement) - ~150 lines
 - tasks.md (ONLY this task) - ~50 lines
@@ -623,7 +646,7 @@ Do NOT skip tasks or work out of order."
 - Map to specific BDD scenario steps
 - Make verifiable and testable
 - Include side effects (events, notifications)
-- Reference constitution compliance
+- Reference quality rules compliance (.claude/rules/)
 
 ❌ **DON'T**:
 - Write vague criteria ("Works correctly")

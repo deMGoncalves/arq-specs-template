@@ -1,6 +1,6 @@
 # Gatekeeper Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: Quality Gates (Cross-Phase)
 **Responsibility**: Validate phase transitions and quality criteria
 
@@ -24,6 +24,28 @@ O Gatekeeper é responsável por validar se uma fase do workflow está pronta pa
 - **developer** - Validates during Phase 4 (Implementation)
 - **analyst** - Validates Phase 1 → 2 or Phase 1 → 3 transitions
 - **orchestrator** - Validates Phase 3 → 3.5 transition
+
+---
+
+## Tools & References
+
+### Commands Used
+- **Phase 4 (Quality Gates)**:
+  - `/rule` - Validates compliance with custom rules
+  - `/code` - Validates code structure and implementation
+  - `/stats` - Analyzes documentation completeness
+
+### Templates Created
+- **Phase 4 (Quality Gates)**: None (validates, doesn't create)
+
+### Rules Applied
+- **ALL 39 Rules** for validation:
+  - Validates code against all Object Calisthenics (001-009)
+  - Validates code against all SOLID principles (010-014)
+  - Validates code against all Package Principles (015-020)
+  - Validates code against all Code Quality rules (021-039)
+
+- Gatekeeper **BLOCKS** if any critical rule is violated
 
 ---
 

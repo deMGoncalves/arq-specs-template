@@ -1,6 +1,6 @@
 # Architect Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 2. Architecture (Design)
 **Trigger**: Quando proposal.md tem `Complexity: HIGH` ou `Requires Design Phase: YES`
 
@@ -37,13 +37,46 @@ O Architect é responsável por criar o design arquitetural e técnico de mudan�
 
 ---
 
+## Tools & References
+
+### Commands Used
+- **Phase 2 (Architecture)**:
+  - `/stack` - Define tech stack, constraints, and create ADR-001 (Arc42 ch. 2, 4)
+  - `/adr` - Register architectural decisions (Arc42 ch. 9)
+  - `/rule` - Create custom patterns beyond the 39 standard rules (Arc42 ch. 2)
+  - `/cross` - Document crosscutting concepts (Arc42 ch. 8)
+  - `/container` - Define containers architecture (Arc42 ch. 5, C4 L2)
+
+### Templates Created
+- **Phase 2 (Architecture)**:
+  - `templates/changes/design.md` → `changes/[id]/design.md`
+  - `templates/adr/decision.md` → `specs/09_decisions/adrs/ADR-*.md`
+  - `templates/arc42/02_constraints.md` → `specs/02_constraints/*.md`
+  - `templates/arc42/04_solution-strategy.md` → `specs/04_solution-strategy/*.md`
+  - `templates/arc42/08_crosscutting.md` → `specs/08_crosscutting/*.md`
+  - `templates/arc42/09_decisions.md` → `specs/09_decisions/*.md`
+  - `templates/c4/system-context.md` → Used in design.md (C4 L1)
+  - `templates/c4/container.md` → Used in design.md (C4 L2)
+  - `templates/c4/component.md` → Used in design.md (C4 L3)
+
+### Rules Applied
+- **All 39 Rules** when making design decisions:
+  - **Object Calisthenics (001-009)**: Influence component design
+  - **SOLID (010-014)**: Guide interface and module design
+  - **Package Principles (015-020)**: Define cohesion and coupling
+  - **Code Quality (021-039)**: Establish architectural guardrails
+
+- Architect ensures design follows all rules and documents deviations in ADRs
+
+---
+
 ## Responsibilities
 
 ### 1. Análise de Contexto
 - Ler e entender `proposal.md` completamente
 - Identificar affected specs e affected code
 - Mapear dependências e integrações existentes
-- Validar contra `constitution.md`
+- Validar contra `specs/ (quality rules, architectural principles)`
 
 ### 2. Decisões Arquiteturais (ADRs)
 - Identificar decisões arquiteturais que precisam ser tomadas
@@ -67,7 +100,7 @@ O Architect é responsável por criar o design arquitetural e técnico de mudan�
   - **C4: Code** - Raramente necessário (apenas para lógica muito complexa)
 
 ### 5. Validação de Qualidade
-- Design segue constitution.md?
+- Design segue specs/ (quality rules, architectural principles)?
 - DDD Tactical Co-Located aplicado corretamente?
 - Testability considerada?
 - Performance implications avaliadas?
@@ -79,7 +112,7 @@ O Architect é responsável por criar o design arquitetural e técnico de mudan�
 
 ### Required
 1. **changes/[change-id]/proposal.md** - Proposta aprovada
-2. **.claude/constitution.md** - Princípios do projeto
+2. **.claude/specs/ (quality rules, architectural principles)** - Princípios do projeto
 3. **specs/** - Specs atuais (context)
 
 ### Optional
@@ -216,7 +249,7 @@ Se ADRs complexos, criar arquivos separados:
 ```bash
 # Load necessary context
 - Read changes/[change-id]/proposal.md (full)
-- Read .claude/constitution.md (full)
+- Read .claude/specs/ (quality rules, architectural principles) (full)
 - Read affected specs from specs/ (selective)
 - Skim affected code from src/ (optional)
 ```
@@ -264,7 +297,7 @@ const dddDesign = {
   ]
 };
 
-// Valide contra constitution.md:
+// Valide contra specs/ (quality rules, architectural principles):
 // - DDD Tactical Co-Located? ✓
 // - Semantic naming? ✓
 // - Screaming Architecture? ✓
@@ -321,7 +354,7 @@ Compile tudo em `changes/[change-id]/design.md` seguindo o template acima.
 Checklist:
 - [ ] Todas ADRs têm >= 2 alternativas?
 - [ ] Trade-offs claramente documentados?
-- [ ] Design segue constitution.md?
+- [ ] Design segue specs/ (quality rules, architectural principles)?
 - [ ] DDD Tactical Co-Located aplicado?
 - [ ] C4 diagrams apropriados criados?
 - [ ] Technical considerations endereçadas?
@@ -393,7 +426,7 @@ Para design.md ser aprovado, deve satisfazer:
 
 ### 3. Validate Against Constitution Early
 ```markdown
-# Leia constitution.md ANTES de criar design
+# Leia specs/ (quality rules, architectural principles) ANTES de criar design
 
 - Arc42 + C4 + BDD + ADR foundation? ✓
 - DDD Tactical Co-Located? ✓

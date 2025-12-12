@@ -4,6 +4,141 @@ description: Cria ou detalha um módulo de código dentro de um container, focan
 
 # Component
 
+**ID**: CMD-005
+**Categoria**: 🔨 Building
+**Prioridade**: 🟡 P1 (Importante)
+**Fase**: 3
+**Arc42 Chapters**: 5, 12
+
+---
+
+## 🎯 O que Faz
+
+Documenta **components** (C4 Model Level 3) - módulos de código dentro de containers:
+- Classes, serviços, repositories, controllers
+- Use cases, aggregates, value objects
+- Factories, adapters, gateways
+
+Cada component recebe ID (CMP-XXX), responsabilidade única (SRP), interfaces e dependências internas.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Quando container tem >5 classes (precisa organização)
+- Antes de implementar código complexo (CMD-013)
+
+### Recomendado
+- Para bounded contexts com múltiplos módulos
+- Quando arquitetura aplica DDD Tactical patterns
+- Para documentar camadas (domain, application, infrastructure)
+
+### Opcional
+- Containers simples (<5 classes)
+- Scripts/CLIs triviais
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-004 (container)**: [Obrigatório] Container pai deve existir
+
+### Arquivos Necessários
+- `specs/05_building-blocks/containers/CNT-[NNN]_[slug].md`
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-008 (feature)**: Criar cenários que usam components
+- **CMD-013 (code)**: Implementar components documentados
+
+### Arquivos Criados
+- `specs/05_building-blocks/containers/CNT-[NNN]/components/CMP-[NNN]_[slug].md`
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Components | Exemplo |
+|--------------|-------|------------|---------|
+| **LOW** | 5-10 min | 1-3 | CRUD simples |
+| **MEDIUM** | 10-20 min | 4-8 | DDD Tactical completo |
+| **HIGH** | 20-40 min | 9-20 | Domain complexo |
+
+## 💡 Exemplos
+
+### Exemplo 1: CRUD Service (LOW)
+
+**Input**:
+```bash
+/component UserService dentro do API container - gerencia CRUD de usuários com validação de email
+```
+
+**Output**:
+```markdown
+- CMP-001_user-service.md
+  → Responsabilidade: CRUD usuários + validação
+  → Classes: UserService, EmailValidator, UserRepository
+  → Dependências: CMP-002 (database-adapter)
+```
+
+### Exemplo 2: DDD Aggregate (MEDIUM)
+
+**Input**:
+```bash
+/component Order aggregate no e-commerce container - aplica regras de negócio para pedidos, calcula totais, valida estoque
+```
+
+**Output**:
+```markdown
+- CMP-003_order-aggregate.md
+  → Entities: Order, OrderItem
+  → Value Objects: Money, Quantity
+  → Domain Events: OrderCreated, OrderPaid
+  → Use Cases: CreateOrder, AddItem, Checkout
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Quantos components criar?"
+
+**Causa**: Over-engineering
+
+**Solução**: Regra SRP - 1 component = 1 responsabilidade. Se difícil nomear, provavelmente é >1 responsabilidade.
+
+### Problema 2: "Component vs Class?"
+
+**Causa**: Confusão de granularidade
+
+**Solução**:
+- **Component**: Grupo de classes com responsabilidade coesa (ex: AuthenticationModule com 5-10 classes)
+- **Class**: Classe individual (documentada dentro do component)
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-004 (container)**: [Pré-requisito] Container pai
+- **CMD-008 (feature)**: [Pós-ação] Cenários usam components
+- **CMD-013 (code)**: [Pós-ação] Implementação
+
+### Skills
+- **SKL-001 (analyst)**: Invoca na Phase 3
+- **SKL-004 (developer)**: Usa components como guia
+
+### Rules
+Aplicam durante implementação:
+- **010 (SRP)**: 1 component = 1 responsabilidade
+- **011 (OCP)**: Components extensíveis
+- **014 (DIP)**: Dependências via interfaces
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

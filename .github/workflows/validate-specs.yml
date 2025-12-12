@@ -1,0 +1,84 @@
+name: 🔍 Validate Specifications
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'specs/**'
+      - 'changes/**'
+      - '.claude/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'specs/**'
+      - 'changes/**'
+      - '.claude/**'
+
+jobs:
+  validate-specs:
+    name: Validate Documentation Health
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check Arc42 chapters
+        run: |
+          echo "📚 Checking Arc42 chapters..."
+          chapters=0
+          for i in $(seq -f "%02g" 1 12); do
+            if [ -d "specs/${i}_"* ]; then
+              ((chapters++))
+              echo "✅ Chapter ${i} found"
+            else
+              echo "⚠️  Chapter ${i} missing"
+            fi
+          done
+          echo "📊 Total chapters: ${chapters}/12"
+          if [ "$chapters" -lt 8 ]; then
+            echo "❌ Insufficient Arc42 coverage (minimum 8 chapters required)"
+            exit 1
+          fi
+
+      - name: 🎭 Check BDD scenarios
+        run: |
+          echo "🎭 Checking BDD scenarios..."
+          if [ -d "specs/06_runtime/scenarios" ]; then
+            count=$(find specs/06_runtime/scenarios -name "SCN-*.md" 2>/dev/null | wc -l)
+            echo "📋 Found ${count} BDD scenarios"
+            if [ "$count" -eq 0 ]; then
+              echo "⚠️  No BDD scenarios found"
+            fi
+          else
+            echo "⚠️  No scenarios directory found"
+          fi
+
+      - name: 📋 Check ADRs
+        run: |
+          echo "📋 Checking ADRs..."
+          if [ -d "specs/09_decisions/adrs" ]; then
+            count=$(find specs/09_decisions/adrs -name "ADR-*.md" 2>/dev/null | wc -l)
+            echo "📄 Found ${count} ADRs"
+            if [ "$count" -eq 0 ]; then
+              echo "⚠️  No ADRs found"
+            fi
+          else
+            echo "⚠️  No ADRs directory found"
+          fi
+
+      - name: ⚠️  Check for TODOs
+        run: |
+          echo "⚠️  Checking for TODOs and placeholders..."
+          if grep -r "TODO\|FIXME\|\[PLACEHOLDER\]" specs/ 2>/dev/null; then
+            echo "⚠️  Found TODOs/placeholders in specs/"
+            echo "💡 Tip: Complete all TODOs before merging"
+          else
+            echo "✅ No TODOs found"
+          fi
+
+      - name: 📊 Generate report
+        run: |
+          echo "## 📊 Specification Health Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Validation completed successfully" >> $GITHUB_STEP_SUMMARY

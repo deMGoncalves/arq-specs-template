@@ -1,28 +1,28 @@
-# 03. Context and Scope
+# 03. Contexto e Escopo
 
-**Template ID**: TPL-ARC42-03
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 3 (Context and Scope)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-03
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 3 (Contexto e Escopo)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
 **ID**: ARC42-03
-**Status**: [Draft | In Review | Approved]
+**Status**: [Rascunho | Em Revisão | Aprovado]
 
 ---
 
-## Overview
+## Visão Geral
 
-This chapter describes the system context - how it fits into its environment and what its boundaries are. This is **C4 Level 1** (System Context).
+Este capítulo descreve o contexto do sistema - como ele se encaixa em seu ambiente e quais são seus limites. Este é o **C4 Nível 1** (Contexto do Sistema).
 
 ---
 
-## Business Context
+## Contexto de Negócio
 
-### C4 Level 1: System Context Diagram
+### C4 Nível 1: Diagrama de Contexto do Sistema
 
 ```
 ┌─────────────┐
@@ -33,9 +33,9 @@ This chapter describes the system context - how it fits into its environment and
        ↓
 ┌─────────────────────────────────────┐
 │                                     │
-│      [System Name]                  │
+│      [Nome do Sistema]              │
 │                                     │
-│   [Brief description]               │
+│   [Descrição breve]                 │
 │                                     │
 └──────┬──────────────┬───────────────┘
        │              │
@@ -47,10 +47,10 @@ This chapter describes the system context - how it fits into its environment and
 └──────────────┘  └─────────────┘
 ```
 
-**Example (E-Commerce Platform)**:
+**Exemplo (Plataforma E-Commerce)**:
 ```
          ┌─────────────┐                    ┌──────────────┐
-         │  Customer   │                    │  Admin User  │
+         │  Cliente    │                    │  Admin User  │
          │   (Web)     │                    │   (Web)      │
          └──────┬──────┘                    └──────┬───────┘
                 │ HTTPS                            │ HTTPS
@@ -58,10 +58,10 @@ This chapter describes the system context - how it fits into its environment and
                 ↓                                  ↓
          ┌──────────────────────────────────────────────┐
          │                                              │
-         │       E-Commerce Platform                    │
+         │       Plataforma E-Commerce                  │
          │                                              │
-         │  Browse products, manage cart,               │
-         │  checkout, track orders                      │
+         │  Navegar produtos, gerenciar carrinho,       │
+         │  checkout, rastrear pedidos                  │
          │                                              │
          └────┬──────┬──────┬───────┬──────────┬────────┘
               │      │      │       │          │
@@ -76,326 +76,326 @@ This chapter describes the system context - how it fits into its environment and
 
 ---
 
-## Actors (Users)
+## Atores (Usuários)
 
-### Primary Actors
+### Atores Primários
 
-#### ACT-001: [Actor Name]
+#### ATR-001: [Nome do Ator]
 
-**Type**: [Human | System | Device]
+**Tipo**: [Humano | Sistema | Dispositivo]
 
-**Description**: [Who/what is this actor]
+**Descrição**: [Quem/o que é este ator]
 
-**Goals**:
-- [Goal 1]
-- [Goal 2]
+**Objetivos**:
+- [Objetivo 1]
+- [Objetivo 2]
 
-**Interactions**:
-- [Interaction 1]: [Description]
-- [Interaction 2]: [Description]
+**Interações**:
+- [Interação 1]: [Descrição]
+- [Interação 2]: [Descrição]
 
-**Authentication**: [Method]
+**Autenticação**: [Método]
 
-**Authorization**: [Permissions/roles]
-
----
-
-**Example:**
-
-#### ACT-001: End Customer
-
-**Type**: Human (Web Browser)
-
-**Description**: Person shopping on the e-commerce platform
-
-**Goals**:
-- Find products quickly
-- Complete purchase securely
-- Track order status
-
-**Interactions**:
-- Browse product catalog (read)
-- Search products (read)
-- Add items to cart (write)
-- Complete checkout (write)
-- View order history (read)
-
-**Authentication**: Optional (guest checkout) or OAuth 2.0 (registered user)
-
-**Authorization**:
-- Read: Public products
-- Write: Own cart, own orders
+**Autorização**: [Permissões/papéis]
 
 ---
 
-#### ACT-002: Administrator
+**Exemplo:**
 
-**Type**: Human (Web Browser)
+#### ATR-001: Cliente Final
 
-**Description**: Staff managing inventory, orders, customers
+**Tipo**: Humano (Navegador Web)
 
-**Goals**:
-- Manage product inventory
-- Process orders
-- Handle customer support
+**Descrição**: Pessoa comprando na plataforma de e-commerce
 
-**Interactions**:
-- CRUD products
-- View all orders
-- Update order status
-- View customer data
+**Objetivos**:
+- Encontrar produtos rapidamente
+- Completar compra com segurança
+- Rastrear status do pedido
 
-**Authentication**: OAuth 2.0 (required)
+**Interações**:
+- Navegar catálogo de produtos (leitura)
+- Buscar produtos (leitura)
+- Adicionar itens ao carrinho (escrita)
+- Completar checkout (escrita)
+- Ver histórico de pedidos (leitura)
 
-**Authorization**:
-- Role: Admin
-- Permissions: Full access
+**Autenticação**: Opcional (checkout como convidado) ou OAuth 2.0 (usuário registrado)
 
----
-
-### Secondary Actors
-
-#### ACT-003: [External System]
-
-**Example:**
-
-#### ACT-003: Inventory System (Legacy)
-
-**Type**: System (REST API)
-
-**Description**: Legacy ERP system tracking warehouse inventory
-
-**Interactions**:
-- System calls inventory API to check stock
-- Inventory system sends stock updates via webhook
-
-**Protocol**: REST (JSON over HTTPS)
-
-**Authentication**: API Key
+**Autorização**:
+- Leitura: Produtos públicos
+- Escrita: Próprio carrinho, próprios pedidos
 
 ---
 
-## External Systems
+#### ATR-002: Administrador
 
-### SYS-001: [System Name]
+**Tipo**: Humano (Navegador Web)
 
-**Type**: [Service | Database | API]
+**Descrição**: Equipe gerenciando inventário, pedidos, clientes
 
-**Provider**: [Company/organization]
+**Objetivos**:
+- Gerenciar inventário de produtos
+- Processar pedidos
+- Lidar com suporte ao cliente
 
-**Purpose**: [What it does for us]
+**Interações**:
+- CRUD de produtos
+- Ver todos os pedidos
+- Atualizar status de pedido
+- Ver dados de clientes
 
-**Protocol**: [Communication method]
+**Autenticação**: OAuth 2.0 (obrigatório)
 
-**SLA**: [Uptime guarantee]
-
-**Data Flow**: [What data is exchanged]
-
-**Dependency Level**: [Critical | High | Medium | Low]
-
-**Fallback Strategy**: [What happens if unavailable]
-
----
-
-**Example:**
-
-### SYS-001: Auth0
-
-**Type**: Authentication Service
-
-**Provider**: Auth0 (Okta)
-
-**Purpose**: User authentication and authorization (OAuth 2.0)
-
-**Protocol**: HTTPS/REST + OIDC
-
-**SLA**: 99.9% uptime
-
-**Data Flow**:
-- **To Auth0**: Login requests, token refresh
-- **From Auth0**: JWT tokens, user profile
-
-**Dependency Level**: Critical
-
-**Fallback Strategy**:
-- Cached tokens (2h TTL)
-- Graceful degradation (read-only mode)
-- Manual fallback to database auth (emergency only)
+**Autorização**:
+- Papel: Admin
+- Permissões: Acesso total
 
 ---
 
-### SYS-002: Stripe
+### Atores Secundários
 
-**Type**: Payment Gateway
+#### ATR-003: [Sistema Externo]
 
-**Provider**: Stripe, Inc.
+**Exemplo:**
 
-**Purpose**: Process credit card payments
+#### ATR-003: Sistema de Inventário (Legado)
 
-**Protocol**: HTTPS/REST
+**Tipo**: Sistema (REST API)
 
-**SLA**: 99.99% uptime
+**Descrição**: Sistema ERP legado rastreando inventário de armazém
 
-**Data Flow**:
-- **To Stripe**: Payment intents, customer data (tokenized)
-- **From Stripe**: Payment status, webhooks (payment.succeeded)
+**Interações**:
+- Sistema chama API de inventário para verificar estoque
+- Sistema de inventário envia atualizações de estoque via webhook
 
-**Dependency Level**: Critical
+**Protocolo**: REST (JSON sobre HTTPS)
 
-**Fallback Strategy**:
-- Queue payments (retry up to 24h)
-- Show maintenance message to users
-- Manual payment processing (fallback)
+**Autenticação**: API Key
 
 ---
 
-### SYS-003: SendGrid
+## Sistemas Externos
 
-**Type**: Email Service
+### SIS-001: [Nome do Sistema]
 
-**Provider**: Twilio SendGrid
+**Tipo**: [Serviço | Banco de Dados | API]
 
-**Purpose**: Transactional emails (order confirmation, password reset)
+**Provedor**: [Empresa/organização]
 
-**Protocol**: HTTPS/REST
+**Propósito**: [O que faz por nós]
 
-**SLA**: 99.95% uptime
+**Protocolo**: [Método de comunicação]
 
-**Data Flow**:
-- **To SendGrid**: Email templates, recipient list, variables
-- **From SendGrid**: Delivery status, webhooks (delivered, bounced)
+**SLA**: [Garantia de uptime]
 
-**Dependency Level**: Medium
+**Fluxo de Dados**: [Quais dados são trocados]
 
-**Fallback Strategy**:
-- Queue emails (retry with exponential backoff)
-- Log failures for manual follow-up
-- System remains operational (email not blocking)
+**Nível de Dependência**: [Crítico | Alto | Médio | Baixo]
+
+**Estratégia de Fallback**: [O que acontece se indisponível]
 
 ---
 
-### SYS-004: AWS S3
+**Exemplo:**
 
-**Type**: Object Storage
+### SIS-001: Auth0
 
-**Provider**: Amazon Web Services
+**Tipo**: Serviço de Autenticação
 
-**Purpose**: Store product images, user uploads
+**Provedor**: Auth0 (Okta)
 
-**Protocol**: HTTPS/REST (S3 API)
+**Propósito**: Autenticação e autorização de usuários (OAuth 2.0)
 
-**SLA**: 99.9% uptime
+**Protocolo**: HTTPS/REST + OIDC
 
-**Data Flow**:
-- **To S3**: Image uploads (multipart)
-- **From S3**: Image URLs (via CloudFront CDN)
+**SLA**: 99,9% de uptime
 
-**Dependency Level**: High
+**Fluxo de Dados**:
+- **Para Auth0**: Requisições de login, refresh de token
+- **Do Auth0**: Tokens JWT, perfil de usuário
 
-**Fallback Strategy**:
-- CDN cache (CloudFront, 24h TTL)
-- Placeholder images if S3 unavailable
-- Retry uploads in background
+**Nível de Dependência**: Crítico
+
+**Estratégia de Fallback**:
+- Tokens em cache (2h TTL)
+- Degradação graciosa (modo somente leitura)
+- Fallback manual para autenticação em banco de dados (apenas emergência)
+
+---
+
+### SIS-002: Stripe
+
+**Tipo**: Gateway de Pagamento
+
+**Provedor**: Stripe, Inc.
+
+**Propósito**: Processar pagamentos com cartão de crédito
+
+**Protocolo**: HTTPS/REST
+
+**SLA**: 99,99% de uptime
+
+**Fluxo de Dados**:
+- **Para Stripe**: Payment intents, dados de cliente (tokenizados)
+- **Do Stripe**: Status de pagamento, webhooks (payment.succeeded)
+
+**Nível de Dependência**: Crítico
+
+**Estratégia de Fallback**:
+- Enfileirar pagamentos (retry até 24h)
+- Mostrar mensagem de manutenção aos usuários
+- Processamento manual de pagamento (fallback)
+
+---
+
+### SIS-003: SendGrid
+
+**Tipo**: Serviço de Email
+
+**Provedor**: Twilio SendGrid
+
+**Propósito**: Emails transacionais (confirmação de pedido, reset de senha)
+
+**Protocolo**: HTTPS/REST
+
+**SLA**: 99,95% de uptime
+
+**Fluxo de Dados**:
+- **Para SendGrid**: Templates de email, lista de destinatários, variáveis
+- **Do SendGrid**: Status de entrega, webhooks (delivered, bounced)
+
+**Nível de Dependência**: Médio
+
+**Estratégia de Fallback**:
+- Enfileirar emails (retry com backoff exponencial)
+- Logar falhas para follow-up manual
+- Sistema permanece operacional (email não bloqueante)
+
+---
+
+### SIS-004: AWS S3
+
+**Tipo**: Object Storage
+
+**Provedor**: Amazon Web Services
+
+**Propósito**: Armazenar imagens de produtos, uploads de usuários
+
+**Protocolo**: HTTPS/REST (S3 API)
+
+**SLA**: 99,9% de uptime
+
+**Fluxo de Dados**:
+- **Para S3**: Uploads de imagens (multipart)
+- **Do S3**: URLs de imagens (via CloudFront CDN)
+
+**Nível de Dependência**: Alto
+
+**Estratégia de Fallback**:
+- Cache CDN (CloudFront, 24h TTL)
+- Imagens placeholder se S3 indisponível
+- Retry de uploads em background
 
 ---
 
 ## Interfaces
 
-### Technical Interfaces
+### Interfaces Técnicas
 
-#### INT-001: [Interface Name]
+#### INT-001: [Nome da Interface]
 
-**Protocol**: [HTTP/REST | WebSocket | gRPC | Message Queue]
+**Protocolo**: [HTTP/REST | WebSocket | gRPC | Fila de Mensagens]
 
-**Format**: [JSON | XML | Protocol Buffers]
+**Formato**: [JSON | XML | Protocol Buffers]
 
-**Authentication**: [Method]
+**Autenticação**: [Método]
 
-**Endpoints**: [List or link to API doc]
+**Endpoints**: [Lista ou link para doc da API]
 
-**Rate Limits**: [Limits]
+**Limites de Taxa**: [Limites]
 
 ---
 
-**Example:**
+**Exemplo:**
 
-#### INT-001: Public REST API
+#### INT-001: API REST Pública
 
-**Protocol**: HTTPS/REST
+**Protocolo**: HTTPS/REST
 
-**Format**: JSON
+**Formato**: JSON
 
-**Authentication**:
-- Public endpoints: None
-- Protected endpoints: JWT Bearer token
+**Autenticação**:
+- Endpoints públicos: Nenhuma
+- Endpoints protegidos: Token JWT Bearer
 
-**Base URL**: `https://api.example.com/v1`
+**URL Base**: `https://api.example.com/v1`
 
 **Endpoints**:
 ```
-GET    /products              # List products
-GET    /products/{id}         # Get product details
-POST   /cart                  # Add to cart
-GET    /cart                  # View cart
-POST   /orders                # Create order
-GET    /orders/{id}           # Get order status
+GET    /products              # Listar produtos
+GET    /products/{id}         # Obter detalhes do produto
+POST   /cart                  # Adicionar ao carrinho
+GET    /cart                  # Ver carrinho
+POST   /orders                # Criar pedido
+GET    /orders/{id}           # Obter status do pedido
 ```
 
-**Rate Limits**:
-- Anonymous: 100 req/hour
-- Authenticated: 1000 req/hour
+**Limites de Taxa**:
+- Anônimo: 100 req/hora
+- Autenticado: 1000 req/hora
 
-**Error Format** (RFC 7807):
+**Formato de Erro** (RFC 7807):
 ```json
 {
   "type": "https://api.example.com/errors/rate-limit",
-  "title": "Rate limit exceeded",
+  "title": "Limite de taxa excedido",
   "status": 429,
-  "detail": "You have exceeded 100 requests per hour",
+  "detail": "Você excedeu 100 requisições por hora",
   "instance": "/products"
 }
 ```
 
 ---
 
-#### INT-002: Webhooks (Incoming)
+#### INT-002: Webhooks (Entrada)
 
-**Protocol**: HTTPS/POST
+**Protocolo**: HTTPS/POST
 
-**Format**: JSON
+**Formato**: JSON
 
-**Authentication**: HMAC-SHA256 signature verification
+**Autenticação**: Verificação de assinatura HMAC-SHA256
 
-**Sources**:
+**Fontes**:
 - Stripe: `payment.succeeded`, `payment.failed`
 - SendGrid: `delivered`, `bounced`, `opened`
 
 **Endpoint**: `https://api.example.com/webhooks/{provider}`
 
-**Retry Policy**:
-- Exponential backoff: 1s, 2s, 4s, 8s, 16s
-- Max attempts: 5
+**Política de Retry**:
+- Backoff exponencial: 1s, 2s, 4s, 8s, 16s
+- Tentativas máximas: 5
 - Timeout: 30s
 
 ---
 
-### Data Interfaces
+### Interfaces de Dados
 
-#### Data Exchange with External Systems
+#### Troca de Dados com Sistemas Externos
 
-**Format**: [JSON | CSV | XML]
+**Formato**: [JSON | CSV | XML]
 
-**Frequency**: [Real-time | Hourly | Daily]
+**Frequência**: [Tempo real | Por hora | Diário]
 
-**Volume**: [Records per day]
+**Volume**: [Registros por dia]
 
-**Example:**
+**Exemplo:**
 
-**Inventory Sync**:
-- **Direction**: Inventory System → Platform
-- **Format**: JSON
-- **Frequency**: Real-time (webhook) + nightly batch
-- **Volume**: ~10K updates/day
+**Sincronização de Inventário**:
+- **Direção**: Sistema de Inventário → Plataforma
+- **Formato**: JSON
+- **Frequência**: Tempo real (webhook) + lote noturno
+- **Volume**: ~10K atualizações/dia
 - **Schema**:
 ```json
 {
@@ -407,128 +407,128 @@ GET    /orders/{id}           # Get order status
 
 ---
 
-## Communication Patterns
+## Padrões de Comunicação
 
-### Pattern 1: Request/Response
+### Padrão 1: Requisição/Resposta
 
-**Used for**: API calls (REST)
+**Usado para**: Chamadas de API (REST)
 
-**Characteristics**:
-- Synchronous
-- Client waits for response
+**Características**:
+- Síncrono
+- Cliente aguarda resposta
 - Timeout: 30s
 
-**Example**: User searches for products → API returns results
+**Exemplo**: Usuário busca por produtos → API retorna resultados
 
 ---
 
-### Pattern 2: Event-Driven (Webhooks)
+### Padrão 2: Orientado a Eventos (Webhooks)
 
-**Used for**: Asynchronous notifications
+**Usado para**: Notificações assíncronas
 
-**Characteristics**:
-- Asynchronous
-- Eventual consistency
-- Retry with exponential backoff
+**Características**:
+- Assíncrono
+- Consistência eventual
+- Retry com backoff exponencial
 
-**Example**: Stripe payment succeeds → Webhook → Order confirmed
-
----
-
-### Pattern 3: Batch Processing
-
-**Used for**: Non-urgent bulk operations
-
-**Characteristics**:
-- Scheduled (cron)
-- Large volume
-- Low priority
-
-**Example**: Nightly inventory sync from ERP
+**Exemplo**: Pagamento Stripe sucede → Webhook → Pedido confirmado
 
 ---
 
-## Data Flow Overview
+### Padrão 3: Processamento em Lote
 
-### Checkout Flow Example
+**Usado para**: Operações em massa não urgentes
+
+**Características**:
+- Agendado (cron)
+- Grande volume
+- Baixa prioridade
+
+**Exemplo**: Sincronização de inventário noturna do ERP
+
+---
+
+## Visão Geral do Fluxo de Dados
+
+### Exemplo de Fluxo de Checkout
 
 ```
-Customer          Platform         Auth0         Stripe        SendGrid
+Cliente          Plataforma        Auth0         Stripe        SendGrid
    │                 │              │              │              │
-   │  Add to cart    │              │              │              │
+   │  Adicionar cart │              │              │              │
    ├────────────────>│              │              │              │
    │                 │              │              │              │
    │  Checkout       │              │              │              │
    ├────────────────>│              │              │              │
-   │                 │  Verify JWT  │              │              │
+   │                 │  Verificar JWT│             │              │
    │                 ├─────────────>│              │              │
    │                 │<─────────────┤              │              │
-   │                 │  (valid)     │              │              │
+   │                 │  (válido)    │              │              │
    │                 │              │              │              │
-   │                 │  Create Payment Intent      │              │
+   │                 │  Criar Payment Intent       │              │
    │                 ├──────────────────────────>  │              │
    │                 │<──────────────────────────┤  │              │
    │                 │  (client_secret)           │              │
    │                 │              │              │              │
-   │  Enter card     │              │              │              │
+   │  Inserir cartão │              │              │              │
    │  (Stripe.js)    │              │              │              │
    ├─────────────────────────────────────────────>│              │
-   │                 │              │  (payment)   │              │
+   │                 │              │  (pagamento) │              │
    │                 │              │              │              │
    │                 │<─────────────────────────── ┤              │
    │<────────────────┤  Webhook: payment.succeeded │              │
-   │  (success)      │              │              │              │
+   │  (sucesso)      │              │              │              │
    │                 │              │              │              │
-   │                 │  Send confirmation email    │              │
+   │                 │  Enviar email de confirmação│              │
    │                 ├──────────────────────────────────────────>│
    │                 │              │              │              │
-   │<────────────────┤  Order confirmation                        │
+   │<────────────────┤  Confirmação de pedido                     │
    │  (email)        │              │              │              │
 ```
 
 ---
 
-## Boundary Decisions
+## Decisões de Limite
 
-### What's Inside the System
+### O Que Está Dentro do Sistema
 
-✅ **Responsibilities of this system**:
-- Product catalog management
-- Shopping cart logic
-- Order processing workflow
-- User session management
-- Business logic
+✅ **Responsabilidades deste sistema**:
+- Gestão de catálogo de produtos
+- Lógica de carrinho de compras
+- Workflow de processamento de pedidos
+- Gestão de sessão de usuário
+- Lógica de negócio
 
-### What's Outside the System
+### O Que Está Fora do Sistema
 
-❌ **Not our responsibility**:
-- User authentication (Auth0)
-- Payment processing (Stripe)
-- Email delivery (SendGrid)
-- Image storage (AWS S3)
+❌ **Não é nossa responsabilidade**:
+- Autenticação de usuários (Auth0)
+- Processamento de pagamentos (Stripe)
+- Entrega de email (SendGrid)
+- Armazenamento de imagens (AWS S3)
 - Analytics (Mixpanel)
 
-**Rationale**: Focus on core business logic, leverage best-in-class services for infrastructure concerns.
+**Fundamentação**: Focar em lógica de negócio core, aproveitar serviços best-in-class para preocupações de infraestrutura.
 
 ---
 
-## Risks and Mitigation
+## Riscos e Mitigação
 
-| External Dependency | Risk | Probability | Impact | Mitigation |
-|---------------------|------|-------------|--------|------------|
-| Auth0 outage | Users can't login | Low | High | Cached tokens, read-only mode |
-| Stripe outage | Can't process payments | Low | Critical | Queue payments, manual fallback |
-| SendGrid outage | Emails not sent | Medium | Low | Queue and retry, non-blocking |
-| S3 outage | Images unavailable | Low | Medium | CDN cache, placeholder images |
-
----
-
-## Change History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0.0 | [Date] | [Name] | Initial version |
+| Dependência Externa | Risco | Probabilidade | Impacto | Mitigação |
+|---------------------|-------|---------------|---------|-----------|
+| Outage Auth0 | Usuários não conseguem logar | Baixa | Alto | Tokens em cache, modo somente leitura |
+| Outage Stripe | Não pode processar pagamentos | Baixa | Crítico | Enfileirar pagamentos, fallback manual |
+| Outage SendGrid | Emails não enviados | Média | Baixo | Enfileirar e retry, não-bloqueante |
+| Outage S3 | Imagens indisponíveis | Baixa | Médio | Cache CDN, imagens placeholder |
 
 ---
 
-**Previous**: [02. Constraints](02_constraints.md) | **Next**: [04. Solution Strategy](04_solution-strategy.md)
+## Histórico de Mudanças
+
+| Versão | Data | Autor | Mudanças |
+|--------|------|--------|----------|
+| 1.0.0 | [Data] | [Nome] | Versão inicial |
+
+---
+
+**Anterior**: [02. Restrições](02_constraints.md) | **Próximo**: [04. Estratégia de Solução](04_solution-strategy.md)

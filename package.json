@@ -1,19 +1,13 @@
 {
-  "name": "arq-specs-template",
+  "name": "documentation-first-approach",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.3",
     "markdownlint-cli": "^0.45.0"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
   "scripts": {
-    "prepare": "husky",
-    "doc": "mdbook serve --open",
-    "doc:build": "mdbook build"
+    "prepare": "husky"
   }
 }

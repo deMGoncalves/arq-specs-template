@@ -73,7 +73,7 @@ Invoke the Architect:
 ### Inputs Required
 
 1. `changes/[change-id]/proposal.md` - Approved proposal
-2. `.claude/constitution.md` - Project principles
+2. `.claude/specs/ (quality rules, architectural principles)` - Project principles
 3. `specs/` - Current specifications (context)
 
 ### Outputs Produced
@@ -135,7 +135,7 @@ A good `design.md` should:
 - [ ] Document 2+ alternatives for each major decision
 - [ ] Map all DDD components (contexts, aggregates, entities, value objects)
 - [ ] Include C4 diagrams for cross-component changes
-- [ ] Follow `constitution.md` principles (DDD Tactical Co-Located)
+- [ ] Follow `specs/ (quality rules, architectural principles)` principles (DDD Tactical Co-Located)
 - [ ] Provide clear implementation guidance
 - [ ] Be reviewable by tech lead
 
@@ -173,7 +173,7 @@ For performance-critical features, define budgets (latency, throughput, memory).
 
 ## 📚 References
 
-- **constitution.md** - DDD Tactical Co-Located principles
+- **specs/ (quality rules, architectural principles)** - DDD Tactical Co-Located principles
 - **Arc42 templates** - `.claude/templates/arc42/04_solution-strategy.md`
 - **ADR templates** - `.claude/templates/adr/decision.md`
 - **C4 Model templates** - `.claude/templates/c4/`
@@ -205,6 +205,6 @@ C4: Component diagram showing concern across components
 
 ---
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Created**: 2025-11-17
 **Last Updated**: 2025-11-17

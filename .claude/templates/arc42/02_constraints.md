@@ -1,386 +1,386 @@
-# 02. Architecture Constraints
+# 02. Restrições de Arquitetura
 
-**Template ID**: TPL-ARC42-02
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 2 (Architecture Constraints)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-02
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 2 (Restrições de Arquitetura)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
 **ID**: ARC42-02
-**Status**: [Draft | In Review | Approved]
+**Status**: [Rascunho | Em Revisão | Aprovado]
 
 ---
 
-## Overview
+## Visão Geral
 
-This chapter documents constraints that limit the freedom in architectural decisions. Constraints are immovable requirements that must be satisfied.
-
----
-
-## Technical Constraints
-
-### TC-001: [Constraint Name]
-
-**Category**: [Programming Language | Framework | Platform | Database | Protocol]
-
-**Constraint**: [Description]
-
-**Reason**: [Why this constraint exists]
-
-**Impact**: [How this affects architecture]
-
-**Mitigation**: [How to work within this constraint]
+Este capítulo documenta restrições que limitam a liberdade nas decisões arquiteturais. Restrições são requisitos imutáveis que devem ser satisfeitos.
 
 ---
 
-### Example: Programming Language
+## Restrições Técnicas
 
-**TC-001: Backend Must Use Node.js**
+### RT-001: [Nome da Restrição]
 
-**Category**: Programming Language
+**Categoria**: [Linguagem de Programação | Framework | Plataforma | Banco de Dados | Protocolo]
 
-**Constraint**: All backend services must be written in Node.js (TypeScript preferred).
+**Restrição**: [Descrição]
 
-**Reason**:
-- Existing team expertise (5 developers with 3+ years Node.js)
-- Existing infrastructure optimized for Node.js
-- Shared code between frontend and backend (TypeScript)
+**Razão**: [Por que esta restrição existe]
 
-**Impact**:
-- ✅ Fast development (team expertise)
-- ✅ NPM ecosystem (large library selection)
-- ❌ CPU-intensive tasks less efficient than Go/Rust
-- ❌ Memory usage higher than compiled languages
+**Impacto**: [Como isto afeta a arquitetura]
 
-**Mitigation**:
-- Use worker threads for CPU-intensive operations
-- Offload heavy processing to dedicated services (Python/Go)
-- Optimize memory usage (profiling, caching strategies)
+**Mitigação**: [Como trabalhar dentro desta restrição]
 
 ---
 
-### TC-002: [Database Constraint]
+### Exemplo: Linguagem de Programação
 
-**Example: Database Must Be PostgreSQL**
+**RT-001: Backend Deve Usar Node.js**
 
-**Category**: Database
+**Categoria**: Linguagem de Programação
 
-**Constraint**: Primary database must be PostgreSQL 14+.
+**Restrição**: Todos os serviços de backend devem ser escritos em Node.js (TypeScript preferido).
 
-**Reason**:
-- Existing infrastructure and expertise
-- ACID compliance required
-- JSON support needed (JSONB columns)
-- License: Open source (no vendor lock-in)
+**Razão**:
+- Expertise existente do time (5 desenvolvedores com 3+ anos Node.js)
+- Infraestrutura existente otimizada para Node.js
+- Código compartilhado entre frontend e backend (TypeScript)
 
-**Impact**:
-- ✅ ACID guarantees
-- ✅ Rich query capabilities (joins, aggregations)
-- ✅ Strong ecosystem (ORMs, tools)
-- ❌ Horizontal scaling complexity (need sharding)
-- ❌ Not ideal for write-heavy workloads
+**Impacto**:
+- ✅ Desenvolvimento rápido (expertise do time)
+- ✅ Ecossistema NPM (grande seleção de bibliotecas)
+- ❌ Tarefas CPU-intensivas menos eficientes que Go/Rust
+- ❌ Uso de memória maior que linguagens compiladas
 
-**Mitigation**:
-- Use read replicas for scalability
-- Implement caching layer (Redis)
-- Consider partitioning for large tables
-- Use connection pooling (PgBouncer)
+**Mitigação**:
+- Usar worker threads para operações CPU-intensivas
+- Descarregar processamento pesado para serviços dedicados (Python/Go)
+- Otimizar uso de memória (profiling, estratégias de caching)
 
 ---
 
-### TC-003: [Cloud Platform Constraint]
+### RT-002: [Restrição de Banco de Dados]
 
-**Example: Must Deploy to AWS**
+**Exemplo: Banco de Dados Deve Ser PostgreSQL**
 
-**Category**: Platform
+**Categoria**: Banco de Dados
 
-**Constraint**: All infrastructure must run on AWS.
+**Restrição**: Banco de dados primário deve ser PostgreSQL 14+.
 
-**Reason**:
-- Existing enterprise contract ($100K credits)
-- Compliance certifications (SOC 2, HIPAA)
-- Team expertise with AWS services
+**Razão**:
+- Infraestrutura e expertise existentes
+- Conformidade ACID requerida
+- Suporte JSON necessário (colunas JSONB)
+- Licença: Open source (sem vendor lock-in)
 
-**Impact**:
-- ✅ Rich service ecosystem (RDS, S3, Lambda, etc)
-- ✅ Compliance pre-certified
+**Impacto**:
+- ✅ Garantias ACID
+- ✅ Capacidades ricas de query (joins, agregações)
+- ✅ Ecossistema forte (ORMs, ferramentas)
+- ❌ Complexidade de escalabilidade horizontal (necessita sharding)
+- ❌ Não ideal para workloads write-heavy
+
+**Mitigação**:
+- Usar réplicas de leitura para escalabilidade
+- Implementar camada de caching (Redis)
+- Considerar particionamento para tabelas grandes
+- Usar connection pooling (PgBouncer)
+
+---
+
+### RT-003: [Restrição de Plataforma Cloud]
+
+**Exemplo: Deve Fazer Deploy na AWS**
+
+**Categoria**: Plataforma
+
+**Restrição**: Toda infraestrutura deve rodar na AWS.
+
+**Razão**:
+- Contrato empresarial existente ($100K em créditos)
+- Certificações de conformidade (SOC 2, HIPAA)
+- Expertise do time com serviços AWS
+
+**Impacto**:
+- ✅ Ecossistema rico de serviços (RDS, S3, Lambda, etc)
+- ✅ Conformidade pré-certificada
 - ❌ Vendor lock-in
-- ❌ Multi-cloud deployment not possible
+- ❌ Deploy multi-cloud não é possível
 
-**Mitigation**:
-- Use abstraction layers for cloud-specific services
-- Use containers (ECS/EKS) for portability
-- Document migration path to other clouds (if needed)
-
----
-
-### TC-004: [Protocol/API Constraint]
-
-**Example: Must Support REST API**
-
-**Category**: Protocol
-
-**Constraint**: External API must be RESTful (HTTP/JSON).
-
-**Reason**:
-- Existing clients expect REST
-- Backward compatibility required
-- Industry standard for public APIs
-
-**Impact**:
-- ✅ Widely understood
-- ✅ Tooling support (Postman, Swagger)
-- ❌ Over-fetching/under-fetching issues
-- ❌ Multiple requests for related data
-
-**Mitigation**:
-- Provide batch endpoints where appropriate
-- Consider GraphQL for internal APIs
-- Optimize with field filtering (?fields=name,email)
+**Mitigação**:
+- Usar camadas de abstração para serviços específicos da cloud
+- Usar containers (ECS/EKS) para portabilidade
+- Documentar caminho de migração para outras clouds (se necessário)
 
 ---
 
-### TC-005: [Security Constraint]
+### RT-004: [Restrição de Protocolo/API]
 
-**Example: Must Use OAuth 2.0**
+**Exemplo: Deve Suportar API REST**
 
-**Category**: Security
+**Categoria**: Protocolo
 
-**Constraint**: Authentication must use OAuth 2.0 with Auth0.
+**Restrição**: API externa deve ser RESTful (HTTP/JSON).
 
-**Reason**:
-- Corporate standard
-- Security team mandate
-- Existing Auth0 contract
+**Razão**:
+- Clientes existentes esperam REST
+- Compatibilidade retroativa requerida
+- Padrão da indústria para APIs públicas
 
-**Impact**:
-- ✅ Proven security
-- ✅ Offload auth complexity
-- ❌ Dependency on Auth0 availability
-- ❌ Migration difficulty if switching provider
+**Impacto**:
+- ✅ Amplamente compreendido
+- ✅ Suporte de ferramentas (Postman, Swagger)
+- ❌ Problemas de over-fetching/under-fetching
+- ❌ Múltiplas requisições para dados relacionados
 
-**Mitigation**:
-- Cache tokens (2h TTL)
-- Implement graceful degradation
-- Abstract auth behind interface (future flexibility)
-
----
-
-## Organizational Constraints
-
-### OC-001: [Team Constraint]
-
-**Example: Team Size is Fixed**
-
-**Category**: Team
-
-**Constraint**: Development team is 5 developers (cannot grow for 12 months).
-
-**Reason**: Budget constraints, hiring freeze.
-
-**Impact**:
-- ❌ Limited capacity (velocity ~50 story points/sprint)
-- ❌ No specialization (everyone full-stack)
-- ✅ Faster communication (small team)
-
-**Mitigation**:
-- Prioritize ruthlessly (MVP-first)
-- Automate everything (CI/CD, testing, deployment)
-- Avoid complex architectures (microservices → modular monolith)
-- Simplify tech stack (fewer technologies to maintain)
+**Mitigação**:
+- Fornecer endpoints batch quando apropriado
+- Considerar GraphQL para APIs internas
+- Otimizar com filtragem de campos (?fields=name,email)
 
 ---
 
-### OC-002: [Timeline Constraint]
+### RT-005: [Restrição de Segurança]
 
-**Example: Must Launch in 6 Months**
+**Exemplo: Deve Usar OAuth 2.0**
 
-**Category**: Timeline
+**Categoria**: Segurança
 
-**Constraint**: MVP must be in production by 2026-06-01 (6 months).
+**Restrição**: Autenticação deve usar OAuth 2.0 com Auth0.
 
-**Reason**:
-- Market opportunity (competitor launching similar product)
-- Business commitment to investors
+**Razão**:
+- Padrão corporativo
+- Mandato do time de segurança
+- Contrato Auth0 existente
 
-**Impact**:
-- ❌ Limited time for R&D
-- ❌ Technical debt likely
-- ✅ Forces focus on essentials
+**Impacto**:
+- ✅ Segurança comprovada
+- ✅ Descarregar complexidade de autenticação
+- ❌ Dependência da disponibilidade do Auth0
+- ❌ Dificuldade de migração se trocar de provedor
 
-**Mitigation**:
-- Define strict MVP scope
-- Use proven technologies (no experiments)
-- Plan phase 2 for technical debt paydown
-- Automate testing to maintain quality under pressure
-
----
-
-### OC-003: [Budget Constraint]
-
-**Example: Infrastructure Budget is $50K/month**
-
-**Category**: Budget
-
-**Constraint**: Cloud infrastructure costs must be < $50K/month.
-
-**Reason**: Startup funding constraints.
-
-**Impact**:
-- ❌ Limits scalability options
-- ❌ Careful resource management required
-- ✅ Forces efficient architecture
-
-**Mitigation**:
-- Use auto-scaling (scale down when idle)
-- Optimize resource usage (right-sizing)
-- Use reserved instances (1-year commit for 30% savings)
-- Monitor costs continuously (CloudWatch, Cost Explorer)
-- Consider serverless where appropriate (pay-per-use)
+**Mitigação**:
+- Cachear tokens (2h TTL)
+- Implementar degradação graciosa
+- Abstrair autenticação atrás de interface (flexibilidade futura)
 
 ---
 
-### OC-004: [Skill Constraint]
+## Restrições Organizacionais
 
-**Example: Team Has Limited DevOps Experience**
+### RO-001: [Restrição de Time]
 
-**Category**: Skills
+**Exemplo: Tamanho do Time é Fixo**
 
-**Constraint**: Team is strong in Node.js but has limited Kubernetes/infrastructure expertise.
+**Categoria**: Time
 
-**Reason**: Team composition (mainly web developers).
+**Restrição**: Time de desenvolvimento é de 5 desenvolvedores (não pode crescer por 12 meses).
 
-**Impact**:
-- ❌ Complex infrastructure choices risky
-- ❌ Kubernetes learning curve steep
-- ✅ Faster development with familiar stack
+**Razão**: Restrições de orçamento, congelamento de contratações.
 
-**Mitigation**:
-- Use managed services (AWS ECS/Fargate instead of K8s)
-- Hire DevOps consultant for setup
-- Invest in training (allocate 10% time for learning)
-- Document everything (runbooks, troubleshooting guides)
+**Impacto**:
+- ❌ Capacidade limitada (velocidade ~50 story points/sprint)
+- ❌ Sem especialização (todos full-stack)
+- ✅ Comunicação mais rápida (time pequeno)
 
----
-
-## Legal/Compliance Constraints
-
-### LC-001: [Data Privacy]
-
-**Example: Must Be GDPR Compliant**
-
-**Category**: Data Privacy
-
-**Constraint**: System must comply with GDPR (EU regulation).
-
-**Reason**:
-- Serving EU customers
-- Legal requirement
-
-**Impact**:
-- ✅ User trust (privacy by design)
-- ❌ Implementation complexity
-- ❌ Data handling restrictions
-
-**Requirements**:
-- Right to access (users can download their data)
-- Right to erasure (users can delete their data)
-- Consent management (explicit opt-in)
-- Data portability (export in machine-readable format)
-- Privacy by design (default to minimal data collection)
-- Data breach notification (within 72 hours)
-
-**Mitigation**:
-- Use GDPR-compliant services (Auth0, SendGrid)
-- Implement data retention policies
-- Add consent management UI
-- Maintain audit logs
-- Document data flows (DPIAs)
+**Mitigação**:
+- Priorizar impiedosamente (MVP-first)
+- Automatizar tudo (CI/CD, testes, deployment)
+- Evitar arquiteturas complexas (microsserviços → monolito modular)
+- Simplificar tech stack (menos tecnologias para manter)
 
 ---
 
-### LC-002: [Regulatory Compliance]
+### RO-002: [Restrição de Cronograma]
 
-**Example: Must Be PCI-DSS Compliant**
+**Exemplo: Deve Lançar em 6 Meses**
 
-**Category**: Financial
+**Categoria**: Cronograma
 
-**Constraint**: Must comply with PCI-DSS for credit card processing.
+**Restrição**: MVP deve estar em produção até 2026-06-01 (6 meses).
 
-**Reason**: Accepting credit card payments.
+**Razão**:
+- Oportunidade de mercado (concorrente lançando produto similar)
+- Compromisso de negócio com investidores
 
-**Impact**:
-- ❌ Cannot store credit card numbers
-- ❌ Strict security requirements
-- ✅ Customer trust
+**Impacto**:
+- ❌ Tempo limitado para R&D
+- ❌ Débito técnico provável
+- ✅ Força foco nos essenciais
 
-**Requirements**:
-- Never store CVV
-- Encrypt card data in transit and at rest
-- Regular security audits
-- Network segmentation
-- Access control (least privilege)
-
-**Mitigation**:
-- Use Stripe (PCI Level 1 certified)
-- Tokenize cards immediately
-- Never touch raw card data
-- Limit PCI scope (payment page only)
+**Mitigação**:
+- Definir escopo MVP estrito
+- Usar tecnologias comprovadas (sem experimentos)
+- Planejar fase 2 para pagamento de débito técnico
+- Automatizar testes para manter qualidade sob pressão
 
 ---
 
-### LC-003: [Accessibility]
+### RO-003: [Restrição de Orçamento]
 
-**Example: Must Meet WCAG 2.1 Level AA**
+**Exemplo: Orçamento de Infraestrutura é R$ 50K/mês**
 
-**Category**: Accessibility
+**Categoria**: Orçamento
 
-**Constraint**: Web interface must meet WCAG 2.1 Level AA standards.
+**Restrição**: Custos de infraestrutura cloud devem ser < R$ 50K/mês.
 
-**Reason**:
-- Legal requirement (ADA compliance)
-- Corporate policy (inclusive design)
+**Razão**: Restrições de funding da startup.
 
-**Impact**:
-- ✅ Larger addressable market (accessibility)
-- ❌ Additional development time
-- ❌ Testing complexity
+**Impacto**:
+- ❌ Limita opções de escalabilidade
+- ❌ Gestão cuidadosa de recursos requerida
+- ✅ Força arquitetura eficiente
 
-**Requirements**:
-- Keyboard navigation
-- Screen reader compatible
-- Color contrast ratios (4.5:1 for text)
-- Alt text for images
-- Captions for videos
-- Form labels and error messages
-
-**Mitigation**:
-- Use accessible component library (Radix UI, Reach UI)
-- Automated testing (axe-core, Lighthouse)
-- Manual testing with screen readers
-- Design with accessibility from start (not retrofit)
+**Mitigação**:
+- Usar auto-scaling (scale down quando ocioso)
+- Otimizar uso de recursos (right-sizing)
+- Usar instâncias reservadas (commit 1 ano para 30% de economia)
+- Monitorar custos continuamente (CloudWatch, Cost Explorer)
+- Considerar serverless quando apropriado (pay-per-use)
 
 ---
 
-## Conventions
+### RO-004: [Restrição de Habilidades]
 
-### CV-001: [Coding Standards]
+**Exemplo: Time Tem Experiência Limitada em DevOps**
 
-**Example: Must Follow ESLint + Prettier**
+**Categoria**: Habilidades
 
-**Category**: Code Quality
+**Restrição**: Time é forte em Node.js mas tem expertise limitada em Kubernetes/infraestrutura.
 
-**Constraint**: All code must pass ESLint + Prettier checks.
+**Razão**: Composição do time (principalmente web developers).
 
-**Reason**:
-- Team consistency
-- Code review efficiency
-- Automated quality checks
+**Impacto**:
+- ❌ Escolhas complexas de infraestrutura são arriscadas
+- ❌ Curva de aprendizado de Kubernetes é íngreme
+- ✅ Desenvolvimento mais rápido com stack familiar
 
-**Configuration**:
+**Mitigação**:
+- Usar serviços gerenciados (AWS ECS/Fargate em vez de K8s)
+- Contratar consultor DevOps para setup
+- Investir em treinamento (alocar 10% do tempo para aprendizado)
+- Documentar tudo (runbooks, guias de troubleshooting)
+
+---
+
+## Restrições Legais/Conformidade
+
+### RL-001: [Privacidade de Dados]
+
+**Exemplo: Deve Ser Compatível com GDPR**
+
+**Categoria**: Privacidade de Dados
+
+**Restrição**: Sistema deve estar em conformidade com GDPR (regulação EU).
+
+**Razão**:
+- Servir clientes EU
+- Requisito legal
+
+**Impacto**:
+- ✅ Confiança do usuário (privacy by design)
+- ❌ Complexidade de implementação
+- ❌ Restrições de tratamento de dados
+
+**Requisitos**:
+- Direito de acesso (usuários podem baixar seus dados)
+- Direito ao esquecimento (usuários podem deletar seus dados)
+- Gestão de consentimento (opt-in explícito)
+- Portabilidade de dados (exportar em formato legível por máquina)
+- Privacy by design (padrão para coleta mínima de dados)
+- Notificação de violação de dados (em 72 horas)
+
+**Mitigação**:
+- Usar serviços compatíveis com GDPR (Auth0, SendGrid)
+- Implementar políticas de retenção de dados
+- Adicionar UI de gestão de consentimento
+- Manter logs de auditoria
+- Documentar fluxos de dados (DPIAs)
+
+---
+
+### RL-002: [Conformidade Regulatória]
+
+**Exemplo: Deve Ser Compatível com PCI-DSS**
+
+**Categoria**: Financeiro
+
+**Restrição**: Deve estar em conformidade com PCI-DSS para processamento de cartão de crédito.
+
+**Razão**: Aceitar pagamentos com cartão de crédito.
+
+**Impacto**:
+- ❌ Não pode armazenar números de cartão de crédito
+- ❌ Requisitos de segurança estritos
+- ✅ Confiança do cliente
+
+**Requisitos**:
+- Nunca armazenar CVV
+- Criptografar dados de cartão em trânsito e em repouso
+- Auditorias de segurança regulares
+- Segmentação de rede
+- Controle de acesso (least privilege)
+
+**Mitigação**:
+- Usar Stripe (certificado PCI Level 1)
+- Tokenizar cartões imediatamente
+- Nunca tocar dados brutos de cartão
+- Limitar escopo PCI (apenas página de pagamento)
+
+---
+
+### RL-003: [Acessibilidade]
+
+**Exemplo: Deve Atender WCAG 2.1 Nível AA**
+
+**Categoria**: Acessibilidade
+
+**Restrição**: Interface web deve atender padrões WCAG 2.1 Nível AA.
+
+**Razão**:
+- Requisito legal (conformidade ADA)
+- Política corporativa (design inclusivo)
+
+**Impacto**:
+- ✅ Mercado endereçável maior (acessibilidade)
+- ❌ Tempo de desenvolvimento adicional
+- ❌ Complexidade de testes
+
+**Requisitos**:
+- Navegação por teclado
+- Compatível com leitores de tela
+- Taxas de contraste de cor (4.5:1 para texto)
+- Texto alt para imagens
+- Legendas para vídeos
+- Labels de formulário e mensagens de erro
+
+**Mitigação**:
+- Usar biblioteca de componentes acessíveis (Radix UI, Reach UI)
+- Testes automatizados (axe-core, Lighthouse)
+- Testes manuais com leitores de tela
+- Design com acessibilidade desde o início (não retrofit)
+
+---
+
+## Convenções
+
+### CV-001: [Padrões de Código]
+
+**Exemplo: Deve Seguir ESLint + Prettier**
+
+**Categoria**: Qualidade de Código
+
+**Restrição**: Todo código deve passar verificações ESLint + Prettier.
+
+**Razão**:
+- Consistência do time
+- Eficiência de code review
+- Verificações de qualidade automatizadas
+
+**Configuração**:
 ```json
 {
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
@@ -392,157 +392,157 @@ This chapter documents constraints that limit the freedom in architectural decis
 }
 ```
 
-**Impact**:
-- ✅ Consistent code style
-- ✅ Fewer code review debates
-- ❌ Initial setup time
+**Impacto**:
+- ✅ Estilo de código consistente
+- ✅ Menos debates em code review
+- ❌ Tempo de setup inicial
 
 ---
 
-### CV-002: [Git Workflow]
+### CV-002: [Workflow Git]
 
-**Example: Must Use Git Flow**
+**Exemplo: Deve Usar Git Flow**
 
-**Category**: Version Control
+**Categoria**: Controle de Versão
 
-**Constraint**: All development must follow Git Flow branching model.
+**Restrição**: Todo desenvolvimento deve seguir o modelo de branching Git Flow.
 
-**Reason**:
-- Multiple environments (dev, staging, prod)
-- Release coordination
+**Razão**:
+- Múltiplos ambientes (dev, staging, prod)
+- Coordenação de releases
 
 **Branches**:
-- `main`: Production-ready code
-- `develop`: Integration branch
-- `feature/*`: Feature branches
-- `release/*`: Release preparation
-- `hotfix/*`: Production fixes
+- `main`: Código pronto para produção
+- `develop`: Branch de integração
+- `feature/*`: Branches de features
+- `release/*`: Preparação de release
+- `hotfix/*`: Correções de produção
 
-**Rules**:
-- No direct commits to `main` or `develop`
-- Pull requests required
-- 1 approval minimum
-- CI must pass
-
----
-
-### CV-003: [Testing Requirements]
-
-**Example: Minimum 80% Code Coverage**
-
-**Category**: Testing
-
-**Constraint**: All code must have minimum 80% test coverage.
-
-**Reason**:
-- Quality assurance
-- Prevent regressions
-- Enable safe refactoring
-
-**Requirements**:
-- Unit tests: 80% coverage
-- Integration tests: Critical paths
-- E2E tests: Happy paths
-- CI fails if coverage drops below threshold
+**Regras**:
+- Sem commits diretos em `main` ou `develop`
+- Pull requests requeridos
+- 1 aprovação mínima
+- CI deve passar
 
 ---
 
-### CV-004: [Documentation Standards]
+### CV-003: [Requisitos de Testes]
 
-**Example: Must Follow Arc42 + C4**
+**Exemplo: Mínimo 80% de Cobertura de Código**
 
-**Category**: Documentation
+**Categoria**: Testes
 
-**Constraint**: Architecture documentation must follow Arc42 template with C4 diagrams.
+**Restrição**: Todo código deve ter mínimo 80% de cobertura de testes.
 
-**Reason**:
-- Consistency
+**Razão**:
+- Garantia de qualidade
+- Prevenir regressões
+- Habilitar refatoração segura
+
+**Requisitos**:
+- Testes unitários: 80% de cobertura
+- Testes de integração: Caminhos críticos
+- Testes E2E: Caminhos felizes
+- CI falha se cobertura cair abaixo do limiar
+
+---
+
+### CV-004: [Padrões de Documentação]
+
+**Exemplo: Deve Seguir Arc42 + C4**
+
+**Categoria**: Documentação
+
+**Restrição**: Documentação de arquitetura deve seguir template Arc42 com diagramas C4.
+
+**Razão**:
+- Consistência
 - Onboarding
-- Stakeholder communication
+- Comunicação com stakeholders
 
-**Requirements**:
-- Arc42: 12 chapters
-- C4: Context, Containers, Components
-- ADRs: All significant decisions
-- BDD: All features (Given-When-Then)
-
----
-
-## Summary Table
-
-| ID | Category | Constraint | Impact | Mitigation Priority |
-|----|----------|------------|--------|---------------------|
-| TC-001 | Technical | Node.js backend | Medium | Low |
-| TC-002 | Technical | PostgreSQL | Medium | Medium |
-| TC-003 | Technical | AWS only | High | Medium |
-| OC-001 | Org | 5 developers | High | High |
-| OC-002 | Org | 6 month deadline | High | Critical |
-| OC-003 | Org | $50K/mo budget | Medium | High |
-| LC-001 | Legal | GDPR | High | Critical |
-| LC-002 | Legal | PCI-DSS | Critical | Critical |
+**Requisitos**:
+- Arc42: 12 capítulos
+- C4: Contexto, Containers, Componentes
+- ADRs: Todas as decisões significativas
+- BDD: Todas as features (Given-When-Then)
 
 ---
 
-## Constraint Trade-offs
+## Tabela Resumo
 
-Document key trade-offs made due to constraints:
+| ID | Categoria | Restrição | Impacto | Prioridade de Mitigação |
+|----|-----------|-----------|---------|-------------------------|
+| RT-001 | Técnica | Backend Node.js | Médio | Baixa |
+| RT-002 | Técnica | PostgreSQL | Médio | Média |
+| RT-003 | Técnica | Apenas AWS | Alto | Média |
+| RO-001 | Org | 5 desenvolvedores | Alto | Alta |
+| RO-002 | Org | Prazo 6 meses | Alto | Crítica |
+| RO-003 | Org | R$ 50K/mês orçamento | Médio | Alta |
+| RL-001 | Legal | GDPR | Alto | Crítica |
+| RL-002 | Legal | PCI-DSS | Crítico | Crítica |
 
-### Trade-off 1: Monolith vs Microservices
+---
 
-**Constraint**: Team size (5 developers), Timeline (6 months)
+## Trade-offs de Restrições
 
-**Decision**: Modular monolith (not microservices)
+Documente trade-offs-chave feitos devido às restrições:
 
-**Rationale**:
-- Small team → microservices overhead too high
-- Tight deadline → simplicity critical
-- Can split later if needed (plan for modularity)
+### Trade-off 1: Monolito vs Microsserviços
 
-**Accepted Trade-offs**:
-- ❌ Less independent scalability
-- ❌ Deployment coupling
-- ✅ Faster development
-- ✅ Easier debugging
-- ✅ Lower operational complexity
+**Restrição**: Tamanho do time (5 desenvolvedores), Cronograma (6 meses)
+
+**Decisão**: Monolito modular (não microsserviços)
+
+**Fundamentação**:
+- Time pequeno → overhead de microsserviços muito alto
+- Prazo apertado → simplicidade crítica
+- Pode dividir depois se necessário (planejar para modularidade)
+
+**Trade-offs Aceitos**:
+- ❌ Menos escalabilidade independente
+- ❌ Acoplamento de deployment
+- ✅ Desenvolvimento mais rápido
+- ✅ Debug mais fácil
+- ✅ Complexidade operacional menor
 
 ---
 
 ### Trade-off 2: Build vs Buy
 
-**Constraint**: Timeline (6 months), Budget ($50K/mo)
+**Restrição**: Cronograma (6 meses), Orçamento (R$ 50K/mês)
 
-**Decision**: Buy for auth, payment, email (don't build)
+**Decisão**: Comprar para auth, pagamento, email (não construir)
 
-**Rationale**:
-- Auth: Complex, security-critical → Auth0
-- Payment: PCI-DSS compliance → Stripe
+**Fundamentação**:
+- Auth: Complexo, crítico para segurança → Auth0
+- Pagamento: Conformidade PCI-DSS → Stripe
 - Email: Deliverability → SendGrid
-- Focus dev time on core business logic
+- Focar tempo de dev em lógica de negócio core
 
-**Accepted Trade-offs**:
-- ❌ Vendor dependencies
-- ❌ Monthly costs ($5K/mo for services)
-- ✅ Faster time-to-market (saved 3 months)
-- ✅ Better reliability (proven services)
-
----
-
-## Open Questions
-
-Constraints that need clarification:
-
-- [ ] **Question 1**: Can we use Redis for caching? (need security approval)
-- [ ] **Question 2**: Which AWS regions are approved? (need compliance verification)
-- [ ] **Question 3**: Can we use Lambda for background jobs? (need cost approval)
+**Trade-offs Aceitos**:
+- ❌ Dependências de vendors
+- ❌ Custos mensais (R$ 5K/mês para serviços)
+- ✅ Time-to-market mais rápido (economizou 3 meses)
+- ✅ Melhor confiabilidade (serviços comprovados)
 
 ---
 
-## Change History
+## Questões Abertas
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0.0 | [Date] | [Name] | Initial version |
+Restrições que precisam de esclarecimento:
+
+- [ ] **Questão 1**: Podemos usar Redis para caching? (precisa aprovação de segurança)
+- [ ] **Questão 2**: Quais regiões AWS são aprovadas? (precisa verificação de conformidade)
+- [ ] **Questão 3**: Podemos usar Lambda para jobs background? (precisa aprovação de custo)
 
 ---
 
-**Previous**: [01. Introduction](01_introduction.md) | **Next**: [03. Context and Scope](03_context.md)
+## Histórico de Mudanças
+
+| Versão | Data | Autor | Mudanças |
+|--------|------|--------|----------|
+| 1.0.0 | [Data] | [Nome] | Versão inicial |
+
+---
+
+**Anterior**: [01. Introdução](01_introduction.md) | **Próximo**: [03. Contexto e Escopo](03_context.md)

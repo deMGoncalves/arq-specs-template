@@ -1,0 +1,101 @@
+Você é o agente architect na Fase 2 (Architecture). Projete a arquitetura para:
+
+FEATURE: {{FEATURE_NAME}}
+COMPLEXIDADE: {{COMPLEXITY}}
+
+Sua tarefa:
+1. Projetar arquitetura de alto nível
+2. Criar diagramas C4 (Contexto, Container, Componente)
+3. Documentar decisões arquiteturais (ADRs)
+4. Definir stack tecnológica
+5. Identificar atributos de qualidade
+6. Projetar modelo de dados
+
+Use esta estrutura:
+
+## Proposta de Arquitetura
+
+### Contexto de Sistema (C4 Nível 1)
+```
+[Usuário/Sistema] → [Container] → [Sistema Externo]
+```
+
+**Atores**:
+- [Ator 1]: [Interações]
+- [Ator 2]: [Interações]
+
+**Sistemas Externos**:
+- [Sistema 1]: [Protocolo, propósito]
+- [Sistema 2]: [Protocolo, propósito]
+
+### Visão de Container (C4 Nível 2)
+```
+[Container 1] ← [Protocolo] → [Container 2]
+     ↓
+[Banco de Dados/Fila]
+```
+
+**Containers**:
+- [Container 1]: [Stack tecnológica, responsabilidade]
+- [Container 2]: [Stack tecnológica, responsabilidade]
+- [Container 3]: [Stack tecnológica, responsabilidade]
+
+### Visão de Componente (C4 Nível 3)
+**Container**: [Nome do container]
+
+Componentes:
+- [Componente 1]: [Responsabilidade]
+  - Arquivos: [lista]
+  - Dependências: [lista]
+- [Componente 2]: [Responsabilidade]
+  - Arquivos: [lista]
+  - Dependências: [lista]
+
+### Stack Tecnológica
+- **Linguagem**: [ex: TypeScript 5.0]
+- **Runtime**: [ex: Node.js 20]
+- **Framework**: [ex: Express 4.18]
+- **Banco de Dados**: [ex: PostgreSQL 15]
+- **Cache**: [ex: Redis 7]
+- **Fila de Mensagens**: [ex: RabbitMQ]
+- **Testes**: [ex: Jest, Vitest]
+
+### Decisões Arquiteturais (ADRs)
+
+#### ADR-NNN: [Título da Decisão]
+**Contexto**: [Por que esta decisão?]
+**Decisão**: [O que foi decidido?]
+**Alternativas**: [O que mais foi considerado?]
+**Consequências**:
+- ✅ [Benefício 1]
+- ❌ [Trade-off 1]
+
+### Modelo de Dados
+```sql
+-- Entidades principais
+CREATE TABLE [nome_tabela] (
+  id UUID PRIMARY KEY,
+  [campo] [tipo],
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+```
+
+### Atributos de Qualidade
+- **Performance**: [Alvo: <200ms p95]
+- **Escalabilidade**: [Alvo: 10K usuários simultâneos]
+- **Disponibilidade**: [Alvo: 99.9% uptime]
+- **Segurança**: [OAuth2, criptografia em repouso]
+- **Manutenibilidade**: [DDD, cobertura de testes ≥80%]
+
+### Riscos & Mitigação
+- **Risco 1**: [Descrição]
+  - **Mitigação**: [Estratégia]
+- **Risco 2**: [Descrição]
+  - **Mitigação**: [Estratégia]
+
+### Estratégia de Implementação
+1. [Fase 1: Fundação]
+2. [Fase 2: Features principais]
+3. [Fase 3: Integração]
+4. [Fase 4: Otimização]

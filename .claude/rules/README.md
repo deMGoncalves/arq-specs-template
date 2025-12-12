@@ -1,14 +1,14 @@
-# 39 Regras de Qualidade - Arq-Kit
+# 39 Quality Rules - Documentation-First Approach
 
-**Versão**: 2.1.0
-**Última Atualização**: 2025-11-17
-**Status**: 🟢 Ativo
+**Version**: 3.0.0
+**Last Updated**: 2025-12-10
+**Status**: 🟢 Production-ready
 
 ---
 
 ## Visão Geral
 
-Este diretório contém **39 regras de qualidade** que garantem código limpo, manutenível e de alta qualidade em todos os projetos Arq-Kit.
+Este diretório contém **39 regras de qualidade** que garantem código limpo, manutenível e de alta qualidade em todos os projetos Documentation-First Approach.
 
 ### Filosofia
 
@@ -701,15 +701,61 @@ Total: 37/39 regras OK
 
 ---
 
-## Referências
+## 🔗 Cross-References
 
-### Internas
-- **Constitution**: `.claude/constitution.md` - Princípios fundamentais
-- **Skills**: `.claude/skills/README.md` - Workflow de 7 fases
-- **Templates**: `.claude/templates/README.md` - Templates determinísticos
-- **Main README**: `.claude/README.md` - Overview do sistema
+### Integration with Skills (7-Phase Workflow)
 
-### Externas
+| Skill | Rules Applied | Phase | Purpose |
+|-------|---------------|-------|---------|
+| **architect** | All 39 rules | 2 | Design decisions must follow rules |
+| **developer** | All 39 rules | 4 | Implementation must follow rules |
+| **gatekeeper** | All 39 rules | 4 | Validates rule compliance before completing tasks |
+| **reviewer** | All 39 rules | 5 | Reviews code for rule violations |
+| **guardian** | All 39 rules | 7 | Pre-commit validation ensures 100% compliance |
+
+**Critical Integration**:
+- **Phase 2 (Architecture)**: architect considers rules when making design decisions
+- **Phase 4 (Implementation)**: developer applies rules + gatekeeper validates
+- **Phase 5 (Review)**: reviewer checks compliance
+- **Phase 7 (Pre-commit)**: guardian blocks commit if violations found
+
+See `../skills/README.md` for complete 7-phase workflow documentation.
+
+### Integration with Commands
+
+| Command | Rules Referenced | How Used |
+|---------|------------------|----------|
+| /stack | All 39 rules | Defines rules as constraints in specs/02_constraints/ |
+| /rule | Creates custom rule | Adds project-specific rule to specs/02_constraints/patterns/ |
+| /code | All 39 rules | Implementation guided by rules |
+| /build | Testing rules (034-039) | Quality requirements reference test coverage rules |
+| /cross | Domain rules (011, 020, 024) | DDD concepts reference domain modeling rules |
+
+See `../commands/README.md` for complete command catalog.
+
+### Integration with Templates
+
+| Template | Rules Referenced | Integration |
+|----------|------------------|-------------|
+| changes/tasks.md | Task-specific rules | Each task lists applicable rules (e.g., "Apply rules 001, 010, 015") |
+| bdd/scenario.md | Validation rules | BDD scenarios validate business rules |
+| c4/component.md | SOLID rules (010-014) | Components designed following SRP, OCP, etc |
+| arc42/02_constraints.md | All 39 rules | Lists rules as technical constraints |
+| arc42/10_quality.md | Testing rules (034-039) | Quality requirements reference rules |
+
+See `../templates/README.md` for complete template catalog.
+
+---
+
+## 📖 Related Documentation
+
+- **[Main Hub](../README.md)** - Complete system overview with 7-phase workflow
+- **[Commands](../commands/README.md)** - 15 Arc42 commands
+- **[Skills](../skills/README.md)** - 9 specialized agents and 7-phase workflow
+- **[Templates](../templates/README.md)** - 20 deterministic templates (Arc42, C4, BDD, ADR)
+- **[Result: specs/](../../specs/)** - Well-documented specifications (the constitution)
+
+### External References
 - **Object Calisthenics**: Jeff Bay (ThoughtWorks Anthology)
 - **SOLID**: Robert C. Martin (Uncle Bob)
 - **Package Principles**: Robert C. Martin
@@ -718,19 +764,36 @@ Total: 37/39 regras OK
 
 ---
 
-## Próximos Passos
+## 🎓 Next Steps
 
-1. **Leia cada regra**: Explore os 39 arquivos individuais (001-039)
-2. **Configure linters**: Aplique regras no seu projeto
-3. **Integre no workflow**: Use regras nas fases 3-7
-4. **Revise código**: Valide conformidade durante code review
-5. **Automatize**: Configure pre-commit hooks
-
----
-
-**Mantido por**: Sistema de Workflow de Especificações Determinísticas v2.1.0
-**Licença**: Ver raiz do projeto
+1. **Read each rule**: Explore the 39 individual files (001-039)
+2. **Configure linters**: Apply rules in your project
+3. **Integrate into workflow**: Use rules in phases 3-7
+4. **Review code**: Validate compliance during code review
+5. **Automate**: Configure pre-commit hooks
 
 ---
 
-**Código de qualidade = Princípios aplicados consistentemente.** 🎯
+## 📜 Changelog
+
+### v3.0.0 (2025-12-10)
+- 🔗 **COMPLETE CROSS-REFERENCES**: Integration with skills, commands, templates
+- 📖 **ENHANCED DOCUMENTATION**: Clear links to all related directories
+- 🎯 **COHERENT FLOW**: Perfect navigation for developers
+- 🗺️ **WORKFLOW INTEGRATION**: Complete 7-phase workflow mapping
+
+### v2.1.0 (2025-11-17)
+- Complete reorganization into 4 categories
+- 39 rules documented with examples
+- Validation tools recommended
+
+---
+
+**Version**: 3.0.0
+**Maintained by**: Documentation-First Approach System
+**License**: MIT
+**Last Updated**: 2025-12-10
+
+---
+
+**Quality code = Principles applied consistently.** 🎯

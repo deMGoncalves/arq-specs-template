@@ -1,9 +1,0 @@
-{
-  "context": {
-    "fileName": "AGENTS.md"
-  },
-  "general": {
-    "preferredEditor": "neovim",
-    "vimMode": true
-  }
-}

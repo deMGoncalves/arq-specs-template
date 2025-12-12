@@ -1,11 +1,11 @@
-# 10. Quality Requirements
+# 10. Requisitos de Qualidade
 
-**Template ID**: TPL-ARC42-10
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 10 (Quality Requirements)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-10
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 10 (Requisitos de Qualidade)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
@@ -13,63 +13,63 @@
 
 ---
 
-## Quality Attributes
+## Atributos de Qualidade
 
 ### Performance
-- **Response Time**: p95 < 200ms, p99 < 500ms
-- **Throughput**: 10,000 req/s
-- **Database Queries**: < 100ms (p95)
+- **Tempo de Resposta**: p95 < 200ms, p99 < 500ms
+- **Throughput**: 10.000 req/s
+- **Queries de Banco de Dados**: < 100ms (p95)
 
-### Scalability
+### Escalabilidade
 - **Horizontal**: Auto-scale (CPU > 70%)
-- **Vertical**: Up to 8 vCPU per container
-- **Concurrent Users**: 100,000
+- **Vertical**: Até 8 vCPU por container
+- **Usuários Concorrentes**: 100.000
 
-### Availability
-- **SLA**: 99.9% uptime (~8.7h downtime/year)
-- **RTO**: < 1 hour
-- **RPO**: < 5 minutes
+### Disponibilidade
+- **SLA**: 99,9% uptime (~8,7h downtime/ano)
+- **RTO**: < 1 hora
+- **RPO**: < 5 minutos
 
-### Security
-- **OWASP Top 10**: All mitigated
-- **Penetration Test**: Annual
-- **Compliance**: GDPR, PCI-DSS
+### Segurança
+- **OWASP Top 10**: Todos mitigados
+- **Teste de Penetração**: Anual
+- **Conformidade**: GDPR, PCI-DSS
 
-### Maintainability
-- **Code Coverage**: > 80%
-- **Deployment Frequency**: Daily
-- **Lead Time**: < 4 hours
-
----
-
-## Quality Scenarios
-
-### Scenario 1: Peak Traffic
-**Condition**: Black Friday (10x normal traffic)
-**Response**: Auto-scale from 10 to 100 instances
-**Measure**: Response time remains < 500ms (p99)
-
-### Scenario 2: Database Failover
-**Condition**: Primary database fails
-**Response**: Automatic failover to replica
-**Measure**: Downtime < 2 minutes
-
-### Scenario 3: Security Breach Attempt
-**Condition**: SQL injection attack
-**Response**: Input validation blocks attack
-**Measure**: No data breach, attack logged
+### Manutenibilidade
+- **Cobertura de Código**: > 80%
+- **Frequência de Deploy**: Diária
+- **Lead Time**: < 4 horas
 
 ---
 
-## Quality Metrics
+## Cenários de Qualidade
 
-| Metric | Current | Target | Actual |
-|--------|---------|--------|--------|
-| Response Time (p95) | 250ms | < 200ms | - |
-| Uptime | 99.5% | 99.9% | - |
-| Code Coverage | 75% | 80% | - |
-| Security Vulnerabilities | 5 | 0 | - |
+### Cenário 1: Pico de Tráfego
+**Condição**: Black Friday (10x tráfego normal)
+**Resposta**: Auto-scale de 10 para 100 instâncias
+**Medida**: Tempo de resposta permanece < 500ms (p99)
+
+### Cenário 2: Failover de Banco de Dados
+**Condição**: Banco de dados primário falha
+**Resposta**: Failover automático para réplica
+**Medida**: Downtime < 2 minutos
+
+### Cenário 3: Tentativa de Violação de Segurança
+**Condição**: Ataque de SQL injection
+**Resposta**: Validação de input bloqueia ataque
+**Medida**: Sem violação de dados, ataque registrado em log
 
 ---
 
-**Previous**: [09. Decisions](09_decisions.md) | **Next**: [11. Risks](11_risks.md)
+## Métricas de Qualidade
+
+| Métrica | Atual | Meta | Real |
+|---------|-------|------|------|
+| Tempo de Resposta (p95) | 250ms | < 200ms | - |
+| Uptime | 99,5% | 99,9% | - |
+| Cobertura de Código | 75% | 80% | - |
+| Vulnerabilidades de Segurança | 5 | 0 | - |
+
+---
+
+**Anterior**: [09. Decisions](09_decisions.md) | **Próximo**: [11. Risks](11_risks.md)

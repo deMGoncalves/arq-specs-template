@@ -4,6 +4,163 @@ description: Cria e detalha uma entidade externa (Pessoa ou Sistema) que interag
 
 # Actor
 
+**ID**: CMD-003
+**Categoria**: 📖 Vision
+**Prioridade**: 🟡 P1 (Importante)
+**Fase**: 1-3
+**Arc42 Chapters**: 3, 12
+
+---
+
+## 🎯 O que Faz
+
+Documenta atores externos que interagem com o sistema:
+- **Atores humanos** (personas/usuários): ACT-XXX
+- **Sistemas externos** (APIs/integrações): SYS-XXX
+
+Cria arquivo dedicado com objetivos, características, interações, métricas e segurança. Atualiza contexto e glossário automaticamente.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Quando visão (CMD-001) lista atores mas não os detalha
+- Antes de criar cenários (CMD-008) que envolvem atores específicos
+
+### Recomendado
+- Para sistemas com múltiplos perfis de usuário
+- Quando integrações externas têm SLAs/contratos
+- Para documentar permissões e responsabilidades
+
+### Opcional
+- Sistemas com único tipo de usuário genérico
+- Integrações triviais sem SLA
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-001 (vision)**: [Recomendado] Lista atores inicialmente
+
+### Arquivos Necessários
+- `specs/03_context/003_context-and-scope.md` (atualizado pelo CMD-001)
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-004 (container)**: Criar serviços que atendem esses atores
+- **CMD-008 (feature)**: Criar cenários onde atores interagem
+
+### Arquivos Criados
+- `specs/03_context/actors/ACT-[NNN]_[slug].md` (humanos)
+- `specs/03_context/systems/SYS-[NNN]_[slug].md` (externos)
+- `specs/03_context/003_context-and-scope.md` (atualizado)
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Arquivos | Exemplo |
+|--------------|-------|----------|---------|
+| **LOW** | 3-5 min | 1-2 | Usuário comum + Admin |
+| **MEDIUM** | 5-10 min | 3-5 | Multi-tenant com roles |
+| **HIGH** | 10-20 min | 6-10 | B2B com integrações complexas |
+
+## 💡 Exemplos
+
+### Exemplo 1: Ator Humano (LOW)
+
+**Input**:
+```bash
+/actor Médico - profissional que acessa prontuários, prescreve medicamentos e agenda consultas
+```
+
+**Output**:
+```markdown
+- specs/03_context/actors/ACT-003_medico.md
+  → Objetivos: Acesso rápido a prontuários, prescrever com segurança
+  → Características: 200 médicos, 50-100 acessos/dia cada
+  → Interações: Consulta prontuário, cria prescrição, agenda consulta
+  → Métricas: Tempo de acesso <2s, disponibilidade 99.9%
+```
+
+### Exemplo 2: Sistema Externo (MEDIUM)
+
+**Input**:
+```bash
+/actor Sistema Stripe - gateway de pagamento que processa transações via webhook e retorna confirmações em tempo real
+```
+
+**Output**:
+```markdown
+- specs/03_context/systems/SYS-002_stripe-gateway.md
+  → Tipo: API REST + Webhooks
+  → Integração: POST /v1/charges (criar cobrança)
+  → Dados trocados: card_token, amount, currency → charge_id, status
+  → Autenticação: API Key (sk_live_...)
+  → SLA: 99.99% uptime, latência P95 <500ms
+  → Dependências: CNT-003 (payment-service)
+```
+
+### Exemplo 3: Multi-perfil (HIGH)
+
+**Input**:
+```bash
+/actor Sistema B2B com 4 perfis: Comprador (realiza pedidos), Vendedor (gerencia catálogo), Admin (configura sistema), Financeiro (aprova pagamentos). Integração com ERP SAP via BAPI calls.
+```
+
+**Output**:
+```markdown
+4 atores humanos:
+- ACT-004_comprador-b2b.md
+- ACT-005_vendedor.md
+- ACT-006_admin-sistema.md
+- ACT-007_financeiro.md
+
+1 sistema externo:
+- SYS-003_erp-sap.md (BAPI RFC calls)
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "É ator ou sistema externo?"
+
+**Causa**: Briefing ambíguo
+
+**Solução**: Regra de decisão:
+- **Ator humano**: Tem objetivos, necessidades, perfil, toma decisões
+- **Sistema externo**: API, protocolo, SLA, sem julgamento humano
+- **Ambos**: Cliente usa app (ACT) E app integra com CRM do cliente (SYS)
+
+### Problema 2: "IDs duplicados"
+
+**Sintoma**: ACT-001 já existe
+
+**Solução**:
+- Se mesmo ator: Atualizar arquivo existente
+- Se ator diferente: Usar próximo ID disponível (ACT-002, ACT-003...)
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-001 (vision)**: [Pré-requisito] Lista atores inicialmente
+- **CMD-004 (container)**: [Pós-ação] Containers atendem atores
+- **CMD-008 (feature)**: [Pós-ação] Cenários envolvem atores
+
+### Skills
+- **SKL-001 (analyst)**: Invoca este command na Phase 1/3
+
+### Rules
+- Não aplicável (apenas documentação)
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

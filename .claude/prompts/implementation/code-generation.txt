@@ -1,0 +1,148 @@
+Você é o agente developer na Fase 4 (Implementation). Implemente a seguinte tarefa:
+
+TAREFA: {{TASK_ID}} - {{TASK_NAME}}
+SPEC: {{SPEC_REFERENCE}}
+LOC: {{ESTIMATED_LOC}}
+
+Sua tarefa:
+1. Ler critérios de aceitação da tarefa
+2. Carregar apenas contexto relevante (<500 linhas)
+3. Implementar seguindo DDD Tactical Co-Located
+4. Escrever testes (abordagem TDD)
+5. Aplicar todas as 39 regras de qualidade
+6. Garantir cobertura de cenários BDD
+
+Siga este checklist:
+
+## Checklist de Implementação
+
+### 1. Carregamento de Contexto
+Carregar APENAS:
+- [ ] specs/[capitulo]/[secao-relevante].md
+- [ ] changes/[id]/tasks.md (ESTA tarefa apenas)
+- [ ] Implementações de tarefas anteriores (se houver dependências)
+- [ ] .claude/rules/ (regras aplicáveis)
+
+NÃO carregar:
+- [ ] spec.md completo (>500 linhas)
+- [ ] Tarefas não relacionadas
+- [ ] Capítulos não relacionados
+
+### 2. Estrutura DDD Tactical
+```
+src/[contexto-delimitado]/[container]/[componente]/
+├── index.ts              # Aggregate root (exports)
+├── criar-[entidade].ts   # Factory
+├── [Entidade].ts         # Entity (com ID)
+├── [ValueObject].ts      # Value Object (imutável)
+├── [acao]-[entidade].ts  # Use Case
+└── [componente].spec.ts  # Testes
+```
+
+### 3. Regras de Qualidade (Críticas)
+- [ ] Regra 001: Máx. 1 nível de indentação
+- [ ] Regra 002: Sem cláusula ELSE
+- [ ] Regra 003: Encapsular primitivos (Email, CPF, etc.)
+- [ ] Regra 004: Coleções como primeira classe
+- [ ] Regra 010: Princípio da Responsabilidade Única
+- [ ] Regra 027: Tratamento de erros de domínio
+- [ ] Regra 030: Sem funções inseguras (eval, innerHTML)
+- [ ] Regra 032: Cobertura de testes ≥80%
+
+### 4. Test-First (TDD)
+```typescript
+describe('{{COMPONENT_NAME}}', () => {
+  describe('{{USE_CASE}}', () => {
+    it('should {{comportamento esperado}}', () => {
+      // Given (Arrange)
+      const [precondições]
+
+      // When (Act)
+      const result = [ação]
+
+      // Then (Assert)
+      expect(result).toEqual([esperado])
+    });
+
+    it('should throw {{ERROR}} when {{condição}}', () => {
+      // Given
+      const [condições inválidas]
+
+      // When/Then
+      expect(() => [ação]).toThrow({{ERROR}})
+    });
+  });
+});
+```
+
+### 5. Mapeamento BDD
+Mapear para cenário:
+```gherkin
+Scenario: {{SCENARIO_NAME}}
+  Given {{precondição}}  # ← Arrange
+  When {{ação}}          # ← Act
+  Then {{resultado}}     # ← Assert
+```
+
+### 6. Template de Implementação
+```typescript
+// {{nome-arquivo}}.ts
+
+import type { {{Types}} } from './types';
+
+/**
+ * {{Descrição breve}}
+ *
+ * @param {{param}} - {{descrição}}
+ * @returns {{tipo de retorno}}
+ * @throws {{ErrorType}} when {{condição}}
+ */
+export function {{functionName}}(
+  {{param}}: {{Type}}
+): {{ReturnType}} {
+  // Validação (Regra 027: Erros de domínio)
+  if ({{condição inválida}}) {
+    throw new {{DomainError}}('{{mensagem clara}}');
+  }
+
+  // Lógica de negócio (Regra 001: Máx. 1 indentação)
+  const result = {{implementação}};
+
+  return result;
+}
+```
+
+### 7. Validação Antes de Completar
+- [ ] Todos os critérios de aceitação atendidos
+- [ ] Testes passam (npm test)
+- [ ] Cobertura ≥80% (npm run coverage)
+- [ ] Linter limpo (npm run lint)
+- [ ] Sem comentários TODO
+- [ ] Cenário BDD totalmente coberto
+- [ ] Violações de regras: 0
+
+### 8. Formato de Output
+```markdown
+## Implementação: {{TASK_ID}}
+
+### Arquivos Criados/Modificados
+- `{{caminho arquivo}}` - {{propósito}}
+- `{{caminho arquivo}}` - {{propósito}}
+
+### Testes Adicionados
+- `{{arquivo teste}}` - {{cobertura}}
+
+### Cobertura BDD
+- ✅ Given: {{coberto}}
+- ✅ When: {{coberto}}
+- ✅ Then: {{coberto}}
+
+### Métricas de Qualidade
+- LOC: {{real}} (estimado {{estimado}})
+- Cobertura: {{porcentagem}}%
+- Complexidade: {{pontuação}}
+- Violações de Regras: 0
+
+### Status
+✅ Pronto para validação do gatekeeper
+```

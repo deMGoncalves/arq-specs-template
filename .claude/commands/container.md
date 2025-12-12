@@ -4,6 +4,148 @@ description: Cria ou detalha um bloco de construção de alto nível (ex: API we
 
 # Container
 
+**ID**: CMD-004
+**Categoria**: 🔨 Building
+**Prioridade**: 🔴 P0 (Crítico)
+**Fase**: 3
+**Arc42 Chapters**: 5, 12
+
+---
+
+## 🎯 O que Faz
+
+Documenta **containers** (C4 Model Level 2) - unidades de deployment executáveis:
+- Web apps, APIs REST/GraphQL, Workers, CLIs
+- Databases (PostgreSQL, MongoDB, Redis)
+- Message queues (RabbitMQ, Kafka)
+- Serviços externos gerenciados
+
+Cada container recebe ID único (CNT-XXX), tecnologia, responsabilidades, interfaces e dependências.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Após definir stack (CMD-002)
+- Antes de criar componentes (CMD-005)
+- Antes de implementar código (CMD-013)
+
+### Recomendado
+- Para cada serviço/aplicação independente
+- Quando arquitetura tem múltiplos processos
+- Para documentar boundaries de deployment
+
+### Opcional
+- Sistemas monolíticos simples (1 container apenas)
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-001 (vision)**: Fornece contexto
+- **CMD-002 (stack)**: Define tecnologias permitidas
+
+### Arquivos Necessários
+- `specs/04_solution-strategy/004_solution-strategy.md`
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-005 (component)**: Detalhar módulos internos do container
+- **CMD-008 (feature)**: Criar cenários que usam containers
+- **CMD-010 (build)**: Definir deployment dos containers
+
+### Arquivos Criados
+- `specs/05_building-blocks/containers/CNT-[NNN]_[slug].md`
+- `specs/05_building-blocks/005_building-block-view.md` (atualizado)
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Containers | Exemplo |
+|--------------|-------|------------|---------|
+| **LOW** | 5-10 min | 1-3 | Monolito + DB |
+| **MEDIUM** | 10-20 min | 4-8 | Microserviços básicos |
+| **HIGH** | 20-40 min | 9-20 | Arquitetura distribuída |
+
+## 💡 Exemplos
+
+### Exemplo 1: Monolito (LOW)
+
+**Input**:
+```bash
+/container API REST em Node.js 20 + Express que serve frontend React, conecta PostgreSQL 15 e Redis 7 para cache
+```
+
+**Output**:
+```markdown
+- CNT-001_api-rest.md (Node.js + Express + React SSR)
+- CNT-002_postgresql.md (Database)
+- CNT-003_redis.md (Cache)
+```
+
+### Exemplo 2: Microserviços (MEDIUM)
+
+**Input**:
+```bash
+/container Arquitetura com API Gateway (Node), Auth Service (Node + JWT), Product Service (Node), Payment Service (Python + Stripe), PostgreSQL, Redis, RabbitMQ
+```
+
+**Output**:
+```markdown
+- CNT-001_api-gateway.md (Node.js, roteamento, rate limiting)
+- CNT-002_auth-service.md (JWT generation/validation)
+- CNT-003_product-service.md (CRUD produtos)
+- CNT-004_payment-service.md (Python, integra Stripe)
+- CNT-005_postgresql.md
+- CNT-006_redis.md
+- CNT-007_rabbitmq.md
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Container vs Component?"
+
+**Causa**: Confusão entre níveis C4
+
+**Solução**:
+- **Container**: Processo separado, deployável independentemente (ex: API, Worker, DB)
+- **Component**: Módulo de código dentro de um container (ex: UserService, ProductRepository)
+
+### Problema 2: "Quantos containers criar?"
+
+**Causa**: Over-engineering ou under-engineering
+
+**Solução**: Regra prática:
+- **1 container**: Monolito simples (<50 KLOC)
+- **3-5 containers**: Bounded contexts claros
+- **6-10 containers**: Microserviços
+- **>10 containers**: Apenas se justificado (escala, times, linguagens)
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-002 (stack)**: [Pré-requisito] Define tecnologias
+- **CMD-005 (component)**: [Pós-ação] Detalha internamente containers
+- **CMD-008 (feature)**: [Pós-ação] Cenários usam containers
+- **CMD-010 (build)**: [Pós-ação] Deploy de containers
+
+### Skills
+- **SKL-001 (analyst)**: Invoca na Phase 3
+- **SKL-002 (architect)**: Invoca na Phase 2 (HIGH complexity)
+
+### Rules
+- Não aplicável (apenas documentação)
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

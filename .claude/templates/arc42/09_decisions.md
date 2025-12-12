@@ -1,56 +1,56 @@
-# 09. Architectural Decisions
+# 09. Decisões Arquiteturais
 
-**Template ID**: TPL-ARC42-09
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 9 (Architectural Decisions)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-09
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 9 (Decisões Arquiteturais)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
 **ID**: ARC42-09
 
-This chapter contains links to **ADRs** (Architectural Decision Records).
+Este capítulo contém links para **ADRs** (Architectural Decision Records).
 
-Use separate files for each decision:
-- `specs/09_decisions/adr/ADR-001_[name].md`
+Use arquivos separados para cada decisão:
+- `specs/09_decisions/adr/ADR-001_[nome].md`
 
-See template: [ADR Template](../../adr/decision.md)
-
----
-
-## ADR List
-
-| ID | Title | Status | Date |
-|----|-------|--------|------|
-| ADR-001 | Use PostgreSQL | Accepted | 2025-10-01 |
-| ADR-002 | Use Modular Monolith | Accepted | 2025-10-05 |
-| ADR-003 | Use Auth0 for Authentication | Accepted | 2025-10-10 |
-| ADR-004 | Use Stripe for Payments | Accepted | 2025-10-12 |
-| ADR-005 | Use Redis for Caching | Accepted | 2025-10-15 |
-
-**Details**: See `specs/09_decisions/adr/ADR-*`
+Veja template: [Template ADR](../../adr/decision.md)
 
 ---
 
-## Decision Log (Summary)
+## Lista de ADRs
 
-### ADR-001: Use PostgreSQL
-**Decision**: PostgreSQL as primary database
-**Rationale**: ACID, team expertise, JSON support
-**Trade-offs**: ❌ Horizontal scaling complexity
+| ID | Título | Status | Data |
+|----|--------|--------|------|
+| ADR-001 | Usar PostgreSQL | Aceito | 2025-10-01 |
+| ADR-002 | Usar Monolito Modular | Aceito | 2025-10-05 |
+| ADR-003 | Usar Auth0 para Autenticação | Aceito | 2025-10-10 |
+| ADR-004 | Usar Stripe para Pagamentos | Aceito | 2025-10-12 |
+| ADR-005 | Usar Redis para Caching | Aceito | 2025-10-15 |
 
-### ADR-002: Use Modular Monolith
-**Decision**: Start with modular monolith
-**Rationale**: Small team, simplicity
-**Trade-offs**: ❌ Limited independent scalability
+**Detalhes**: Veja `specs/09_decisions/adr/ADR-*`
 
-### ADR-003: Use Auth0
-**Decision**: Auth0 for authentication
-**Rationale**: Security, compliance, time-to-market
+---
+
+## Log de Decisões (Resumo)
+
+### ADR-001: Usar PostgreSQL
+**Decisão**: PostgreSQL como banco de dados primário
+**Fundamentação**: ACID, expertise do time, suporte JSON
+**Trade-offs**: ❌ Complexidade de escalabilidade horizontal
+
+### ADR-002: Usar Monolito Modular
+**Decisão**: Começar com monolito modular
+**Fundamentação**: Time pequeno, simplicidade
+**Trade-offs**: ❌ Escalabilidade independente limitada
+
+### ADR-003: Usar Auth0
+**Decisão**: Auth0 para autenticação
+**Fundamentação**: Segurança, conformidade, time-to-market
 **Trade-offs**: ❌ Vendor lock-in
 
 ---
 
-**Previous**: [08. Crosscutting](08_crosscutting.md) | **Next**: [10. Quality](10_quality.md)
+**Anterior**: [08. Crosscutting](08_crosscutting.md) | **Próximo**: [10. Quality](10_quality.md)

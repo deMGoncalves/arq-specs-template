@@ -1,11 +1,11 @@
-# 08. Crosscutting Concepts
+# 08. Conceitos Transversais
 
-**Template ID**: TPL-ARC42-08
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 8 (Crosscutting Concepts)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-08
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 8 (Conceitos Transversais)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
@@ -13,31 +13,31 @@
 
 ---
 
-## Security
+## Segurança
 
-### Authentication
+### Autenticação
 
-- **Method**: OAuth 2.0 (Auth0)
-- **Tokens**: JWT, 2h TTL, refresh tokens
-- **Storage**: HTTP-only cookies (web), secure storage (mobile)
+- **Método**: OAuth 2.0 (Auth0)
+- **Tokens**: JWT, TTL 2h, refresh tokens
+- **Armazenamento**: Cookies HTTP-only (web), armazenamento seguro (mobile)
 
-### Authorization
+### Autorização
 
-- **Model**: RBAC (Role-Based Access Control)
-- **Roles**: Guest, Customer, Admin
-- **Implementation**: Middleware checks JWT claims
+- **Modelo**: RBAC (Role-Based Access Control)
+- **Papéis**: Guest, Customer, Admin
+- **Implementação**: Middleware verifica claims JWT
 
-### Encryption
+### Criptografia
 
-- **In-Transit**: TLS 1.3
-- **At-Rest**: AES-256
+- **Em Trânsito**: TLS 1.3
+- **Em Repouso**: AES-256
 - **Secrets**: AWS Secrets Manager
 
 ---
 
-## Logging & Observability
+## Logging & Observabilidade
 
-### Structured Logging
+### Logging Estruturado
 
 ```json
 {
@@ -50,23 +50,23 @@
 }
 ```
 
-### Log Levels
+### Níveis de Log
 
-- **ERROR**: System errors (500s)
-- **WARN**: Business errors (400s), degraded performance
-- **INFO**: Important business events
-- **DEBUG**: Detailed execution (dev only)
+- **ERROR**: Erros do sistema (500s)
+- **WARN**: Erros de negócio (400s), performance degradada
+- **INFO**: Eventos de negócio importantes
+- **DEBUG**: Execução detalhada (apenas dev)
 
-### Correlation
+### Correlação
 
-- **X-Request-ID**: Trace requests across services
-- **Propagation**: Pass in all internal calls
+- **X-Request-ID**: Rastrear requisições entre serviços
+- **Propagação**: Passar em todas as chamadas internas
 
 ---
 
-## Error Handling
+## Tratamento de Erros
 
-### Error Response Format (RFC 7807)
+### Formato de Resposta de Erro (RFC 7807)
 
 ```json
 {
@@ -79,25 +79,25 @@
 }
 ```
 
-### Error Codes
+### Códigos de Erro
 
-- **AUTH_001**: Invalid credentials
-- **AUTH_002**: Token expired
-- **PRODUCT_001**: Product not found
-- **CART_001**: Cart empty
-- **PAYMENT_001**: Payment failed
+- **AUTH_001**: Credenciais inválidas
+- **AUTH_002**: Token expirado
+- **PRODUCT_001**: Produto não encontrado
+- **CART_001**: Carrinho vazio
+- **PAYMENT_001**: Pagamento falhou
 
 ---
 
-## Data Validation
+## Validação de Dados
 
-### Input Validation
+### Validação de Input
 
-- **Library**: Joi (Node.js)
-- **Validation**: All API inputs
-- **Fail-fast**: Return 400 immediately
+- **Biblioteca**: Joi (Node.js)
+- **Validação**: Todos os inputs de API
+- **Fail-fast**: Retornar 400 imediatamente
 
-### Example
+### Exemplo
 
 ```typescript
 const schema = Joi.object({
@@ -108,73 +108,73 @@ const schema = Joi.object({
 
 ---
 
-## Transaction Management
+## Gerenciamento de Transações
 
-### Database Transactions
+### Transações de Banco de Dados
 
-- **Level**: Read Committed
-- **Scope**: Use cases (application layer)
-- **Rollback**: On any error
+- **Nível**: Read Committed
+- **Escopo**: Casos de uso (camada de aplicação)
+- **Rollback**: Em qualquer erro
 
-### Distributed Transactions
+### Transações Distribuídas
 
-- **Pattern**: Saga (choreography)
-- **Compensation**: Compensating transactions
-- **Example**: Order → Payment (if payment fails, cancel order)
-
----
-
-## Caching Strategy
-
-### Layers
-
-1. **CDN**: Static assets (CloudFront, 24h)
-2. **Application**: API responses (Redis, 5min)
-3. **Database**: Query results (Redis, 1h)
-
-### Cache Invalidation
-
-- **TTL**: Time-based expiration
-- **Events**: Explicit invalidation on updates
+- **Padrão**: Saga (coreografia)
+- **Compensação**: Transações compensatórias
+- **Exemplo**: Pedido → Pagamento (se pagamento falhar, cancelar pedido)
 
 ---
 
-## Internationalization (i18n)
+## Estratégia de Caching
 
-### Supported Languages
+### Camadas
 
-- English (en-US) - Default
-- Portuguese (pt-BR)
-- Spanish (es-ES)
+1. **CDN**: Assets estáticos (CloudFront, 24h)
+2. **Aplicação**: Respostas de API (Redis, 5min)
+3. **Banco de Dados**: Resultados de query (Redis, 1h)
 
-### Implementation
+### Invalidação de Cache
 
-- **Library**: i18next
-- **Format**: JSON files per language
-- **Detection**: Accept-Language header
+- **TTL**: Expiração baseada em tempo
+- **Eventos**: Invalidação explícita em atualizações
 
 ---
 
-## Testing Strategy
+## Internacionalização (i18n)
 
-### Test Pyramid
+### Idiomas Suportados
+
+- Inglês (en-US) - Padrão
+- Português (pt-BR)
+- Espanhol (es-ES)
+
+### Implementação
+
+- **Biblioteca**: i18next
+- **Formato**: Arquivos JSON por idioma
+- **Detecção**: Header Accept-Language
+
+---
+
+## Estratégia de Testes
+
+### Pirâmide de Testes
 
 ```
         /  \
-       /E2E \      10% - End-to-end (critical paths)
+       /E2E \      10% - End-to-end (caminhos críticos)
       /------\
-     /Integr. \    20% - Integration (API, DB)
+     /Integr. \    20% - Integração (API, BD)
     /----------\
-   /   Unit     \  70% - Unit (business logic)
+   /   Unit     \  70% - Unitários (lógica de negócio)
   /--------------\
 ```
 
-### Coverage Requirements
+### Requisitos de Cobertura
 
-- **Unit**: 80% minimum
-- **Integration**: Critical paths
-- **E2E**: Happy paths
+- **Unitários**: 80% mínimo
+- **Integração**: Caminhos críticos
+- **E2E**: Caminhos felizes
 
 ---
 
-**Previous**: [07. Deployment](07_deployment.md) | **Next**: [09. Decisions](09_decisions.md)
+**Anterior**: [07. Deployment](07_deployment.md) | **Próximo**: [09. Decisions](09_decisions.md)

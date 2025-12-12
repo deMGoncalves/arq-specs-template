@@ -1,6 +1,6 @@
 # Tester Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 5. Review (Testing Validation)
 **Responsibility**: Validate test quality, coverage, and correctness
 
@@ -22,6 +22,29 @@ O Tester é responsável pela **Phase 5: Testing Validation** (alongside reviewe
 
 ### Works with (parallel/collaborative):
 - **reviewer** - Reviews code quality alongside tester (Phase 5)
+
+---
+
+## Tools & References
+
+### Commands Used
+- **Phase 5 (Testing)**:
+  - `/feature` - References BDD scenarios for test validation
+  - `/flow` - References alternative flows for edge case tests
+  - `/code` - Validates test implementation
+
+### Templates Created
+- **Phase 5 (Testing)**: None (validates tests, creates test reports)
+
+### Rules Applied
+- **Testing Rules**:
+  - **Rule 032** (Test coverage ≥80%): PRIMARY validation
+  - **Rule 028** (Async exception handling): Validates error handling tests
+  - **Rule 027** (Domain error handling): Validates domain error tests
+  - **Rule 021** (DRY): Ensures tests don't duplicate logic
+  - **Rule 022** (KISS): Ensures tests are simple and clear
+
+- Tester validates BDD scenarios map to tests 1:1
 
 ---
 

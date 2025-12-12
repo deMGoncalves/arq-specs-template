@@ -1,433 +1,433 @@
-# ADR-[XXX]: [Decision Title]
+# ADR-[XXX]: [Título da Decisão]
 
-**Template ID**: TPL-ADR-001
-**Version**: 2.0.0
-**Category**: ADR
-**Used By**: architect (Phase 2: Architecture), analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
-
----
-
-**Status**: [Proposed | Accepted | Deprecated | Superseded]
-**Date**: [YYYY-MM-DD]
-**Deciders**: [Names or roles of decision makers]
-**Supersedes**: [ADR-XXX] (if applicable)
-**Superseded by**: [ADR-XXX] (if deprecated)
+**ID do Template**: TPL-ADR-001
+**Versão**: 2.0.0
+**Categoria**: ADR
+**Usado Por**: architect (Fase 2: Arquitetura), analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
-## Context
-
-What is the issue we're trying to solve? What forces are at play?
-
-**Include**:
-- Problem statement
-- Current situation
-- Constraints
-- Requirements
-- Context that influences the decision
-
-**Example**:
-
-We need to choose a primary database for our e-commerce platform.
-
-**Requirements**:
-- ACID transactions (critical for payments and inventory)
-- Complex queries (joins, aggregations for reports)
-- JSON data support (flexible product attributes)
-- Strong consistency (inventory must be accurate)
-- Scalability to 100K users
-- Team has experience with relational databases
-- Budget: $5K/month max for database
-
-**Constraints**:
-- Must deploy on AWS (existing infrastructure)
-- Must support TypeScript/Node.js (team expertise)
-- Must be production-ready within 3 months
-- No MongoDB (company policy: no document DBs for transactional data)
+**Status**: [Proposto | Aceito | Depreciado | Substituído]
+**Data**: [YYYY-MM-DD]
+**Decisores**: [Nomes ou papéis dos tomadores de decisão]
+**Substitui**: [ADR-XXX] (se aplicável)
+**Substituído por**: [ADR-XXX] (se depreciado)
 
 ---
 
-## Decision
+## Contexto
 
-What is the change we're making?
+Qual é o problema que estamos tentando resolver? Quais forças estão em jogo?
 
-**Format**: "We will [decision]"
+**Incluir**:
+- Declaração do problema
+- Situação atual
+- Restrições
+- Requisitos
+- Contexto que influencia a decisão
 
-**Example**:
+**Exemplo**:
 
-We will use **PostgreSQL 14+** as our primary database.
+Precisamos escolher um banco de dados primário para nossa plataforma de e-commerce.
 
----
+**Requisitos**:
+- Transações ACID (crítico para pagamentos e inventário)
+- Consultas complexas (joins, agregações para relatórios)
+- Suporte a dados JSON (atributos flexíveis de produto)
+- Consistência forte (inventário deve ser preciso)
+- Escalabilidade para 100K usuários
+- Time tem experiência com bancos de dados relacionais
+- Orçamento: máx $5K/mês para banco de dados
 
-## Rationale
-
-Why did we choose this option?
-
-**Include**:
-- Reasons for the decision
-- Why this solution is better than alternatives
-- How it addresses the context/problem
-
-**Example**:
-
-**PostgreSQL is the best choice because**:
-
-1. **ACID Compliance**: Fully ACID compliant, critical for financial transactions
-2. **JSON Support**: Native JSONB type for flexible product attributes
-3. **Team Expertise**: Team has 3+ years experience with PostgreSQL
-4. **Rich Ecosystem**: Mature ORMs (TypeORM, Prisma), monitoring tools (pg_stat_statements)
-5. **Performance**: Fast enough for our scale (10K req/s tested)
-6. **Cost**: AWS RDS pricing ~$300/month for our workload (well under budget)
-7. **Reliability**: Battle-tested, 20+ years of production use
-8. **Open Source**: No vendor lock-in, community support
+**Restrições**:
+- Deve deployar na AWS (infraestrutura existente)
+- Deve suportar TypeScript/Node.js (expertise do time)
+- Deve estar pronto para produção em 3 meses
+- Sem MongoDB (política da empresa: sem DBs de documento para dados transacionais)
 
 ---
 
-## Alternatives Considered
+## Decisão
 
-What other options did we consider? Why were they rejected?
+Qual é a mudança que estamos fazendo?
 
-### Alternative 1: [Option]
+**Formato**: "Nós iremos [decisão]"
 
-**Pros**:
-- [Pro 1]
-- [Pro 2]
+**Exemplo**:
 
-**Cons**:
-- [Con 1]
-- [Con 2]
-
-**Why Rejected**: [Reason]
+Nós iremos usar **PostgreSQL 14+** como nosso banco de dados primário.
 
 ---
 
-### Alternative 2: [Option]
+## Fundamentação
 
-**Pros**:
-- [Pro 1]
-- [Pro 2]
+Por que escolhemos esta opção?
 
-**Cons**:
-- [Con 1]
-- [Con 2]
+**Incluir**:
+- Razões para a decisão
+- Por que esta solução é melhor que alternativas
+- Como ela endereça o contexto/problema
 
-**Why Rejected**: [Reason]
+**Exemplo**:
 
----
+**PostgreSQL é a melhor escolha porque**:
 
-**Example**:
-
-### Alternative 1: MySQL
-
-**Pros**:
-- Similar to PostgreSQL (relational, ACID)
-- Team has some experience
-- Wide adoption
-- AWS RDS support
-
-**Cons**:
-- Less feature-rich than PostgreSQL (JSON support inferior)
-- Some quirks with strict mode and default values
-- Less powerful query optimizer
-
-**Why Rejected**: PostgreSQL has better JSON support and more powerful features. No compelling reason to choose MySQL over PostgreSQL.
+1. **Conformidade ACID**: Totalmente compatível com ACID, crítico para transações financeiras
+2. **Suporte JSON**: Tipo JSONB nativo para atributos flexíveis de produto
+3. **Expertise do Time**: Time tem 3+ anos de experiência com PostgreSQL
+4. **Ecossistema Rico**: ORMs maduros (TypeORM, Prisma), ferramentas de monitoramento (pg_stat_statements)
+5. **Performance**: Rápido o suficiente para nossa escala (10K req/s testado)
+6. **Custo**: Preço AWS RDS ~$300/mês para nossa carga de trabalho (bem abaixo do orçamento)
+7. **Confiabilidade**: Testado em batalha, 20+ anos de uso em produção
+8. **Open Source**: Sem vendor lock-in, suporte da comunidade
 
 ---
 
-### Alternative 2: MongoDB
+## Alternativas Consideradas
 
-**Pros**:
-- Flexible schema (good for product catalog)
-- Horizontal scaling built-in
-- Popular, large ecosystem
+Quais outras opções consideramos? Por que foram rejeitadas?
 
-**Cons**:
-- No ACID transactions (until v4, still limited)
-- Eventual consistency (not acceptable for inventory)
-- Team has zero experience
-- Company policy: no document DBs for transactional data
+### Alternativa 1: [Opção]
 
-**Why Rejected**: Lack of strong consistency and ACID guarantees make it unsuitable for transactional data (payments, inventory). Company policy also forbids it.
+**Prós**:
+- [Pró 1]
+- [Pró 2]
 
----
+**Contras**:
+- [Contra 1]
+- [Contra 2]
 
-### Alternative 3: DynamoDB
-
-**Pros**:
-- Fully managed (no ops)
-- Horizontal scaling automatic
-- AWS native (good integration)
-- Pay-per-use pricing
-
-**Cons**:
-- NoSQL (complex queries difficult)
-- No joins (need multiple queries)
-- Vendor lock-in (AWS-specific)
-- Team has zero experience
-- Cost unpredictable at scale
-
-**Why Rejected**: Complex queries (reports, aggregations) are core requirement. DynamoDB makes this very difficult. Also, vendor lock-in is concerning.
+**Por que Rejeitada**: [Razão]
 
 ---
 
-### Alternative 4: CockroachDB
+### Alternativa 2: [Opção]
 
-**Pros**:
-- PostgreSQL-compatible
-- Distributed (horizontal scaling built-in)
-- ACID + strong consistency
-- Multi-region support
+**Prós**:
+- [Pró 1]
+- [Pró 2]
 
-**Cons**:
-- More complex to operate
-- Higher cost (~3x PostgreSQL)
-- Overkill for current scale (100K users)
-- Team has zero experience
+**Contras**:
+- [Contra 1]
+- [Contra 2]
 
-**Why Rejected**: Excellent technology but overkill for our current needs. Can migrate later if we need global distribution. Cost is 3x higher without immediate benefit.
+**Por que Rejeitada**: [Razão]
 
 ---
 
-## Consequences
+**Exemplo**:
 
-What are the results of this decision? What trade-offs are we making?
+### Alternativa 1: MySQL
 
-### Positive Consequences
+**Prós**:
+- Similar ao PostgreSQL (relacional, ACID)
+- Time tem alguma experiência
+- Adoção ampla
+- Suporte AWS RDS
 
-- ✅ [Benefit 1]
-- ✅ [Benefit 2]
-- ✅ [Benefit 3]
+**Contras**:
+- Menos features que PostgreSQL (suporte JSON inferior)
+- Algumas peculiaridades com modo strict e valores padrão
+- Otimizador de query menos poderoso
 
-### Negative Consequences
+**Por que Rejeitada**: PostgreSQL tem melhor suporte JSON e features mais poderosas. Nenhuma razão convincente para escolher MySQL sobre PostgreSQL.
+
+---
+
+### Alternativa 2: MongoDB
+
+**Prós**:
+- Schema flexível (bom para catálogo de produtos)
+- Escalabilidade horizontal embutida
+- Popular, grande ecossistema
+
+**Contras**:
+- Sem transações ACID (até v4, ainda limitado)
+- Consistência eventual (não aceitável para inventário)
+- Time tem zero experiência
+- Política da empresa: sem DBs de documento para dados transacionais
+
+**Por que Rejeitada**: Falta de consistência forte e garantias ACID o torna inadequado para dados transacionais (pagamentos, inventário). Política da empresa também o proíbe.
+
+---
+
+### Alternativa 3: DynamoDB
+
+**Prós**:
+- Totalmente gerenciado (sem ops)
+- Escalabilidade horizontal automática
+- AWS nativo (boa integração)
+- Preço pay-per-use
+
+**Contras**:
+- NoSQL (consultas complexas difíceis)
+- Sem joins (precisa múltiplas queries)
+- Vendor lock-in (específico AWS)
+- Time tem zero experiência
+- Custo imprevisível em escala
+
+**Por que Rejeitada**: Consultas complexas (relatórios, agregações) são requisito core. DynamoDB torna isso muito difícil. Além disso, vendor lock-in é preocupante.
+
+---
+
+### Alternativa 4: CockroachDB
+
+**Prós**:
+- Compatível com PostgreSQL
+- Distribuído (escalabilidade horizontal embutida)
+- ACID + consistência forte
+- Suporte multi-região
+
+**Contras**:
+- Mais complexo para operar
+- Custo maior (~3x PostgreSQL)
+- Overkill para escala atual (100K usuários)
+- Time tem zero experiência
+
+**Por que Rejeitada**: Excelente tecnologia mas overkill para nossas necessidades atuais. Podemos migrar depois se precisarmos de distribuição global. Custo é 3x maior sem benefício imediato.
+
+---
+
+## Consequências
+
+Quais são os resultados desta decisão? Quais trade-offs estamos fazendo?
+
+### Consequências Positivas
+
+- ✅ [Benefício 1]
+- ✅ [Benefício 2]
+- ✅ [Benefício 3]
+
+### Consequências Negativas
 
 - ❌ [Trade-off 1]
 - ❌ [Trade-off 2]
 - ❌ [Trade-off 3]
 
-### Neutral Consequences
+### Consequências Neutras
 
-- ⚪ [Impact 1]
-- ⚪ [Impact 2]
-
----
-
-**Example**:
-
-### Positive Consequences
-
-- ✅ **ACID Guarantees**: Can safely handle financial transactions
-- ✅ **Fast Development**: Team expertise means faster development
-- ✅ **Rich Queries**: Joins, aggregations, CTEs available for reports
-- ✅ **JSON Flexibility**: JSONB for product attributes without schema migrations
-- ✅ **Cost Effective**: $300/month well under $5K budget
-- ✅ **Ecosystem**: Mature ORMs, tools, monitoring
-- ✅ **Reliability**: Battle-tested in production for 20+ years
-- ✅ **Open Source**: No vendor lock-in
-
-### Negative Consequences
-
-- ❌ **Vertical Scaling Limits**: Need to shard for massive scale (10M+ users)
-- ❌ **Write Bottleneck**: Single primary instance (can use read replicas for reads)
-- ❌ **Complex Sharding**: Manual effort if we need horizontal scaling
-- ❌ **Not Cloud-Native**: Not designed for distributed systems like DynamoDB
-
-### Neutral Consequences
-
-- ⚪ **Managed Service**: Will use AWS RDS (less control, more convenience)
-- ⚪ **Backup Strategy**: RDS automated backups (7-day retention)
-- ⚪ **Monitoring**: Use CloudWatch + pg_stat_statements
+- ⚪ [Impacto 1]
+- ⚪ [Impacto 2]
 
 ---
 
-## Risks and Mitigation
+**Exemplo**:
 
-What risks does this decision introduce? How do we mitigate them?
+### Consequências Positivas
 
-| Risk | Probability | Impact | Mitigation |
-|------|-------------|--------|------------|
-| [Risk 1] | [Low/Med/High] | [Low/Med/High] | [Strategy] |
+- ✅ **Garantias ACID**: Pode lidar com segurança com transações financeiras
+- ✅ **Desenvolvimento Rápido**: Expertise do time significa desenvolvimento mais rápido
+- ✅ **Queries Ricas**: Joins, agregações, CTEs disponíveis para relatórios
+- ✅ **Flexibilidade JSON**: JSONB para atributos de produto sem migrations de schema
+- ✅ **Custo Efetivo**: $300/mês bem abaixo do orçamento de $5K
+- ✅ **Ecossistema**: ORMs maduros, ferramentas, monitoramento
+- ✅ **Confiabilidade**: Testado em batalha em produção por 20+ anos
+- ✅ **Open Source**: Sem vendor lock-in
 
-**Example**:
+### Consequências Negativas
 
-| Risk | Probability | Impact | Mitigation |
-|------|-------------|--------|------------|
-| Database becomes bottleneck at scale | Medium | High | Use read replicas (up to 5), implement caching (Redis), monitor query performance |
-| Single point of failure | Low | High | Use Multi-AZ deployment (automatic failover), regular backups, tested DR plan |
-| PostgreSQL-specific features create lock-in | Low | Medium | Use ORM abstraction (TypeORM), avoid PostgreSQL-specific features unless critical |
-| Connection pool exhaustion | Medium | High | Use connection pooling (PgBouncer), set max connections = 100, monitor connections |
-| Storage grows beyond budget | Low | Medium | Implement data retention policy (archive old orders after 2 years), monitor growth |
+- ❌ **Limites de Escalabilidade Vertical**: Precisa sharding para escala massiva (10M+ usuários)
+- ❌ **Gargalo de Escrita**: Instância primária única (pode usar read replicas para leituras)
+- ❌ **Sharding Complexo**: Esforço manual se precisarmos de escalabilidade horizontal
+- ❌ **Não Cloud-Native**: Não projetado para sistemas distribuídos como DynamoDB
 
----
+### Consequências Neutras
 
-## Implementation Plan
-
-How will this decision be implemented?
-
-**Steps**:
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-**Timeline**: [Duration]
-
-**Owner**: [Person/Team]
+- ⚪ **Serviço Gerenciado**: Usaremos AWS RDS (menos controle, mais conveniência)
+- ⚪ **Estratégia de Backup**: Backups automatizados RDS (retenção 7 dias)
+- ⚪ **Monitoramento**: Usar CloudWatch + pg_stat_statements
 
 ---
 
-**Example**:
+## Riscos e Mitigação
 
-**Steps**:
-1. **Week 1**: Provision RDS PostgreSQL instance (db.t3.large, Multi-AZ)
-2. **Week 1**: Configure security groups, VPC, parameter groups
-3. **Week 2**: Set up connection pooling (PgBouncer)
-4. **Week 2**: Implement database migrations (using TypeORM or Knex)
-5. **Week 3**: Set up monitoring (CloudWatch, pg_stat_statements)
-6. **Week 3**: Configure backups (automated daily, 7-day retention)
-7. **Week 4**: Load testing (simulate production traffic)
-8. **Week 4**: Document runbook (backup/restore, failover, scaling)
+Quais riscos esta decisão introduz? Como os mitigamos?
 
-**Timeline**: 4 weeks
+| Risco | Probabilidade | Impacto | Mitigação |
+|-------|---------------|---------|-----------|
+| [Risco 1] | [Baixo/Médio/Alto] | [Baixo/Médio/Alto] | [Estratégia] |
 
-**Owner**: DevOps team + Backend lead
+**Exemplo**:
 
----
-
-## Validation
-
-How will we know if this decision was correct?
-
-**Success Criteria**:
-- [Criterion 1]
-- [Criterion 2]
-
-**Metrics to Track**:
-- [Metric 1]
-- [Metric 2]
-
-**Review Date**: [When to revisit this decision]
+| Risco | Probabilidade | Impacto | Mitigação |
+|-------|---------------|---------|-----------|
+| Banco de dados se torna gargalo em escala | Médio | Alto | Usar read replicas (até 5), implementar caching (Redis), monitorar performance de queries |
+| Ponto único de falha | Baixo | Alto | Usar deployment Multi-AZ (failover automático), backups regulares, plano DR testado |
+| Features específicas do PostgreSQL criam lock-in | Baixo | Médio | Usar abstração de ORM (TypeORM), evitar features específicas do PostgreSQL a menos que crítico |
+| Exaustão do pool de conexões | Médio | Alto | Usar connection pooling (PgBouncer), definir max connections = 100, monitorar conexões |
+| Armazenamento cresce além do orçamento | Baixo | Médio | Implementar política de retenção de dados (arquivar pedidos antigos após 2 anos), monitorar crescimento |
 
 ---
 
-**Example**:
+## Plano de Implementação
 
-**Success Criteria**:
-- Application meets performance requirements (p95 < 200ms)
-- Zero data loss or corruption incidents
-- Database costs remain under $500/month
-- Team can develop features without database blocking them
+Como esta decisão será implementada?
 
-**Metrics to Track**:
-- Query performance (p95, p99 latency)
-- Database CPU usage (< 70% avg)
-- Connection count (< 80 of max 100)
-- Storage growth (< 10GB/month)
-- Backup success rate (100%)
-- Replication lag (< 1 second)
+**Passos**:
+1. [Passo 1]
+2. [Passo 2]
+3. [Passo 3]
 
-**Review Date**: 2026-05-01 (6 months after launch)
+**Timeline**: [Duração]
 
-**Trigger for Re-evaluation**:
-- Database CPU consistently > 80%
-- Storage costs exceed $1K/month
-- Query performance degrades (p95 > 500ms)
-- Need for multi-region support
+**Responsável**: [Pessoa/Time]
 
 ---
 
-## Related Decisions
+**Exemplo**:
 
-- [ADR-001: Choice of Cloud Provider (AWS)](./ADR-001_aws.md)
-- [ADR-004: Use Redis for Caching](./ADR-004_redis.md)
-- [ADR-010: Database Sharding Strategy](./ADR-010_sharding.md) (future)
+**Passos**:
+1. **Semana 1**: Provisionar instância RDS PostgreSQL (db.t3.large, Multi-AZ)
+2. **Semana 1**: Configurar security groups, VPC, parameter groups
+3. **Semana 2**: Configurar connection pooling (PgBouncer)
+4. **Semana 2**: Implementar migrations de banco de dados (usando TypeORM ou Knex)
+5. **Semana 3**: Configurar monitoramento (CloudWatch, pg_stat_statements)
+6. **Semana 3**: Configurar backups (automatizados diários, retenção 7 dias)
+7. **Semana 4**: Teste de carga (simular tráfego de produção)
+8. **Semana 4**: Documentar runbook (backup/restore, failover, scaling)
 
----
+**Timeline**: 4 semanas
 
-## Notes
-
-Additional context, links, or information:
-
-- [Link to benchmark results]
-- [Link to cost analysis spreadsheet]
-- [Link to team discussion notes]
-
-**Example**:
-- Benchmark results: [Link to GitHub gist]
-- Cost analysis: [Link to Google Sheets]
-- Discussion thread: [Link to Slack]
-- PostgreSQL best practices: [Link to internal wiki]
+**Responsável**: Time DevOps + Lead Backend
 
 ---
 
-## Change History
+## Validação
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-10-01 | Tech Lead | Initial decision |
-| 1.1 | 2025-10-15 | DevOps | Added implementation plan |
-| 1.2 | 2025-11-01 | Tech Lead | Added risk mitigation |
+Como saberemos se esta decisão estava correta?
 
----
+**Critérios de Sucesso**:
+- [Critério 1]
+- [Critério 2]
 
-## Approval
+**Métricas para Rastrear**:
+- [Métrica 1]
+- [Métrica 2]
 
-| Role | Name | Approved | Date |
-|------|------|----------|------|
-| Tech Lead | [Name] | ✅ | 2025-10-01 |
-| CTO | [Name] | ✅ | 2025-10-01 |
-| DevOps Lead | [Name] | ✅ | 2025-10-02 |
+**Data de Revisão**: [Quando revisitar esta decisão]
 
 ---
 
-**Status**: Accepted
-**Parent**: [09. Architectural Decisions](../../arc42/09_decisions.md)
-**Type**: ADR (Architectural Decision Record)
+**Exemplo**:
+
+**Critérios de Sucesso**:
+- Aplicação atende requisitos de performance (p95 < 200ms)
+- Zero incidentes de perda ou corrupção de dados
+- Custos de banco de dados permanecem abaixo de $500/mês
+- Time pode desenvolver features sem banco de dados os bloqueando
+
+**Métricas para Rastrear**:
+- Performance de query (latência p95, p99)
+- Uso de CPU do banco de dados (< 70% média)
+- Contagem de conexões (< 80 de máx 100)
+- Crescimento de armazenamento (< 10GB/mês)
+- Taxa de sucesso de backup (100%)
+- Lag de replicação (< 1 segundo)
+
+**Data de Revisão**: 2026-05-01 (6 meses após lançamento)
+
+**Gatilho para Reavaliação**:
+- CPU do banco de dados consistentemente > 80%
+- Custos de armazenamento excedem $1K/mês
+- Performance de query degrada (p95 > 500ms)
+- Necessidade de suporte multi-região
 
 ---
 
-## Related Templates
+## Decisões Relacionadas
 
-### Prerequisites
-- **proposal.md** (TPL-WORKFLOW-001) - Problem context from proposal
-- **arc42/02_constraints.md** (TPL-ARC42-02) - Technical and organizational constraints
-
-### Part Of
-- **design.md** (TPL-WORKFLOW-002) - Architecture design document (if HIGH complexity)
-- **arc42/09_decisions.md** (TPL-ARC42-09) - Arc42 Chapter 9: Architecture Decisions
-
-### Influences
-- **arc42/04_solution-strategy.md** (TPL-ARC42-04) - Solution strategy
-- **arc42/05_building-blocks.md** (TPL-ARC42-05) - Component design
-- **c4/system-context.md** (TPL-C4-001) - External system choices
-- **arc42/10_quality.md** (TPL-ARC42-10) - Quality requirements
-
-### See Also
-- **constitution.md** - Architectural principles
-- **bdd/scenario.md** (TPL-BDD-001) - Behavioral implications
+- [ADR-001: Escolha de Provedor Cloud (AWS)](./ADR-001_aws.md)
+- [ADR-004: Usar Redis para Caching](./ADR-004_redis.md)
+- [ADR-010: Estratégia de Sharding de Banco de Dados](./ADR-010_sharding.md) (futuro)
 
 ---
 
-## Workflow Integration
+## Notas
 
-**Phase**: 2 (Architecture) or 3 (Specification)
+Contexto adicional, links ou informações:
 
-**Primary Skill**:
-- **architect** - Creates ADRs as part of design.md (Phase 2, HIGH complexity)
-- **analyst** - Documents ADRs during specification (Phase 3)
+- [Link para resultados de benchmark]
+- [Link para planilha de análise de custo]
+- [Link para notas de discussão do time]
 
-**Output Location**:
-- `changes/[change-id]/design.md` (embedded in design, Phase 2)
-- `specs/09_decisions/adr/ADR-*.md` (separate files, Phase 3)
+**Exemplo**:
+- Resultados de benchmark: [Link para GitHub gist]
+- Análise de custo: [Link para Google Sheets]
+- Thread de discussão: [Link para Slack]
+- Melhores práticas PostgreSQL: [Link para wiki interna]
 
-**When to Create**:
-- Technology selection (database, framework, cloud provider)
-- Architectural pattern choice (microservices, monolith, hexagonal)
-- Integration approach (REST, gRPC, messaging)
-- Data model decisions (SQL vs NoSQL, schema design)
-- Cross-cutting concerns (logging, monitoring, security)
+---
 
-**Next Steps**:
-1. **Discuss with team** - Validate decision before accepting
-2. **Update spec.md** - Reference ADR in Arc42 Chapter 9
-3. **Implement** - Developer follows ADR during implementation
-4. **Review** - Revisit ADR if context changes
+## Histórico de Mudanças
+
+| Versão | Data | Autor | Mudanças |
+|--------|------|-------|----------|
+| 1.0 | 2025-10-01 | Tech Lead | Decisão inicial |
+| 1.1 | 2025-10-15 | DevOps | Adicionado plano de implementação |
+| 1.2 | 2025-11-01 | Tech Lead | Adicionada mitigação de riscos |
+
+---
+
+## Aprovação
+
+| Papel | Nome | Aprovado | Data |
+|-------|------|----------|------|
+| Tech Lead | [Nome] | ✅ | 2025-10-01 |
+| CTO | [Nome] | ✅ | 2025-10-01 |
+| Lead DevOps | [Nome] | ✅ | 2025-10-02 |
+
+---
+
+**Status**: Aceito
+**Parent**: [09. Decisões Arquiteturais](../../arc42/09_decisions.md)
+**Tipo**: ADR (Registro de Decisão Arquitetural)
+
+---
+
+## Templates Relacionados
+
+### Pré-requisitos
+- **proposal.md** (TPL-WORKFLOW-001) - Contexto do problema da proposta
+- **arc42/02_constraints.md** (TPL-ARC42-02) - Restrições técnicas e organizacionais
+
+### Parte De
+- **design.md** (TPL-WORKFLOW-002) - Documento de design de arquitetura (se complexidade HIGH)
+- **arc42/09_decisions.md** (TPL-ARC42-09) - Capítulo 9 do Arc42: Decisões Arquiteturais
+
+### Influencia
+- **arc42/04_solution-strategy.md** (TPL-ARC42-04) - Estratégia de solução
+- **arc42/05_building-blocks.md** (TPL-ARC42-05) - Design de componentes
+- **c4/system-context.md** (TPL-C4-001) - Escolhas de sistemas externos
+- **arc42/10_quality.md** (TPL-ARC42-10) - Requisitos de qualidade
+
+### Veja Também
+- **specs/ (princípios arquiteturais)** - Princípios arquiteturais
+- **bdd/scenario.md** (TPL-BDD-001) - Implicações comportamentais
+
+---
+
+## Integração com Workflow
+
+**Fase**: 2 (Arquitetura) ou 3 (Especificação)
+
+**Skill Principal**:
+- **architect** - Cria ADRs como parte do design.md (Fase 2, complexidade HIGH)
+- **analyst** - Documenta ADRs durante especificação (Fase 3)
+
+**Localização de Output**:
+- `changes/[change-id]/design.md` (embutido no design, Fase 2)
+- `specs/09_decisions/adr/ADR-*.md` (arquivos separados, Fase 3)
+
+**Quando Criar**:
+- Seleção de tecnologia (banco de dados, framework, provedor cloud)
+- Escolha de padrão arquitetural (microsserviços, monolito, hexagonal)
+- Abordagem de integração (REST, gRPC, mensageria)
+- Decisões de modelo de dados (SQL vs NoSQL, design de schema)
+- Conceitos transversais (logging, monitoramento, segurança)
+
+**Próximos Passos**:
+1. **Discutir com time** - Validar decisão antes de aceitar
+2. **Atualizar spec.md** - Referenciar ADR no Capítulo 9 do Arc42
+3. **Implementar** - Developer segue ADR durante implementação
+4. **Revisar** - Revisitar ADR se contexto mudar

@@ -286,6 +286,6 @@ Avoid jargon unless necessary. Write for your audience.
 
 ---
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Created**: 2025-11-17
 **Last Updated**: 2025-11-17

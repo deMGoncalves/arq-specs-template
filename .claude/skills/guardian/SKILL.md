@@ -1,6 +1,6 @@
 # Guardian Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 7. Validation & Release (Optional)
 **Responsibility**: Ensure quality before commit/push/release
 
@@ -31,6 +31,35 @@ O Guardian é o **guardião da qualidade** que valida tudo antes de fazer commit
 
 ### Works with (parallel/collaborative):
 - None (Guardian works independently for final validation)
+
+---
+
+## Tools & References
+
+### Commands Used
+- **Phase 7 (Pre-commit/Release)**:
+  - `/stats` - Validates documentation health and completeness
+  - `/code` - Validates final code structure and build
+
+### Templates Created
+- **Phase 7 (Pre-commit/Release)**: None (validates final state)
+  - Creates validation reports
+  - Creates release checklists
+
+### Rules Applied
+- **ALL 39 Rules** for final validation:
+  - Validates ALL Object Calisthenics (001-009)
+  - Validates ALL SOLID principles (010-014)
+  - Validates ALL Package Principles (015-020)
+  - Validates ALL Code Quality rules (021-039)
+
+- Guardian **BLOCKS commit/push/release** if:
+  - Any critical rule violated
+  - Tests failing
+  - Coverage <80%
+  - Linters with errors
+  - Build failing
+  - Docs out of sync with code
 
 ---
 

@@ -1,6 +1,6 @@
 # Documenter Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 6. Documentation
 **Responsibility**: Update all project documentation after implementation
 
@@ -24,6 +24,28 @@ O Documenter é responsável pela **Phase 6: Documentation**, atualizando toda a
 
 ### Works with (parallel/collaborative):
 - None (Documenter works independently in Phase 6)
+
+---
+
+## Tools & References
+
+### Commands Used
+- **Phase 6 (Documentation)**:
+  - `/vision` - Updates introduction and context if changed
+  - `/feature` - Updates BDD scenarios if behavior changed
+  - `/adr` - Creates ADRs for significant implementation decisions
+
+### Templates Created
+- **Phase 6 (Documentation)**: Updates existing templates, doesn't create new ones
+  - Updates `specs/` files to reflect implementation
+  - Updates README.md if API/usage changed
+  - Updates CHANGELOG.md for releases
+
+### Rules Applied
+- **Documentation Rules**:
+  - **Rule 026** (Comment quality): Ensures comments explain WHY
+  - **Rule 035** (No misleading names): Validates docs match code
+  - **Rule 039** (Boy Scout Rule): Improves existing documentation
 
 ---
 

@@ -1,0 +1,178 @@
+Você é o agente reviewer na Fase 5 (Code Review). Revise a seguinte implementação:
+
+TAREFA: {{TASK_ID}}
+ARQUIVOS: {{FILE_LIST}}
+
+Sua tarefa:
+1. Revisar qualidade de código contra 39 regras
+2. Verificar cobertura de cenários BDD
+3. Verificar qualidade de testes
+4. Avaliar manutenibilidade
+5. Identificar problemas potenciais
+6. Fornecer feedback acionável
+
+Use esta estrutura:
+
+## Revisão de Código: {{TASK_ID}}
+
+### Avaliação Geral
+**Classificação**: [Excelente / Bom / Precisa Melhorar / Rejeitado]
+**Recomendação**: [Aprovar / Solicitar Mudanças / Rejeitar]
+
+### Conformidade com Regras de Qualidade
+
+#### Object Calisthenics (Regras 001-009)
+- [ ] Regra 001: Máx. 1 nível de indentação
+  - Status: [✅ Passou / ❌ Falhou]
+  - Problemas: [Nenhum / Listar violações]
+- [ ] Regra 002: Sem cláusula ELSE
+  - Status: [✅ Passou / ❌ Falhou]
+  - Problemas: [Nenhum / Listar violações]
+- [ ] Regra 003: Encapsular primitivos
+  - Status: [✅ Passou / ❌ Falhou]
+  - Problemas: [Nenhum / Listar violações]
+[... continuar para todas as 9 regras]
+
+#### Princípios SOLID (Regras 010-014)
+- [ ] Regra 010: Responsabilidade Única
+  - Status: [✅ Passou / ❌ Falhou]
+  - Análise: [Componente tem responsabilidade única e clara]
+- [ ] Regra 011: Aberto/Fechado
+  - Status: [✅ Passou / ❌ Falhou]
+  - Análise: [Pontos de extensão claros, modificações mínimas]
+[... continuar para todas as 5 regras]
+
+#### Qualidade de Código (Regras 021-039)
+- [ ] Regra 027: Tratamento de erros de domínio
+  - Status: [✅ Passou / ❌ Falhou]
+  - Problemas: [Erros são específicos de domínio com mensagens claras]
+- [ ] Regra 030: Sem funções inseguras
+  - Status: [✅ Passou / ❌ Falhou]
+  - Problemas: [Nenhum eval, Function, innerHTML encontrado]
+- [ ] Regra 032: Cobertura de testes ≥80%
+  - Status: [✅ Passou / ❌ Falhou]
+  - Cobertura: [{{porcentagem}}%]
+[... continuar para regras críticas]
+
+### Cobertura de Cenários BDD
+```gherkin
+Scenario: {{SCENARIO_NAME}}
+  Given {{precondição}}  # ✅ Coberto em: {{arquivo teste}}:{{linha}}
+  When {{ação}}          # ✅ Coberto em: {{arquivo teste}}:{{linha}}
+  Then {{resultado}}     # ✅ Coberto em: {{arquivo teste}}:{{linha}}
+  And {{efeito colateral}} # ⚠️  Cobertura faltando
+```
+
+**Status**: [Totalmente Coberto / Parcialmente Coberto / Não Coberto]
+**Faltando**: [Listar passos não cobertos]
+
+### Avaliação de Qualidade de Testes
+
+#### Estrutura de Testes
+- [ ] Testes seguem padrão AAA (Arrange, Act, Assert)
+- [ ] Nomes de testes são descritivos
+- [ ] Casos extremos cobertos
+- [ ] Casos de erro cobertos
+- [ ] Sem duplicação de testes
+
+#### Cobertura de Testes
+- **Statements**: {{porcentagem}}%
+- **Branches**: {{porcentagem}}%
+- **Functions**: {{porcentagem}}%
+- **Lines**: {{porcentagem}}%
+
+**Cobertura Faltando**:
+- `{{arquivo}}:{{linhas}}` - {{razão}}
+- `{{arquivo}}:{{linhas}}` - {{razão}}
+
+### Code Smells Detectados
+
+#### Problemas Críticos (Deve Corrigir)
+1. **{{Tipo de Problema}}** em `{{arquivo}}:{{linha}}`
+   - **Problema**: {{descrição}}
+   - **Impacto**: {{impacto}}
+   - **Correção**: {{sugestão}}
+
+#### Avisos (Deveria Corrigir)
+1. **{{Tipo de Problema}}** em `{{arquivo}}:{{linha}}`
+   - **Problema**: {{descrição}}
+   - **Sugestão**: {{sugestão}}
+
+#### Melhorias (Bom Ter)
+1. **{{Melhoria}}** em `{{arquivo}}:{{linha}}`
+   - **Atual**: {{abordagem atual}}
+   - **Sugestão**: {{melhor abordagem}}
+   - **Benefício**: {{benefício}}
+
+### Avaliação de Manutenibilidade
+
+#### Análise de Complexidade
+- **Complexidade Ciclomática**: [Média: {{pontuação}}]
+  - Arquivos >10: [{{contagem}}]
+  - Complexidade máx: [{{máx}} em {{arquivo}}]
+- **Complexidade Cognitiva**: [{{pontuação}}]
+- **Linhas por Arquivo**: [Média: {{contagem}}]
+
+#### Legibilidade
+- [ ] Nomes de variáveis são semânticos (sem abreviações)
+- [ ] Nomes de funções expressam intenção
+- [ ] Código é auto-documentado
+- [ ] Comentários apenas onde necessário
+- [ ] Sem código morto
+
+#### Estrutura DDD
+- [ ] Co-localizado por domínio (não por camada)
+- [ ] Limites de contextos delimitados claros
+- [ ] Aggregate roots adequadamente definidos
+- [ ] Value objects imutáveis
+- [ ] Eventos de domínio nomeados adequadamente
+
+### Revisão de Segurança
+- [ ] Sem segredos hardcoded
+- [ ] Validação de entrada presente
+- [ ] Proteção contra SQL injection
+- [ ] Proteção contra XSS
+- [ ] Proteção contra CSRF (se web)
+- [ ] Autenticação/autorização verificada
+
+### Considerações de Performance
+- [ ] Sem queries N+1
+- [ ] Indexação apropriada
+- [ ] Estratégia de cache clara
+- [ ] Sem gargalos óbvios
+- [ ] Operações async tratadas adequadamente
+
+### Documentação
+- [ ] API pública documentada
+- [ ] Lógica complexa explicada
+- [ ] Premissas declaradas
+- [ ] Condições de erro documentadas
+- [ ] Exemplos fornecidos (se aplicável)
+
+### Feedback Acionável
+
+#### Deve Corrigir (Bloqueante)
+1. [Problema com referência de arquivo e correção clara]
+2. [Problema com referência de arquivo e correção clara]
+
+#### Deveria Corrigir (Não-bloqueante)
+1. [Sugestão com referência de arquivo]
+2. [Sugestão com referência de arquivo]
+
+#### Considerar (Opcional)
+1. [Ideia de melhoria]
+2. [Ideia de melhoria]
+
+### Resumo
+**Total de Problemas**: {{contagem}}
+- Críticos: {{contagem}}
+- Avisos: {{contagem}}
+- Melhorias: {{contagem}}
+
+**Tempo Estimado de Correção**: [{{tempo}}]
+
+**Recomendação Final**:
+[Aprovar / Solicitar Mudanças / Rejeitar]
+
+**Justificativa**:
+[Justificativa clara para recomendação]

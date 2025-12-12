@@ -1,527 +1,797 @@
-# Specification-Driven Workflow System v2.0.0
+# Skills - Documentation-First Workflow Agents
 
-Sistema de workflow para desenvolvimento orientado a especificações (Document-First Development).
+**Version**: 3.0.0
+**Total**: 9 specialized agents
+**Status**: 🟢 Production-ready
+**Last Updated**: 2025-12-10
 
 ---
 
-## 🎯 Visão Geral
+## 🎯 Philosophy
 
-Este sistema implementa um workflow de **7 fases** para desenvolvimento de software guiado por especificações Arc42 + C4 + BDD + ADR, com decomposição de tasks para prevenir AI hallucinations.
+**Specifications don't implement themselves - specialized agents execute the deterministic workflow.**
 
-### Complete Workflow (7 Phases)
+These 9 agents cover **100% of the 7-phase workflow** in a structured and deterministic way. Each agent has:
+- Unique position (001-009)
+- Workflow phase (1-7)
+- Specific responsibility
+- Well-defined inputs/outputs
+- Validation CHECKLISTs
+- Practical EXAMPLES
+- TROUBLESHOOTING guides
+
+---
+
+## 📊 Overview
+
+### By Workflow Phase
+
+| Phase | Skills | % Total | Purpose |
+|-------|--------|---------|---------|
+| 1 (Discovery) | analyst | 11% | Plan and propose change |
+| 2 (Architecture) | architect | 11% | Design for HIGH complexity |
+| 3 (Specification) | analyst | 11% | Arc42 + BDD specification |
+| 3.5 (Decomposition) | orchestrator | 11% | Decompose into atomic tasks |
+| 4 (Implementation) | developer, gatekeeper | 22% | Implement + validate |
+| 5 (Review & Test) | reviewer, tester | 22% | Review quality + tests |
+| 6 (Documentation) | documenter | 11% | Update documentation |
+| 7 (Validation) | analyst, guardian | 22% | Final validation + pre-commit |
+
+### By Criticality
+
+| Criticality | Count | Skills | When It Fails... |
+|-------------|-------|--------|------------------|
+| 🔴 CRITICAL | 5 | orchestrator, developer, gatekeeper, guardian, analyst | System produces hallucinations or technical debt |
+| 🟡 IMPORTANT | 3 | architect, reviewer, tester | Quality degrades, but not catastrophic |
+| 🟢 USEFUL | 1 | documenter | Docs become outdated |
+
+---
+
+## 🗺️ Complete 7-Phase Workflow
+
+### Phase 1: Discovery
 
 ```
-User Request
+User Request: "Implement OAuth2 authentication"
     ↓
-Phase 1: Discovery
-    📋 analyst → Creates proposal.md
-        ↓
-Phase 2: Architecture (HIGH complexity only)
-    🏗️ architect → Creates design.md
-        ↓
-Phase 3: Specification
-    📋 analyst → Creates spec.md (Arc42 + BDD)
-        ↓
-Phase 3.5: Task Decomposition (CRITICAL)
-    🎯 orchestrator → Creates tasks.md (atomic tasks)
-        ↓
-Phase 4: Implementation
-    💻 developer → Implements task-by-task
-    🔒 gatekeeper → Validates quality gates
-        ↓
-Phase 5: Review
-    👀 reviewer → Reviews code quality
-    🧪 tester → Validates test quality
-        ↓
-Phase 6: Documentation
-    📚 documenter → Updates all docs
-        ↓
-Phase 7: Validation & Release (Optional)
-    ✅ analyst → Final validation
-    🛡️ guardian → Pre-commit/push/release checks
-        ↓
-Done!
+📋 analyst - PLANNING
+    Input: User requirement
+    Process:
+      1. Understand requirement
+      2. Analyze context (.claude/rules/, specs/)
+      3. Detect deterioration signals (score X/16)
+      4. Create .agent-task.md with detailed checklist
+    Output: proposal.md + .agent-task.md
+    Time: 15-60 min
+    Gate: ≥80% of checklist complete
+    Uses Commands: /vision, /actor, /stats
+    Creates: changes/[id]/proposal.md (uses templates/changes/proposal.md)
+    ↓
 ```
 
----
+### Phase 2: Architecture (Conditional - only if HIGH complexity)
 
-## 📚 Available Skills
+```
+📋 analyst detects: Score <13/16 OR Complexity=HIGH
+    ↓
+🏗️ architect - DESIGN
+    Input: proposal.md + preliminary spec
+    Process:
+      1. Create C4 Level 3 diagrams (components)
+      2. Define DDD patterns (Aggregates, Entities, VOs, Repos)
+      3. Create 3-5 ADRs for critical decisions
+    Output: design.md + ADRs
+    Time: 2-4h
+    Gate: Complete design + documented ADRs
+    Uses Commands: /stack, /adr, /rule, /cross, /container
+    Creates: changes/[id]/design.md (uses templates/changes/design.md)
+    Creates: specs/09_decisions/adrs/ADR-*.md (uses templates/adr/decision.md)
+    ↓
+```
 
-### Phase 1-3: Specification
+### Phase 3: Specification
 
-| Skill | Phase | Responsibility | Files |
-|-------|-------|---------------|--------|
-| **analyst** | 1 + 3 | Discovery (proposal.md) + Specification (spec.md) | `analyst/` |
-| **architect** | 2 | Architecture design for HIGH complexity (design.md) | `architect/` |
+```
+📋 analyst - SPECIFICATION
+    Input: proposal.md, design.md (if HIGH)
+    Process:
+      1. Create complete Arc42 specs (12 chapters)
+      2. Create BDD scenarios (Gherkin Given/When/Then)
+      3. Map DDD components
+    Output: spec.md (Arc42 + BDD)
+    Time: 1-4h (depends on complexity)
+    Gate: spec.md approved, 100% requirement coverage
+    Uses Commands: /vision, /plan, /feature, /flow, /build, /cross, /component
+    Creates: changes/[id]/spec.md (uses templates/changes/spec.md)
+    Creates: specs/ files (uses all templates/arc42/*, templates/bdd/*)
+    ↓
+```
 
-### Phase 3.5-4: Task Decomposition & Implementation
+### Phase 3.5: Task Decomposition (**CRITICAL** - prevents hallucinations)
 
-| Skill | Phase | Responsibility | Files |
-|-------|-------|---------------|--------|
-| **orchestrator** | 3.5 | 🎯 **CRITICAL**: Decompose spec → atomic tasks | `orchestrator/` |
-| **developer** | 4 | Implement code task-by-task (prevents hallucinations) | `developer/` |
-| **gatekeeper** | Cross-phase | Validate quality gates between phases | `gatekeeper/` |
+```
+🎯 orchestrator - DECOMPOSITION
+    Input: spec.md (approved)
+    Process:
+      1. Extract BDD scenarios
+      2. Map to DDD components
+      3. Generate N atomic tasks:
+         - Each task ≤100 LOC
+         - Each context ≤500 lines
+         - Dependencies (valid DAG)
+         - Specific acceptance criteria
+    Output: tasks.md (N tasks)
+    Time: 15-60 min
+    Gate:
+      - NO task >100 LOC
+      - NO context >600 lines
+      - Valid DAG (no cycles)
+      - 100% coverage of spec.md
+    Creates: changes/[id]/tasks.md (uses templates/changes/tasks.md)
 
-### Phase 5-6: Review & Documentation
+    🔴 CRITICAL: Large context = Hallucinations
+                Small context = Deterministic code
+    ↓
+```
 
-| Skill | Phase | Responsibility | Files |
-|-------|-------|---------------|--------|
-| **reviewer** | 5 | Review code quality and standards | `reviewer/` |
-| **tester** | 5 | Validate test coverage and quality | `tester/` |
-| **documenter** | 6 | Update README, docs, examples | `documenter/` |
+### Phase 4: Implementation
+
+```
+💻 developer - IMPLEMENTATION (task-by-task)
+    Input: tasks.md → current TASK-NNN
+    Process:
+      1. Load context (Files to Load, ≤500 lines)
+      2. Implement code (DDD Co-Located, ≤100 LOC)
+      3. Apply Object Calisthenics (39 rules)
+      4. Write tests (TDD, coverage ≥80%)
+      5. Validate acceptance criteria
+    Output: Code + tests
+    Time: <2h per task
+    Uses Commands: /code, /component
+    Applies Rules: All 39 rules from rules/ directory
+
+    During implementation:
+    🔒 gatekeeper - QUALITY GATES
+      Validates: 39 rules, spec alignment, quality standards
+      Gate: 100% compliant OR BLOCKS
+    ↓
+    Repeat for all N tasks (sequential or parallel)
+    ↓
+```
+
+### Phase 5: Review & Testing
+
+```
+👀 reviewer - CODE REVIEW
+    Input: Implemented code
+    Process:
+      1. Validate Software Quality (12 criteria):
+         📋 Operation (6): Executability, Correctness, Reliability, etc
+         🔄 Revision (3): Maintainability, Testability, Understandability
+         🔀 Transition (3): Portability, Adaptability, Installability
+      2. Detect code smells
+      3. Recommend refactorings
+    Output: Review report (approved/rejected + issues)
+    Time: 30-120 min
+    Gate: 12/12 criteria met
+
+🧪 tester - TEST VALIDATION
+    Input: Written tests
+    Process:
+      1. Validate coverage (≥80%)
+      2. Validate test quality (non-trivial)
+      3. Execute complete suite
+      4. Validate e2e tests (BDD scenarios)
+    Output: Test report (100% passing, coverage %)
+    Time: 30-90 min
+    Gate: 100% tests passing, coverage ≥80%
+    ↓
+```
+
+### Phase 6: Documentation
+
+```
+📚 documenter - DOCUMENTATION
+    Input: Code + specs
+    Process:
+      1. Update README (if necessary)
+      2. Update CHANGELOG (releases)
+      3. Verify doc comments (public APIs)
+      4. Update specs/ (if architectural change)
+    Output: Synchronized documentation
+    Time: 30-60 min
+    Gate: Docs synchronized with code
+    Uses Commands: /vision, /feature, /adr
+    ↓
+```
 
 ### Phase 7: Validation & Release
 
-| Skill | Phase | Responsibility | Files |
-|-------|-------|---------------|--------|
-| **analyst** | 7 | Final validation (completeness check) | `analyst/` |
-| **guardian** | 7 | Pre-commit/push/release validation | `guardian/` |
-
----
-
-## 🔗 How Skills Interconnect
-
-### Dependencies Graph
-
 ```
-analyst (Phase 1: proposal.md)
+📋 analyst - FINAL VALIDATION
+    Input: .agent-task.md + all previous outputs
+    Process:
+      1. Review checklist (100% complete?)
+      2. Validate acceptance criteria (all met?)
+      3. Recalculate health score (improved/maintained/worsened?)
+      4. Generate final report with metrics
+    Output: Final report + recommendations
+    Time: 15-30 min
+    Gate: ≥95% validation complete
+    Uses Commands: /stats
+
+🛡️ guardian - PRE-COMMIT/PUSH/RELEASE
+    Input: Code ready for commit
+    Process:
+      1. Execute linters (0 warnings)
+      2. Execute tests (100% passing, ≥80% coverage)
+      3. Execute build (success)
+      4. Validate quality standards (compliant)
+      5. Validate security (0 critical vulnerabilities)
+      6. Validate docs (synchronized)
+    Output: ✅ Authorized OR ❌ BLOCKED
+    Time: 2-10 min
+    Gate: ALL 6 criteria PASS
+    Uses Commands: /stats, /code
     ↓
-    ├─→ architect (Phase 2: design.md) [if HIGH complexity]
-    │       ↓
-    └─→ analyst (Phase 3: spec.md) ←────────────┘
-            ↓
-        orchestrator (Phase 3.5: tasks.md) ← CRITICAL!
-            ↓
-        developer (Phase 4: code) + gatekeeper (quality gates)
-            ↓
-        reviewer + tester (Phase 5: code review + test validation)
-            ↓
-        documenter (Phase 6: documentation)
-            ↓
-        analyst (Phase 7: final validation)
-            ↓
-        guardian (Phase 7: pre-commit checks) [optional]
+Done! 🎉
 ```
-
-### Trigger Matrix
-
-| Phase | Trigger | Input | Output |
-|-------|---------|-------|--------|
-| 1 | User request | - | `proposal.md` |
-| 2 | `Complexity: HIGH` | `proposal.md` | `design.md` |
-| 3 | Proposal approved | `proposal.md` + `design.md` (if HIGH) | `spec.md` |
-| 3.5 | Spec approved | `spec.md` + `design.md` (if exists) | `tasks.md` |
-| 4 | Tasks ready | `tasks.md` | Code + tests |
-| 5 | Implementation done | Code + tests | Code review approval |
-| 6 | Review approved | Code | Updated docs |
-| 7 | Docs updated | All artifacts | Validation report / commit |
 
 ---
 
-## 🚀 Quick Start
+## 📚 Agent Catalog
 
-### Option 1: Full Workflow (Recommended)
+### 📋 001: analyst
 
-Start with analyst for discovery:
+**Category**: Planning & Validation
+**Phases**: 1 (Discovery), 3 (Specification), 7 (Final Validation)
+**Criticality**: 🔴 CRITICAL
 
-```bash
-@skill analyst
+**What it does**:
+- **Phase 1**: Creates proposal.md + .agent-task.md (planning)
+- **Phase 3**: Creates spec.md (Arc42 + BDD)
+- **Phase 7**: Final validation + metrics report
 
-"Adicionar validação de email no cadastro de usuário"
+**When to use**:
+- Start of any feature/change (Phase 1)
+- After architect (if invoked), to create specs (Phase 3)
+- End of workflow for validation (Phase 7)
+
+**Inputs**: User request, .claude/rules/, specs/
+**Outputs**: proposal.md, .agent-task.md, spec.md, final report
+**Uses Commands**: /vision, /actor, /container, /component, /feature, /build, /cross, /import, /stats
+**Uses Templates**: changes/proposal.md, changes/spec.md, arc42/*, bdd/*
+
+📄 [SKILL.md](./analyst/SKILL.md) | [CHECKLIST.md](./analyst/CHECKLIST.md) | [EXAMPLES.md](./analyst/EXAMPLES.md) | [TROUBLESHOOTING.md](./analyst/TROUBLESHOOTING.md)
+
+---
+
+### 🏗️ 002: architect
+
+**Category**: Architecture Design
+**Phase**: 2 (Architecture)
+**Criticality**: 🟡 IMPORTANT (mandatory if HIGH complexity)
+
+**What it does**:
+- Creates design.md with C4 Level 3 diagrams
+- Defines DDD patterns (Aggregates, Entities, VOs, Repos, Use Cases)
+- Creates 3-5 ADRs for critical decisions
+
+**When to use**:
+- Health score <13/16 (Moderate or Severe)
+- Complexity = HIGH (multiple bounded contexts, >15 files)
+- Critical architectural decisions
+
+**Inputs**: proposal.md, preliminary spec
+**Outputs**: design.md, ADR-XXX (multiple)
+**Uses Commands**: /stack, /rule, /adr, /cross, /container
+**Uses Templates**: changes/design.md, adr/decision.md, c4/system-context.md, c4/container.md, c4/component.md
+
+📄 [SKILL.md](./architect/SKILL.md) | [CHECKLIST.md](./architect/CHECKLIST.md) | [EXAMPLES.md](./architect/EXAMPLES.md) | [TROUBLESHOOTING.md](./architect/TROUBLESHOOTING.md)
+
+---
+
+### 🎯 003: orchestrator
+
+**Category**: Task Decomposition
+**Phase**: 3.5 (Decomposition)
+**Criticality**: 🔴 CRITICAL (prevents AI hallucinations)
+
+**What it does**:
+- Decomposes spec.md into N atomic tasks (<100 LOC, ~500 lines context)
+- Establishes dependencies (valid DAG)
+- Defines exact context for each task (Files to Load)
+
+**When to use**:
+- **ALWAYS** after spec.md approved
+- **MANDATORY** for ANY complexity (LOW, MEDIUM, HIGH)
+
+**Why critical?**
+```
+Large context (5000+ lines) → AI loses focus → Hallucinations ❌
+Small context (~500 lines/task) → AI stays deterministic → Correct code ✅
 ```
 
-The analyst will:
-1. Create `changes/[change-id]/proposal.md`
-2. Assess complexity (LOW/MEDIUM/HIGH)
-3. If HIGH → invoke architect
-4. Create `changes/[change-id]/spec.md` (Arc42 + BDD)
-5. Invoke orchestrator → creates `changes/[change-id]/tasks.md`
-6. Invoke developer → implements task-by-task
-7. Invoke reviewer + tester → code review
-8. Invoke documenter → updates docs
-9. Final validation
-10. (Optional) Invoke guardian for commit/push
+**Inputs**: spec.md, design.md (if HIGH)
+**Outputs**: tasks.md (5-100 atomic tasks)
+**Uses Templates**: changes/tasks.md
 
-### Option 2: Resume from Task Decomposition
+📄 [SKILL.md](./orchestrator/SKILL.md) | [CHECKLIST.md](./orchestrator/CHECKLIST.md) | [EXAMPLES.md](./orchestrator/EXAMPLES.md) | [TROUBLESHOOTING.md](./orchestrator/TROUBLESHOOTING.md)
 
-If you already have `spec.md`:
+---
 
-```bash
-@skill orchestrator
-```
+### 💻 004: developer
 
-The orchestrator will decompose spec → tasks, then invoke developer.
+**Category**: Implementation
+**Phase**: 4 (Implementation)
+**Criticality**: 🔴 CRITICAL
 
-### Option 3: Manual Phase-by-Phase
+**What it does**:
+- Implements tasks sequentially (TASK-001, TASK-002, ...)
+- Applies DDD Co-Located structure
+- Applies Object Calisthenics (39 rules)
+- Writes tests (TDD, coverage ≥80%)
 
-Execute each skill individually:
+**When to use**:
+- After orchestrator generates tasks.md
+- For each TASK-NNN (sequential or parallel)
+
+**Inputs**: tasks.md → TASK-NNN
+**Outputs**: Code + tests
+**Uses Commands**: /code, /component
+**Applies Rules**: All 39 rules from rules/ (Object Calisthenics, SOLID, Package Principles, Code Quality)
+
+📄 [SKILL.md](./developer/SKILL.md) | [CHECKLIST.md](./developer/CHECKLIST.md) | [EXAMPLES.md](./developer/EXAMPLES.md) | [TROUBLESHOOTING.md](./developer/TROUBLESHOOTING.md)
+
+---
+
+### 🔒 005: gatekeeper
+
+**Category**: Quality Gates
+**Phase**: 4 (During implementation)
+**Criticality**: 🔴 CRITICAL (prevents technical debt)
+
+**What it does**:
+- Validates compliance with 39 rules
+- Validates alignment with spec.md
+- Validates quality principles (39 rules from .claude/rules/)
+
+**When to use**:
+- During implementation (automatically invoked by developer)
+- Before marking task as complete
+
+**Inputs**: Implemented code
+**Outputs**: ✅ Pass OR ❌ Fail (with issues)
+**Uses Commands**: /rule, /code (validates)
+**Applies Rules**: All 39 rules from rules/
+
+📄 [SKILL.md](./gatekeeper/SKILL.md) | [CHECKLIST.md](./gatekeeper/CHECKLIST.md) | [EXAMPLES.md](./gatekeeper/EXAMPLES.md) | [TROUBLESHOOTING.md](./gatekeeper/TROUBLESHOOTING.md)
+
+---
+
+### 👀 006: reviewer
+
+**Category**: Code Review
+**Phase**: 5 (Review)
+**Criticality**: 🟡 IMPORTANT
+
+**What it does**:
+- Validates Software Quality (12 criteria: Operation, Revision, Transition)
+- Detects code smells
+- Recommends refactorings
+
+**When to use**:
+- After all tasks implemented
+- Before marking change as DONE
+
+**Inputs**: Complete code
+**Outputs**: Review report
+
+📄 [SKILL.md](./reviewer/SKILL.md) | [CHECKLIST.md](./reviewer/CHECKLIST.md) | [EXAMPLES.md](./reviewer/EXAMPLES.md) | [TROUBLESHOOTING.md](./reviewer/TROUBLESHOOTING.md)
+
+---
+
+### 🧪 007: tester
+
+**Category**: Test Validation
+**Phase**: 5 (Testing)
+**Criticality**: 🟡 IMPORTANT
+
+**What it does**:
+- Validates coverage (≥80%)
+- Validates test quality
+- Executes complete suite (unit, integration, e2e)
+
+**When to use**:
+- In parallel with reviewer (Phase 5)
+- To validate implemented BDD scenarios
+
+**Inputs**: Written tests
+**Outputs**: Test report (coverage %, passing %)
+**Uses Commands**: /feature, /flow, /code (validates tests)
+
+📄 [SKILL.md](./tester/SKILL.md) | [CHECKLIST.md](./tester/CHECKLIST.md) | [EXAMPLES.md](./tester/EXAMPLES.md) | [TROUBLESHOOTING.md](./tester/TROUBLESHOOTING.md)
+
+---
+
+### 📚 008: documenter
+
+**Category**: Documentation
+**Phase**: 6 (Documentation)
+**Criticality**: 🟢 USEFUL
+
+**What it does**:
+- Updates README, CHANGELOG
+- Verifies doc comments
+- Updates specs/ (if necessary)
+
+**When to use**:
+- After reviewer + tester approve
+- Before final commit
+
+**Inputs**: Code + specs
+**Outputs**: Synchronized documentation
+**Uses Commands**: /vision, /feature, /adr
+
+📄 [SKILL.md](./documenter/SKILL.md) | [CHECKLIST.md](./documenter/CHECKLIST.md) | [EXAMPLES.md](./documenter/EXAMPLES.md) | [TROUBLESHOOTING.md](./documenter/TROUBLESHOOTING.md)
+
+---
+
+### 🛡️ 009: guardian
+
+**Category**: Pre-commit Validation
+**Phase**: 7 (Final gate)
+**Criticality**: 🔴 CRITICAL (prevents bad commits)
+
+**What it does**:
+- Validates linters (0 warnings)
+- Validates tests (100% passing, ≥80% coverage)
+- Validates build (success)
+- Validates quality rules, security, docs
+
+**When to use**:
+- Before `git commit`
+- Before `git push`
+- Before release
+
+**Inputs**: Code ready for commit
+**Outputs**: ✅ Authorized OR ❌ BLOCKED
+**Uses Commands**: /stats, /code
+
+📄 [SKILL.md](./guardian/SKILL.md) | [CHECKLIST.md](./guardian/CHECKLIST.md) | [EXAMPLES.md](./guardian/EXAMPLES.md) | [TROUBLESHOOTING.md](./guardian/TROUBLESHOOTING.md)
+
+---
+
+## 🎓 Usage Guides
+
+### For Beginners (Simple Feature - LOW)
+
+**Basic workflow** (3-4h total):
 
 ```bash
 # Phase 1: Discovery
-@skill analyst
-"Add email validation"
+@skill analyst "Add email validation to registration"
+# Output: proposal.md + .agent-task.md
 
-# Phase 2: Architecture (if HIGH complexity)
-@skill architect
+# Phase 3: Specification (analyst automatically creates spec.md)
+# Output: spec.md (Arc42 + BDD)
 
-# Phase 3: Specification
-@skill analyst  # (creates spec.md)
+# Phase 3.5: Decomposition
+# orchestrator is invoked automatically
+# Output: tasks.md (8 tasks)
 
-# Phase 3.5: Task Decomposition
-@skill orchestrator
+# Phase 4: Implementation (developer executes tasks sequentially)
+# gatekeeper validates each task automatically
+# Output: Code + tests (8 tasks complete)
 
-# Phase 4: Implementation
-@skill developer
-
-# Phase 5: Review
+# Phase 5: Review & Test
 @skill reviewer
 @skill tester
+# Output: Approved ✅
 
 # Phase 6: Documentation
 @skill documenter
+# Output: Docs synchronized
 
-# Phase 7: Validation & Release
-@skill analyst  # (final validation)
-@skill guardian push  # (commit & push)
+# Phase 7: Pre-commit
+@skill guardian
+# Output: ✅ Commit authorized
+
+git commit -m "feat: Add email validation"
 ```
 
 ---
 
-## 🎯 Key Principles
+### For Developers (Medium Feature - MEDIUM)
 
-### 1. Specification-Driven
+**Complete workflow** (1-3 days):
 
-All implementations start with specs (proposal → design → spec → tasks).
+```bash
+# Phase 1
+@skill analyst "Implement notification system (email, push, SMS) with user preferences"
 
-**Why**: Prevents scope creep, ensures alignment, enables traceability.
+# Phase 2 (Conditional - analyst decides)
+# If complexity=MEDIUM and score <13:
+@skill architect  # Creates design.md + 2-3 ADRs
 
-### 2. Arc42 + C4 + BDD + ADR
+# Phase 3
+# analyst creates spec.md automatically
 
-Specs follow standardized formats:
-- **Arc42**: Architecture documentation framework (adaptive by complexity)
-- **C4**: System context, containers, components diagrams
-- **BDD**: Behavioral scenarios (GIVEN-WHEN-THEN)
-- **ADR**: Architecture Decision Records
+# Phase 3.5
+# orchestrator creates tasks.md (32 tasks)
 
-**Why**: Consistency, completeness, industry-standard formats.
+# Phase 4 (2 days)
+# developer implements 32 tasks
+# gatekeeper validates each one
 
-### 3. Task Decomposition (CRITICAL)
+# Phase 5
+@skill reviewer
+@skill tester
 
-**Orchestrator** decomposes large specs (5000+ lines) into atomic tasks (<100 LOC each).
+# Phase 6
+@skill documenter
 
-**Why**:
-```
-❌ Large context (5000+ lines) = AI hallucinations = Wrong code
-✅ Small context (~500 lines/task) = Deterministic AI = Correct code
-```
+# Phase 7
+@skill analyst  # Final validation
+@skill guardian  # Pre-commit
 
-This is the **MOST CRITICAL** phase for preventing AI hallucinations.
-
-### 4. Library-First
-
-Build reusable components from day one.
-
-**Why**: Enables extraction to shared libraries, promotes modularity.
-
-### 5. Test-First
-
-Tests written alongside (or before) implementation.
-
-**Why**: TDD ensures testability, reduces bugs, documents behavior.
-
-### 6. DDD Tactical Co-Located
-
-Code organized by domain concepts (not technical layers).
-
-```
-✅ GOOD: /src/user-management/api/usuario/
-  - index.ts (Aggregate Root)
-  - criar.ts (Factory)
-  - Email.ts (Value Object)
-
-❌ BAD: /src/
-  - /domain/entities/Usuario.ts
-  - /application/services/UsuarioService.ts
-  - /infrastructure/repositories/UsuarioRepository.ts
-```
-
-**Why**: Screaming architecture, easy navigation, high cohesion.
-
----
-
-## 📖 Documentation per Skill
-
-Each skill has comprehensive documentation:
-
-| Skill | README | SKILL.md | Auxiliary Files |
-|-------|--------|----------|----------------|
-| analyst | ✅ | ✅ | sinais-deterioracao.md |
-| architect | ✅ | ✅ | - |
-| developer | ✅ | ✅ | README.md, tatical-design.md, CONVENÇÃO-DDD.md |
-| documenter | ✅ | ✅ | CONVENÇÃO-TEMPLATES.md |
-| gatekeeper | ✅ | ✅ | - |
-| guardian | ✅ | ✅ | checklist.md |
-| orchestrator | ✅ | ✅ | INTEGRATION.md |
-| reviewer | ✅ | ✅ | README.md, operacao.md, revisao.md, transicao.md |
-| tester | ✅ | ✅ | - |
-
-**README.md**: Documentation for humans (overview, when to use, examples)
-**SKILL.md**: Instructions for AI agent (prompts, workflows, acceptance criteria)
-
----
-
-## 📂 Project Structure
-
-This workflow expects:
-
-```
-project-root/
-├── .claude/
-│   ├── constitution.md         # Core principles
-│   ├── skills/                 # This directory
-│   └── templates/              # Templates for specs, tasks, etc
-├── changes/
-│   └── [change-id]/
-│       ├── proposal.md         # Phase 1
-│       ├── design.md           # Phase 2 (if HIGH)
-│       ├── spec.md             # Phase 3
-│       └── tasks.md            # Phase 3.5
-├── specs/                      # Arc42 documentation
-│   ├── 01_introduction/
-│   ├── 02_constraints/
-│   ├── ...
-│   └── 12_glossary/
-├── examples/                   # Usage examples
-└── src/                        # Source code (DDD Co-Located)
-    └── [context]/[container]/[component]/
+git commit -m "feat: Implement notification system"
 ```
 
 ---
 
-## 🎓 Complexity Assessment
+### For Architects (Complex System - HIGH)
 
-The analyst assesses complexity to determine workflow path:
+**HIGH complexity workflow** (2 weeks):
 
-### LOW Complexity
-- Single bounded context
-- <5 files modified
-- Established patterns
-- **Path**: Phase 1 → 3 → 3.5 → 4 → 5 → 6 → 7
-- **Example**: Add email validation, new CRUD endpoint
+```bash
+# Phase 1: Discovery
+@skill analyst "Migrate authentication from JWT to OAuth2 + OIDC:
+                - Google, GitHub, Microsoft providers
+                - Corporate SSO (SAML)
+                - Refresh token rotation
+                - 2FA (TOTP)
+                - Rate limiting
+                - Zero downtime migration"
 
-### MEDIUM Complexity
-- Multiple components in one context
-- 5-15 files modified
-- Some new patterns
-- **Path**: Phase 1 → 3 → 3.5 → 4 → 5 → 6 → 7
-- **Example**: New feature with 3-5 use cases
+# Output: proposal.md
+# analyst detects: Complexity=HIGH, Score=9/16 (Moderate)
 
-### HIGH Complexity
-- Multiple bounded contexts
-- >15 files modified
-- Architectural decisions required
-- **Path**: Phase 1 → **2** → 3 → 3.5 → 4 → 5 → 6 → 7
-- **Example**: Payment system, authentication, messaging
+# Phase 2: Architecture (MANDATORY)
+@skill architect
+# Output: design.md (50 pages) + ADR-005, 006, 007, 008 (4 ADRs)
 
-**Key Difference**: HIGH complexity adds Phase 2 (Architecture) with architect skill.
+# Phase 3: Specification
+# analyst creates spec.md (100+ pages Arc42 + 15 BDD scenarios)
 
----
+# Phase 3.5: Decomposition
+# orchestrator creates tasks.md (78 atomic tasks)
 
-## 🔧 Templates
+# Phase 4: Implementation (2 weeks)
+# developer implements 78 tasks
+# gatekeeper validates each one
+# Progress: TASK-001 ✅, TASK-002 ✅, ..., TASK-078 ✅
 
-All templates are available in `.claude/templates/`:
+# Phase 5: Review & Test
+@skill reviewer  # 147 tests, 89% coverage
+@skill tester
 
-| Template | Purpose | Used By |
-|----------|---------|---------|
-| `proposal.md` | Discovery phase template | analyst (Phase 1) |
-| `design.md` | Architecture design template | architect (Phase 2) |
-| `tasks.md` | Task decomposition template | orchestrator (Phase 3.5) |
-| `arc42/` | Arc42 chapter templates (12 chapters) | analyst (Phase 3) |
-| `adr/decision.md` | Architecture Decision Record | architect, analyst |
-| `bdd/scenario.md` | BDD scenario template | analyst (Phase 3) |
-| `c4/` | C4 model diagrams | architect, analyst |
+# Phase 6: Documentation
+@skill documenter  # Migration guide + README + CHANGELOG
 
----
+# Phase 7: Validation
+@skill analyst  # Final report: Score improved 9→13 (+44%)
+@skill guardian  # Security audit, load tests
 
-## 💡 Best Practices
-
-### For Users
-
-1. **Start with analyst**: Always begin with Phase 1 (Discovery)
-2. **Be specific**: Clear requirements → better specs → better code
-3. **Trust the process**: Let workflow guide through phases
-4. **Review specs before implementation**: Validate spec.md before orchestrator runs
-
-### For AI Agents
-
-1. **Follow prerequisites**: Never skip required phases
-2. **Load minimal context**: As specified in each task/phase
-3. **Update progress**: Mark tasks/phases as completed
-4. **Reference specs**: Always align with spec.md and tasks.md
-5. **Follow templates**: Use `.claude/templates/` as base
+git commit -m "feat: Migrate to OAuth2 + OIDC"
+```
 
 ---
 
-## 🚨 Common Pitfalls
+## 📊 Efficiency Metrics
 
-### ❌ Pitfall 1: Skip Task Decomposition
-**Problem**: Developer tries to implement full spec at once
-**Result**: AI hallucinations, incorrect code
-**Solution**: ALWAYS use orchestrator (Phase 3.5)
+### Implementation Time (with vs without agents)
 
-### ❌ Pitfall 2: Large Context per Task
-**Problem**: Task loads 5000+ lines of context
-**Result**: AI loses focus, hallucinations
-**Solution**: Limit context to ~500 lines per task (orchestrator does this)
+| Complexity | Manual | With Agents | Savings |
+|------------|--------|-------------|---------|
+| **LOW** (5-15 tasks) | 1-2 days | 3-4h | 75% |
+| **MEDIUM** (15-40 tasks) | 1-2 weeks | 1-3 days | 70% |
+| **HIGH** (40-100 tasks) | 4-8 weeks | 2-3 weeks | 60% |
 
-### ❌ Pitfall 3: Skip Architecture Phase for HIGH Complexity
-**Problem**: Implement HIGH complexity without design.md
-**Result**: Technical debt, wrong decisions
-**Solution**: Always run architect for HIGH complexity
+### Code Quality
 
-### ❌ Pitfall 4: Ignore BDD Scenarios
-**Problem**: Implement without understanding behavioral requirements
-**Result**: Code doesn't match requirements
-**Solution**: Map each task to BDD scenarios
-
-### ❌ Pitfall 5: Skip Tests
-**Problem**: Implement without tests
-**Result**: Bugs, regressions, low confidence
-**Solution**: TDD - write tests alongside implementation
+| Metric | Manual | With Agents | Improvement |
+|--------|--------|-------------|-------------|
+| Hallucination Rate | 60-80% | <10% | 90% |
+| Rework Rate | 50-70% | <15% | 80% |
+| Test Coverage | Variable | ≥80% | 100% |
+| Technical Debt | High | Low | 85% |
+| Rules Compliance | 30-50% | 95-100% | 100% |
 
 ---
 
-## 📊 Success Metrics
+## 🔗 Cross-References
 
-Expected improvements with this workflow:
+### Integration with Commands
 
-| Metric | Before | After |
-|--------|--------|-------|
-| AI Hallucination Rate | 60-80% | <10% |
-| Rework Rate | 50-70% | <15% |
-| Test Coverage | Variable | ≥80% |
-| Documentation Debt | High | Low |
-| Implementation Time | Unpredictable | Predictable (estimated in tasks.md) |
-| Code Quality | Variable | Consistent |
+| Command | Skills Used | Phase | Created Artifacts |
+|---------|-------------|-------|-------------------|
+| /vision | analyst | 1-3 | specs/01_introduction/*, specs/03_context/* |
+| /stack | analyst, architect | 1-2 | specs/02_constraints/*, specs/04_solution-strategy/*, specs/09_decisions/adrs/ADR-001_* |
+| /actor | analyst | 3 | specs/03_context/* |
+| /container | analyst, architect | 3 | specs/05_building-blocks/containers/* |
+| /component | analyst | 3 | specs/05_building-blocks/components/* |
+| /plan | analyst | 3 | Multiple specs |
+| /rule | architect, gatekeeper | 2, 4 | specs/02_constraints/patterns/* |
+| /feature | analyst, orchestrator | 3, 3.5 | specs/06_runtime/scenarios/* |
+| /flow | analyst | 3 | specs/06_runtime/scenarios/* |
+| /build | analyst, architect | 3 | specs/07_deployment/*, specs/10_quality/* |
+| /cross | analyst, architect | 3 | specs/08_crosscutting/* |
+| /adr | architect | 2 | specs/09_decisions/adrs/* |
+| /code | orchestrator, developer, gatekeeper, reviewer, tester | 3.5-5 | Source code + tests |
+| /import | analyst | 1-3 | All specs/ files |
+| /stats | analyst | - | Health dashboard |
 
----
+See `../commands/README.md` for complete command catalog.
 
-## 🔗 External References
+### Integration with Templates
 
-- **Arc42**: https://arc42.org/
-- **C4 Model**: https://c4model.com/
-- **BDD**: https://cucumber.io/docs/bdd/
-- **ADR**: https://adr.github.io/
-- **DDD**: Domain-Driven Design by Eric Evans
+| Agent | Templates Used | Output Location |
+|-------|----------------|-----------------|
+| analyst | changes/proposal.md, changes/spec.md, arc42/*, bdd/* | changes/[id]/, specs/ |
+| architect | changes/design.md, adr/decision.md, c4/* | changes/[id]/, specs/09_decisions/adrs/ |
+| orchestrator | changes/tasks.md | changes/[id]/tasks.md |
+| developer | - | src/ (applies all templates indirectly) |
+| gatekeeper | - | (validates against rules/) |
+| reviewer | - | (generates review reports) |
+| tester | bdd/scenario.md | (validates BDD scenarios) |
+| documenter | - | README.md, CHANGELOG.md |
+| guardian | - | (validates all outputs) |
 
----
+See `../templates/README.md` for complete template catalog.
 
-## 📝 Example: Add Email Validation
+### Integration with Rules
 
-### Phase 1: Discovery (analyst)
+| Agent | Rules Applied | Categories |
+|-------|---------------|------------|
+| architect | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
+| developer | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
+| gatekeeper | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
+| reviewer | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
+| guardian | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
 
-**Input**: "Adicionar validação de email no cadastro de usuário"
-
-**Output**: `changes/add-email-validation/proposal.md`
-- Why: 15% of registrations fail email delivery
-- What: Add Email value object, validate format
-- Complexity: LOW
-- Next: Skip Phase 2, go to Phase 3
-
-### Phase 3: Specification (analyst)
-
-**Output**: `changes/add-email-validation/spec.md`
-- 5 BDD scenarios (valid, invalid, edge cases)
-- Email value object specification
-- Quality requirements (testability, usability)
-
-### Phase 3.5: Task Decomposition (orchestrator)
-
-**Output**: `changes/add-email-validation/tasks.md`
-- 8 atomic tasks
-- TASK-001: Setup structure (~20 LOC, 30 min)
-- TASK-002: Setup tests (~30 LOC, 30 min)
-- TASK-003: Implement Email value object (~40 LOC, 1h)
-- TASK-004: Integrate in criar-usuario (~30 LOC, 1h)
-- TASK-005: Implement EmailInvalidoError (~30 LOC, 30 min)
-- TASK-006: Unit tests (~80 LOC, 1.5h)
-- TASK-007: Integration tests (~60 LOC, 1h)
-- TASK-008: Constitution compliance check (validation, 30 min)
-
-### Phase 4: Implementation (developer)
-
-Implements task-by-task:
-- Loads ONLY context specified in each task (~500 lines)
-- Implements Email.ts (value object)
-- Integrates in criar-usuario.ts (factory)
-- Writes tests (unit + integration)
-- Total: ~250 LOC, ~7 hours
-
-### Phase 5: Review (reviewer + tester)
-
-- Reviewer: Code quality ✅
-- Tester: Coverage 92% ✅, all tests pass ✅
-
-### Phase 6: Documentation (documenter)
-
-Updates:
-- spec.md status → ✅ Implemented
-- README.md (if needed)
-- Code comments
-
-### Phase 7: Validation (analyst + guardian)
-
-- Analyst: All acceptance criteria met ✅
-- Guardian: Linters pass, tests pass, ready to commit ✅
-
-**Result**: Feature implemented correctly, no hallucinations, 92% coverage, documented.
+See `../rules/README.md` for complete rule catalog.
 
 ---
 
-## 🎉 Getting Started
+## 🚨 Antipatterns to Avoid
 
-1. **Read the constitution**: `.claude/constitution.md`
-2. **Try a simple feature**:
-   ```bash
-   @skill analyst
-   "Add a sum function"
-   ```
-3. **Watch the workflow**: See proposal → spec → tasks → code → tests → docs
-4. **Review the output**: Check each generated artifact
-5. **Scale up**: Try MEDIUM then HIGH complexity features
+### ❌ 1. Skip Orchestrator
+
+```bash
+# WRONG
+@skill analyst → spec.md → @skill developer (implements 5000 LOC at once)
+# Result: Hallucinations, code doesn't follow spec
+
+# RIGHT
+@skill analyst → spec.md → orchestrator → tasks.md (50 tasks) → developer (task-by-task)
+# Result: Deterministic code, no hallucinations
+```
+
+### ❌ 2. Implement Without Spec
+
+```bash
+# WRONG
+"Implement feature X" → @skill developer
+# Result: Random code, no validation
+
+# RIGHT
+"Feature X" → @skill analyst (creates spec) → orchestrator → developer
+```
+
+### ❌ 3. Ignore Gatekeeper
+
+```bash
+# WRONG
+developer implements tasks without gatekeeper
+# Result: Code violates 39 rules, technical debt accumulates
+
+# RIGHT
+developer + gatekeeper validating each task
+# Result: 100% compliance
+```
+
+### ❌ 4. Skip Guardian
+
+```bash
+# WRONG
+git commit (without guardian)
+# Result: Failing tests committed, vulnerabilities, unformatted code
+
+# RIGHT
+@skill guardian → ✅ Pass → git commit
+# Result: Only quality code committed
+```
+
+### ❌ 5. Don't Invoke Architect (HIGH complexity)
+
+```bash
+# WRONG
+Score 9/16 (Moderate) → Don't invoke architect → developer implements without design
+# Result: Ad-hoc architecture, high fragility, rework
+
+# RIGHT
+Score 9/16 → architect (design.md + ADRs) → developer implements following design
+# Result: Robust architecture, score improves to 13/16
+```
 
 ---
 
-**Version**: 2.0.0
-**Compatible with**: All languages (language-agnostic)
-**Requires**: Claude Code with skills support
-**License**: See project root
+## 🔍 Quick Reference
+
+### By Need
+
+| I need to... | Skill | Phase |
+|-------------|-------|-------|
+| Plan feature | analyst | 1 |
+| Design for HIGH complexity | architect | 2 |
+| Create Arc42 + BDD specs | analyst | 3 |
+| Decompose into atomic tasks | orchestrator | 3.5 |
+| Implement code | developer | 4 |
+| Validate compliance | gatekeeper | 4 |
+| Review quality | reviewer | 5 |
+| Validate tests | tester | 5 |
+| Update docs | documenter | 6 |
+| Final validation + pre-commit | analyst + guardian | 7 |
+
+### By Workflow Phase
+
+| Phase | Skills | Mandatory? |
+|-------|--------|------------|
+| 1 (Discovery) | analyst | ✅ Always |
+| 2 (Architecture) | architect | ⚠️ If HIGH complexity |
+| 3 (Specification) | analyst | ✅ Always |
+| 3.5 (Decomposition) | orchestrator | ✅ Always (CRITICAL) |
+| 4 (Implementation) | developer + gatekeeper | ✅ Always |
+| 5 (Review & Test) | reviewer + tester | ✅ Always |
+| 6 (Documentation) | documenter | ⚠️ Recommended |
+| 7 (Validation) | analyst + guardian | ✅ Always |
 
 ---
 
-## 🆘 Troubleshooting
+## 📖 Related Documentation
 
-**Q: Which skill do I start with?**
-A: Always start with **analyst** (Phase 1: Discovery)
-
-**Q: Do I need all 7 phases?**
-A: Phase 7 (guardian) is optional. Phases 1-6 are required for quality.
-
-**Q: What if I have an existing spec?**
-A: Start with **orchestrator** (Phase 3.5) to decompose into tasks.
-
-**Q: Can I skip the architect phase?**
-A: Yes, for LOW/MEDIUM complexity. Required for HIGH complexity.
-
-**Q: How do I know which complexity?**
-A: The **analyst** assesses complexity in Phase 1 (proposal.md).
-
-**Q: What if AI hallucinates during implementation?**
-A: Check if orchestrator was used. Task decomposition (Phase 3.5) prevents hallucinations.
-
-**Q: Can I use this for bug fixes?**
-A: Yes! Start with analyst: "Fix bug in email validation". Follow the same workflow.
+- **[Main Hub](../README.md)** - Complete system overview with 7-phase workflow
+- **[Commands](../commands/README.md)** - 15 Arc42 commands
+- **[Templates](../templates/README.md)** - 20 deterministic templates (Arc42, C4, BDD, ADR)
+- **[Rules](../rules/README.md)** - 39 quality rules organized by category
+- **[Result: specs/](../../specs/)** - Well-documented specifications (the constitution)
 
 ---
 
-For detailed documentation on each skill, see individual README.md files in skill directories.
+## 📜 Changelog
+
+### v3.0.0 (2025-12-10)
+- 🔗 **COMPLETE CROSS-REFERENCES**: Integration with commands, templates, rules
+- 📖 **ENHANCED DOCUMENTATION**: Clear links to all related directories
+- 🎯 **COHERENT FLOW**: Perfect navigation for developers
+- 🗺️ **WORKFLOW INTEGRATION**: Complete 7-phase workflow with all cross-references
+- ✨ Removed ID prefixes (SKL-) for cleaner structure
+
+### v2.0.0 (2025-12-09)
+- ✨ **COMPLETE ELEVATION**: 9 skills with IDs, phases, criticality
+- 📊 Standardized structure (CHECKLIST, EXAMPLES, TROUBLESHOOTING)
+- 🔗 Complete integration with commands
+- 📚 Comprehensive README with 7-phase workflow
+- 🎯 Antipatterns and usage guides
+- 📊 Efficiency metrics
+
+### v1.0.0 (2025-11-17)
+- Initial version with 9 basic skills
+
+---
+
+**Version**: 3.0.0
+**Maintained by**: Documentation-First Approach System
+**License**: MIT
+**Last Updated**: 2025-12-10

@@ -1,153 +1,153 @@
-# Scenario: [Scenario Name]
+# Cenário: [Nome do Cenário]
 
-**Template ID**: TPL-BDD-001
-**Version**: 2.0.0
-**Category**: BDD
-**Used By**: analyst (Phase 3: Specification - Runtime scenarios)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-BDD-001
+**Versão**: 2.0.0
+**Categoria**: BDD
+**Usado Por**: analyst (Fase 3: Especificação - Cenários de runtime)
+**Última Atualização**: 2025-11-17
 
 ---
 
 **ID**: SCN-[XXX]
-**Feature**: [Feature Name]
-**Priority**: [Critical | High | Medium | Low]
-**Status**: [Draft | Implemented | Tested | Deprecated]
-**Last Updated**: [YYYY-MM-DD]
+**Feature**: [Nome da Feature]
+**Prioridade**: [Crítica | Alta | Média | Baixa]
+**Status**: [Rascunho | Implementado | Testado | Depreciado]
+**Última Atualização**: [YYYY-MM-DD]
 
 ---
 
-## Feature Description
+## Descrição da Feature
 
-**Feature**: [Feature name]
+**Feature**: [Nome da feature]
 
-**As a** [role]
-**I want** [capability]
-**So that** [benefit]
+**Como** [papel]
+**Eu quero** [capacidade]
+**Para que** [benefício]
 
-**Example**:
+**Exemplo**:
 
-**Feature**: User Login
+**Feature**: Login de Usuário
 
-**As a** registered customer
-**I want** to log in to my account
-**So that** I can access my order history and saved preferences
-
----
-
-## Scenarios
-
-### Scenario 1: [Happy Path]
-
-```gherkin
-Scenario: [Scenario name]
-  Given [initial context]
-  And [additional context]
-  When [action]
-  Then [expected outcome]
-  And [additional outcome]
-```
-
-**Example**:
-
-```gherkin
-Scenario: Successful login with valid credentials
-  Given user exists with email "user@example.com"
-  And password is "SecurePass123"
-  And account is not locked
-  When user submits login form
-  Then user is authenticated
-  And JWT token is issued with 2-hour expiration
-  And user sees dashboard
-  And login success event is logged
-```
+**Como** um cliente registrado
+**Eu quero** fazer login na minha conta
+**Para que** eu possa acessar meu histórico de pedidos e preferências salvas
 
 ---
 
-### Scenario 2: [Error Case 1]
+## Cenários
+
+### Cenário 1: [Caminho Feliz]
 
 ```gherkin
-Scenario: [Scenario name]
-  Given [initial context]
-  When [action]
-  Then [expected error]
-  And [side effects]
+Scenario: [Nome do cenário]
+  Given [contexto inicial]
+  And [contexto adicional]
+  When [ação]
+  Then [resultado esperado]
+  And [resultado adicional]
 ```
 
-**Example**:
+**Exemplo**:
 
 ```gherkin
-Scenario: Login fails with invalid password
-  Given user exists with email "user@example.com"
-  And password is incorrect
-  When user submits login form
-  Then login fails with error "Invalid credentials"
-  And user remains unauthenticated
-  And failed login attempt is logged
-  And failed attempt counter is incremented
+Scenario: Login bem-sucedido com credenciais válidas
+  Given usuário existe com email "user@example.com"
+  And senha é "SecurePass123"
+  And conta não está bloqueada
+  When usuário submete formulário de login
+  Then usuário é autenticado
+  And token JWT é emitido com expiração de 2 horas
+  And usuário vê dashboard
+  And evento de sucesso de login é registrado
 ```
 
 ---
 
-### Scenario 3: [Error Case 2]
-
-**Example**:
+### Cenário 2: [Caso de Erro 1]
 
 ```gherkin
-Scenario: Login is blocked when account is locked
-  Given user exists with email "user@example.com"
-  And account has 5 failed login attempts
-  And account is locked until 10:00 AM
-  And current time is 9:30 AM
-  When user submits login form with valid password
-  Then login fails with error "Account temporarily locked"
-  And user sees message "Try again after 10:00 AM"
-  And lockout event is logged
+Scenario: [Nome do cenário]
+  Given [contexto inicial]
+  When [ação]
+  Then [erro esperado]
+  And [efeitos colaterais]
+```
+
+**Exemplo**:
+
+```gherkin
+Scenario: Login falha com senha inválida
+  Given usuário existe com email "user@example.com"
+  And senha está incorreta
+  When usuário submete formulário de login
+  Then login falha com erro "Credenciais inválidas"
+  And usuário permanece não autenticado
+  And tentativa de login falha é registrada
+  And contador de tentativas falhas é incrementado
 ```
 
 ---
 
-### Scenario 4: [Edge Case 1]
+### Cenário 3: [Caso de Erro 2]
 
-**Example**:
+**Exemplo**:
 
 ```gherkin
-Scenario: Login unlocks account after lockout period expires
-  Given user account was locked at 9:00 AM (1 hour lockout)
-  And current time is 10:05 AM (lockout expired)
-  And user provides valid credentials
-  When user submits login form
-  Then account is unlocked automatically
-  And user is authenticated successfully
-  And failed attempt counter is reset to 0
+Scenario: Login é bloqueado quando conta está bloqueada
+  Given usuário existe com email "user@example.com"
+  And conta tem 5 tentativas de login falhas
+  And conta está bloqueada até 10:00 AM
+  And horário atual é 9:30 AM
+  When usuário submete formulário de login com senha válida
+  Then login falha com erro "Conta temporariamente bloqueada"
+  And usuário vê mensagem "Tente novamente após 10:00 AM"
+  And evento de bloqueio é registrado
 ```
 
 ---
 
-### Scenario 5: [Edge Case 2]
+### Cenário 4: [Caso Extremo 1]
 
-**Example**:
+**Exemplo**:
 
 ```gherkin
-Scenario: Login with email in different case
-  Given user exists with email "user@example.com"
-  And user provides email "USER@EXAMPLE.COM" (uppercase)
-  And password is correct
-  When user submits login form
-  Then email is normalized to lowercase
-  And user is authenticated successfully
+Scenario: Login desbloqueia conta após período de bloqueio expirar
+  Given conta de usuário foi bloqueada às 9:00 AM (1 hora de bloqueio)
+  And horário atual é 10:05 AM (bloqueio expirado)
+  And usuário fornece credenciais válidas
+  When usuário submete formulário de login
+  Then conta é desbloqueada automaticamente
+  And usuário é autenticado com sucesso
+  And contador de tentativas falhas é resetado para 0
+```
+
+---
+
+### Cenário 5: [Caso Extremo 2]
+
+**Exemplo**:
+
+```gherkin
+Scenario: Login com email em case diferente
+  Given usuário existe com email "user@example.com"
+  And usuário fornece email "USER@EXAMPLE.COM" (maiúsculo)
+  And senha está correta
+  When usuário submete formulário de login
+  Then email é normalizado para minúsculo
+  And usuário é autenticado com sucesso
 ```
 
 ---
 
 ## Scenario Outline (Data-Driven)
 
-For scenarios with multiple input combinations:
+Para cenários com múltiplas combinações de inputs:
 
 ```gherkin
-Scenario Outline: [Scenario name]
-  Given [context with <placeholder>]
-  When [action with <placeholder>]
-  Then [outcome with <placeholder>]
+Scenario Outline: [Nome do cenário]
+  Given [contexto com <placeholder>]
+  When [ação com <placeholder>]
+  Then [resultado com <placeholder>]
 
 Examples:
   | placeholder1 | placeholder2 | expected_result |
@@ -155,75 +155,75 @@ Examples:
   | value3       | value4       | result2         |
 ```
 
-**Example**:
+**Exemplo**:
 
 ```gherkin
-Scenario Outline: Login validation errors
-  Given user provides email "<email>"
-  And user provides password "<password>"
-  When user submits login form
-  Then validation fails with error "<error>"
+Scenario Outline: Erros de validação de login
+  Given usuário fornece email "<email>"
+  And usuário fornece senha "<password>"
+  When usuário submete formulário de login
+  Then validação falha com erro "<error>"
 
 Examples:
-  | email              | password      | error                          |
-  | invalid-email      | SecurePass123 | Invalid email format           |
-  | user@example.com   | short         | Password must be at least 8 chars |
-  | user@example.com   |               | Password is required           |
-  |                    | SecurePass123 | Email is required              |
+  | email              | password      | error                                  |
+  | email-invalido     | SecurePass123 | Formato de email inválido              |
+  | user@example.com   | curta         | Senha deve ter no mínimo 8 caracteres |
+  | user@example.com   |               | Senha é obrigatória                    |
+  |                    | SecurePass123 | Email é obrigatório                    |
 ```
 
 ---
 
-## Background (Common Setup)
+## Background (Configuração Comum)
 
-If multiple scenarios share the same setup:
+Se múltiplos cenários compartilham a mesma configuração:
 
 ```gherkin
 Background:
-  Given [common setup]
-  And [common setup]
+  Given [configuração comum]
+  And [configuração comum]
 
-Scenario: [Scenario 1]
-  When [action]
-  Then [outcome]
+Scenario: [Cenário 1]
+  When [ação]
+  Then [resultado]
 
-Scenario: [Scenario 2]
-  When [different action]
-  Then [different outcome]
+Scenario: [Cenário 2]
+  When [ação diferente]
+  Then [resultado diferente]
 ```
 
-**Example**:
+**Exemplo**:
 
 ```gherkin
 Background:
-  Given database is seeded with test users
-  And authentication service is running
-  And rate limiter is configured to 100 req/hour
+  Given banco de dados está populado com usuários de teste
+  And serviço de autenticação está rodando
+  And rate limiter está configurado para 100 req/hora
 
-Scenario: Successful login
-  When user submits valid credentials
-  Then user is authenticated
+Scenario: Login bem-sucedido
+  When usuário submete credenciais válidas
+  Then usuário é autenticado
 
-Scenario: Failed login
-  When user submits invalid credentials
-  Then login fails
+Scenario: Login falho
+  When usuário submete credenciais inválidas
+  Then login falha
 ```
 
 ---
 
-## API Contract (Technical Details)
+## Contrato da API (Detalhes Técnicos)
 
 ### Endpoint
 
-**Method**: [HTTP method]
-**Path**: [URL path]
-**Authentication**: [Required/Optional]
+**Método**: [Método HTTP]
+**Caminho**: [Caminho da URL]
+**Autenticação**: [Obrigatória/Opcional]
 
-**Example**:
+**Exemplo**:
 
-**Method**: POST
-**Path**: `/api/v1/auth/login`
-**Authentication**: Not required (public endpoint)
+**Método**: POST
+**Caminho**: `/api/v1/auth/login`
+**Autenticação**: Não obrigatória (endpoint público)
 
 ---
 
@@ -231,38 +231,38 @@ Scenario: Failed login
 
 ```json
 {
-  "field1": "type (constraints)",
-  "field2": "type (constraints)"
+  "field1": "tipo (restrições)",
+  "field2": "tipo (restrições)"
 }
 ```
 
-**Example**:
+**Exemplo**:
 
 ```json
 {
-  "email": "string (format: email, max 255 characters)",
-  "password": "string (min 8 characters)"
+  "email": "string (formato: email, máximo 255 caracteres)",
+  "password": "string (mínimo 8 caracteres)"
 }
 ```
 
-**Validation Rules**:
-- `email`: Required, valid email format, max 255 chars
-- `password`: Required, min 8 chars
+**Regras de Validação**:
+- `email`: Obrigatório, formato de email válido, máx 255 caracteres
+- `password`: Obrigatório, mín 8 caracteres
 
 ---
 
-### Response (Success)
+### Response (Sucesso)
 
-**Status**: [HTTP status code]
+**Status**: [Código de status HTTP]
 
 ```json
 {
-  "field1": "type",
-  "field2": "type"
+  "field1": "tipo",
+  "field2": "tipo"
 }
 ```
 
-**Example**:
+**Exemplo**:
 
 **Status**: 200 OK
 
@@ -277,289 +277,289 @@ Scenario: Failed login
 
 ---
 
-### Response (Errors)
+### Response (Erros)
 
-| Status | Error Code | Description | Example |
-|--------|------------|-------------|---------|
-| [Code] | [ERR_CODE] | [Description] | [Example message] |
+| Status | Código do Erro | Descrição | Exemplo |
+|--------|----------------|-----------|---------|
+| [Código] | [ERR_CODE] | [Descrição] | [Mensagem de exemplo] |
 
-**Example**:
+**Exemplo**:
 
-| Status | Error Code | Description | Example |
-|--------|------------|-------------|---------|
-| 400 | VALIDATION_ERROR | Invalid input | "Email format is invalid" |
-| 401 | INVALID_CREDENTIALS | Wrong email/password | "Invalid credentials" |
-| 403 | ACCOUNT_LOCKED | Too many failed attempts | "Account temporarily locked" |
-| 429 | RATE_LIMIT_EXCEEDED | Too many requests | "Try again in 30 minutes" |
-| 500 | INTERNAL_ERROR | Server error | "An error occurred. Try again later" |
+| Status | Código do Erro | Descrição | Exemplo |
+|--------|----------------|-----------|---------|
+| 400 | VALIDATION_ERROR | Input inválido | "Formato de email é inválido" |
+| 401 | INVALID_CREDENTIALS | Email/senha incorretos | "Credenciais inválidas" |
+| 403 | ACCOUNT_LOCKED | Muitas tentativas falhas | "Conta temporariamente bloqueada" |
+| 429 | RATE_LIMIT_EXCEEDED | Muitas requisições | "Tente novamente em 30 minutos" |
+| 500 | INTERNAL_ERROR | Erro do servidor | "Ocorreu um erro. Tente novamente mais tarde" |
 
-**Error Response Format** (RFC 7807):
+**Formato de Resposta de Erro** (RFC 7807):
 
 ```json
 {
   "type": "https://api.example.com/errors/invalid-credentials",
-  "title": "Invalid Credentials",
+  "title": "Credenciais Inválidas",
   "status": 401,
-  "detail": "The email or password provided is incorrect",
+  "detail": "O email ou senha fornecidos estão incorretos",
   "instance": "/api/v1/auth/login"
 }
 ```
 
 ---
 
-## Side Effects
+## Efeitos Colaterais
 
-Document all side effects of this feature:
+Documente todos os efeitos colaterais desta feature:
 
-### State Changes
+### Mudanças de Estado
 
-| What | Before | After |
-|------|--------|-------|
-| [Entity] | [State] | [State] |
+| O Que | Antes | Depois |
+|-------|-------|--------|
+| [Entidade] | [Estado] | [Estado] |
 
-**Example**:
+**Exemplo**:
 
-| What | Before | After |
-|------|--------|-------|
-| User session | Not logged in | Logged in (JWT issued) |
-| Failed login counter | N | N+1 (if failed) OR 0 (if success) |
-| Account status | Active | Locked (after 5 failed attempts) |
-
----
-
-### Events Published
-
-| Event Name | When | Payload |
-|------------|------|---------|
-| [event.name] | [Condition] | [Data] |
-
-**Example**:
-
-| Event Name | When | Payload |
-|------------|------|---------|
-| `user.login.success` | Successful login | `{userId, email, timestamp, ip}` |
-| `user.login.failed` | Failed login | `{email, reason, timestamp, ip}` |
-| `user.account.locked` | Account locked | `{userId, email, unlockAt, timestamp}` |
+| O Que | Antes | Depois |
+|-------|-------|--------|
+| Sessão do usuário | Não logado | Logado (JWT emitido) |
+| Contador de login falho | N | N+1 (se falhou) OU 0 (se sucesso) |
+| Status da conta | Ativo | Bloqueado (após 5 tentativas falhas) |
 
 ---
 
-### External Calls
+### Eventos Publicados
 
-| Service | Call | When |
-|---------|------|------|
-| [Service] | [Action] | [Condition] |
+| Nome do Evento | Quando | Payload |
+|----------------|--------|---------|
+| [event.name] | [Condição] | [Dados] |
 
-**Example**:
+**Exemplo**:
 
-| Service | Call | When |
-|---------|------|------|
-| Auth0 | Verify credentials | Every login attempt |
-| Redis | Increment counter | Failed login |
-| Redis | Set lockout | 5 failed attempts |
-| SendGrid | Send alert email | Account locked |
-| Analytics | Track event | Successful login |
+| Nome do Evento | Quando | Payload |
+|----------------|--------|---------|
+| `user.login.success` | Login bem-sucedido | `{userId, email, timestamp, ip}` |
+| `user.login.failed` | Login falho | `{email, reason, timestamp, ip}` |
+| `user.account.locked` | Conta bloqueada | `{userId, email, unlockAt, timestamp}` |
 
 ---
 
-### Database Changes
+### Chamadas Externas
 
-| Table | Operation | When |
-|-------|-----------|------|
-| [table] | [INSERT/UPDATE/DELETE] | [Condition] |
+| Serviço | Chamada | Quando |
+|---------|---------|--------|
+| [Serviço] | [Ação] | [Condição] |
 
-**Example**:
+**Exemplo**:
 
-| Table | Operation | When |
-|-------|-----------|------|
-| login_attempts | INSERT | Every login attempt |
-| users | UPDATE (last_login_at) | Successful login |
-| audit_log | INSERT | Every login attempt |
+| Serviço | Chamada | Quando |
+|---------|---------|--------|
+| Auth0 | Verificar credenciais | Toda tentativa de login |
+| Redis | Incrementar contador | Login falho |
+| Redis | Definir bloqueio | 5 tentativas falhas |
+| SendGrid | Enviar email de alerta | Conta bloqueada |
+| Analytics | Rastrear evento | Login bem-sucedido |
+
+---
+
+### Mudanças no Banco de Dados
+
+| Tabela | Operação | Quando |
+|--------|----------|--------|
+| [tabela] | [INSERT/UPDATE/DELETE] | [Condição] |
+
+**Exemplo**:
+
+| Tabela | Operação | Quando |
+|--------|----------|--------|
+| login_attempts | INSERT | Toda tentativa de login |
+| users | UPDATE (last_login_at) | Login bem-sucedido |
+| audit_log | INSERT | Toda tentativa de login |
 
 ---
 
 ## Performance
 
-### Expected Performance
+### Performance Esperada
 
-- **Response Time**: p95 < [X]ms, p99 < [Y]ms
+- **Tempo de Resposta**: p95 < [X]ms, p99 < [Y]ms
 - **Throughput**: [X] req/s
-- **Concurrent Users**: [X]
+- **Usuários Concorrentes**: [X]
 
-**Example**:
-- **Response Time**: p95 < 200ms, p99 < 500ms
+**Exemplo**:
+- **Tempo de Resposta**: p95 < 200ms, p99 < 500ms
 - **Throughput**: 100 logins/s
-- **Concurrent Users**: 1,000
+- **Usuários Concorrentes**: 1.000
 
 ---
 
-### Load Testing
+### Teste de Carga
 
-**Scenario**: [Description]
-**Expected**: [Behavior under load]
+**Cenário**: [Descrição]
+**Esperado**: [Comportamento sob carga]
 
-**Example**:
+**Exemplo**:
 
-**Scenario**: 1,000 concurrent logins (sustained for 5 minutes)
-**Expected**:
-- All requests complete successfully
-- p95 < 300ms (degraded but acceptable)
-- No rate limit errors for valid users
-- Database connections remain < 100
-
----
-
-## Security
-
-### Authentication
-
-- [Security measure 1]
-- [Security measure 2]
-
-**Example**:
-- Password transmitted over HTTPS only (TLS 1.3)
-- Password never logged or stored in plain text
-- Failed attempts logged with IP for abuse detection
+**Cenário**: 1.000 logins concorrentes (sustentados por 5 minutos)
+**Esperado**:
+- Todas as requisições completam com sucesso
+- p95 < 300ms (degradado mas aceitável)
+- Nenhum erro de rate limit para usuários válidos
+- Conexões com banco de dados permanecem < 100
 
 ---
 
-### Authorization
+## Segurança
 
-- [Authorization rule 1]
-- [Authorization rule 2]
+### Autenticação
 
-**Example**:
-- N/A (public endpoint, but creates authenticated session)
+- [Medida de segurança 1]
+- [Medida de segurança 2]
 
----
-
-### Vulnerabilities Mitigated
-
-| Vulnerability | Mitigation |
-|---------------|------------|
-| [OWASP category] | [How mitigated] |
-
-**Example**:
-
-| Vulnerability | Mitigation |
-|---------------|------------|
-| Brute force | Account lockout after 5 attempts |
-| Credential stuffing | Rate limiting (100 req/hour per IP) |
-| Timing attacks | Constant-time password comparison |
-| Session fixation | Generate new session ID on login |
+**Exemplo**:
+- Senha transmitida apenas via HTTPS (TLS 1.3)
+- Senha nunca registrada ou armazenada em texto plano
+- Tentativas falhas registradas com IP para detecção de abuso
 
 ---
 
-## Testing
+### Autorização
 
-### Unit Tests
+- [Regra de autorização 1]
+- [Regra de autorização 2]
 
-Key test cases:
-- [ ] Valid credentials → success
-- [ ] Invalid password → error
-- [ ] Invalid email format → validation error
-- [ ] Missing fields → validation error
-- [ ] Account locked → error
-- [ ] Lockout expires → success
+**Exemplo**:
+- N/A (endpoint público, mas cria sessão autenticada)
 
 ---
 
-### Integration Tests
+### Vulnerabilidades Mitigadas
 
-- [ ] End-to-end login flow (API → Auth0 → Database → Response)
-- [ ] Account lockout after 5 failed attempts
-- [ ] Lockout expires after 1 hour
-- [ ] Failed counter resets after successful login
+| Vulnerabilidade | Mitigação |
+|-----------------|-----------|
+| [Categoria OWASP] | [Como mitigado] |
+
+**Exemplo**:
+
+| Vulnerabilidade | Mitigação |
+|-----------------|-----------|
+| Força bruta | Bloqueio de conta após 5 tentativas |
+| Credential stuffing | Rate limiting (100 req/hora por IP) |
+| Ataques de timing | Comparação de senha em tempo constante |
+| Session fixation | Gerar novo ID de sessão no login |
 
 ---
 
-### E2E Tests (UI)
+## Testes
 
-- [ ] User can log in via web form
-- [ ] Error messages display correctly
-- [ ] Locked account shows appropriate message
-- [ ] Dashboard loads after successful login
+### Testes Unitários
+
+Casos de teste principais:
+- [ ] Credenciais válidas → sucesso
+- [ ] Senha inválida → erro
+- [ ] Formato de email inválido → erro de validação
+- [ ] Campos faltando → erro de validação
+- [ ] Conta bloqueada → erro
+- [ ] Bloqueio expira → sucesso
 
 ---
 
-## Acceptance Criteria
+### Testes de Integração
 
-This scenario is accepted when:
+- [ ] Fluxo de login end-to-end (API → Auth0 → Banco → Resposta)
+- [ ] Bloqueio de conta após 5 tentativas falhas
+- [ ] Bloqueio expira após 1 hora
+- [ ] Contador falho reseta após login bem-sucedido
 
-- [ ] All scenarios pass (happy path + error cases + edge cases)
-- [ ] Unit tests: 100% coverage for login logic
-- [ ] Integration tests pass
-- [ ] E2E tests pass (critical paths)
+---
+
+### Testes E2E (UI)
+
+- [ ] Usuário pode fazer login via formulário web
+- [ ] Mensagens de erro são exibidas corretamente
+- [ ] Conta bloqueada mostra mensagem apropriada
+- [ ] Dashboard carrega após login bem-sucedido
+
+---
+
+## Critérios de Aceitação
+
+Este cenário é aceito quando:
+
+- [ ] Todos os cenários passam (caminho feliz + casos de erro + casos extremos)
+- [ ] Testes unitários: 100% de cobertura para lógica de login
+- [ ] Testes de integração passam
+- [ ] Testes E2E passam (caminhos críticos)
 - [ ] Performance: p95 < 200ms
-- [ ] Security: No vulnerabilities found
-- [ ] Documentation: API docs updated
-- [ ] Code review: Approved by 2 developers
+- [ ] Segurança: Nenhuma vulnerabilidade encontrada
+- [ ] Documentação: Docs da API atualizados
+- [ ] Code review: Aprovado por 2 desenvolvedores
 
 ---
 
-## Related Documents
+## Documentos Relacionados
 
-- [Component: Auth Service](../../05_building-blocks/components/CMP-001_auth-service.md)
-- [ADR: Use Auth0](../09_decisions/adr/ADR-003_use-auth0.md)
-- [Quality: Security Requirements](../../10_quality.md)
-
----
-
-## Change History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 2.0.0 | 2025-11-17 | Template Standardization | Added Template ID, Related Templates, Workflow Integration |
-| 1.0.0 | [Date] | [Name] | Initial version |
+- [Componente: Serviço de Auth](../../05_building-blocks/components/CMP-001_auth-service.md)
+- [ADR: Usar Auth0](../09_decisions/adr/ADR-003_use-auth0.md)
+- [Qualidade: Requisitos de Segurança](../../10_quality.md)
 
 ---
 
-## Related Templates
+## Histórico de Mudanças
 
-### Prerequisites
-- **arc42/01_introduction.md** (TPL-ARC42-01) - Feature context and requirements
-- **arc42/03_context.md** (TPL-ARC42-03) - System boundaries and external systems
-
-### Part Of
-- **arc42/06_runtime.md** (TPL-ARC42-06) - Arc42 Chapter 6: Runtime View
-
-### Follows This Template
-- **tasks.md** (TPL-WORKFLOW-003) - Orchestrator decomposes scenarios into tasks
-- **component.md** (TPL-C4-003) - Components implement scenario behavior
-
-### See Also
-- **c4/component.md** (TPL-C4-003) - Components involved in scenario
-- **adr/decision.md** (TPL-ADR-001) - Architecture decisions affecting behavior
-- **arc42/10_quality.md** (TPL-ARC42-10) - Quality scenarios
+| Versão | Data | Autor | Mudanças |
+|--------|------|-------|----------|
+| 2.0.0 | 2025-11-17 | Padronização de Templates | Adicionado Template ID, Templates Relacionados, Integração com Workflow |
+| 1.0.0 | [Data] | [Nome] | Versão inicial |
 
 ---
 
-## Workflow Integration
+## Templates Relacionados
 
-**Phase**: 3 (Specification)
+### Pré-requisitos
+- **arc42/01_introduction.md** (TPL-ARC42-01) - Contexto da feature e requisitos
+- **arc42/03_context.md** (TPL-ARC42-03) - Limites do sistema e sistemas externos
 
-**Primary Skill**: analyst
+### Parte De
+- **arc42/06_runtime.md** (TPL-ARC42-06) - Capítulo 6 do Arc42: Visão de Runtime
 
-**Part Of**: Complete spec.md document (Arc42 Chapter 6: Runtime View)
+### Segue Este Template
+- **tasks.md** (TPL-WORKFLOW-003) - Orchestrator decompõe cenários em tarefas
+- **component.md** (TPL-C4-003) - Componentes implementam comportamento do cenário
 
-**Output Location**: `specs/06_runtime/scenarios/SCN-*.md`
-
-**Prerequisites**:
-- System context defined (C4 Level 1)
-- Components identified (C4 Level 3)
-- Business requirements understood (Arc42 Chapter 1)
-
-**Purpose**:
-- Define system behavior from user perspective
-- Provide testable acceptance criteria
-- Map features to implementation tasks
-- Enable BDD (Behavior-Driven Development)
-
-**Next Steps**:
-1. **Orchestrator decomposes** - Scenarios → Atomic tasks (Phase 3.5)
-2. **Developer implements** - TDD based on scenarios (Phase 4)
-3. **Tester validates** - Scenarios become test cases (Phase 5)
+### Veja Também
+- **c4/component.md** (TPL-C4-003) - Componentes envolvidos no cenário
+- **adr/decision.md** (TPL-ADR-001) - Decisões arquiteturais afetando comportamento
+- **arc42/10_quality.md** (TPL-ARC42-10) - Cenários de qualidade
 
 ---
 
-**Parent**: [06. Runtime View](../../arc42/06_runtime.md)
-**Type**: BDD Scenario (Behavior Specification)
+## Integração com Workflow
+
+**Fase**: 3 (Especificação)
+
+**Skill Principal**: analyst
+
+**Parte De**: Documento spec.md completo (Capítulo 6 do Arc42: Visão de Runtime)
+
+**Localização de Output**: `specs/06_runtime/scenarios/SCN-*.md`
+
+**Pré-requisitos**:
+- Contexto do sistema definido (C4 Nível 1)
+- Componentes identificados (C4 Nível 3)
+- Requisitos de negócio compreendidos (Capítulo 1 do Arc42)
+
+**Propósito**:
+- Definir comportamento do sistema a partir da perspectiva do usuário
+- Fornecer critérios de aceitação testáveis
+- Mapear features para tarefas de implementação
+- Habilitar BDD (Behavior-Driven Development)
+
+**Próximos Passos**:
+1. **Orchestrator decompõe** - Cenários → Tarefas atômicas (Fase 3.5)
+2. **Developer implementa** - TDD baseado em cenários (Fase 4)
+3. **Tester valida** - Cenários se tornam casos de teste (Fase 5)
+
+---
+
+**Parent**: [06. Visão de Runtime](../../arc42/06_runtime.md)
+**Tipo**: Cenário BDD (Especificação de Comportamento)

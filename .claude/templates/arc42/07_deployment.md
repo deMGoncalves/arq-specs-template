@@ -1,11 +1,11 @@
-# 07. Deployment View
+# 07. Visão de Deployment
 
-**Template ID**: TPL-ARC42-07
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 7 (Deployment View)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-07
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 7 (Visão de Deployment)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
@@ -13,14 +13,14 @@
 
 ---
 
-## Infrastructure
+## Infraestrutura
 
-**Cloud Provider**: AWS
-**Regions**: us-east-1 (primary), us-west-2 (backup)
+**Provedor Cloud**: AWS
+**Regiões**: us-east-1 (primária), us-west-2 (backup)
 
 ---
 
-## Deployment Diagram
+## Diagrama de Deployment
 
 ```
 ┌─────────────────────────────────────────┐
@@ -29,15 +29,15 @@
 │  │  VPC: 10.0.0.0/16                 │  │
 │  │                                   │  │
 │  │  ┌─────────────────────────────┐ │  │
-│  │  │ Public Subnet: 10.0.1.0/24  │ │  │
+│  │  │ Subnet Pública: 10.0.1.0/24 │ │  │
 │  │  │                             │ │  │
 │  │  │  ┌───────────────────────┐  │ │  │
-│  │  │  │  Load Balancer (ALB)  │  │ │  │
+│  │  │  │  Load Balancer (ALB)  │  │  │  │
 │  │  │  └───────────┬───────────┘  │ │  │
 │  │  └──────────────┼──────────────┘ │  │
 │  │                 │                │  │
 │  │  ┌──────────────┼──────────────┐ │  │
-│  │  │ Private Subnet: 10.0.2.0/24│ │  │
+│  │  │ Subnet Privada: 10.0.2.0/24│ │  │
 │  │  │              │              │ │  │
 │  │  │  ┌───────────┴────────┐    │ │  │
 │  │  │  │  ECS Cluster       │    │ │  │
@@ -48,7 +48,7 @@
 │  │  └────────────────────────────┘ │  │
 │  │                                   │  │
 │  │  ┌─────────────────────────────┐ │  │
-│  │  │ Data Subnet: 10.0.3.0/24    │ │  │
+│  │  │ Subnet de Dados: 10.0.3.0/24│ │  │
 │  │  │                             │ │  │
 │  │  │  ┌──────────┐  ┌─────────┐ │ │  │
 │  │  │  │  RDS     │  │ Redis   │ │ │  │
@@ -59,7 +59,7 @@
 └─────────────────────────────────────────┘
 
 ┌─────────────────────────┐
-│  AWS Services (External)│
+│  AWS Services (Externos)│
 │  - S3                   │
 │  - CloudFront           │
 │  - Secrets Manager      │
@@ -69,67 +69,67 @@
 
 ---
 
-## Components
+## Componentes
 
-### Compute
-- **ECS Fargate**: Serverless containers
+### Computação
+- **ECS Fargate**: Containers serverless
 - **Auto-scaling**: CPU > 70% → scale up
 - **Task Definition**: 2 vCPU, 4GB RAM
 
-### Database
+### Banco de Dados
 - **RDS PostgreSQL**: Multi-AZ, db.t3.large
-- **Read Replicas**: 2 replicas
-- **Backups**: Daily, 7-day retention
+- **Read Replicas**: 2 réplicas
+- **Backups**: Diário, retenção de 7 dias
 
 ### Cache
-- **ElastiCache Redis**: Cluster mode, 3 nodes
-- **Eviction**: LRU, 4GB memory
+- **ElastiCache Redis**: Modo cluster, 3 nós
+- **Eviction**: LRU, 4GB memória
 
-### Storage
-- **S3**: Product images, user uploads
-- **CloudFront**: CDN, 24h cache TTL
+### Armazenamento
+- **S3**: Imagens de produtos, uploads de usuários
+- **CloudFront**: CDN, TTL de cache 24h
 
-### Networking
+### Rede
 - **ALB**: Application Load Balancer
-- **Security Groups**: Restrict access
+- **Security Groups**: Restrição de acesso
 
 ---
 
-## CI/CD Pipeline
+## Pipeline CI/CD
 
 ```
 Developer → Git Push → GitHub Actions → Build → Test → Deploy
 ```
 
-**Stages**:
+**Estágios**:
 1. **Lint**: ESLint + Prettier
-2. **Test**: Unit + Integration (80% coverage)
-3. **Build**: Docker image
+2. **Test**: Unit + Integration (80% cobertura)
+3. **Build**: Imagem Docker
 4. **Push**: ECR (Elastic Container Registry)
-5. **Deploy**: ECS (rolling update, 25% at a time)
+5. **Deploy**: ECS (rolling update, 25% por vez)
 
-**Deployment Strategy**: Blue-Green
-**Rollback**: Automatic if health checks fail
-
----
-
-## Environments
-
-| Environment | URL | Purpose | Data |
-|-------------|-----|---------|------|
-| Development | dev.example.com | Feature testing | Fake |
-| Staging | staging.example.com | UAT | Anonymized |
-| Production | api.example.com | Live | Real |
+**Estratégia de Deployment**: Blue-Green
+**Rollback**: Automático se health checks falharem
 
 ---
 
-## Monitoring
+## Ambientes
 
-- **Logs**: CloudWatch Logs (centralized)
-- **Metrics**: CloudWatch Metrics (CPU, memory, requests)
-- **Alerts**: SNS → PagerDuty
+| Ambiente | URL | Propósito | Dados |
+|----------|-----|-----------|-------|
+| Development | dev.example.com | Teste de features | Fake |
+| Staging | staging.example.com | UAT | Anonimizados |
+| Production | api.example.com | Live | Reais |
+
+---
+
+## Monitoramento
+
+- **Logs**: CloudWatch Logs (centralizados)
+- **Métricas**: CloudWatch Metrics (CPU, memória, requisições)
+- **Alertas**: SNS → PagerDuty
 - **Dashboards**: Grafana
 
 ---
 
-**Previous**: [06. Runtime](06_runtime.md) | **Next**: [08. Crosscutting](08_crosscutting.md)
+**Anterior**: [06. Runtime](06_runtime.md) | **Próximo**: [08. Crosscutting](08_crosscutting.md)

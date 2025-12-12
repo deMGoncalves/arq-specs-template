@@ -1,617 +1,573 @@
-# Guia de Contribuição - Arq-Specs
+# Guia de Contribuição
 
-Obrigado por considerar contribuir com o Arq-Specs! 🎉
+Obrigado por considerar contribuir com o **Documentation-First Approach**! 🎉
 
-Este documento fornece diretrizes para contribuir com o projeto.
-
----
-
-## 📚 Leitura Recomendada Antes de Contribuir
-
-- **[QUICKSTART.md](QUICKSTART.md)** - Entenda como usar o projeto (15 minutos)
-- **[HOW-IT-WORKS.md](HOW-IT-WORKS.md)** - Entenda como funciona na prática
-- **[MANIFEST.md](MANIFEST.md)** - Entenda por que funciona (matemática + ciência)
-- **[.claude/constitution.md](.claude/constitution.md)** - Princípios fundamentais (LEIA PRIMEIRO!)
+Este documento fornece diretrizes para contribuir com o projeto. Seguir estas diretrizes ajuda a comunicar que você respeita o tempo dos desenvolvedores que gerenciam e desenvolvem este projeto open source.
 
 ---
 
-## 📖 Índice
+## 📋 Índice
 
-- [Código de Conduta](#código-de-conduta)
-- [Como Posso Contribuir?](#como-posso-contribuir)
-- [Configurando o Ambiente](#configurando-o-ambiente)
-- [Processo de Contribuição](#processo-de-contribuição)
-- [Padrões de Código](#padrões-de-código)
-- [Padrões de Documentação](#padrões-de-documentação)
-- [Commits e PRs](#commits-e-prs)
-- [Revisão de Código](#revisão-de-código)
+- [Código de Conduta](#-código-de-conduta)
+- [Como Posso Contribuir?](#-como-posso-contribuir)
+- [Processo de Desenvolvimento](#-processo-de-desenvolvimento)
+- [Configuração do Ambiente](#-configuração-do-ambiente)
+- [Diretrizes de Código](#-diretrizes-de-código)
+- [Diretrizes de Commit](#-diretrizes-de-commit)
+- [Processo de Pull Request](#-processo-de-pull-request)
+- [Diretrizes de Documentação](#-diretrizes-de-documentação)
+- [Relatando Bugs](#-relatando-bugs)
+- [Sugerindo Melhorias](#-sugerindo-melhorias)
+- [Comunidade](#-comunidade)
 
 ---
 
 ## 📜 Código de Conduta
 
-Este projeto segue o [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
-
-**Resumo:**
-- 🤝 Seja respeitoso e inclusivo
-- 💬 Comunique-se de forma construtiva
-- 🚫 Não tolere assédio ou discriminação
-- ✅ Foque no que é melhor para a comunidade
+Este projeto adere ao [Código de Conduta](CODE_OF_CONDUCT.md). Ao participar, espera-se que você mantenha este código. Por favor, reporte comportamentos inaceitáveis para [INSERIR EMAIL].
 
 ---
 
 ## 🤝 Como Posso Contribuir?
 
-### 1. Reportar Bugs
+Existem várias formas de contribuir com o projeto:
 
-Encontrou um bug? Abra uma [issue](https://github.com/your-org/arq-specs-template/issues) com:
+### 1. 🐛 Reportar Bugs
 
-**Template:**
-```markdown
-## Descrição do Bug
-[Descrição clara e concisa]
+Encontrou um bug? Ajude-nos a corrigi-lo:
 
-## Passos para Reproduzir
-1. ...
-2. ...
-3. ...
+1. **Verifique** se o bug já não foi reportado em [Issues](https://github.com/yourusername/arq-specs-template/issues)
+2. **Abra uma issue** usando o template de bug report
+3. **Descreva** o problema claramente com passos para reprodução
+4. **Inclua** informações de ambiente (SO, versão do Claude Code, etc.)
 
-## Comportamento Esperado
-[O que deveria acontecer]
+### 2. 💡 Sugerir Melhorias
 
-## Comportamento Atual
-[O que realmente acontece]
+Tem uma ideia para melhorar o projeto?
 
-## Screenshots/Logs
-[Se aplicável]
+1. **Verifique** se a sugestão já não existe em [Issues](https://github.com/yourusername/arq-specs-template/issues)
+2. **Abra uma issue** usando o template de feature request
+3. **Descreva** claramente a melhoria e sua motivação
+4. **Explique** como isso beneficia os usuários do projeto
 
-## Ambiente
-- OS: [ex: macOS 14.1]
-- Claude Code: [ex: 1.2.3]
-- Bun: [ex: 1.1.0]
-```
+### 3. 📖 Melhorar Documentação
 
-### 2. Sugerir Melhorias
+Documentação clara é essencial:
 
-Tem uma ideia? Abra uma [discussion](https://github.com/your-org/arq-specs-template/discussions) com:
+- Corrigir erros de digitação ou gramática
+- Adicionar exemplos práticos
+- Melhorar explicações existentes
+- Traduzir documentação (atualmente em Português BR)
+- Criar tutoriais e guias
 
-**Template:**
-```markdown
-## Problema que Resolve
-[Qual problema esta melhoria resolve?]
+### 4. 💻 Contribuir com Código
 
-## Solução Proposta
-[Como você sugere resolver?]
+Quer implementar uma nova feature ou corrigir um bug?
 
-## Alternativas Consideradas
-[Outras abordagens que você considerou]
+- Escolha uma issue marcada como `good first issue` para começar
+- Issues marcadas como `help wanted` precisam de contribuidores
+- Siga o [Processo de Desenvolvimento](#-processo-de-desenvolvimento) abaixo
 
-## Impacto
-[Quem se beneficia? Qual o impacto?]
-```
+### 5. 🧪 Adicionar Exemplos
 
-### 3. Contribuir com Código
+Exemplos práticos são muito valiosos:
 
-Áreas que precisam de ajuda:
+- Novos cenários BDD (`.claude/examples/bdd-scenarios/`)
+- Novos exemplos de arquitetura (`.claude/examples/architecture/`)
+- Novos exemplos de regras de qualidade (`.claude/examples/quality-rules/`)
 
-#### 🎯 Alta Prioridade
+### 6. 🎨 Melhorar Templates
 
-- **Templates específicos de domínio**
-  - Fintech (pagamentos, KYC, transações)
-  - Healthtech (HIPAA, prontuários, telemedicina)
-  - E-commerce (checkout, inventory, shipping)
-  - Logística (rastreamento, roteirização, armazém)
+Aprimore os templates existentes:
 
-- **Agents especializados**
-  - Melhorias no orchestrator (decomposição mais inteligente)
-  - Novos agents (ex: performance-analyzer, security-auditor)
-
-- **Validadores**
-  - Validator de conformidade Arc42
-  - Validator de cenários BDD
-  - Validator de ADRs
-
-#### 🌟 Média Prioridade
-
-- **Tradução de documentação**
-  - Inglês completo
-  - Espanhol
-  - Outros idiomas
-
-- **Exemplos práticos**
-  - Projetos reais completos
-  - Casos de uso específicos
-  - Tutoriais em vídeo
-
-- **Ferramentas**
-  - CLI para comandos Arc42
-  - VS Code extension
-  - Web dashboard
-
-#### 💡 Baixa Prioridade (mas bem-vinda!)
-
-- **Melhorias de UI/UX**
-  - Diagramas mais bonitos
-  - Templates mais legíveis
-  - Markdown melhor formatado
-
-- **Performance**
-  - Otimização de comandos
-  - Cache de templates
-  - Parallel processing
+- Templates Arc42 (`.claude/templates/arc42/`)
+- Templates C4 (`.claude/templates/c4/`)
+- Templates BDD (`.claude/templates/bdd/`)
+- Templates ADR (`.claude/templates/adr/`)
 
 ---
 
-## ⚙️ Configurando o Ambiente
+## 🔄 Processo de Desenvolvimento
+
+Este projeto segue a **abordagem Documentation-First**. Isso significa:
+
+### 1. Documentação ANTES de Código
+
+```
+❌ ERRADO: Escrever código → Documentar depois
+✅ CORRETO: Especificar → Implementar → Atualizar docs
+```
+
+### 2. Workflow Completo
+
+Para features não-triviais:
+
+```bash
+# 1. Criar proposta (se feature complexa)
+# Arquivo: changes/[feature-id]/proposal.md
+
+# 2. Especificar (Arc42 + BDD)
+# Arquivo: changes/[feature-id]/spec.md
+
+# 3. Implementar código
+# Seguindo DDD Tactical Co-Located
+
+# 4. Escrever testes (cobertura ≥80%)
+# Junto com o código
+
+# 5. Atualizar documentação
+# specs/, README.md, etc.
+```
+
+### 3. Organização de Código
+
+**✅ Use DDD Tactical Co-Located**:
+```
+src/[contexto]/[container]/[componente]/
+  - index.ts
+  - criar-[entidade].ts
+  - [acao]-[entidade].ts
+  - [Entidade].ts
+  - [componente].spec.ts
+```
+
+**❌ NÃO use organização por camadas técnicas**:
+```
+src/domain/entities/
+src/application/services/
+src/infrastructure/repositories/
+```
+
+### 4. Qualidade de Código
+
+Aplique as **39 regras de qualidade** (`.claude/rules/`):
+
+- ✅ Máximo 1 nível de indentação
+- ✅ Sem cláusula ELSE
+- ✅ Encapsular primitivos
+- ✅ Coleções como primeira classe
+- ✅ Funções pequenas (<20 linhas)
+- ✅ SOLID principles
+- ✅ Testes com ≥80% cobertura
+
+---
+
+## ⚙️ Configuração do Ambiente
 
 ### Pré-requisitos
 
-- [Bun](https://bun.sh/) ≥ 1.1
-- [Git](https://git-scm.com/)
-- [Claude Code](https://claude.ai/code) (para testar)
-- Editor de código (VS Code recomendado)
+```bash
+✅ Claude Code instalado → https://claude.ai/code
+✅ Git 2.x+
+✅ Node.js 18+ (opcional, para validações)
+```
 
-### Fork & Clone
+### Setup Inicial
 
 ```bash
-# 1. Fork o repositório no GitHub
+# 1. Fork o repositório
+# Clique em "Fork" no GitHub
+
 # 2. Clone seu fork
 git clone https://github.com/SEU-USUARIO/arq-specs-template.git
 cd arq-specs-template
 
 # 3. Adicione o upstream
-git remote add upstream https://github.com/your-org/arq-specs-template.git
+git remote add upstream https://github.com/yourusername/arq-specs-template.git
 
-# 4. Instale dependências
-bun install
+# 4. Crie uma branch para sua feature
+git checkout -b feature/minha-feature
+
+# 5. (Opcional) Configure validações
+chmod +x .claude/hooks/*.sh
+chmod +x .claude/validators/**/*.sh
 ```
 
-### Estrutura do Projeto
-
-```
-arq-specs-template/
-├── .claude/              # Configuração Claude Code
-│   ├── constitution.md   # NÃO MODIFIQUE sem aprovação
-│   ├── commands/         # Comandos Arc42
-│   ├── skills/           # Agents especializados
-│   ├── templates/        # Templates (principal área de contribuição)
-│   └── rules/            # 39 regras de qualidade
-│
-├── docs/                 # Documentação adicional
-├── examples/             # Exemplos práticos
-├── tests/                # Testes automatizados
-└── scripts/              # Scripts de build/validação
-```
-
-### Rodando Localmente
+### Mantendo seu Fork Atualizado
 
 ```bash
-# Desenvolvimento com HMR
-bun run dev
+# Buscar mudanças do upstream
+git fetch upstream
 
-# Build de produção
-bun run build
-
-# Preview do build
-bun run preview
-
-# Testes
-bun test
-
-# Linting
-bun run lint
-
-# Validação de specs
-bun run lint:specs
-```
-
----
-
-## 🔄 Processo de Contribuição
-
-### Princípios Inegociáveis
-
-- **Documentação primeiro.** Toda alteração começa em `specs/`. Sem capítulo atualizado, não há código aprovado.
-- **Fonte única de verdade.** O Arc42 é o contrato vivo que alimenta humanos e agentes; divergências são tratadas como incidentes.
-- **Transparência mensurável.** Cada mudança deve apontar métricas (SLOs, RTO/RPO, produtividade) e riscos associados.
-- **Automação consciente.** Comandos `/vision`, `/stack`, `/plan`, etc., são seus copilotos. Sempre revise o resultado antes do commit.
-
-### 1. Crie uma Branch
-
-```bash
-# Sempre crie a partir da main atualizada
+# Atualizar sua main
 git checkout main
-git pull upstream main
+git merge upstream/main
 
-# Crie branch com nome descritivo
-git checkout -b feature/nome-da-feature
-# ou
-git checkout -b fix/nome-do-bug
-# ou
-git checkout -b docs/nome-da-doc
-```
-
-**Convenção de nomes:**
-- `feature/` - Nova funcionalidade
-- `fix/` - Correção de bug
-- `docs/` - Documentação
-- `refactor/` - Refatoração
-- `test/` - Adicionar/melhorar testes
-- `chore/` - Tarefas de manutenção
-
-### 2. Escolha o Fluxo Certo
-
-| Cenário | Fluxo recomendado | Ordem dos comandos |
-| ------- | ----------------- | ------------------ |
-| Já existe documentação densa (RFP, BRD, discovery completo) | **Opção A — Fluxo Acelerado** | `/import` → `/code` |
-| Projeto greenfield ou necessidade de inspeções faseadas | **Opção B — Desenvolvimento Iterativo** | `/vision` → `/stack` → `/plan` + `/feature` → `/build` → `/code` |
-
-### 3. Faça Suas Mudanças
-
-**Regras:**
-
-✅ **FAÇA:**
-- Siga os [padrões de código](#padrões-de-código)
-- Adicione testes para novas funcionalidades
-- Atualize documentação relevante
-- Verifique se build passa (`bun run build`)
-- Teste com Claude Code localmente
-- Execute `bun run lint:specs` após cada comando
-
-❌ **NÃO FAÇA:**
-- Mudanças no `.claude/constitution.md` sem discussão prévia
-- Commits diretos na `main`
-- PRs enormes (>500 linhas alteradas)
-- Breaking changes sem discussão
-- Código sem especificação correspondente em `specs/`
-
-### 4. Commit Suas Mudanças
-
-Siga o padrão [Conventional Commits](https://www.conventionalcommits.org/):
-
-```bash
-# Formato
-<tipo>[escopo opcional]: <descrição>
-
-[corpo opcional]
-
-[rodapé opcional]
-```
-
-**Tipos:**
-- `feat`: Nova funcionalidade
-- `fix`: Correção de bug
-- `docs`: Documentação
-- `style`: Formatação (não afeta código)
-- `refactor`: Refatoração
-- `test`: Testes
-- `chore`: Manutenção
-
-**Exemplos:**
-
-```bash
-git commit -m "feat(templates): add fintech payment template"
-
-git commit -m "fix(orchestrator): correct task size calculation
-
-Task size was being calculated incorrectly for TypeScript files,
-leading to tasks with >200 LOC.
-
-Fixes #123"
-
-git commit -m "docs(readme): update installation instructions"
-```
-
-### 5. Push e Crie PR
-
-```bash
-# Push para seu fork
-git push origin feature/nome-da-feature
-
-# Crie Pull Request no GitHub
-# Use o template de PR
-```
-
-**Template de PR:**
-
-```markdown
-## Descrição
-[Descrição clara do que foi feito]
-
-## Tipo de Mudança
-- [ ] Bug fix (correção que resolve um problema)
-- [ ] Nova funcionalidade (mudança que adiciona funcionalidade)
-- [ ] Breaking change (correção ou funcionalidade que causa quebra)
-- [ ] Documentação (mudança apenas em documentação)
-
-## Como Foi Testado?
-[Descreva os testes realizados]
-
-## Impacto
-- **SLOs afetados**: [Liste]
-- **Riscos**: [Liste]
-- **Métricas**: [Liste]
-
-## Documentação Atualizada
-- [ ] `specs/` atualizado
-- [ ] README atualizado (se necessário)
-- [ ] ADR criado (se decisão arquitetural)
-- [ ] Glossário atualizado
-
-## Checklist
-- [ ] Meu código segue os padrões do projeto
-- [ ] Revisei meu próprio código
-- [ ] Comentei código complexo
-- [ ] Atualizei a documentação ANTES do código
-- [ ] Minhas mudanças não geram warnings
-- [ ] Adicionei testes que provam que meu fix/feature funciona
-- [ ] Testes unitários novos e existentes passam localmente
-- [ ] Build passa (`bun run build`)
-- [ ] Specs validadas (`bun run lint:specs`)
-
-## Screenshots (se aplicável)
-[Cole screenshots aqui]
-
-## Issues Relacionadas
-Fixes #123
-Closes #456
+# Atualizar sua branch de feature
+git checkout feature/minha-feature
+git rebase main
 ```
 
 ---
 
-## 📝 Padrões de Código
+## 📝 Diretrizes de Código
 
-### TypeScript/JavaScript
+### Estilo de Código
 
-Seguimos o [Airbnb Style Guide](https://github.com/airbnb/javascript).
+1. **TypeScript/JavaScript**:
+   - Use TypeScript sempre que possível
+   - Siga as regras do `.claude/rules/`
+   - Use `const` ao invés de `let` sempre que possível
+   - Prefira funções puras
 
-**Regras principais:**
+2. **Nomenclatura**:
+   - **Arquivos**: kebab-case (`criar-usuario.ts`)
+   - **Classes**: PascalCase (`Usuario`, `EmailValueObject`)
+   - **Funções**: camelCase (`criarUsuario`, `validarEmail`)
+   - **Constantes**: UPPER_SNAKE_CASE (`MAX_TENTATIVAS`)
+
+3. **Comentários**:
+   - Em Português (Brasil)
+   - Explique o "por quê", não o "o quê"
+   - Use JSDoc para funções públicas
+
+### Exemplo de Código Bom
 
 ```typescript
-// ✅ BOM
-export class Email {
-  private constructor(private readonly value: string) {
-    this.validate()
-  }
+/**
+ * Cria um novo usuário validando email e senha
+ *
+ * @param dados - Dados do usuário (email, senha, nome)
+ * @returns Usuário criado com ID gerado
+ * @throws {EmailInvalidoError} Se email for inválido
+ * @throws {SenhaFracaError} Se senha não atender critérios
+ */
+export function criarUsuario(dados: DadosUsuario): Usuario {
+  const email = Email.criar(dados.email);
+  const senha = Senha.criar(dados.senha);
 
-  private validate(): void {
-    if (!this.isValidFormat()) {
-      throw new EmailInvalidoError('INVALID_EMAIL_FORMAT')
-    }
-  }
-
-  private isValidFormat(): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)
-  }
-
-  static create(value: string): Email {
-    return new Email(value)
-  }
-}
-
-// ❌ RUIM
-export class Email {
-  value: string  // Deveria ser private readonly
-
-  constructor(value: string) {  // Deveria ser private
-    this.value = value
-    if (!this.validate()) {  // Deveria lançar erro, não retornar boolean
-      console.log("Email inválido")  // Não use console.log, use Error
-    }
-  }
-
-  validate() {  // Tipo de retorno faltando
-    // Regex inline sem validação
-    return this.value.includes("@")  // Validação muito simples
-  }
+  return {
+    id: gerarId(),
+    email: email.valor,
+    senha: senha.hash,
+    nome: dados.nome,
+    criadoEm: new Date(),
+  };
 }
 ```
 
-### Estrutura DDD Co-Located
+### Testes
 
+**Estrutura de Teste**:
+
+```typescript
+describe('criarUsuario', () => {
+  describe('quando dados são válidos', () => {
+    it('cria usuário com sucesso', () => {
+      const dados = {
+        email: 'maria@exemplo.com',
+        senha: 'Senha123!',
+        nome: 'Maria Silva',
+      };
+
+      const usuario = criarUsuario(dados);
+
+      expect(usuario.id).toBeDefined();
+      expect(usuario.email).toBe('maria@exemplo.com');
+      expect(usuario.nome).toBe('Maria Silva');
+    });
+  });
+
+  describe('quando email é inválido', () => {
+    it('lança EmailInvalidoError', () => {
+      const dados = {
+        email: 'email-invalido',
+        senha: 'Senha123!',
+        nome: 'Maria Silva',
+      };
+
+      expect(() => criarUsuario(dados)).toThrow(EmailInvalidoError);
+    });
+  });
+});
 ```
-✅ CORRETO:
-src/user-management/api/usuario/
-  ├── index.ts                    # Aggregate root
-  ├── criar-usuario.ts            # Factory
-  ├── registrar-usuario.ts        # Use case
-  ├── Email.ts                    # Value object
-  ├── UsuarioRegistrado.ts        # Domain event
-  └── usuario.spec.ts             # Tests
 
-❌ ERRADO:
-src/
-  ├── domain/entities/Usuario.ts
-  ├── application/services/UsuarioService.ts
-  └── infrastructure/repositories/UsuarioRepository.ts
-```
-
-### Object Calisthenics
-
-Seguimos as [9 regras de Object Calisthenics](.claude/rules/001-009_object-calisthenics/):
-
-1. **1 nível de indentação** por método
-2. **Sem ELSE**
-3. **Encapsular primitivos**
-4. **Coleções como primeira classe**
-5. **Máximo 1 chamada por linha**
-6. **Sem nomes abreviados**
-7. **Máximo 50 linhas por classe**
-8. **Sem getters/setters**
-9. **Diga, não pergunte (Tell, Don't Ask)**
+**Cobertura Mínima**: ≥80% (lines, branches, functions, statements)
 
 ---
 
-## 📚 Padrões de Documentação
+## 📋 Diretrizes de Commit
 
-### Markdown
+### Formato de Commit
+
+Use [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<tipo>(<escopo>): <descrição curta>
+
+<corpo opcional>
+
+<rodapé opcional>
+```
+
+### Tipos de Commit
+
+| Tipo | Descrição | Exemplo |
+|------|-----------|---------|
+| `feat` | Nova funcionalidade | `feat(auth): adiciona autenticação OAuth2` |
+| `fix` | Correção de bug | `fix(email): corrige validação RFC 5322` |
+| `docs` | Apenas documentação | `docs(readme): atualiza exemplo de uso` |
+| `style` | Formatação, ponto e vírgula, etc | `style(user): formata código com Prettier` |
+| `refactor` | Refatoração de código | `refactor(payment): simplifica lógica de desconto` |
+| `test` | Adicionar ou corrigir testes | `test(auth): adiciona testes de integração` |
+| `chore` | Tarefas de manutenção | `chore(deps): atualiza dependências` |
+| `perf` | Melhoria de performance | `perf(db): otimiza query de busca` |
+
+### Exemplos de Bons Commits
+
+```bash
+# Feature nova
+feat(checkout): implementa validação de estoque antes do checkout
+
+Adiciona verificação de disponibilidade de estoque antes de
+permitir que o usuário complete o checkout.
+
+Closes #123
+
+# Correção de bug
+fix(auth): corrige expiração de token JWT
+
+O token estava expirando após 1 hora ao invés de 2 horas
+conforme especificado em specs/06_runtime/scenarios/SCN-001.md
+
+Fixes #456
+
+# Documentação
+docs(contributing): adiciona seção sobre testes
+
+# Refatoração
+refactor(user): remove cláusula ELSE conforme regra 002
+
+Aplica Object Calisthenics Regra 2 - Sem cláusula ELSE.
+Usa early return para simplificar lógica.
+
+Refs: .claude/rules/002-no-else-clause.md
+```
+
+### Regras de Commit
+
+- ✅ Mensagem em Português (Brasil)
+- ✅ Use presente do indicativo ("adiciona", não "adicionou")
+- ✅ Primeira linha ≤72 caracteres
+- ✅ Corpo do commit explica "por quê", não "o quê"
+- ✅ Referencie issues relacionadas (#123)
+- ❌ Não commite código não testado
+- ❌ Não commite código que quebra o build
+
+---
+
+## 🔀 Processo de Pull Request
+
+### Antes de Abrir o PR
+
+**Checklist**:
+
+- [ ] Código segue as [Diretrizes de Código](#-diretrizes-de-código)
+- [ ] Commits seguem [Conventional Commits](#-diretrizes-de-commit)
+- [ ] Todos os testes passam localmente
+- [ ] Cobertura de testes ≥80%
+- [ ] Documentação atualizada (se necessário)
+- [ ] Specs atualizadas (se feature nova)
+- [ ] CHANGELOG.md atualizado (se aplicável)
+- [ ] Sem conflitos com branch `main`
+
+### Abrindo o PR
+
+1. **Título descritivo** seguindo Conventional Commits:
+   ```
+   feat(auth): adiciona autenticação OAuth2 com Google e GitHub
+   ```
+
+2. **Preencha o template** de PR com todas as seções:
+   - Descrição
+   - Tipo de mudança
+   - Checklist
+   - Testes realizados
+   - Capturas de tela (se aplicável)
+
+3. **Linke issues relacionadas**:
+   ```markdown
+   Closes #123
+   Relates to #456
+   ```
+
+4. **Solicite review** de pelo menos 1 mantenedor
+
+### Durante o Review
+
+- **Responda aos comentários** de forma construtiva
+- **Faça mudanças solicitadas** em novos commits
+- **Não force-push** após o review inicial (dificulta acompanhar mudanças)
+- **Marque conversas como resolvidas** quando aplicável
+
+### Merge
+
+- PRs são mergeados por mantenedores após aprovação
+- Usamos **Squash and Merge** para manter histórico limpo
+- Sua branch será automaticamente deletada após merge
+
+---
+
+## 📚 Diretrizes de Documentação
+
+### Estrutura de Documentação
+
+Este projeto usa **Arc42** com 12 capítulos em `specs/`:
+
+```
+specs/
+├── 01_introduction/     # Visão, objetivos, stakeholders
+├── 02_constraints/      # Restrições técnicas
+├── 03_context/          # Contexto do sistema
+├── 04_solution-strategy/# Estratégia de solução
+├── 05_building-blocks/  # Containers + Componentes
+├── 06_runtime/          # Cenários BDD
+├── 07_deployment/       # Deployment
+├── 08_crosscutting/     # Conceitos transversais
+├── 09_decisions/        # ADRs
+├── 10_quality/          # Requisitos de qualidade
+├── 11_risks/            # Riscos
+└── 12_glossary/         # Glossário
+```
+
+### Escrevendo Documentação
+
+1. **Linguagem**: Português (Brasil)
+2. **Formato**: Markdown com GitHub Flavored Markdown
+3. **Clareza**: Explique conceitos como se para alguém novo no projeto
+4. **Exemplos**: Sempre que possível, inclua exemplos práticos
+5. **Diagramas**: Use Mermaid, PlantUML ou imagens
+6. **Referências**: Linke para outros documentos quando relevante
+
+### Exemplo de Documentação Boa
 
 ```markdown
-# Título Nível 1
+## Autenticação JWT
 
-Parágrafo introdutório.
+O sistema utiliza **JSON Web Tokens (JWT)** para autenticação stateless.
 
-## Título Nível 2
+### Fluxo de Autenticação
 
-### Título Nível 3
+1. Usuário envia credenciais (email + senha)
+2. Sistema valida credenciais contra banco de dados
+3. Sistema gera 2 tokens:
+   - **Access Token**: Expira em 2 horas
+   - **Refresh Token**: Expira em 7 dias
+4. Cliente armazena tokens (localStorage ou httpOnly cookie)
+5. Cliente inclui access token em todas as requisições
 
-**Negrito** para ênfase.
-*Itálico* para termos técnicos na primeira menção.
+### Estrutura do Token
 
-`código inline` para código, comandos, arquivos.
-
-\`\`\`typescript
-// Bloco de código
-const example = "hello"
-\`\`\`
-
-- Lista não ordenada
-- Item 2
-  - Subitem
-
-1. Lista ordenada
-2. Item 2
-
-> Citação
-
----
-
-Separador horizontal
-
-[Link](https://example.com)
-
-![Imagem](path/to/image.png)
+```json
+{
+  "sub": "user-uuid",
+  "email": "maria@exemplo.com",
+  "roles": ["user"],
+  "iat": 1699999999,
+  "exp": 1700007199
+}
 ```
 
-### Templates Arc42
+### Segurança
 
-Todos os templates devem seguir a estrutura Arc42. Veja `.claude/templates/arc42/` para exemplos.
+- Tokens são assinados com RS256 (chave assimétrica)
+- Chave privada mantida em secret management (AWS Secrets Manager)
+- Tokens não podem ser revogados (design stateless)
+- Para logout, cliente descarta tokens localmente
 
-### Cenários BDD
+### Referências
 
-```gherkin
-Funcionalidade: [Nome da Funcionalidade]
-  Como um [tipo de usuário]
-  Eu quero [objetivo]
-  Para que [benefício]
-
-  Contexto:
-    Dado que [pré-condição compartilhada]
-
-  Cenário: [Nome do Cenário Positivo]
-    Dado que [pré-condição]
-    E [outra pré-condição]
-    Quando [ação]
-    Então [resultado esperado]
-    E [outro resultado]
-
-  Cenário: [Nome do Cenário Negativo]
-    Dado que [pré-condição]
-    Quando [ação que falha]
-    Então [erro esperado]
-    E [consequência do erro]
+- Especificação: `specs/06_runtime/scenarios/SCN-001_login.md`
+- Implementação: `src/autenticacao/jwt/`
+- ADR: `specs/09_decisions/adrs/ADR-003_jwt-authentication.md`
 ```
 
-### ADRs (Architecture Decision Records)
+---
 
-Veja `.claude/templates/adr/adr-template.md` para o template completo.
+## 🐛 Relatando Bugs
+
+### Antes de Reportar
+
+1. **Verifique** se o bug já foi reportado
+2. **Teste** na versão mais recente
+3. **Confirme** que não é um erro de configuração
+
+### Reportando
+
+Use o [template de bug report](https://github.com/yourusername/arq-specs-template/issues/new?template=bug_report.md):
+
+**Informações Necessárias**:
+
+- **Descrição clara** do problema
+- **Passos para reproduzir**:
+  1. Execute comando X
+  2. Faça Y
+  3. Observe erro Z
+- **Comportamento esperado**: O que deveria acontecer
+- **Comportamento atual**: O que está acontecendo
+- **Ambiente**:
+  - SO: macOS 13.0
+  - Claude Code: v1.2.3
+  - Node.js: v20.0.0
+- **Logs/Screenshots**: Se aplicável
+- **Possível solução**: Se você tem ideia de como corrigir
 
 ---
 
-## 🔍 Revisão de Código
+## 💡 Sugerindo Melhorias
 
-### O Que Revisores Verificam
+### Antes de Sugerir
 
-1. **Documentação Primeiro**
-   - Specs em `specs/` atualizadas?
-   - Especificação determinística?
-   - ADR criado (se decisão arquitetural)?
+1. **Verifique** se a sugestão já existe
+2. **Considere** se alinha com os objetivos do projeto
+3. **Pense** em implementação e impacto
 
-2. **Corretude**
-   - Código faz o que deveria?
-   - Lógica está correta?
-   - Edge cases tratados?
+### Sugerindo
 
-3. **Testes**
-   - Cobertura >= 80%?
-   - Testes significativos?
-   - Integration tests quando apropriado?
+Use o [template de feature request](https://github.com/yourusername/arq-specs-template/issues/new?template=feature_request.md):
 
-4. **Padrões**
-   - Segue DDD Co-Located?
-   - Segue Object Calisthenics?
-   - Segue SOLID?
+**Informações Necessárias**:
 
-5. **Segurança**
-   - Input validado?
-   - Secrets não hardcoded?
-   - SQL injection prevenido?
-
-### Revisão e Aprovação
-
-- **Pelo menos um Maintainer** deve aprovar mudanças de documentação estratégica (capítulos 01–04, 08–09).
-- Mudanças que impliquem novos riscos precisam atualizar `specs/11_risks/011_risks-and-technical-debt.md`.
-- **Qualquer divergência entre código e documentação bloqueia o merge** até ser resolvida.
-- Se um agente for usado para gerar conteúdo, mencione no PR qual comando foi executado e quais ajustes manuais foram feitos.
+- **Problema que resolve**: Qual dor você está tentando aliviar?
+- **Solução proposta**: Como você imagina que isso funcione?
+- **Alternativas consideradas**: Que outras abordagens você pensou?
+- **Contexto adicional**: Mockups, exemplos, referências
+- **Impacto estimado**: Quem se beneficiaria e como?
 
 ---
 
-## 🐛 Como Reportar Incidentes
+## 🌍 Comunidade
 
-- Abra uma issue com o prefixo `[INCIDENT]`.
-- Informe data/hora, capítulos desatualizados, sintomas percebidos e custo (tempo extra, incidentes em produção, retrabalho).
-- Inclua um plano para corrigir a documentação antes de tocar no código.
+### Onde Obter Ajuda
 
----
+- **Documentação**: Leia `.claude/README.md` e `specs/`
+- **Issues**: Procure em [Issues fechadas](https://github.com/yourusername/arq-specs-template/issues?q=is%3Aissue+is%3Aclosed)
+- **Discussions**: Use [GitHub Discussions](https://github.com/yourusername/arq-specs-template/discussions)
+- **Discord**: [Junte-se ao servidor](https://discord.gg/INSERIR-LINK)
 
-## ❓ FAQ
+### Como Ajudar Outros
 
-### P: Como sei se minha contribuição será aceita?
-
-**R**: Abra uma **discussion** ou **issue** primeiro para discutir sua ideia. Isso evita trabalho desperdiçado.
-
-### P: Posso modificar a constitution.md?
-
-**R**: Apenas com **consenso da equipe** (>75%). Veja [constitution.md - Artigo V](.claude/constitution.md#artigo-v-governança--evolução).
-
-### P: Quanto tempo leva para revisar meu PR?
-
-**R**: Tipicamente **2-5 dias úteis**. PRs urgentes (bugs críticos) são priorizados.
-
-### P: Meu PR foi rejeitado. E agora?
-
-**R**: Analise o feedback fornecido, implemente os ajustes solicitados e resubmeta. O processo de revisão avalia código, não desenvolvedores.
-
-### P: Posso contribuir se sou iniciante?
-
-**R**: Contribuições de todos os níveis de experiência são bem-vindas. Issues marcadas com `good first issue` e `help wanted` são pontos de entrada recomendados para novos contribuidores.
-
-### P: Como reporto uma vulnerabilidade de segurança?
-
-**R**: **NÃO** abra uma issue pública. Envie email para security@arq-specs.dev (se disponível) ou abra uma [Security Advisory](https://docs.github.com/en/code-security/security-advisories).
-
----
-
-## 📞 Contato
-
-- 🐛 **Bugs**: [GitHub Issues](https://github.com/your-org/arq-specs-template/issues)
-- 💬 **Discussões**: [GitHub Discussions](https://github.com/your-org/arq-specs-template/discussions)
-- 📧 **Email**: contributors@arq-specs.dev
+- Responda perguntas em Discussions
+- Ajude a reproduzir bugs em Issues
+- Melhore documentação com base em suas dúvidas
+- Compartilhe suas experiências usando o projeto
 
 ---
 
 ## 🙏 Agradecimentos
 
-Obrigado a todos os contribuidores! Vocês são incríveis. ❤️
+Obrigado por contribuir! Suas contribuições tornam este projeto melhor para todos.
+
+**Principais Contribuidores**: Veja [Contributors](https://github.com/yourusername/arq-specs-template/graphs/contributors)
 
 ---
 
 ## 📜 Licença
 
-Ao contribuir com este projeto, você concorda que suas contribuições serão licenciadas sob a [MIT License](LICENSE).
+Ao contribuir, você concorda que suas contribuições serão licenciadas sob a [Licença MIT](LICENSE).
 
 ---
 
-Seguindo estas diretrizes, mantém-se a disciplina de documentação que demonstra resultados mensuráveis: redução de 60% em reuniões de alinhamento, aceleração de 40% no processo de onboarding, e retorno sobre investimento superior a 300%.
+**Dúvidas sobre este guia?** Abra uma [Discussion](https://github.com/yourusername/arq-specs-template/discussions/new) ou entre em contato com os mantenedores.
 
-**A aderência ao processo Documentation-First constitui fundamento para qualidade sustentável do código gerado.**
+**Pronto para contribuir?** [Abra uma issue](https://github.com/yourusername/arq-specs-template/issues/new/choose) ou [fork o repositório](https://github.com/yourusername/arq-specs-template/fork)! 🚀

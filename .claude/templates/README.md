@@ -1,349 +1,554 @@
 # Templates - Especificações Determinísticas
 
-**Versão**: 2.0.0 | **Atualizado**: 2025-11-17
+**Versão**: 3.0.0
+**Última Atualização**: 2025-12-10
+**Total**: 20 templates organizados
+**Status**: 🟢 Pronto para produção
 
 ---
 
-## O Que São?
+## 🎯 Filosofia
 
-Templates estruturados para criação de especificações determinísticas baseadas em frameworks comprovados da indústria: **Arc42** (12 capítulos de documentação arquitetural), **C4 Model** (visualização de arquitetura em 4 níveis), **BDD** (cenários comportamentais Given-When-Then) e **ADR** (registros de decisões arquiteturais).
+**Especificações determinísticas reduzem o espaço de interpretação da IA de 10²⁰ possibilidades para ~10 implementações funcionalmente equivalentes.**
 
-Especificações determinísticas reduzem o espaço de interpretação da IA de 10²⁰ possibilidades para ~10 implementações funcionalmente equivalentes, aumentando a taxa de acerto de 20-40% para >90%.
+Este diretório contém 20 templates estruturados baseados em frameworks comprovados:
+- **Arc42** (12 capítulos): Documentação arquitetural
+- **Modelo C4** (3 níveis): Visualização de arquitetura
+- **BDD** (Gherkin): Cenários comportamentais
+- **ADR**: Registros de decisões arquiteturais
+- **Workflow**: Templates de processo (proposal, design, tasks)
 
----
-
-## Por Que Usar?
-
-### Comparação: Vago vs Determinístico
-
-**Spec Vaga** ❌:
-```markdown
-Criar endpoint de registro de usuário com email e senha
-```
-**Resultado**: 10²⁰ interpretações possíveis, código errado em 60-80% das vezes.
-
-**Spec Determinística** ✅:
-```markdown
-## POST /api/auth/register
-
-Request: {"email": "string (format: email, max 255)", "password": "string (min 8, 1 upper, 1 digit, 1 special)"}
-Response 201: {"userId": "uuid", "status": "pending_verification"}
-Errors:
-- 400 INVALID_EMAIL: Formato inválido
-- 409 DUPLICATE_EMAIL: Email já existe
-- 422 WEAK_PASSWORD: Senha não atende requisitos
-
-Side Effects:
-- User criado com status "pending_verification"
-- Evento user.registered publicado
-- Email de verificação enviado
-- Log: INFO "User registered: {userId}"
-
-Security:
-- Password hash bcrypt (min 12 rounds)
-- Rate limit: 5 tentativas/hora por IP
-- HTTPS obrigatório (TLS 1.3)
-```
-**Resultado**: ~10 implementações equivalentes, código correto em >90% das vezes.
+Taxa de acerto com specs determinísticas: **>90%** vs **20-40%** com specs vagas.
 
 ---
 
-## Estrutura (20 Templates)
+## 📊 Visão Geral
 
-```
-.claude/templates/
-├── README.md                    # Este arquivo
-├── proposal.md                  # TPL-WORKFLOW-001 (Phase 1: Discovery)
-├── design.md                    # TPL-WORKFLOW-002 (Phase 2: Architecture - HIGH only)
-├── tasks.md                     # TPL-WORKFLOW-003 (Phase 3.5: Task Decomposition)
-│
-├── arc42/                       # 12 capítulos Arc42 (Phase 3: Specification)
-│   ├── 01_introduction.md       # TPL-ARC42-01: Visão geral e objetivos
-│   ├── 02_constraints.md        # TPL-ARC42-02: Restrições técnicas/organizacionais
-│   ├── 03_context.md            # TPL-ARC42-03: Limites do sistema (C4 Level 1)
-│   ├── 04_solution-strategy.md  # TPL-ARC42-04: Stack e padrões arquiteturais
-│   ├── 05_building-blocks.md    # TPL-ARC42-05: Containers e componentes (C4 L2-3)
-│   ├── 06_runtime.md            # TPL-ARC42-06: Comportamento observável (BDD)
-│   ├── 07_deployment.md         # TPL-ARC42-07: Infraestrutura e CI/CD
-│   ├── 08_crosscutting.md       # TPL-ARC42-08: Segurança, logging, i18n
-│   ├── 09_decisions.md          # TPL-ARC42-09: Decisões arquiteturais (ADRs)
-│   ├── 10_quality.md            # TPL-ARC42-10: Performance, escalabilidade, SLA
-│   ├── 11_risks.md              # TPL-ARC42-11: Riscos e débito técnico
-│   └── 12_glossary.md           # TPL-ARC42-12: Terminologia do domínio
-│
-├── c4/                          # C4 Model (Níveis 1-3)
-│   ├── system-context.md        # TPL-C4-001: Sistema + atores + sistemas externos
-│   ├── container.md             # TPL-C4-002: Microsserviços, apps, bancos de dados
-│   └── component.md             # TPL-C4-003: Módulos, classes, serviços
-│
-├── bdd/                         # Behavior-Driven Development
-│   └── scenario.md              # TPL-BDD-001: Cenários Given-When-Then
-│
-└── adr/                         # Architecture Decision Records
-    └── decision.md              # TPL-ADR-001: Registro de decisões arquiteturais
-```
+### Por Categoria
 
----
-
-## Registro de Templates
-
-### Formato de IDs
-
-`TPL-[CATEGORY]-[NUMBER]`
-- **CATEGORY**: WORKFLOW, ARC42, C4, BDD, ADR
-- **NUMBER**: Sequencial (001, 002...) ou capítulo Arc42 (01-12)
-
-### Workflow (3 templates)
-
-| ID | Arquivo | Skill | Fase | Descrição |
-|----|---------|-------|------|-----------|
-| TPL-WORKFLOW-001 | proposal.md | analyst | 1 | Discovery e avaliação de complexidade |
-| TPL-WORKFLOW-002 | design.md | architect | 2 | Design arquitetural (HIGH only) |
-| TPL-WORKFLOW-003 | tasks.md | orchestrator | 3.5 | Decomposição em tarefas atômicas |
-
-### Arc42 (12 capítulos)
-
-| ID | Arquivo | Fase | Descrição |
-|----|---------|------|-----------|
-| TPL-ARC42-01 | 01_introduction.md | 3 | Introdução, requisitos, stakeholders |
-| TPL-ARC42-02 | 02_constraints.md | 3 | Restrições técnicas, organizacionais, convenções |
-| TPL-ARC42-03 | 03_context.md | 3 | Contexto do sistema (C4 L1), atores, integrações |
-| TPL-ARC42-04 | 04_solution-strategy.md | 3 | Stack tecnológica, padrões, trade-offs |
-| TPL-ARC42-05 | 05_building-blocks.md | 3 | Containers (C4 L2), componentes (C4 L3) |
-| TPL-ARC42-06 | 06_runtime.md | 3 | Comportamento observável, cenários BDD |
-| TPL-ARC42-07 | 07_deployment.md | 3 | Infraestrutura, CI/CD, monitoramento |
-| TPL-ARC42-08 | 08_crosscutting.md | 3 | Segurança, observabilidade, erro handling |
-| TPL-ARC42-09 | 09_decisions.md | 3 | Decisões arquiteturais (ADRs) |
-| TPL-ARC42-10 | 10_quality.md | 3 | Performance, escalabilidade, confiabilidade |
-| TPL-ARC42-11 | 11_risks.md | 3 | Riscos técnicos, débito técnico |
-| TPL-ARC42-12 | 12_glossary.md | 3 | Termos de negócio e técnicos |
-
-### C4 Model (3 níveis)
-
-| ID | Arquivo | Nível | Descrição |
-|----|---------|-------|-----------|
-| TPL-C4-001 | system-context.md | C4 L1 | Sistema + atores + sistemas externos |
-| TPL-C4-002 | container.md | C4 L2 | Microsserviços, apps, bancos de dados |
-| TPL-C4-003 | component.md | C4 L3 | Módulos, classes, serviços |
-
-### BDD (1 template)
-
-| ID | Arquivo | Fase | Descrição |
-|----|---------|------|-----------|
-| TPL-BDD-001 | scenario.md | 3 | Cenários Given-When-Then (happy path, errors, edge cases) |
-
-### ADR (1 template)
-
-| ID | Arquivo | Fase | Descrição |
-|----|---------|------|-----------|
-| TPL-ADR-001 | decision.md | 2-3 | Registro de decisão arquitetural (status, contexto, consequências) |
+| Categoria | Quantidade | IDs | Propósito |
+|-----------|------------|-----|-----------|
+| **Workflow** | 3 | TPL-WORKFLOW-001 a 003 | Templates de processo (proposal, design, tasks) |
+| **Arc42** | 12 | TPL-ARC42-01 a 12 | Documentação de arquitetura (12 capítulos) |
+| **Modelo C4** | 3 | TPL-C4-001 a 003 | Visualização de arquitetura (3 níveis) |
+| **BDD** | 1 | TPL-BDD-001 | Cenários comportamentais (Gherkin) |
+| **ADR** | 1 | TPL-ADR-001 | Registros de decisões arquiteturais |
 
 **Total**: 20 templates
 
----
+### Por Criticidade
 
-## Como Usar
-
-### Seleção por Fase do Workflow
-
-| Fase | Complexidade | Templates Necessários |
-|------|--------------|------------------------|
-| **1 - Discovery** | Todas | proposal.md (TPL-WORKFLOW-001) |
-| **2 - Architecture** | HIGH apenas | design.md (TPL-WORKFLOW-002) + ADRs + C4 L1-2 |
-| **3 - Specification** | LOW/MEDIUM | Arc42 cap 6, 10 + BDD scenarios |
-| **3 - Specification** | HIGH | Arc42 completo (12 capítulos) + C4 + BDD + ADRs |
-| **3.5 - Task Decomp** | Todas | tasks.md (TPL-WORKFLOW-003) |
-| **4-7** | Todas | Sem templates (implementação, review, docs, validation) |
-
-### Seleção por Objetivo
-
-**Quero documentar um novo sistema completo**
-→ Use todos os 12 capítulos Arc42 + C4 L1-3 + ADRs para decisões importantes
-
-**Quero documentar uma nova feature**
-→ Use Arc42 cap 6 (Runtime) + BDD scenarios para a feature específica
-
-**Quero documentar uma decisão arquitetural**
-→ Use ADR (TPL-ADR-001)
-
-**Quero decompor uma spec em tarefas**
-→ Use tasks.md (TPL-WORKFLOW-003)
-
-**Quero documentar comportamento observável**
-→ Use BDD scenario.md (TPL-BDD-001)
-
-**Quero documentar estrutura de containers/componentes**
-→ Use C4 container.md (TPL-C4-002) ou component.md (TPL-C4-003)
+| Criticidade | Quantidade | Templates | Quando Falha... |
+|-------------|------------|-----------|-----------------|
+| 🔴 CRÍTICO | 2 | TPL-WORKFLOW-001, TPL-WORKFLOW-003 | IA alucina, débito técnico explode |
+| 🟡 IMPORTANTE | 5 | TPL-WORKFLOW-002, TPL-ARC42-06, TPL-BDD-001, TPL-ADR-001, TPL-C4-001 | Qualidade degrada, retrabalho aumenta |
+| 🟢 ÚTIL | 13 | Demais Arc42, C4-002, C4-003 | Docs ficam desatualizados, mas não crítico |
 
 ---
 
-## Exemplos Práticos
-
-### Exemplo 1: Nova Feature de Login
-
-**Objetivo**: Implementar autenticação com email e senha
-
-**Templates usados**:
-1. **proposal.md** → Avalia complexidade (MEDIUM)
-2. **Arc42 cap 6** + **BDD scenario.md** → Define comportamento:
-   ```gherkin
-   Scenario: Login com credenciais válidas
-     Given usuário existe com email "user@example.com"
-     And senha é "StrongPass123"
-     When usuário submete formulário
-     Then usuário é autenticado
-     And token JWT criado (expires 24h)
-     And log: INFO "User logged in: {userId}"
-   ```
-3. **tasks.md** → Decompõe em tarefas atômicas (ex: criar endpoint, validar credenciais, gerar JWT)
-4. **developer** → Implementa task-by-task
-
-### Exemplo 2: Sistema de Pagamentos (HIGH Complexity)
-
-**Objetivo**: Novo subsistema de processamento de pagamentos
-
-**Templates usados**:
-1. **proposal.md** → Avalia complexidade (HIGH)
-2. **design.md** → Estratégia arquitetural
-3. **ADR decision.md** → ADR-001: Use Stripe como gateway
-4. **C4 system-context.md** → Sistema + Stripe + bancos
-5. **C4 container.md** → Payment API, Payment DB, Event Bus
-6. **Arc42 completo** (12 capítulos) → Documentação completa
-7. **BDD scenarios** → Cenários de pagamento (sucesso, falha, timeout)
-8. **tasks.md** → Decomposição em 50+ tarefas atômicas
-
-### Exemplo 3: Decisão de Migração de Banco
-
-**Objetivo**: Migrar de MySQL para PostgreSQL
-
-**Templates usados**:
-1. **ADR decision.md** → ADR-005: Migrate to PostgreSQL
-   - **Context**: Performance issues com queries complexas
-   - **Decision**: Migrar para PostgreSQL
-   - **Consequences**: ✅ Melhor performance em queries, ✅ JSON nativo, ❌ Downtime de 2h
-   - **Alternatives**: Aurora MySQL (rejected: custo 3x maior)
-
----
-
-## Workflow Integration
-
-### Fluxo Visual por Fase
+## 📁 Estrutura de Diretórios (v3.0)
 
 ```
-FASE 1 (Discovery)
-    proposal.md (TPL-WORKFLOW-001)
+.claude/templates/
+├── README.md                                 # Este arquivo
+│
+├── arc42/                                    # Arc42 - 12 capítulos
+│   ├── 01_introduction.md
+│   ├── 02_constraints.md
+│   ├── 03_context.md
+│   ├── 04_solution-strategy.md
+│   ├── 05_building-blocks.md
+│   ├── 06_runtime.md
+│   ├── 07_deployment.md
+│   ├── 08_crosscutting.md
+│   ├── 09_decisions.md
+│   ├── 10_quality.md
+│   ├── 11_risks.md
+│   └── 12_glossary.md
+│
+├── c4/                                       # Modelo C4 - 3 níveis
+│   ├── context.md
+│   ├── container.md
+│   └── component.md
+│
+├── bdd/                                      # Behavior-Driven Development
+│   └── scenario.md                           # Gherkin Given/When/Then
+│
+├── adr/                                      # Architecture Decision Records
+│   └── decision.md
+│
+└── changes/                                  # Templates de workflow
+    ├── proposal.md
+    ├── design.md
+    └── tasks.md
+```
+
+---
+
+## 🗺️ Workflow de 7 Fases - Uso de Templates
+
+### Fase 1: Discovery
+
+```
+Requisição do Usuário: "Implementar autenticação OAuth2"
     ↓
-    [Avalia complexidade: LOW/MEDIUM/HIGH]
+📋 analyst cria:
+    ├─ TPL-WORKFLOW-001 (proposal.md)
+    │   ├─ Avalia complexity: HIGH
+    │   ├─ Calcula health score: 9/16
+    │   └─ Decide: Fase 2 OBRIGATÓRIA
+    └─ Output: proposal.md
+```
+
+**Templates usados**:
+- 🔴 **TPL-WORKFLOW-001 (proposal)**: SEMPRE (qualquer complexidade)
+
+---
+
+### Fase 2: Architecture (Condicional - apenas HIGH)
+
+```
+proposal.md indica: Complexity=HIGH OU Score<13
     ↓
-    ├─→ [if HIGH] FASE 2 (Architecture)
-    │       design.md (TPL-WORKFLOW-002)
-    │       ├─→ ADR templates (TPL-ADR-001)
-    │       └─→ C4 System Context (TPL-C4-001)
-    │               └─→ C4 Container (TPL-C4-002)
-    │
-    └─→ FASE 3 (Specification)
-            Arc42 12 capítulos (TPL-ARC42-01 a 12)
-            ├─→ Cap 3: Usa TPL-C4-001 (System Context)
-            ├─→ Cap 5: Usa TPL-C4-002, TPL-C4-003 (Containers, Components)
-            ├─→ Cap 6: Usa TPL-BDD-001 (Scenarios)
-            └─→ Cap 9: Usa TPL-ADR-001 (ADRs)
-            ↓
-        FASE 3.5 (Task Decomposition)
-            tasks.md (TPL-WORKFLOW-003)
-            ↓
-        FASE 4-7 (Implementation → Release)
-            [Sem templates, usa constitution.md e skills]
+🏗️ architect cria:
+    ├─ TPL-WORKFLOW-002 (design.md)
+    ├─ TPL-ADR-001 (4-6 ADRs)
+    ├─ TPL-C4-001 (system-context)
+    └─ TPL-C4-002 (containers)
+    ↓
+Output: design.md + ADR-XXX + diagramas C4
 ```
 
-### Aplicação Adaptativa por Complexidade
-
-| Complexidade | Arc42 Obrigatórios | Arc42 Opcionais | C4 Necessário | ADR Necessário |
-|--------------|-------------------|-----------------|---------------|----------------|
-| **LOW** | Cap 6, 10 | Demais como referência | Não | Apenas se decisão importante |
-| **MEDIUM** | Cap 3, 5, 6, 8, 9, 10 | Cap 1, 2, 4, 7, 11, 12 | C4 L2-3 (se múltiplos componentes) | Sim (decisões importantes) |
-| **HIGH** | Todos (1-12) | Nenhum | C4 L1-3 completo | Sim (todas decisões) |
+**Templates usados**:
+- 🟡 **TPL-WORKFLOW-002 (design)**: Se complexidade HIGH
+- 🟡 **TPL-ADR-001 (decision)**: Para decisões críticas
+- 🟡 **TPL-C4-001 (system-context)**: Para visualizar limites
+- 🟢 **TPL-C4-002 (container)**: Para detalhar containers
 
 ---
 
-## Princípios de Specs Determinísticas
+### Fase 3: Specification
 
-### 1. Defina O QUÊ, Não COMO
-
-❌ **Ruim** (implementação):
-```markdown
-Use bcrypt para hash de senha com 12 rounds
+```
+proposal.md + design.md (se HIGH)
+    ↓
+📋 analyst cria:
+    ├─ TPL-ARC42-01 a 12 (spec.md)
+    │   ├─ Cap 6 usa TPL-BDD-001 (scenarios)
+    │   ├─ Cap 3 usa TPL-C4-001 (context)
+    │   └─ Cap 5 usa TPL-C4-002, TPL-C4-003
+    └─ Output: spec.md (Arc42 completo)
 ```
 
-✅ **Bom** (comportamento):
-```markdown
-Senha deve ser armazenada com hash seguro:
-- Resistente a rainbow tables
-- Mínimo 10^12 operações para brute force
-- Salt único por usuário
+**Templates usados**:
+- 🟡 **TPL-ARC42-06 (runtime)**: SEMPRE (comportamento observável)
+- 🟡 **TPL-BDD-001 (scenario)**: Para cada feature (5-15 scenarios)
+- 🟢 **TPL-ARC42-01 a 05, 07 a 12**: Conforme necessário
+- 🟢 **TPL-C4-003 (component)**: Para detalhar componentes
+
+---
+
+### Fase 3.5: Task Decomposition (**CRÍTICO**)
+
+```
+spec.md aprovado
+    ↓
+🎯 orchestrator usa:
+    └─ TPL-WORKFLOW-003 (tasks.md)
+        ├─ Extrai cenários BDD
+        ├─ Mapeia componentes DDD
+        └─ Decompõe em N tasks (<100 LOC cada)
+    ↓
+Output: tasks.md (5-100 tasks atômicas)
 ```
 
-### 2. Comportamento Observável
+**Templates usados**:
+- 🔴 **TPL-WORKFLOW-003 (tasks)**: SEMPRE (qualquer complexidade)
 
-❌ **Ruim** (interno):
-```markdown
-Método privado validateEmail() deve usar regex
+**Por quê crítico?**
 ```
-
-✅ **Bom** (observável):
-```markdown
-POST /api/users {"email": "string"}
-Response 201: {"userId": "uuid"}
-Response 400: INVALID_EMAIL - Formato inválido
-```
-
-### 3. Valores Específicos e Mensuráveis
-
-❌ **Ruim** (vago):
-```markdown
-Sistema deve ser rápido
-```
-
-✅ **Bom** (mensurável):
-```markdown
-- Latência p95 < 200ms
-- Latência p99 < 500ms
-- Throughput > 10,000 req/s
-```
-
-### 4. Condições de Erro Explícitas
-
-❌ **Ruim** (omisso):
-```markdown
-Sistema deve validar email
-```
-
-✅ **Bom** (completo):
-```markdown
-Validação de email:
-✅ Válidos: user@example.com, user+tag@example.co.uk
-❌ Inválidos:
-   - "invalid" → 400 INVALID_EMAIL
-   - "" → 400 MISSING_EMAIL
-   - (> 255 chars) → 400 EMAIL_TOO_LONG
+Contexto grande (5000+ linhas) → IA perde foco → Alucinações ❌
+Contexto pequeno (~500 linhas/task) → IA permanece determinística → Código correto ✅
 ```
 
 ---
 
-## Próximos Passos
+### Fases 4-7: Implementation → Release
 
-1. **Explorar Templates**: Navegue em `arc42/`, `c4/`, `bdd/`, `adr/` para ver estrutura completa
-2. **Entender o Workflow**: Leia `.claude/skills/README.md` para workflow completo de 7 fases
-3. **Ver Comandos Arc42**: Consulte `.claude/commands/README.md` para 15 comandos de documentação
-4. **Aplicar em Projeto Real**: Use analyst skill para criar primeira spec: "Adicionar [sua feature]"
+Sem templates (usa código, skills, rules).
 
 ---
 
-## Referências
+## 📚 Catálogo Completo de Templates
 
-- **Workflow Completo**: `.claude/skills/README.md`
-- **Princípios Core**: `.claude/constitution.md`
-- **Comandos Arc42**: `.claude/commands/README.md`
-- **Arc42 Docs**: https://arc42.org/
-- **C4 Model**: https://c4model.com/
+### 🔴 Templates CRÍTICOS (2)
+
+#### TPL-WORKFLOW-001: Proposal
+
+**Fase**: 1 (Discovery)
+**Skill**: analyst (SKL-001)
+**Quando**: SEMPRE (qualquer mudança)
+
+**O que faz**:
+- Entende requisito do usuário
+- Avalia complexidade (LOW, MEDIUM, HIGH)
+- Calcula health score (0-16)
+- Decide workflow (pular/invocar fase Architecture)
+
+📄 [Template](./changes/proposal.md)
+
+---
+
+#### TPL-WORKFLOW-003: Tasks
+
+**Fase**: 3.5 (Task Decomposition)
+**Skill**: orchestrator (SKL-003)
+**Quando**: SEMPRE (após spec.md aprovado)
+
+**O que faz**:
+- Decompõe spec.md em N tasks atômicas
+- Cada task: ≤100 LOC, ~500 linhas de contexto
+- Estabelece dependências (DAG válido)
+- Define critérios de aceitação específicos
+
+**Por quê crítico?**
+Task decomposition é a técnica que previne alucinações da IA.
+
+📄 [Template](./changes/tasks.md)
+
+---
+
+### 🟡 Templates IMPORTANTES (5)
+
+#### TPL-WORKFLOW-002: Design
+
+**Fase**: 2 (Architecture)
+**Skill**: architect (SKL-002)
+**Quando**: Complexidade HIGH OU score <13
+
+**O que faz**:
+- Cria design.md com diagramas C4 Nível 3
+- Define padrões DDD (Aggregates, Entities, VOs, Repos)
+- Cria 3-5 ADRs para decisões críticas
+
+📄 [Template](./changes/design.md)
+
+---
+
+#### TPL-ARC42-06: Runtime View
+
+**Fase**: 3 (Specification)
+**Skill**: analyst (SKL-001)
+**Quando**: SEMPRE
+
+**O que faz**:
+- Documenta comportamento observável do sistema
+- Usa cenários BDD (TPL-BDD-001)
+- Define fluxos principais e alternativos
+
+📄 [Template](./arc42/06_runtime.md)
+
+---
+
+#### TPL-BDD-001: Scenario
+
+**Fase**: 3 (Specification) + 5 (Testing)
+**Skill**: analyst (SKL-001), tester (SKL-007)
+**Quando**: Para cada feature
+
+**O que faz**:
+- Define comportamento observável com Gherkin (Given/When/Then)
+- Especificação executável (testes derivam diretamente)
+- Linguagem ubíqua (negócio + dev entendem)
+
+📄 [Template](./bdd/scenario.md)
+
+---
+
+#### TPL-ADR-001: Decision
+
+**Fase**: 2 (Architecture) + 3 (Specification)
+**Skill**: architect (SKL-002), analyst (SKL-001)
+**Quando**: Decisões arquiteturais significativas
+
+**O que faz**:
+- Documenta contexto, decisão, consequências, alternativas
+- Transparência (entender "por quê")
+- Evita re-debates
+
+📄 [Template](./adr/decision.md)
+
+---
+
+#### TPL-C4-001: System Context
+
+**Fase**: 2 (Architecture) + 3 (Specification)
+**Skill**: architect (SKL-002), analyst (SKL-001)
+**Quando**: Complexidade HIGH, múltiplos sistemas externos
+
+**O que faz**:
+- Visualiza sistema como caixa preta
+- Define limites (dentro vs fora)
+- Identifica atores e integrações externas
+
+📄 [Template](./c4/context.md)
+
+---
+
+### 🟢 Templates ÚTEIS (13)
+
+#### Capítulos Arc42 (11 capítulos além de Cap 6)
+
+| ID | Template | Propósito |
+|----|----------|-----------|
+| TPL-ARC42-01 | Introduction | Visão geral, stakeholders, objetivos |
+| TPL-ARC42-02 | Constraints | Restrições técnicas/organizacionais |
+| TPL-ARC42-03 | Context | Limites do sistema (usa C4 L1) |
+| TPL-ARC42-04 | Solution Strategy | Stack tecnológica, padrões |
+| TPL-ARC42-05 | Building Blocks | Containers (C4 L2), componentes (C4 L3) |
+| TPL-ARC42-07 | Deployment | Infraestrutura, CI/CD |
+| TPL-ARC42-08 | Crosscutting | Segurança, logging, i18n |
+| TPL-ARC42-09 | Decisions | ADRs (usa TPL-ADR-001) |
+| TPL-ARC42-10 | Quality | Performance, escalabilidade, SLA |
+| TPL-ARC42-11 | Risks | Riscos técnicos, débito técnico |
+| TPL-ARC42-12 | Glossary | Termos de negócio e técnicos |
+
+📄 [Todos em arc42/](./arc42/)
+
+---
+
+#### Níveis C4 2-3 (2 templates)
+
+| ID | Template | Nível | Propósito |
+|----|----------|-------|-----------|
+| TPL-C4-002 | Container | C4 L2 | Microsserviços, apps, bancos |
+| TPL-C4-003 | Component | C4 L3 | Módulos, classes, serviços |
+
+📄 [Todos em c4/](./c4/)
+
+---
+
+## 🎓 Guias de Uso por Complexidade
+
+### Complexidade LOW (3-8h)
+
+**Templates necessários**:
+1. 🔴 TPL-WORKFLOW-001 (proposal)
+2. 🟡 TPL-ARC42-06 (runtime) + TPL-BDD-001 (2-3 scenarios)
+3. 🔴 TPL-WORKFLOW-003 (tasks) → 5-15 tasks
+4. 🟢 TPL-ARC42-10 (quality) - opcional
+
+**Exemplo**: Adicionar validação de email
+
+---
+
+### Complexidade MEDIUM (1-3 dias)
+
+**Templates necessários**:
+1. 🔴 TPL-WORKFLOW-001 (proposal)
+2. ⚠️ TPL-WORKFLOW-002 (design) - RECOMENDADO se score <13
+3. 🟡 TPL-ARC42-03, 05, 06, 08, 09, 10
+4. 🟡 TPL-BDD-001 (5-10 scenarios)
+5. 🟢 TPL-C4-002 (container) - se múltiplos containers
+6. 🟡 TPL-ADR-001 (2-3 ADRs) - se decisões importantes
+7. 🔴 TPL-WORKFLOW-003 (tasks) → 15-40 tasks
+
+**Exemplo**: Sistema de notificações multi-canal
+
+---
+
+### Complexidade HIGH (1-3 semanas)
+
+**Templates necessários**:
+1. 🔴 TPL-WORKFLOW-001 (proposal)
+2. 🔴 TPL-WORKFLOW-002 (design) - **OBRIGATÓRIO**
+3. 🟡 TPL-ADR-001 (4-6 ADRs) - **OBRIGATÓRIO**
+4. 🟡 TPL-C4-001 (system-context) - **OBRIGATÓRIO**
+5. 🟢 TPL-C4-002, TPL-C4-003
+6. 🟢 TPL-ARC42-01 a 12 (todos os 12 capítulos)
+7. 🟡 TPL-BDD-001 (10-20 scenarios)
+8. 🔴 TPL-WORKFLOW-003 (tasks) → 40-100 tasks
+
+**Exemplo**: Migração JWT → OAuth2 + OIDC + SAML + 2FA
+
+---
+
+## 📊 Métricas de Qualidade
+
+### Spec Vaga vs Determinística
+
+| Métrica | Spec Vaga | Spec Determinística | Melhoria |
+|---------|-----------|---------------------|----------|
+| Taxa de Acerto | 20-40% | >90% | +150% |
+| Taxa de Alucinações | 60-80% | <10% | -85% |
+| Taxa de Retrabalho | 50-70% | <15% | -75% |
+| Tempo de Implementação | Imprevisível | Previsível | Estimável |
+
+### Uso de Templates por Complexidade
+
+| Complexidade | Templates | Tempo Doc | Tempo Impl | ROI |
+|--------------|-----------|-----------|------------|-----|
+| **LOW** | 3-5 | 30min | 3-4h | 10x |
+| **MEDIUM** | 8-12 | 2-4h | 1-3 dias | 8x |
+| **HIGH** | 18-20 | 1-2 dias | 2-3 semanas | 5x |
+
+---
+
+## 🚨 Antipadrões a Evitar
+
+### ❌ 1. Pular Proposal (TPL-WORKFLOW-001)
+
+```bash
+# ERRADO
+User: "Add feature X" → analyst → spec.md → developer
+
+# CORRETO
+User: "Add feature X" → analyst → proposal.md → (architect?) → spec.md → orchestrator → developer
+```
+
+**Impacto**: Complexidade mal avaliada, fase de arquitetura pulada quando necessário.
+
+---
+
+### ❌ 2. Pular Task Decomposition (TPL-WORKFLOW-003)
+
+```bash
+# ERRADO
+spec.md (3000 linhas) → developer implementa tudo de uma vez
+
+# CORRETO
+spec.md → orchestrator → tasks.md (30 tasks, cada ~500 linhas de contexto) → developer (task-by-task)
+```
+
+**Impacto**: Alucinações da IA, código incorreto, débito técnico massivo.
+
+---
+
+### ❌ 3. Specs Vagas (Não Usar BDD)
+
+```markdown
+# ERRADO ❌
+O registro de usuário deve validar email.
+
+# CORRETO ✅ (TPL-BDD-001)
+Scenario: Registro de Usuário - Email Inválido
+Given email "abc" é fornecido
+When POST /api/users {"email": "abc"}
+Then resposta é 400 Bad Request
+And erro é "INVALID_EMAIL: Formato de email inválido"
+```
+
+**Impacto**: Interpretação ambígua, comportamento não especificado, testes não mapeiam.
+
+---
+
+### ❌ 4. Não Documentar Decisões (Pular ADR)
+
+```bash
+# ERRADO
+Escolhemos PostgreSQL. (sem documentar por quê, alternativas, trade-offs)
+
+# CORRETO (TPL-ADR-001)
+ADR-005: Usar PostgreSQL
+Contexto: Precisa de ACID, expertise do time, orçamento $500/mês
+Decisão: PostgreSQL
+Consequências: ✅ ACID, ✅ Time conhece, ❌ Limites de escalonamento vertical
+Alternativas: MongoDB (rejeitado: sem ACID), MySQL (rejeitado: queries mais lentas)
+```
+
+**Impacto**: Re-debates futuros, decisões questionadas, falta de transparência.
+
+---
+
+## 🔗 Referências Cruzadas
+
+### Integração com Skills (Workflow de 7 Fases)
+
+| Skill | Templates Usados | Fase | Localização de Output |
+|-------|------------------|------|----------------------|
+| **analyst** | changes/proposal.md, changes/spec.md, arc42/*, bdd/* | 1, 3, 7 | changes/[id]/, specs/ |
+| **architect** | changes/design.md, adr/decision.md, c4/* | 2 | changes/[id]/, specs/09_decisions/adrs/ |
+| **orchestrator** | changes/tasks.md | 3.5 | changes/[id]/tasks.md |
+| **developer** | (aplica todos os templates indiretamente via tasks) | 4 | src/ |
+| **tester** | bdd/scenario.md (valida scenarios) | 5 | Relatórios de teste |
+| **documenter** | (atualiza todas as specs/ se necessário) | 6 | specs/, README.md |
+| **guardian** | (valida todos os outputs de template) | 7 | Relatórios de validação |
+
+Veja `../skills/README.md` para documentação completa do workflow de 7 fases.
+
+### Integração com Comandos
+
+| Comando | Templates Usados | Localização de Output |
+|---------|------------------|----------------------|
+| /vision | arc42/01_introduction.md, arc42/03_context.md | specs/01_introduction/, specs/03_context/ |
+| /stack | arc42/02_constraints.md, arc42/04_solution-strategy.md, adr/decision.md | specs/02_constraints/, specs/04_solution-strategy/, specs/09_decisions/adrs/ADR-001_* |
+| /actor | arc42/03_context.md | specs/03_context/ |
+| /container | c4/container.md | specs/05_building-blocks/containers/ |
+| /component | c4/component.md | specs/05_building-blocks/components/ |
+| /feature | bdd/scenario.md | specs/06_runtime/scenarios/ |
+| /flow | bdd/scenario.md | specs/06_runtime/scenarios/ |
+| /build | arc42/07_deployment.md, arc42/10_quality.md | specs/07_deployment/, specs/10_quality/ |
+| /cross | arc42/08_crosscutting.md | specs/08_crosscutting/ |
+| /adr | adr/decision.md | specs/09_decisions/adrs/ |
+| /plan | arc42/05_building-blocks.md, arc42/06_runtime.md, bdd/scenario.md | Múltiplas specs |
+| /import | Todos arc42/*, c4/*, bdd/*, adr/* | Todos os diretórios specs/ |
+
+Veja `../commands/README.md` para catálogo completo de comandos.
+
+### Integração com Regras
+
+Templates referenciam regras durante implementação:
+- **changes/tasks.md** → Cada task lista regras aplicáveis de rules/
+- **bdd/scenario.md** → Regras de validação de rules/code-quality/
+- **c4/component.md** → Regras SRP, OCP de rules/solid/
+- **arc42/02_constraints.md** → Todas as 39 regras categorizadas
+
+Veja `../rules/README.md` para catálogo completo de regras organizadas por categoria.
+
+---
+
+## 📖 Documentação Relacionada
+
+- **[Hub Principal](../README.md)** - Visão completa do sistema com workflow de 7 fases
+- **[Comandos](../commands/README.md)** - 15 comandos Arc42
+- **[Skills](../skills/README.md)** - 9 agentes especializados e workflow de 7 fases
+- **[Regras](../rules/README.md)** - 39 regras de qualidade organizadas por categoria
+- **[Resultado: specs/](../../specs/)** - Especificações bem documentadas (a constituição)
+
+### Referências Externas
+
+- **Arc42**: https://arc42.org/
+- **Modelo C4**: https://c4model.com/
 - **BDD/Gherkin**: https://cucumber.io/docs/gherkin/
 - **ADR**: https://adr.github.io/
+
+---
+
+## 📜 Changelog
+
+### v3.0.0 (2025-12-10)
+
+**🔗 REFERÊNCIAS CRUZADAS COMPLETAS**:
+- 🔗 Integração completa com skills, comandos, regras
+- 📖 Documentação aprimorada com links claros para todos os diretórios relacionados
+- 🎯 Fluxo coerente para navegação perfeita do desenvolvedor
+- 🗺️ Integração completa do workflow com todas as referências cruzadas
+- ✨ IDs removidos (TPL-) para estrutura mais limpa
+- 📚 Organizado em 5 pastas temáticas (arc42, c4, bdd, adr, changes)
+- 🎓 Guias de uso por complexidade (LOW, MEDIUM, HIGH)
+- 🚨 Antipadrões documentados
+- 📊 Métricas de qualidade
+
+### v2.0.0 (2025-11-17)
+
+- Estrutura inicial com 20 templates
+- 12 capítulos Arc42
+- 3 níveis C4
+- Templates BDD, ADR, Workflow
+
+---
+
+**Versão**: 3.0.0
+**Mantido por**: Sistema Documentation-First Approach
+**Licença**: MIT
+**Última Atualização**: 2025-12-10

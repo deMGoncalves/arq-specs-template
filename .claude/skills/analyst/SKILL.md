@@ -1,6 +1,6 @@
 # Analyst Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phases**: 1. Discovery + 3. Specification
 **Responsibility**: Requirements analysis, proposal creation, and behavioral specification
 
@@ -28,6 +28,50 @@ O Analyst é responsável por duas fases críticas do workflow:
 ### Works with (parallel/collaborative):
 - **architect** - May consult during Phase 2 for design clarifications
 - **orchestrator** - Provides spec.md as input for task decomposition
+
+---
+
+## Tools & References
+
+### Commands Used
+- **Phase 1 (Discovery)**:
+  - `/stats` - Analyze documentation health and gaps
+
+- **Phase 3 (Specification)**:
+  - `/vision` - Define vision, goals, stakeholders (Arc42 ch. 1, 3)
+  - `/actor` - Document actors and external systems (Arc42 ch. 3)
+  - `/container` - Document containers/services (Arc42 ch. 5, C4 L2)
+  - `/component` - Document components/modules (Arc42 ch. 5, C4 L3)
+  - `/feature` - Create BDD scenarios (Arc42 ch. 6)
+  - `/flow` - Document alternative flows (Arc42 ch. 6)
+  - `/build` - Define deployment and quality (Arc42 ch. 7, 10)
+  - `/cross` - Document crosscutting concepts (Arc42 ch. 8)
+  - `/import` - Import external documents into Arc42 format
+
+### Templates Created
+- **Phase 1 (Discovery)**:
+  - `templates/changes/proposal.md` → `changes/[id]/proposal.md`
+
+- **Phase 3 (Specification)**:
+  - `templates/changes/spec.md` → `changes/[id]/spec.md`
+  - `templates/arc42/01_introduction.md` → `specs/01_introduction/*.md`
+  - `templates/arc42/03_context.md` → `specs/03_context/*.md`
+  - `templates/arc42/05_building-blocks.md` → `specs/05_building-blocks/*.md`
+  - `templates/arc42/06_runtime.md` → `specs/06_runtime/*.md`
+  - `templates/arc42/07_deployment.md` → `specs/07_deployment/*.md`
+  - `templates/arc42/08_crosscutting.md` → `specs/08_crosscutting/*.md`
+  - `templates/arc42/10_quality.md` → `specs/10_quality/*.md`
+  - `templates/bdd/scenario.md` → `specs/06_runtime/scenarios/SCN-*.md`
+  - `templates/c4/system-context.md` → Used in Arc42 ch. 3
+  - `templates/c4/container.md` → `specs/05_building-blocks/containers/CNT-*.md`
+  - `templates/c4/component.md` → `specs/05_building-blocks/components/CMP-*.md`
+
+### Rules Applied
+- **Phase 1 (Discovery)**: None (analysis only)
+
+- **Phase 3 (Specification)**: None directly, but specs define rules for implementation:
+  - Specs reference rules in `specs/02_constraints/patterns/`
+  - BDD scenarios validate business rules
 
 ---
 
@@ -132,7 +176,7 @@ Complexity = HIGH:
 ```bash
 # Read relevant context:
 - User request/issue
-- constitution.md (principles)
+- specs/ (quality rules, architectural principles) (principles)
 - specs/ (existing capabilities)
 - src/ (current architecture, optional)
 ```
@@ -310,7 +354,7 @@ Scenario: [Nome do Scenario - Error Case]
 ```bash
 # Required:
 - changes/[change-id]/proposal.md (full)
-- constitution.md (full)
+- specs/ (quality rules, architectural principles) (full)
 - specs/[capability]/spec.md (if updating existing)
 
 # Optional:

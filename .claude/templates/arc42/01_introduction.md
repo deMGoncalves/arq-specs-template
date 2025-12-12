@@ -1,376 +1,376 @@
-# 01. Introduction and Goals
+# 01. Introdução e Objetivos
 
-**Template ID**: TPL-ARC42-01
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 1 (Introduction and Goals)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-01
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 1 (Introdução e Objetivos)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
 **ID**: ARC42-01
-**Status**: [Draft | In Review | Approved]
+**Status**: [Rascunho | Em Revisão | Aprovado]
 
 ---
 
-## Overview
+## Visão Geral
 
-[Brief description of the system - 2-3 sentences explaining what this system does and why it exists]
+[Descrição breve do sistema - 2-3 sentenças explicando o que este sistema faz e por que existe]
 
-**Example:**
-> This document describes the architecture of an e-commerce platform that enables users to browse products, manage shopping carts, process payments, and track orders. The system aims to provide a scalable, secure, and user-friendly online shopping experience.
-
----
-
-## Requirements Overview
-
-### Functional Requirements
-
-List the main functional requirements (what the system must do):
-
-#### [FR-001] [Requirement Name]
-**Description**: [Detailed description]
-
-**Priority**: [Critical | High | Medium | Low]
-
-**Acceptance Criteria**:
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
-
-**Example:**
-#### FR-001: Product Catalog
-**Description**: Users must be able to browse and search through available products with filtering and sorting capabilities.
-
-**Priority**: Critical
-
-**Acceptance Criteria**:
-- [ ] Display product list with images, names, prices
-- [ ] Support text search
-- [ ] Filter by category, price range, ratings
-- [ ] Sort by price, popularity, newest
+**Exemplo:**
+> Este documento descreve a arquitetura de uma plataforma de e-commerce que permite usuários navegarem produtos, gerenciarem carrinhos de compra, processarem pagamentos e rastrearem pedidos. O sistema visa fornecer uma experiência de compra online escalável, segura e amigável.
 
 ---
 
-#### [FR-002] [Requirement Name]
-**Description**: [Detailed description]
+## Visão Geral dos Requisitos
 
-**Priority**: [Critical | High | Medium | Low]
+### Requisitos Funcionais
 
-**Acceptance Criteria**:
-- [ ] Criterion 1
-- [ ] Criterion 2
+Liste os principais requisitos funcionais (o que o sistema deve fazer):
 
----
+#### [RF-001] [Nome do Requisito]
+**Descrição**: [Descrição detalhada]
 
-### Non-Functional Requirements
+**Prioridade**: [Crítica | Alta | Média | Baixa]
 
-List quality attributes and constraints:
+**Critérios de Aceitação**:
+- [ ] Critério 1
+- [ ] Critério 2
+- [ ] Critério 3
 
-#### [NFR-001] Performance
-- **Response Time**: p95 < [X]ms, p99 < [Y]ms
-- **Throughput**: [X] requests/second
-- **Concurrent Users**: [X] users
+**Exemplo:**
+#### RF-001: Catálogo de Produtos
+**Descrição**: Usuários devem poder navegar e buscar produtos disponíveis com capacidades de filtragem e ordenação.
 
-**Example:**
-- **Response Time**: p95 < 200ms, p99 < 500ms
-- **Throughput**: 10,000 requests/second
-- **Concurrent Users**: 100,000 simultaneous users
+**Prioridade**: Crítica
 
----
-
-#### [NFR-002] Scalability
-- **Horizontal Scaling**: Auto-scale based on [metric]
-- **Vertical Scaling**: Up to [X] vCPUs per instance
-- **Database**: [X] read replicas, sharding strategy
+**Critérios de Aceitação**:
+- [ ] Exibir lista de produtos com imagens, nomes, preços
+- [ ] Suportar busca textual
+- [ ] Filtrar por categoria, faixa de preço, avaliações
+- [ ] Ordenar por preço, popularidade, mais recente
 
 ---
 
-#### [NFR-003] Availability
-- **Uptime SLA**: [X]% (e.g., 99.9% = ~8.7h downtime/year)
-- **RTO** (Recovery Time Objective): < [X] hours
-- **RPO** (Recovery Point Objective): < [X] minutes
+#### [RF-002] [Nome do Requisito]
+**Descrição**: [Descrição detalhada]
+
+**Prioridade**: [Crítica | Alta | Média | Baixa]
+
+**Critérios de Aceitação**:
+- [ ] Critério 1
+- [ ] Critério 2
 
 ---
 
-#### [NFR-004] Security
-- **Authentication**: [Method] (e.g., OAuth 2.0, JWT)
-- **Authorization**: [Model] (e.g., RBAC, ABAC)
-- **Encryption**: TLS [version] (in-transit), [algorithm] (at-rest)
-- **Compliance**: [Standards] (e.g., GDPR, PCI-DSS, SOC 2)
+### Requisitos Não-Funcionais
+
+Liste atributos de qualidade e restrições:
+
+#### [RNF-001] Performance
+- **Tempo de Resposta**: p95 < [X]ms, p99 < [Y]ms
+- **Throughput**: [X] requisições/segundo
+- **Usuários Concorrentes**: [X] usuários
+
+**Exemplo:**
+- **Tempo de Resposta**: p95 < 200ms, p99 < 500ms
+- **Throughput**: 10.000 requisições/segundo
+- **Usuários Concorrentes**: 100.000 usuários simultâneos
 
 ---
 
-#### [NFR-005] Maintainability
-- **Code Coverage**: Minimum [X]% (e.g., 80%)
-- **Deployment Frequency**: [Frequency] (e.g., daily, weekly)
-- **Lead Time**: < [X] hours from commit to production
-- **MTTR** (Mean Time To Recovery): < [X] hours
+#### [RNF-002] Escalabilidade
+- **Escalabilidade Horizontal**: Auto-escalar baseado em [métrica]
+- **Escalabilidade Vertical**: Até [X] vCPUs por instância
+- **Banco de Dados**: [X] réplicas de leitura, estratégia de sharding
 
 ---
 
-## Quality Goals
+#### [RNF-003] Disponibilidade
+- **SLA de Uptime**: [X]% (ex: 99,9% = ~8,7h downtime/ano)
+- **RTO** (Recovery Time Objective): < [X] horas
+- **RPO** (Recovery Point Objective): < [X] minutos
 
-Top 3-5 quality goals in priority order:
+---
 
-| Priority | Quality Goal | Scenario |
-|----------|-------------|----------|
-| 1 | [Goal 1] | [Concrete scenario demonstrating this goal] |
-| 2 | [Goal 2] | [Concrete scenario demonstrating this goal] |
-| 3 | [Goal 3] | [Concrete scenario demonstrating this goal] |
+#### [RNF-004] Segurança
+- **Autenticação**: [Método] (ex: OAuth 2.0, JWT)
+- **Autorização**: [Modelo] (ex: RBAC, ABAC)
+- **Criptografia**: TLS [versão] (em trânsito), [algoritmo] (em repouso)
+- **Conformidade**: [Padrões] (ex: GDPR, PCI-DSS, SOC 2)
 
-**Example:**
+---
 
-| Priority | Quality Goal | Scenario |
-|----------|-------------|----------|
-| 1 | Performance | User searches for "laptop" and sees results in < 200ms (p95) |
-| 2 | Availability | System maintains 99.9% uptime even during peak Black Friday traffic |
-| 3 | Security | All user data encrypted at rest (AES-256) and in transit (TLS 1.3) |
-| 4 | Scalability | System auto-scales from 10 to 100 instances during traffic spikes without manual intervention |
-| 5 | Usability | New users complete their first purchase within 5 minutes without help |
+#### [RNF-005] Manutenibilidade
+- **Cobertura de Código**: Mínimo [X]% (ex: 80%)
+- **Frequência de Deploy**: [Frequência] (ex: diária, semanal)
+- **Lead Time**: < [X] horas de commit até produção
+- **MTTR** (Mean Time To Recovery): < [X] horas
+
+---
+
+## Objetivos de Qualidade
+
+Top 3-5 objetivos de qualidade em ordem de prioridade:
+
+| Prioridade | Objetivo de Qualidade | Cenário |
+|------------|-----------------------|---------|
+| 1 | [Objetivo 1] | [Cenário concreto demonstrando este objetivo] |
+| 2 | [Objetivo 2] | [Cenário concreto demonstrando este objetivo] |
+| 3 | [Objetivo 3] | [Cenário concreto demonstrando este objetivo] |
+
+**Exemplo:**
+
+| Prioridade | Objetivo de Qualidade | Cenário |
+|------------|-----------------------|---------|
+| 1 | Performance | Usuário busca por "laptop" e vê resultados em < 200ms (p95) |
+| 2 | Disponibilidade | Sistema mantém 99,9% de uptime mesmo durante pico de tráfego Black Friday |
+| 3 | Segurança | Todos os dados de usuário criptografados em repouso (AES-256) e em trânsito (TLS 1.3) |
+| 4 | Escalabilidade | Sistema auto-escala de 10 para 100 instâncias durante picos de tráfego sem intervenção manual |
+| 5 | Usabilidade | Novos usuários completam sua primeira compra em 5 minutos sem ajuda |
 
 ---
 
 ## Stakeholders
 
-List all stakeholders and their expectations:
+Liste todos os stakeholders e suas expectativas:
 
-| Role | Name | Contact | Expectations |
-|------|------|---------|--------------|
-| [Role] | [Name] | [Email] | [What they expect from the system] |
+| Papel | Nome | Contato | Expectativas |
+|-------|------|---------|--------------|
+| [Papel] | [Nome] | [Email] | [O que esperam do sistema] |
 
-**Example:**
+**Exemplo:**
 
-| Role | Name | Contact | Expectations |
-|------|------|---------|--------------|
-| Product Manager | Jane Doe | jane@example.com | Define features, prioritize backlog, ROI |
-| Tech Lead | John Smith | john@example.com | Technical decisions, architecture quality |
-| DevOps Engineer | Alice Johnson | alice@example.com | Reliable deployments, monitoring, scalability |
-| Security Officer | Bob Wilson | bob@example.com | Compliance, vulnerability management, audits |
-| End Users | - | - | Fast, intuitive, reliable shopping experience |
-| Business Sponsor | CEO | ceo@example.com | Revenue growth, market share, customer satisfaction |
-
----
-
-## Business Context
-
-### Business Goals
-
-What business objectives does this system support?
-
-- **[Goal 1]**: [Description]
-- **[Goal 2]**: [Description]
-- **[Goal 3]**: [Description]
-
-**Example:**
-- **Revenue Growth**: Increase online sales by 30% year-over-year
-- **Market Expansion**: Enter 5 new international markets
-- **Customer Retention**: Improve repeat purchase rate by 20%
-- **Operational Efficiency**: Reduce customer support costs by 40% through self-service
-
-### Success Metrics
-
-How will success be measured?
-
-| Metric | Current | Target | Deadline |
-|--------|---------|--------|----------|
-| [Metric 1] | [Value] | [Value] | [Date] |
-| [Metric 2] | [Value] | [Value] | [Date] |
-
-**Example:**
-
-| Metric | Current | Target | Deadline |
-|--------|---------|--------|----------|
-| Monthly Active Users | 100K | 500K | 2026-Q4 |
-| Conversion Rate | 2.5% | 5% | 2026-Q2 |
-| Average Order Value | $45 | $60 | 2026-Q3 |
-| Customer Satisfaction | 4.2/5 | 4.5/5 | 2026-Q2 |
-| Page Load Time (p95) | 1.2s | 0.5s | 2026-Q1 |
+| Papel | Nome | Contato | Expectativas |
+|-------|------|---------|--------------|
+| Product Manager | Jane Doe | jane@example.com | Definir features, priorizar backlog, ROI |
+| Tech Lead | John Smith | john@example.com | Decisões técnicas, qualidade de arquitetura |
+| Engenheiro DevOps | Alice Johnson | alice@example.com | Deploys confiáveis, monitoramento, escalabilidade |
+| Oficial de Segurança | Bob Wilson | bob@example.com | Conformidade, gestão de vulnerabilidades, auditorias |
+| Usuários Finais | - | - | Experiência de compra rápida, intuitiva e confiável |
+| Patrocinador do Negócio | CEO | ceo@example.com | Crescimento de receita, participação de mercado, satisfação do cliente |
 
 ---
 
-## Scope
+## Contexto de Negócio
 
-### In Scope
+### Objetivos de Negócio
 
-What IS included in this system:
+Quais objetivos de negócio este sistema suporta?
 
-- ✅ [Feature/capability 1]
-- ✅ [Feature/capability 2]
-- ✅ [Feature/capability 3]
+- **[Objetivo 1]**: [Descrição]
+- **[Objetivo 2]**: [Descrição]
+- **[Objetivo 3]**: [Descrição]
 
-**Example:**
-- ✅ Product catalog with search and filters
-- ✅ Shopping cart management
-- ✅ Payment processing (credit cards, PayPal)
-- ✅ Order tracking
-- ✅ User authentication and profiles
-- ✅ Admin dashboard for inventory management
+**Exemplo:**
+- **Crescimento de Receita**: Aumentar vendas online em 30% ano-a-ano
+- **Expansão de Mercado**: Entrar em 5 novos mercados internacionais
+- **Retenção de Clientes**: Melhorar taxa de recompra em 20%
+- **Eficiência Operacional**: Reduzir custos de suporte ao cliente em 40% através de self-service
 
-### Out of Scope
+### Métricas de Sucesso
 
-What is NOT included (at least initially):
+Como o sucesso será medido?
 
-- ❌ [Feature/capability 1]
-- ❌ [Feature/capability 2]
-- ❌ [Feature/capability 3]
+| Métrica | Atual | Meta | Prazo |
+|---------|-------|------|-------|
+| [Métrica 1] | [Valor] | [Valor] | [Data] |
+| [Métrica 2] | [Valor] | [Valor] | [Data] |
 
-**Example:**
-- ❌ Mobile native apps (phase 2)
-- ❌ Cryptocurrency payments (phase 3)
-- ❌ AI-powered product recommendations (phase 2)
-- ❌ Live chat support (phase 2)
-- ❌ Multi-vendor marketplace (future)
-- ❌ Subscription/recurring payments (phase 3)
+**Exemplo:**
 
-### Future Considerations
-
-Features being considered for future releases:
-
-- 🔮 [Feature 1] - [Target: Phase X / Quarter Y]
-- 🔮 [Feature 2] - [Target: Phase X / Quarter Y]
-
-**Example:**
-- 🔮 Mobile native apps (iOS, Android) - Target: Phase 2 / 2026-Q3
-- 🔮 AI product recommendations - Target: Phase 2 / 2026-Q4
-- 🔮 Social commerce integration - Target: Phase 3 / 2027-Q1
+| Métrica | Atual | Meta | Prazo |
+|---------|-------|------|-------|
+| Usuários Ativos Mensais | 100K | 500K | 2026-Q4 |
+| Taxa de Conversão | 2,5% | 5% | 2026-Q2 |
+| Valor Médio do Pedido | R$ 45 | R$ 60 | 2026-Q3 |
+| Satisfação do Cliente | 4,2/5 | 4,5/5 | 2026-Q2 |
+| Tempo de Carregamento (p95) | 1,2s | 0,5s | 2026-Q1 |
 
 ---
 
-## Technical Context
+## Escopo
 
-### Technology Constraints
+### No Escopo
 
-What technologies must/cannot be used?
+O que ESTÁ incluído neste sistema:
 
-**Must Use**:
-- [Technology 1]: [Reason]
-- [Technology 2]: [Reason]
+- ✅ [Feature/capacidade 1]
+- ✅ [Feature/capacidade 2]
+- ✅ [Feature/capacidade 3]
 
-**Cannot Use**:
-- [Technology 1]: [Reason]
-- [Technology 2]: [Reason]
+**Exemplo:**
+- ✅ Catálogo de produtos com busca e filtros
+- ✅ Gerenciamento de carrinho de compras
+- ✅ Processamento de pagamentos (cartões de crédito, PayPal)
+- ✅ Rastreamento de pedidos
+- ✅ Autenticação de usuários e perfis
+- ✅ Dashboard admin para gestão de inventário
 
-**Example:**
+### Fora do Escopo
 
-**Must Use**:
-- PostgreSQL: Existing infrastructure, team expertise, ACID requirements
-- Node.js: Team expertise, ecosystem, async I/O performance
-- AWS: Existing contract, infrastructure, compliance certifications
+O que NÃO está incluído (pelo menos inicialmente):
 
-**Cannot Use**:
-- MongoDB: Data consistency requirements mandate ACID
-- Firebase: Vendor lock-in concerns, data residency requirements
-- Proprietary database: Open source mandate, cost constraints
+- ❌ [Feature/capacidade 1]
+- ❌ [Feature/capacidade 2]
+- ❌ [Feature/capacidade 3]
 
----
+**Exemplo:**
+- ❌ Apps nativos mobile (fase 2)
+- ❌ Pagamentos com criptomoedas (fase 3)
+- ❌ Recomendações de produtos com IA (fase 2)
+- ❌ Suporte via chat ao vivo (fase 2)
+- ❌ Marketplace multi-vendedor (futuro)
+- ❌ Pagamentos recorrentes/assinaturas (fase 3)
 
-## Assumptions
+### Considerações Futuras
 
-List key assumptions that influence architecture:
+Features sendo consideradas para releases futuras:
 
-1. **[Assumption 1]**: [Description and impact if wrong]
-2. **[Assumption 2]**: [Description and impact if wrong]
+- 🔮 [Feature 1] - [Meta: Fase X / Trimestre Y]
+- 🔮 [Feature 2] - [Meta: Fase X / Trimestre Y]
 
-**Example:**
-
-1. **Traffic Growth**: Traffic will grow 3x in next 12 months
-   - **Impact if wrong**: Over-provisioned infrastructure = wasted cost OR under-provisioned = downtime
-
-2. **Team Size**: Team will grow from 5 to 15 developers
-   - **Impact if wrong**: Architecture too complex for small team OR too simplistic for large team
-
-3. **Budget**: $50K/month infrastructure budget
-   - **Impact if wrong**: Need to re-architect for cost optimization
-
-4. **Compliance**: GDPR compliance required within 6 months
-   - **Impact if wrong**: Major refactoring needed for data privacy
+**Exemplo:**
+- 🔮 Apps nativos mobile (iOS, Android) - Meta: Fase 2 / 2026-Q3
+- 🔮 Recomendações de produtos com IA - Meta: Fase 2 / 2026-Q4
+- 🔮 Integração de comércio social - Meta: Fase 3 / 2027-Q1
 
 ---
 
-## Dependencies
+## Contexto Técnico
 
-External dependencies this system relies on:
+### Restrições Tecnológicas
 
-| Dependency | Type | SLA | Fallback Strategy |
-|------------|------|-----|-------------------|
-| [System/Service] | [Type] | [SLA] | [What happens if unavailable] |
+Quais tecnologias devem/não podem ser usadas?
 
-**Example:**
+**Deve Usar**:
+- [Tecnologia 1]: [Razão]
+- [Tecnologia 2]: [Razão]
 
-| Dependency | Type | SLA | Fallback Strategy |
-|------------|------|-----|-------------------|
-| Stripe | Payment Gateway | 99.9% | Queue payments, retry, show error to user |
-| Auth0 | Authentication | 99.9% | Cached tokens (2h TTL), graceful degradation |
-| SendGrid | Email | 99.95% | Queue emails, retry with exponential backoff |
-| AWS S3 | Object Storage | 99.99% | CDN cache, show placeholder images |
-| Elasticsearch | Search | 99.5% | Fallback to database search (slower) |
+**Não Pode Usar**:
+- [Tecnologia 1]: [Razão]
+- [Tecnologia 2]: [Razão]
 
----
+**Exemplo:**
 
-## Glossary (Brief)
+**Deve Usar**:
+- PostgreSQL: Infraestrutura existente, expertise do time, requisitos ACID
+- Node.js: Expertise do time, ecossistema, performance de I/O assíncrono
+- AWS: Contrato existente, infraestrutura, certificações de conformidade
 
-Define domain-specific terms used in this document:
-
-- **[Term 1]**: [Definition]
-- **[Term 2]**: [Definition]
-
-**Example:**
-- **SKU**: Stock Keeping Unit - unique identifier for each product variant
-- **Cart Abandonment**: When user adds items to cart but doesn't complete purchase
-- **Conversion Rate**: Percentage of visitors who complete a purchase
-- **Checkout Flow**: Multi-step process from cart to payment confirmation
-- **Inventory**: Available stock quantity for each SKU
-
-*(Full glossary in Chapter 12)*
+**Não Pode Usar**:
+- MongoDB: Requisitos de consistência de dados mandam ACID
+- Firebase: Preocupações com vendor lock-in, requisitos de residência de dados
+- Banco de dados proprietário: Mandato open source, restrições de custo
 
 ---
 
-## Notes
+## Premissas
 
-Additional context, decisions, or considerations:
+Liste premissas-chave que influenciam a arquitetura:
 
-- [Note 1]
-- [Note 2]
+1. **[Premissa 1]**: [Descrição e impacto se errada]
+2. **[Premissa 2]**: [Descrição e impacto se errada]
 
-**Example:**
-- Architecture must support gradual migration from legacy monolith
-- Initial MVP focuses on B2C, B2B features in phase 2
-- Team has strong Node.js expertise but limited Go experience
-- Black Friday traffic is 10x normal, architecture must handle this
+**Exemplo:**
 
----
+1. **Crescimento de Tráfego**: Tráfego crescerá 3x nos próximos 12 meses
+   - **Impacto se errada**: Infraestrutura super-provisionada = desperdício de custo OU sub-provisionada = downtime
 
-## References
+2. **Tamanho do Time**: Time crescerá de 5 para 15 desenvolvedores
+   - **Impacto se errada**: Arquitetura muito complexa para time pequeno OU muito simplista para time grande
 
-- [Document/Link 1]
-- [Document/Link 2]
+3. **Orçamento**: R$ 50K/mês de orçamento de infraestrutura
+   - **Impacto se errada**: Necessidade de re-arquitetar para otimização de custos
 
-**Example:**
-- [Product Requirements Document](link)
-- [Business Case Document](link)
-- [Competitive Analysis](link)
-- [User Research Findings](link)
+4. **Conformidade**: Conformidade GDPR requerida em 6 meses
+   - **Impacto se errada**: Refatoração importante necessária para privacidade de dados
 
 ---
 
-## Approval
+## Dependências
 
-| Role | Name | Signature | Date |
-|------|------|-----------|------|
-| Product Manager | [Name] | | |
-| Tech Lead | [Name] | | |
-| Security Officer | [Name] | | |
+Dependências externas das quais este sistema depende:
+
+| Dependência | Tipo | SLA | Estratégia de Fallback |
+|-------------|------|-----|------------------------|
+| [Sistema/Serviço] | [Tipo] | [SLA] | [O que acontece se indisponível] |
+
+**Exemplo:**
+
+| Dependência | Tipo | SLA | Estratégia de Fallback |
+|-------------|------|-----|------------------------|
+| Stripe | Gateway de Pagamento | 99,9% | Enfileirar pagamentos, retry, mostrar erro ao usuário |
+| Auth0 | Autenticação | 99,9% | Tokens em cache (2h TTL), degradação graciosa |
+| SendGrid | Email | 99,95% | Enfileirar emails, retry com backoff exponencial |
+| AWS S3 | Object Storage | 99,99% | Cache CDN, mostrar imagens placeholder |
+| Elasticsearch | Busca | 99,5% | Fallback para busca no banco (mais lenta) |
 
 ---
 
-## Change History
+## Glossário (Breve)
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0.0 | [Date] | [Name] | Initial version |
+Defina termos específicos do domínio usados neste documento:
+
+- **[Termo 1]**: [Definição]
+- **[Termo 2]**: [Definição]
+
+**Exemplo:**
+- **SKU**: Stock Keeping Unit - identificador único para cada variante de produto
+- **Abandono de Carrinho**: Quando usuário adiciona itens ao carrinho mas não completa a compra
+- **Taxa de Conversão**: Porcentagem de visitantes que completam uma compra
+- **Fluxo de Checkout**: Processo multi-etapa do carrinho até confirmação de pagamento
+- **Inventário**: Quantidade de estoque disponível para cada SKU
+
+*(Glossário completo no Capítulo 12)*
 
 ---
 
-**Next Chapter**: [02. Architecture Constraints](02_constraints.md)
+## Notas
+
+Contexto adicional, decisões ou considerações:
+
+- [Nota 1]
+- [Nota 2]
+
+**Exemplo:**
+- Arquitetura deve suportar migração gradual do monolito legado
+- MVP inicial foca em B2C, features B2B na fase 2
+- Time tem forte expertise Node.js mas experiência limitada em Go
+- Tráfego Black Friday é 10x normal, arquitetura deve lidar com isso
+
+---
+
+## Referências
+
+- [Documento/Link 1]
+- [Documento/Link 2]
+
+**Exemplo:**
+- [Documento de Requisitos de Produto](link)
+- [Documento de Business Case](link)
+- [Análise Competitiva](link)
+- [Descobertas de Pesquisa com Usuários](link)
+
+---
+
+## Aprovação
+
+| Papel | Nome | Assinatura | Data |
+|-------|------|------------|------|
+| Product Manager | [Nome] | | |
+| Tech Lead | [Nome] | | |
+| Oficial de Segurança | [Nome] | | |
+
+---
+
+## Histórico de Mudanças
+
+| Versão | Data | Autor | Mudanças |
+|--------|------|-------|----------|
+| 1.0.0 | [Data] | [Nome] | Versão inicial |
+
+---
+
+**Próximo Capítulo**: [02. Restrições de Arquitetura](02_constraints.md)

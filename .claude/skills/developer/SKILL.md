@@ -1,6 +1,6 @@
 # Developer Skill
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Phase**: 4. Implementation
 **Responsibility**: Implement code task-by-task following atomic decomposition
 
@@ -37,6 +37,70 @@ O Developer é responsável pela **Phase 4: Implementation**, implementando cód
 
 ---
 
+## Tools & References
+
+### Commands Used
+- **Phase 4 (Implementation)**:
+  - `/code` - Main command for code implementation
+  - `/component` - Reference component structure (C4 L3)
+
+### Templates Created
+- **Phase 4 (Implementation)**: None (creates source code, not templates)
+  - Creates files in `src/` following DDD Co-Located structure
+  - Creates tests in `*.spec.ts` or `*.test.ts`
+
+### Rules Applied
+- **ALL 39 Rules** during implementation:
+
+  **Object Calisthenics (001-009)**:
+  - 001: Max 1 indentation level
+  - 002: No ELSE clause
+  - 003: Wrap primitives in value objects
+  - 004: First-class collections
+  - 005: One dot per line
+  - 006: No abbreviations
+  - 007: Max 200 lines per class
+  - 008: No getters/setters
+  - 009: Tell, Don't Ask
+
+  **SOLID (010-014)**:
+  - 010: Single Responsibility Principle
+  - 011: Open/Closed Principle
+  - 012: Liskov Substitution Principle
+  - 013: Interface Segregation Principle
+  - 014: Dependency Inversion Principle
+
+  **Package Principles (015-020)**:
+  - 015: Release-Reuse Equivalence
+  - 016: Common Closure Principle
+  - 017: Common Reuse Principle
+  - 018: Acyclic Dependencies Principle
+  - 019: Stable Dependencies Principle
+  - 020: Stable Abstractions Principle
+
+  **Code Quality (021-039)**:
+  - 021: DRY (Don't Repeat Yourself)
+  - 022: KISS (Keep It Simple)
+  - 023: YAGNI (You Aren't Gonna Need It)
+  - 024: No magic constants
+  - 025: No "The Blob" anti-pattern
+  - 026: Comment quality (why, not what)
+  - 027: Domain error handling
+  - 028: Async exception handling
+  - 029: Immutability (Object.freeze)
+  - 030: No unsafe functions (eval, etc.)
+  - 031: Use absolute imports
+  - 032: Test coverage ≥80%
+  - 033: Max 3 parameters per function
+  - 034: Consistent naming
+  - 035: No misleading names
+  - 036: Isolate side effects
+  - 037: No boolean flags
+  - 038: Command-Query Separation
+  - 039: Boy Scout Rule (leave it better)
+
+---
+
 ## When to Use
 
 ### Trigger
@@ -64,7 +128,7 @@ O Developer é responsável pela **Phase 4: Implementation**, implementando cód
 
 Example for TASK-003:
 **Context to Load** (~500 lines):
-- constitution.md (DDD section) - ~200 lines
+- specs/ (quality rules, architectural principles) (DDD section) - ~200 lines
 - proposal.md - ~100 lines
 - design.md (if exists) - ~150 lines
 - spec.md (APENAS the Requirement for this scenario) - ~100 lines
@@ -269,7 +333,7 @@ Refactoring checklist:
 - [ ] Improve naming
 - [ ] Extract complex logic into functions
 - [ ] Add comments where needed
-- [ ] Ensure code follows constitution.md principles
+- [ ] Ensure code follows specs/ (quality rules, architectural principles) principles
 
 # After each refactor, run tests:
 npm test usuario.spec.ts
@@ -569,7 +633,7 @@ export class UsuarioCriado {
 ```markdown
 # Load ONLY what current task specifies
 TASK-003 Context:
-- constitution.md (DDD section) - ~200 lines
+- specs/ (quality rules, architectural principles) (DDD section) - ~200 lines
 - proposal.md - ~100 lines
 - spec.md (APENAS requirement) - ~100 lines
 - tasks.md (APENAS TASK-003) - ~50 lines
@@ -730,7 +794,7 @@ Developer work is complete when:
 ### Example Task: TASK-003
 
 **Context to Load** (~500 lines):
-- constitution.md (DDD section)
+- specs/ (quality rules, architectural principles) (DDD section)
 - proposal.md
 - spec.md (APENAS User Registration requirement)
 - tasks.md (APENAS TASK-003)

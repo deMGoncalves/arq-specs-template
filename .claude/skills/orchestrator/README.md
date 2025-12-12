@@ -72,7 +72,7 @@ After `spec.md` is approved, invoke the Orchestrator:
 1. `changes/[change-id]/spec.md` - Approved specification
 2. `changes/[change-id]/proposal.md` - Original proposal (context)
 3. `changes/[change-id]/design.md` - Design (if HIGH complexity)
-4. `.claude/constitution.md` - Project principles
+4. `.claude/specs/ (quality rules, architectural principles)` - Project principles
 
 ### Outputs Produced
 
@@ -156,7 +156,7 @@ TASK-008 depends on: ALL previous tasks
 ### TASK-003: Implement Email value object
 
 **Context to Load** (~450 lines):
-- constitution.md (DDD Tactical section) - ~150 lines
+- specs/ (quality rules, architectural principles) (DDD Tactical section) - ~150 lines
 - proposal.md - ~100 lines
 - spec.md (APENAS Email Validation scenarios) - ~150 lines
 - tasks.md (APENAS TASK-003) - ~50 lines
@@ -346,6 +346,6 @@ The "Context to Load" section is the MOST CRITICAL part of each task.
 
 ---
 
-**Version**: 2.0.0
+**Version**: 3.0.0
 **Created**: 2025-11-17
 **Last Updated**: 2025-11-17

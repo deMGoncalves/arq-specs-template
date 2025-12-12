@@ -4,6 +4,120 @@ description: Cria ou atualiza uma regra de código (pattern) com critérios obje
 
 # Rule
 
+**ID**: CMD-007
+**Categoria**: 📏 Quality
+**Prioridade**: 🟡 P1 (Importante)
+**Fase**: 2
+**Arc42 Chapters**: 2, 12
+
+---
+
+## 🎯 O que Faz
+
+Cria/atualiza **regras de qualidade de código** personalizadas além das 39 regras padrão:
+- Patterns específicos da stack (ex: Next.js conventions, Spring Boot patterns)
+- Regras de domínio (ex: validações específicas do negócio)
+- Standards organizacionais
+
+Cada rule tem ID, severidade, critérios objetivos e forma de detecção (manual/automática).
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Quando stack tem conventions não cobertas pelas 39 rules padrão
+
+### Recomendado
+- Para padrões arquiteturais específicos do projeto
+- Quando time precisa de guia de código customizado
+
+### Opcional
+- Projetos que seguem apenas as 39 rules padrão
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-002 (stack)**: Define tecnologias que influenciam rules
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-013 (code)**: Aplica rules durante implementação
+
+### Arquivos Criados
+- `specs/02_constraints/patterns/[NNN]_[name].md`
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Rules | Exemplo |
+|--------------|-------|-------|---------|
+| **LOW** | 5-10 min | 1-2 | Naming convention simples |
+| **MEDIUM** | 10-20 min | 3-5 | Patterns arquiteturais |
+| **HIGH** | 20-30 min | 6-10 | Framework-specific rules |
+
+## 💡 Exemplos
+
+### Exemplo 1: Next.js Convention (MEDIUM)
+
+**Input**:
+```bash
+/rule Next.js: Server Components devem ter sufixo .server.tsx e Client Components .client.tsx para clareza
+```
+
+**Output**:
+```markdown
+- Pattern 040: Sufixos de Server/Client Components
+  → Severidade: ⚠️ Warning
+  → Critério: Arquivos em app/ com 'use client' devem ter .client.tsx
+```
+
+### Exemplo 2: Domain Validation (LOW)
+
+**Input**:
+```bash
+/rule Email deve ser validado com RFC 5322 completo, não apenas regex simples
+```
+
+**Output**:
+```markdown
+- Pattern 041: Validação Email RFC 5322
+  → Severidade: ❌ Bloqueante
+  → Detecção automática: ESLint plugin-email-validator
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Rule conflita com rule existente"
+
+**Solução**: Documentar conflito explicitamente e definir precedência no campo "Relacionada com".
+
+### Problema 2: "Como numerar rules customizadas?"
+
+**Solução**: Rules padrão: 001-039. Rules customizadas: 040+.
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-002 (stack)**: [Pré-requisito] Stack define rules aplicáveis
+- **CMD-013 (code)**: [Pós-ação] Aplica rules
+
+### Skills
+- **SKL-005 (gatekeeper)**: Valida rules durante implementação
+
+### Rules
+- **Todas as 39 rules padrão** em `.claude/rules/` servem como baseline
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

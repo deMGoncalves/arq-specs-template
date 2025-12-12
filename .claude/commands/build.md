@@ -4,6 +4,142 @@ description: Define a estratégia de deploy, pipeline, RTO/RPO e os requisitos d
 
 # Build
 
+**ID**: CMD-010
+**Categoria**: 🏗️ Infrastructure
+**Prioridade**: 🔴 P0 (Crítico)
+**Fase**: 3-4
+**Arc42 Chapters**: 7, 10, 12
+
+---
+
+## 🎯 O que Faz
+
+Define **estratégia de deployment e qualidade**:
+- Ambientes (dev, staging, prod)
+- Pipeline CI/CD (build, test, deploy)
+- Infraestrutura (Docker, K8s, cloud)
+- SLOs, métricas, monitoramento
+- RTO/RPO, backup, disaster recovery
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Antes de fazer primeiro deploy
+- Antes de implementar código (CMD-013)
+
+### Recomendado
+- Após definir containers (CMD-004)
+- Para documentar requisitos não-funcionais
+
+### Opcional
+- POCs que não vão para produção
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-002 (stack)**: Define tecnologias de infra
+- **CMD-004 (container)**: Define o que será deployado
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-011 (cross)**: Conceitos transversais (logging, monitoring)
+- **CMD-013 (code)**: Implementação
+
+### Arquivos Criados
+- `specs/07_deployment/007_deployment-view.md`
+- `specs/10_quality/010_quality-requirements.md`
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Ambientes | Exemplo |
+|--------------|-------|-----------|---------|
+| **LOW** | 15-25 min | 2 | Dev + Prod em PaaS (Railway, Render) |
+| **MEDIUM** | 25-40 min | 3 | Dev + Staging + Prod em cloud |
+| **HIGH** | 40-90 min | 4+ | Multi-cloud, multi-region, DR |
+
+## 💡 Exemplos
+
+### Exemplo 1: PaaS Simples (LOW)
+
+**Input**:
+```bash
+/build Deploy em Railway, CI via GitHub Actions, PostgreSQL gerenciado, backup diário, RTO 4h
+```
+
+**Output**:
+```markdown
+- Ambientes: dev (local), prod (Railway)
+- Pipeline: GitHub Actions → build → test → deploy Railway
+- SLOs: Uptime 99%, response time <500ms P95
+- Backup: Automated daily (Railway)
+```
+
+### Exemplo 2: Kubernetes (HIGH)
+
+**Input**:
+```bash
+/build Deploy em AWS EKS multi-AZ, ArgoCD GitOps, RDS Multi-AZ, Redis Cluster, monitoring Datadog, RTO 1h, RPO 15min, Blue-Green deployment
+```
+
+**Output**:
+```markdown
+- Ambientes: dev, staging, prod-us-east-1, prod-eu-west-1
+- Pipeline: GitHub Actions → ArgoCD → EKS (Blue-Green)
+- Infrastructure: EKS 3 AZs, RDS Multi-AZ, Redis Cluster 6 nodes
+- SLOs: 99.9% uptime, <200ms P95, <1s P99
+- DR: Multi-region active-passive, RPO 15min, RTO 1h
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Qual RTO/RPO definir?"
+
+**Solução**: Baseie em impacto de negócio:
+- **RTO** (Recovery Time Objective): Quanto tempo pode ficar fora?
+  - Sistema crítico: <1h
+  - Sistema importante: <4h
+  - Sistema secundário: <24h
+- **RPO** (Recovery Point Objective): Quanto dado pode perder?
+  - Transacional: <5min
+  - Analítico: <1h
+  - Arquivo: <24h
+
+### Problema 2: "Quantos ambientes criar?"
+
+**Solução**: Mínimo recomendado:
+- **2 ambientes**: dev (local) + prod
+- **3 ambientes**: dev + staging + prod (recomendado)
+- **4+ ambientes**: +DR, +canary (enterprise)
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-002 (stack)**: [Pré-requisito] Stack define infra
+- **CMD-004 (container)**: [Pré-requisito] O que deployar
+- **CMD-011 (cross)**: [Pós-ação] Logging/monitoring
+- **CMD-013 (code)**: [Pós-ação] Implementação
+
+### Skills
+- **SKL-001 (analyst)**: Define build na Phase 3
+- **SKL-009 (guardian)**: Valida antes de deploy
+
+### Rules
+- **035-036 (Testing)**: Pipeline deve rodar testes
+- Todas as rules aplicam no build
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

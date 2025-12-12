@@ -2,7 +2,236 @@
 description: Registra uma decisão arquitetural importante, seu contexto, alternativas e consequências.
 ---
 
-# Adr
+# ADR
+
+**ID**: CMD-012
+**Categoria**: 🏗️ Infrastructure
+**Prioridade**: 🟡 P1 (Importante)
+**Fase**: 2-3
+**Arc42 Chapters**: 9, 12
+
+---
+
+## 🎯 O que Faz
+
+Cria **Architecture Decision Records** (ADRs) documentando:
+- Contexto e forças que motivaram a decisão
+- Alternativas consideradas (prós/contras)
+- Decisão tomada e justificativa
+- Consequências, riscos e métricas de sucesso
+
+Cada ADR recebe ID único (ADR-001+) e pode ter status: 🟡 Proposta, 🟢 Aceita, 🔴 Deprecated, ⚫ Superseded.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Decisões arquiteturais significativas
+- Escolhas de tecnologia core (CMD-002 cria ADR-001 automaticamente)
+- Mudanças de patterns/padrões estabelecidos
+
+### Recomendado
+- Trade-offs entre alternativas viáveis
+- Decisões com impacto financeiro/técnico alto
+- Quando time precisa de histórico de decisões
+
+### Opcional
+- Decisões triviais sem alternativas
+- Convenções simples de código
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-002 (stack)**: Cria ADR-001 automaticamente
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-007 (rule)**: ADRs podem gerar patterns
+- **CMD-011 (cross)**: Implementa conceitos da ADR
+- **CMD-013 (code)**: Implementa decisão
+
+### Arquivos Criados
+- `specs/09_decisions/adrs/ADR-[NNN]_[slug].md`
+- `specs/09_decisions/009_architectural-decisions.md` (atualizado)
+- `specs/12_glossary/012_glossary.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Alternativas | Exemplo |
+|--------------|-------|--------------|---------|
+| **LOW** | 10-15 min | 2 | Escolha de biblioteca simples |
+| **MEDIUM** | 15-30 min | 3-4 | Padrão arquitetural (MVC vs CQRS) |
+| **HIGH** | 30-60 min | 5+ | Arquitetura distribuída (monolith vs microservices) |
+
+## 💡 Exemplos
+
+### Exemplo 1: Escolha de ORM (LOW)
+
+**Input**:
+```bash
+/adr Usar Prisma para ORM. Alternativas: TypeORM, Drizzle. Prisma escolhido por type-safety e migrations declarativas
+```
+
+**Output**:
+```markdown
+ADR-002: Prisma como ORM Principal
+
+Contexto: Precisamos de ORM com type-safety para Postgres
+
+Alternativas:
+1. TypeORM: Decorators, Active Record, comunidade grande
+2. Drizzle: Performance superior, SQL-like
+3. Prisma: Schema declarativo, type-safe, migrations automáticas ✅
+
+Decisão: Prisma
+- Type-safety end-to-end com geração de tipos
+- Migrations versionadas e declarativas
+- Menor curva de aprendizado para time
+
+Consequências:
++ Type-safety reduz bugs em 40% (baseado em estudo interno)
++ Migrations declarativas facilitam code review
+- Performance 10-15% inferior ao Drizzle (aceitável para nossa escala)
+```
+
+### Exemplo 2: Autenticação (MEDIUM)
+
+**Input**:
+```bash
+/adr Sistema de autenticação: Session-based vs JWT vs OAuth2. Escolher OAuth2 com Auth0 para suportar SSO e múltiplos providers
+```
+
+**Output**:
+```markdown
+ADR-003: OAuth2 com Auth0 para Autenticação
+
+Contexto: Precisamos autenticação que suporte SSO corporativo e social login
+
+Alternativas:
+1. Session-based (Express-session + Redis):
+   + Simples, revogação imediata
+   - Não escala horizontalmente sem Redis, sem SSO nativo
+2. JWT self-signed:
+   + Stateless, escala horizontal
+   - Revogação complexa, gerenciar chaves de rotação
+3. OAuth2 + OIDC (Auth0): ✅
+   + SSO corporativo (SAML), social login (Google, GitHub)
+   + Gerenciamento centralizado de usuários
+   - Custo $0.023/MAU, vendor lock-in
+
+Decisão: OAuth2 com Auth0
+- Requisito de SSO corporativo elimina opções 1 e 2
+- Auth0 reduz time-to-market em 4 semanas vs implementação própria
+- Custo estimado: $300/mês (13k MAU)
+
+Métricas de Sucesso:
+- Login SSO funcional em 2 semanas
+- <500ms P95 latency de autenticação
+- Zero data breaches em 12 meses
+```
+
+### Exemplo 3: Microservices vs Monolith (HIGH)
+
+**Input**:
+```bash
+/adr Arquitetura: Monolith modular vs Microservices. Time pequeno (5 devs), requisitos simples, crescimento gradual. Escolher monolith modular com preparação para micro-frontends
+```
+
+**Output**:
+```markdown
+ADR-004: Monolith Modular com Bounded Contexts
+
+Contexto:
+- Time: 5 desenvolvedores
+- Escala atual: 10k usuários, crescimento 50%/ano
+- Requisitos: E-commerce B2B, pagamentos, inventário
+
+Alternativas:
+1. Monolith tradicional:
+   + Deploy simples, debug local, transações ACID fáceis
+   - Acoplamento, dificulta escalar time
+2. Microservices desde início:
+   + Escala independente, autonomia de times
+   - Complexidade operacional (K8s, tracing, eventual consistency), time pequeno não sustenta
+3. Monolith modular (DDD Bounded Contexts): ✅
+   + Simplicidade operacional, contexts isolados, preparação para split futuro
+   - Requer disciplina arquitetural, split futuro tem custo
+4. Micro-frontends + Monolith:
+   + Frontend escala independente
+   - Overhead de orquestração
+
+Decisão: Monolith Modular
+- Bounded Contexts: `user-management`, `orders`, `payments`, `inventory`
+- Cada context = pasta com entidades, use cases, API routes
+- Preparação: eventos de domínio (future message bus), APIs internas bem definidas
+
+Consequências:
++ Velocity: 1 deploy/dia vs 5 deploys (microservices)
++ Custo infra: $200/mês vs $1200/mês (K8s cluster)
++ Onboarding: 1 semana vs 4 semanas
+- Débito: Splitting futuro custará 6-8 semanas (se necessário)
+
+Plano de Revisão:
+- Re-avaliar aos 50k usuários ou quando time crescer para 15+ devs
+- Métricas de alerta: deploy time >20min, >200 models no mesmo DB schema
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Quando criar uma ADR?"
+
+**Solução**: Critérios para ADR obrigatória:
+- **Decisão cara de reverter** (ex: escolha de cloud provider)
+- **Múltiplas alternativas viáveis** (trade-offs não óbvios)
+- **Impacto em múltiplos times/componentes**
+- **Conflito com padrões existentes**
+
+Não criar ADR para:
+- Decisões triviais (naming conventions → usar rule)
+- Sem alternativas (tecnologia mandatória → constraint)
+
+### Problema 2: "Como deprecar uma ADR?"
+
+**Solução**: Processo de depreciação:
+1. Mudar status de `🟢 Aceita` para `🔴 Deprecated`
+2. Criar nova ADR que substitui (ex: ADR-015 substitui ADR-003)
+3. Na ADR antiga, adicionar: `**Superseded by**: ADR-015`
+4. Na ADR nova, referenciar: `**Supersedes**: ADR-003`
+5. Atualizar índice em `009_architectural-decisions.md`
+
+### Problema 3: "Como numerar ADRs?"
+
+**Solução**: Numeração sequencial:
+- **ADR-001**: Sempre reservada para stack (criada por CMD-002)
+- **ADR-002+**: Ordem cronológica de criação
+- **Nunca reutilizar números** mesmo se ADR for deprecated
+- Usar 3 dígitos: ADR-001, ADR-010, ADR-100
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-002 (stack)**: [Pré-requisito] Cria ADR-001 automaticamente
+- **CMD-007 (rule)**: [Relacionado] ADRs podem gerar patterns
+- **CMD-011 (cross)**: [Pós-ação] Implementa conceitos
+- **CMD-013 (code)**: [Pós-ação] Implementa decisão
+
+### Skills
+- **SKL-002 (architect)**: Cria ADRs na Phase 2
+- **SKL-001 (analyst)**: Pode recomendar ADRs
+
+### Rules
+- Não há rules específicas para ADRs, mas decisões devem respeitar as 39 rules
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
 
 ## User Input
 

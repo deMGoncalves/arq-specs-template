@@ -1,33 +1,33 @@
-# 05. Building Block View
+# 05. Visão de Building Blocks
 
-**Template ID**: TPL-ARC42-05
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 5 (Building Block View)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-05
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 5 (Visão de Building Blocks)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
 **ID**: ARC42-05
 
-This chapter contains **C4 Level 2** (Containers) and **Level 3** (Components).
+Este capítulo contém **C4 Nível 2** (Containers) e **Nível 3** (Componentes).
 
-Use separate files for each container/component:
-- `specs/05_building-blocks/containers/CNT-001_[name].md`
-- `specs/05_building-blocks/components/CMP-001_[name].md`
+Use arquivos separados para cada container/componente:
+- `specs/05_building-blocks/containers/CNT-001_[nome].md`
+- `specs/05_building-blocks/components/CMP-001_[nome].md`
 
-See templates:
-- [Container Template](../../c4/container.md)
-- [Component Template](../../c4/component.md)
+Veja templates:
+- [Template Container](../../c4/container.md)
+- [Template Componente](../../c4/component.md)
 
 ---
 
-## Overview Diagram (C4 Level 2)
+## Diagrama de Visão Geral (C4 Nível 2)
 
 ```
 ┌─────────────────────────────────────────────┐
-│          System: [System Name]              │
+│         Sistema: [Nome do Sistema]          │
 └─────────────────────────────────────────────┘
                     │
     ┌───────────────┼───────────────┐
@@ -44,40 +44,40 @@ See templates:
     ┌───────┼────────┐
     ↓       ↓        ↓
 ┌────────┐ ┌───┐ ┌────┐
-│   DB   │ │Redis│ │ S3 │
+│   BD   │ │Redis│ │ S3 │
 └────────┘ └────┘ └────┘
 ```
 
 ---
 
-## Container List
+## Lista de Containers
 
-| ID | Name | Technology | Purpose |
-|----|------|------------|---------|
-| CNT-001 | API Server | Node.js | REST API |
-| CNT-002 | Web App | Next.js | Frontend |
-| CNT-003 | Database | PostgreSQL | Data persistence |
+| ID | Nome | Tecnologia | Propósito |
+|----|------|------------|-----------|
+| CNT-001 | Servidor API | Node.js | REST API |
+| CNT-002 | App Web | Next.js | Frontend |
+| CNT-003 | Banco de Dados | PostgreSQL | Persistência de dados |
 | CNT-004 | Cache | Redis | Caching |
-| CNT-005 | Worker | Node.js | Background jobs |
+| CNT-005 | Worker | Node.js | Jobs em background |
 
-**Details**: See `specs/05_building-blocks/containers/CNT-*`
-
----
-
-## Component List (per Container)
-
-### CNT-001: API Server
-
-| ID | Name | Purpose |
-|----|------|---------|
-| CMP-001 | Auth Service | Authentication |
-| CMP-002 | Product Service | Product catalog |
-| CMP-003 | Cart Service | Shopping cart |
-| CMP-004 | Order Service | Order processing |
-| CMP-005 | Payment Service | Payment integration |
-
-**Details**: See `specs/05_building-blocks/components/CMP-*`
+**Detalhes**: Veja `specs/05_building-blocks/containers/CNT-*`
 
 ---
 
-**Previous**: [04. Solution Strategy](04_solution-strategy.md) | **Next**: [06. Runtime View](06_runtime.md)
+## Lista de Componentes (por Container)
+
+### CNT-001: Servidor API
+
+| ID | Nome | Propósito |
+|----|------|-----------|
+| CMP-001 | Serviço Auth | Autenticação |
+| CMP-002 | Serviço Produtos | Catálogo de produtos |
+| CMP-003 | Serviço Carrinho | Carrinho de compras |
+| CMP-004 | Serviço Pedidos | Processamento de pedidos |
+| CMP-005 | Serviço Pagamentos | Integração de pagamentos |
+
+**Detalhes**: Veja `specs/05_building-blocks/components/CMP-*`
+
+---
+
+**Anterior**: [04. Estratégia de Solução](04_solution-strategy.md) | **Próximo**: [06. Visão de Runtime](06_runtime.md)

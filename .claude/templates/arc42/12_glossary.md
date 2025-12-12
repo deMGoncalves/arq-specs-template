@@ -1,11 +1,11 @@
-# 12. Glossary
+# 12. Glossário
 
-**Template ID**: TPL-ARC42-12
-**Version**: 2.0.0
-**Category**: Arc42
-**Chapter**: 12 (Glossary)
-**Used By**: analyst (Phase 3: Specification)
-**Last Updated**: 2025-11-17
+**ID do Template**: TPL-ARC42-12
+**Versão**: 2.0.0
+**Categoria**: Arc42
+**Capítulo**: 12 (Glossário)
+**Usado Por**: analyst (Fase 3: Especificação)
+**Última Atualização**: 2025-11-17
 
 ---
 
@@ -13,27 +13,27 @@
 
 ---
 
-## Business Terms
+## Termos de Negócio
 
-- **SKU**: Stock Keeping Unit - unique identifier for each product variant
-- **Cart Abandonment**: User adds items but doesn't complete purchase
-- **Conversion Rate**: % of visitors who complete purchase
-- **Checkout Flow**: Multi-step process from cart to payment
-- **Inventory**: Available stock quantity
+- **SKU**: Stock Keeping Unit - identificador único para cada variante de produto
+- **Cart Abandonment**: Usuário adiciona itens mas não completa a compra
+- **Conversion Rate**: % de visitantes que completam compra
+- **Checkout Flow**: Processo multi-etapa do carrinho ao pagamento
+- **Inventory**: Quantidade de estoque disponível
 
 ---
 
-## Technical Terms
+## Termos Técnicos
 
-- **JWT**: JSON Web Token (stateless authentication)
+- **JWT**: JSON Web Token (autenticação stateless)
 - **CQRS**: Command Query Responsibility Segregation
-- **Event Sourcing**: Store events instead of state
-- **Idempotency**: Same operation can be repeated safely
-- **Circuit Breaker**: Prevent cascading failures
+- **Event Sourcing**: Armazenar eventos ao invés de estado
+- **Idempotency**: Mesma operação pode ser repetida com segurança
+- **Circuit Breaker**: Prevenir falhas em cascata
 
 ---
 
-## Abbreviations
+## Abreviações
 
 - **API**: Application Programming Interface
 - **SLA**: Service Level Agreement
@@ -49,15 +49,15 @@
 
 ---
 
-## Roles
+## Papéis
 
-- **Product Manager**: Define requirements, prioritize backlog
-- **Tech Lead**: Technical decisions, architecture
-- **DevOps Engineer**: Infrastructure, deployments
-- **Security Officer**: Security compliance, audits
-- **End User**: Customer using the platform
-- **Administrator**: Staff managing the system
+- **Product Manager**: Define requisitos, prioriza backlog
+- **Tech Lead**: Decisões técnicas, arquitetura
+- **DevOps Engineer**: Infraestrutura, deploys
+- **Security Officer**: Conformidade de segurança, auditorias
+- **End User**: Cliente usando a plataforma
+- **Administrator**: Staff gerenciando o sistema
 
 ---
 
-**Previous**: [11. Risks](11_risks.md)
+**Anterior**: [11. Risks](11_risks.md)

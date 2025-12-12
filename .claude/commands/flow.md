@@ -4,6 +4,140 @@ description: Cria cenários de teste BDD para fluxos alternativos, como erros e 
 
 # Flow
 
+**ID**: CMD-009
+**Categoria**: 🎬 Runtime
+**Prioridade**: 🟡 P1 (Importante)
+**Fase**: 3
+**Arc42 Chapters**: 6, 12
+
+---
+
+## 🎯 O que Faz
+
+Documenta **fluxos alternativos** e **edge cases** para features existentes:
+- Tratamento de erros (validações, falhas externas)
+- Cenários excepcionais (timeout, rate limit, dados inválidos)
+- Fluxos secundários (cancelamento, rollback, retry)
+
+Complementa CMD-008 (feature) que foca no happy path.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Para features críticas (pagamento, autenticação, dados sensíveis)
+
+### Recomendado
+- Para toda feature após documentar happy path
+- Quando sistema integra com APIs externas (falhas possíveis)
+
+### Opcional
+- Features triviais sem edge cases relevantes
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-008 (feature)**: Happy path deve existir primeiro
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-013 (code)**: Implementar tratamento de erros
+
+### Arquivos Criados
+- `specs/06_runtime/scenarios/SCN-[NNN]_[slug]-error.md` (novos cenários)
+- `specs/06_runtime/006_runtime-view.md` (atualizado)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Fluxos | Exemplo |
+|--------------|-------|--------|---------|
+| **LOW** | 5-10 min | 1-2 | Validações simples |
+| **MEDIUM** | 10-20 min | 3-5 | Múltiplas validações + falhas externas |
+| **HIGH** | 20-40 min | 6-10 | Sistema distribuído com compensações |
+
+## 💡 Exemplos
+
+### Exemplo 1: Login Errors (LOW)
+
+**Input**:
+```bash
+/flow Login com credenciais inválidas, usuário bloqueado, senha expirada
+```
+
+**Output**:
+```gherkin
+Cenário: Login com email inválido
+  Dado que o usuário fornece email "invalido"
+  Quando o usuário tenta fazer login
+  Então o sistema retorna erro 400
+  E a mensagem é "Email inválido"
+
+Cenário: Login com senha incorreta
+  Dado que o usuário fornece senha errada (3 tentativas)
+  Então a conta é bloqueada por 15 minutos
+```
+
+### Exemplo 2: Payment Failures (HIGH)
+
+**Input**:
+```bash
+/flow Checkout com cartão recusado, timeout no gateway, estoque esgotado durante pagamento
+```
+
+**Output**:
+```gherkin
+Cenário: Cartão sem limite
+  Quando Stripe retorna "insufficient_funds"
+  Então pedido permanece "pendente"
+  E usuário vê "Cartão sem limite disponível"
+
+Cenário: Timeout no Stripe (>30s)
+  E o pagamento não é confirmado em 30s
+  Então sistema cancela pedido
+  E libera estoque
+  E notifica usuário por email
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Quantos fluxos alternativos criar?"
+
+**Solução**: Cobertura mínima:
+- **1 flow por validação crítica**
+- **1 flow por integração externa**
+- **1 flow por erro de negócio**
+
+### Problema 2: "Flow vs Feature?"
+
+**Solução**:
+- **Feature (CMD-008)**: Happy path (1 cenário principal)
+- **Flow (CMD-009)**: Erros e edge cases (N cenários alternativos)
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-008 (feature)**: [Pré-requisito] Happy path
+- **CMD-013 (code)**: [Pós-ação] Implementar error handling
+
+### Skills
+- **SKL-001 (analyst)**: Cria flows na Phase 3
+- **SKL-007 (tester)**: Valida cobertura de edge cases
+
+### Rules
+- **029 (Error Handling)**: Todo flow alternativo deve ter tratamento
+- **036 (Coverage)**: Flows críticos devem ter testes
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

@@ -4,6 +4,113 @@ description: Cria os artefatos do design inicial: Container, Componente e Cenár
 
 # Plan
 
+**ID**: CMD-006
+**Categoria**: 🔨 Building
+**Prioridade**: 🟢 P2 (Útil)
+**Fase**: 3
+**Arc42 Chapters**: 5, 6, 12
+
+---
+
+## 🎯 O que Faz
+
+**Atalho** que orquestra múltiplos commands para criar visão arquitetural rápida:
+- Container (C4 L2) via CMD-004
+- Component principal (C4 L3) via CMD-005
+- Cenário BDD principal (runtime) via CMD-008
+
+Útil para **prototipagem rápida** e **visão geral** de features novas.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Nunca (é um atalho opcional)
+
+### Recomendado
+- Para exploração rápida de arquitetura
+- Quando precisa de visão geral antes de detalhar
+
+### Opcional
+- Sempre (preferir commands individuais para controle fino)
+
+## 🔗 Pré-requisitos
+
+### Commands
+- **CMD-001 (vision)**: Contexto do projeto
+- **CMD-002 (stack)**: Stack definida
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-010 (build)**: Deployment
+- **CMD-013 (code)**: Implementação
+
+### Arquivos Criados
+- `specs/05_building-blocks/containers/CNT-[NNN]_[slug].md`
+- `specs/05_building-blocks/containers/CNT-[NNN]/components/CMP-[NNN]_[slug].md`
+- `specs/06_runtime/scenarios/SCN-[NNN]_[slug].md`
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Artefatos | Exemplo |
+|--------------|-------|-----------|---------|
+| **LOW** | 10-15 min | 3 | Feature simples |
+| **MEDIUM** | 15-25 min | 5-8 | Feature com múltiplos cenários |
+| **HIGH** | 25-40 min | 9-15 | Bounded context completo |
+
+## 💡 Exemplos
+
+### Exemplo 1: Feature Rápida (LOW)
+
+**Input**:
+```bash
+/plan Sistema de notificações push via FCM para usuários mobile
+```
+
+**Output**:
+```markdown
+- CNT-004_notification-service.md
+- CMP-001_push-notification-handler.md
+- SCN-004_enviar-notificacao-push.md
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Prefiro controle granular"
+
+**Solução**: Use commands individuais:
+- `/container` para container específico
+- `/component` para component específico
+- `/feature` para cenário específico
+
+### Problema 2: "Plan criou arquivos que não quero"
+
+**Solução**: Plan é opinado (cria 1 container + 1 component + 1 scenario). Para customização, use commands individuais.
+
+## 🔗 Relacionado com
+
+### Commands
+- **CMD-004 (container)**: Invocado internamente
+- **CMD-005 (component)**: Invocado internamente
+- **CMD-008 (feature)**: Invocado internamente
+
+### Skills
+- **SKL-001 (analyst)**: Pode usar plan internamente
+
+### Rules
+- Não aplicável
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text

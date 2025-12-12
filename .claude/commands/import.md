@@ -4,6 +4,283 @@ description: Absorve uma fonte externa (ex: documento de requisitos) para preenc
 
 # Import
 
+**ID**: CMD-014
+**Categoria**: 🔧 Meta
+**Prioridade**: 🟢 P2 (Útil)
+**Fase**: - (orquestrador)
+**Arc42 Chapters**: 1-12 (todos)
+
+---
+
+## 🎯 O que Faz
+
+**Orquestrador** que transforma documentos externos em specs Arc42:
+- Lê documento-fonte (PDF, MD, DOC, etc.)
+- Extrai informações (visão, stack, building blocks, features, build)
+- Executa sequência automática: /vision → /stack → /plan → /feature → /build
+- Gera specs/ completa sem intervenção manual
+
+Ideal para **migrar projetos existentes** ou **importar RFPs/propostas**.
+
+## 📝 Quando Usar
+
+### Obrigatório
+- Nunca (é um atalho opcional)
+
+### Recomendado
+- Migração de projeto legado para Documentation-First
+- RFP/proposta técnica a ser transformada em specs
+- Sincronizar specs com documento Word do cliente
+
+### Opcional
+- Projetos novos (preferir comandos individuais)
+
+## 🔗 Pré-requisitos
+
+### Commands
+- Nenhum (import é comando inicial)
+
+## 🔗 Pós-ações
+
+### Próximos Commands
+- **CMD-013 (code)**: Implementar specs geradas
+- Comandos individuais para ajustes finos
+
+### Arquivos Criados
+- Todos os arquivos gerados por /vision, /stack, /plan, /feature, /build
+- Potencialmente specs/ completa (12 capítulos)
+
+## 📊 Complexidade
+
+| Complexidade | Tempo | Doc Pages | Exemplo |
+|--------------|-------|-----------|---------|
+| **LOW** | 10-20 min | 1-5 | README.md de projeto existente |
+| **MEDIUM** | 20-40 min | 5-20 | Proposta técnica estruturada |
+| **HIGH** | 40-90 min | 20-100 | RFP completa multi-seção |
+
+## 💡 Exemplos
+
+### Exemplo 1: README.md Simples (LOW)
+
+**Input**:
+```bash
+/import docs/PROJECT.md
+```
+
+**Conteúdo de PROJECT.md**:
+```markdown
+# E-commerce Platform
+
+Sistema de e-commerce B2B para atacadistas.
+
+Stack: Node.js 20, PostgreSQL 15, React 18
+
+Features:
+- Login (admin/cliente)
+- Catálogo de produtos
+- Carrinho e checkout
+- Painel admin
+
+Deploy: Docker + Railway
+```
+
+**Output**:
+```text
+📖 Importando docs/PROJECT.md...
+
+🔄 Executando pipeline:
+  1/5 → /vision E-commerce B2B para atacadistas...
+     ✅ specs/01_introduction/001_introduction-and-goals.md
+     ✅ specs/03_context/003_context-and-scope.md
+
+  2/5 → /stack Node.js 20, PostgreSQL 15, React 18...
+     ✅ specs/02_constraints/002_constraints.md
+     ✅ specs/09_decisions/adrs/ADR-001_stack-tecnologico.md
+
+  3/5 → /plan Sistema com 4 features principais...
+     ✅ specs/05_building-blocks/containers/CNT-001_api.md
+     ✅ specs/05_building-blocks/containers/CNT-002_web-app.md
+
+  4/5 → /feature Login, Catálogo, Carrinho, Admin...
+     ✅ specs/06_runtime/scenarios/SCN-001_login.md (4 cenários)
+
+  5/5 → /build Docker + Railway, PostgreSQL...
+     ✅ specs/07_deployment/007_deployment-view.md
+     ✅ specs/10_quality/010_quality-requirements.md
+
+✅ IMPORT COMPLETO
+
+Specs geradas:
+• 12 capítulos Arc42
+• 2 containers (API, Web App)
+• 4 cenários BDD
+• 1 ADR (stack)
+
+Próximos passos:
+- Revisar specs para ajustes finos
+- Executar /code para implementar
+```
+
+### Exemplo 2: Proposta Técnica (MEDIUM)
+
+**Input**:
+```bash
+/import proposta-cliente-xyz.pdf
+```
+
+**Conteúdo do PDF** (20 páginas):
+- Contexto de negócio
+- 15 requisitos funcionais
+- Stack mandatória (AWS, Java Spring Boot)
+- Integrações (Salesforce, SAP)
+- SLAs (99.9% uptime, <200ms P95)
+
+**Output**:
+```text
+📖 Lendo proposta-cliente-xyz.pdf (20 páginas)...
+
+🔍 Extração:
+  ✓ 3 stakeholders identificados
+  ✓ 15 requisitos funcionais
+  ✓ 8 requisitos não-funcionais
+  ✓ Stack: AWS, Java Spring Boot, PostgreSQL
+  ✓ 2 integrações externas
+  ✓ 4 ambientes (dev, staging, prod-us, prod-eu)
+
+🔄 Pipeline (35 min estimado):
+  [/vision] → 8 min
+  [/stack] → 5 min (+ ADR-001)
+  [/actor] → 3 min (Salesforce, SAP como sistemas externos)
+  [/plan] → 12 min (3 containers, 8 componentes)
+  [/feature] → 10 min (15 cenários BDD)
+  [/build] → 7 min (AWS ECS, RDS Multi-AZ, CloudWatch)
+
+✅ Specs completas: 89% cobertura
+⚠️ Ações manuais necessárias:
+  - Revisar SCN-007 (integração SAP) - detalhes técnicos ausentes no PDF
+  - Definir estratégia de testes (specs/10_quality) - não especificada no PDF
+```
+
+### Exemplo 3: RFP Complexa (HIGH)
+
+**Input**:
+```bash
+/import rfp-government-system.docx
+```
+
+**Conteúdo** (80 páginas, múltiplas seções, tabelas, diagramas)
+
+**Output**:
+```text
+📖 Processando RFP (80 páginas)...
+⚠️ Documento complexo detectado - executando em modo HIGH
+
+🔍 Análise estrutural:
+  Seção 1: Business Case (15 páginas)
+  Seção 2: Functional Requirements (30 páginas, 47 requisitos)
+  Seção 3: Technical Architecture (20 páginas, diagramas C4)
+  Seção 4: Quality Requirements (10 páginas, SLAs/SLOs)
+  Seção 5: Deployment Strategy (5 páginas)
+
+🤖 Invocando analyst para processar...
+  [analyst orquestra pipeline completo automaticamente]
+
+⏱️ 78 minutos de processamento...
+
+✅ IMPORT COMPLETO
+
+Specs geradas:
+• 12 capítulos Arc42 (100% cobertura)
+• 47 requisitos funcionais → 47 cenários BDD
+• 5 sistemas externos (ACT/SYS)
+• 8 containers, 23 componentes
+• 12 ADRs (decisões arquiteturais)
+• 18 patterns customizados
+• SLAs/SLOs completos
+
+📊 Métricas:
+- 8947 linhas de specs geradas
+- 0 placeholders remanescentes
+- 3 seções marcadas para revisão manual
+
+⚠️ Revisão Manual Necessária:
+1. specs/06_runtime/scenarios/SCN-032 - Fluxo de auditoria complexo (diagrama ilegível no PDF)
+2. specs/08_crosscutting#8.2 - Segurança: RFP menciona "padrão governamental X" não especificado
+3. specs/11_risks - Adicionar riscos específicos do contexto governamental
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+### Problema 1: "Import gerou specs incompletas"
+
+**Causa**: Documento-fonte ambíguo, mal estruturado ou com informações faltantes
+
+**Solução**:
+1. Verificar qualidade do doc: headings claros, seções organizadas?
+2. Executar `/stats` para avaliar cobertura das specs geradas
+3. Completar gaps manualmente com comandos individuais:
+   ```bash
+   /feature [requisito faltante]
+   /adr [decisão não capturada]
+   /cross [conceito transversal ausente]
+   ```
+
+### Problema 2: "Formato do documento não suportado"
+
+**Formatos suportados**:
+- ✅ Markdown (.md)
+- ✅ PDF (.pdf) - via pdftotext
+- ✅ Word (.docx) - via pandoc
+- ✅ Text (.txt)
+
+**Solução se não suportado**:
+1. Converter para Markdown manualmente
+2. Usar `/vision`, `/stack`, etc. com copy-paste do conteúdo
+
+### Problema 3: "Pipeline falhou no meio"
+
+**Causa**: Erro em um dos comandos intermediários
+
+**Solução**:
+1. Identificar qual comando falhou (logs mostram progresso)
+2. Executar comando manualmente para debug:
+   ```bash
+   /feature [argumentos extraídos do doc]
+   ```
+3. Continuar pipeline a partir do ponto de falha
+
+---
+
+## 🔗 Relacionado com
+
+### Commands
+- **Invoca internamente**:
+  - CMD-001 (/vision)
+  - CMD-002 (/stack)
+  - CMD-003 (/actor) - se houver sistemas externos
+  - CMD-006 (/plan) OU CMD-004+CMD-005+CMD-008 individuais
+  - CMD-010 (/build)
+- **Pós-import**:
+  - CMD-013 (/code): Implementar specs geradas
+  - CMD-015 (/stats): Avaliar qualidade das specs
+
+### Skills
+- **SKL-001 (analyst)**: Pode ser invocado automaticamente para docs complexos (HIGH)
+
+### Rules
+- Não aplicável (import é meta-comando)
+
+---
+
+**Criado em**: 2025-12-09
+**Última Atualização**: 2025-12-09
+**Versão**: 2.0.0
+**Mantido por**: Documentation-First Approach Team
+
+---
+
 ## User Input
 
 ```text
