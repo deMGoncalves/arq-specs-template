@@ -31,9 +31,23 @@
 - **RPO**: < 5 minutos
 
 ### Segurança
-- **OWASP Top 10**: Todos mitigados
+- **OWASP Top 10 (2021)**: Todos mitigados (A01-A10)
+- **OWASP ASVS 4.0**: Level 2 compliance (V1-V14)
+- **CWE Top 25**: Top 10 vulnerabilidades críticas mitigadas
 - **Teste de Penetração**: Anual
-- **Conformidade**: GDPR, PCI-DSS
+- **Conformidade**: GDPR, PCI-DSS, NIST SSDF
+- **Security Rules**: 040-064 (25 regras) aplicadas
+- **SAST/DAST**: Integrado em CI/CD (SonarQube, OWASP ZAP)
+- **Dependency Scanning**: npm audit, Snyk, Dependabot
+
+**Documentação Detalhada**:
+- `specs/08_crosscutting/security/asvs-analysis.md`
+- `specs/08_crosscutting/security/stride-threat-model.md`
+- `specs/10_quality/security-requirements.md`
+- `specs/11_risks/vulnerability-analysis.md`
+
+**Templates Disponíveis**: `.claude/templates/security/`
+**Skill**: `security-analyst`
 
 ### Manutenibilidade
 - **Cobertura de Código**: > 80%

@@ -1,9 +1,9 @@
 # Commands - Arc42 Documentation Commands
 
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Total**: 15 commands
 **Status**: 🟢 Production-ready
-**Last Updated**: 2025-12-10
+**Last Updated**: 2025-12-16
 
 ---
 
@@ -207,7 +207,7 @@ Shortcut: orchestrates container + component + feature for quick view.
 **Category**: 🔨 Building | **Priority**: 🟡 P1 | **Phase**: 2 | **Time**: 5-20min
 **Arc42**: 2, 12
 
-Creates custom patterns/rules beyond the 39 standard rules.
+Creates custom patterns/rules beyond the 64 standard rules (39 quality + 25 security).
 
 **Prerequisites**: /stack
 **Next steps**: /code
@@ -338,7 +338,7 @@ Implements spec-driven code.
 **Prerequisites**: /vision through /cross (complete specs)
 **Next steps**: None (final phase)
 **Used by**: developer, orchestrator, gatekeeper (Phase 4)
-**Applies**: All 39 rules from `rules/` (Object Calisthenics, SOLID, Package Principles, Code Quality)
+**Applies**: All 64 rules from `rules/` (39 quality: Object Calisthenics, SOLID, Package Principles, Code Quality + 25 security: OWASP ASVS, STRIDE, OWASP Top 10, CWE, NIST SSDF)
 
 **CRITICAL**: Code without spec = Hallucination. Always spec BEFORE code.
 
@@ -634,7 +634,7 @@ See `../rules/README.md` for complete rule catalog.
 
 ---
 
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Maintained by**: Documentation-First Approach System
 **License**: MIT
-**Last Updated**: 2025-12-10
+**Last Updated**: 2025-12-16

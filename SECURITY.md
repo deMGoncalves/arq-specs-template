@@ -225,11 +225,12 @@ Se você está usando este template em seu projeto:
 
 1. **✅ Mantenha atualizado**: Use sempre a versão mais recente
 2. **✅ Revise código gerado**: Valide todo código gerado pela IA
-3. **✅ Siga Object Calisthenics**: As 39 regras ajudam a prevenir vulnerabilidades
-4. **✅ Testes de segurança**: Inclua testes de segurança em seus projetos
-5. **✅ Validação de entrada**: Sempre valide inputs de usuário
-6. **✅ Princípio do menor privilégio**: Conceda apenas permissões necessárias
-7. **✅ Secrets management**: NUNCA commite credenciais ou chaves
+3. **✅ Siga as 64 regras**: 39 regras de qualidade + 25 regras de segurança ajudam a prevenir vulnerabilidades
+4. **✅ Use security-analyst skill**: Aplique análise de segurança com OWASP ASVS, STRIDE, Top 10
+5. **✅ Testes de segurança**: Inclua testes de segurança em seus projetos (SAST/DAST)
+6. **✅ Validação de entrada**: Sempre valide inputs de usuário (regra 040)
+7. **✅ Princípio do menor privilégio**: Conceda apenas permissões necessárias (regra 043)
+8. **✅ Secrets management**: NUNCA commite credenciais ou chaves (regra 047)
 
 ### Para Contribuidores
 
@@ -311,8 +312,8 @@ Usamos ferramentas automáticas para monitorar dependências:
 
 ---
 
-**Última Atualização**: 2025-12-11
-**Versão**: 1.0.0
+**Última Atualização**: 2025-12-16
+**Versão**: 1.1.0
 
 ---
 

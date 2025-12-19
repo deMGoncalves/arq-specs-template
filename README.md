@@ -16,7 +16,7 @@
 
 **Template profissional de arquitetura de software com IA determinística**
 
-[![Versão](https://img.shields.io/badge/versão-3.0.0-blue.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/badge/versão-3.1.0-blue.svg)](CHANGELOG.md)
 [![Licença](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-purple.svg)](https://claude.ai/code)
 [![Arc42](https://img.shields.io/badge/Arc42-12%20Capítulos-orange.svg)](https://arc42.org/)
@@ -34,7 +34,7 @@
 
 > **Um boilerplate completo e pronto para produção que elimina alucinações de IA através de especificações determinísticas.**
 
-Este template implementa uma abordagem **científica e comprovada** para desenvolvimento de software assistido por IA, reduzindo alucinações de **60-80% para <10%** através de especificações Arc42, diagramas C4, cenários BDD e 39 regras de qualidade.
+Este template implementa uma abordagem **científica e comprovada** para desenvolvimento de software assistido por IA, reduzindo alucinações de **60-80% para <10%** através de especificações Arc42, diagramas C4, cenários BDD e 64 regras (39 quality + 25 security).
 
 ### 🔥 O Problema que Resolvemos
 
@@ -143,6 +143,7 @@ Construído sobre frameworks consagrados da engenharia de software:
 - **📝 ADR** - Architecture Decision Records
 - **🧩 DDD** - Domain-Driven Design (Tactical Co-Located)
 - **⚙️ SOLID + Object Calisthenics** - 39 regras de qualidade
+- **🛡️ Security Frameworks** - OWASP ASVS, STRIDE, Top 10, CWE, NIST SSDF (25 regras)
 
 </td>
 <td width="50%">
@@ -268,9 +269,9 @@ arq-specs-template/
 │
 ├── 📂 .claude/                    # ⚙️ Configuração do Claude Code
 │   ├── commands/                  # 💬 15 comandos slash
-│   ├── skills/                    # 🤖 9 agentes especializados
-│   ├── rules/                     # 📏 39 regras de qualidade
-│   ├── templates/                 # 📄 Templates Arc42, C4, BDD, ADR
+│   ├── skills/                    # 🤖 10 agentes especializados
+│   ├── rules/                     # 📏 64 regras (39 quality + 25 security)
+│   ├── templates/                 # 📄 Templates Arc42, C4, BDD, ADR, Security
 │   ├── examples/                  # 💡 8 exemplos práticos
 │   ├── prompts/                   # 📝 Prompts de automação
 │   ├── validators/                # ✅ Scripts de validação
@@ -518,7 +519,7 @@ Esta fundação matemática demonstra cientificamente como especificações dete
 ✅ src/user-management/api/usuario/Email.spec.ts (Testes)
 ✅ src/user-management/api/usuario/validar-email.ts (Use Case)
 ✅ Cobertura de testes: 92%
-✅ Todas as 39 regras de qualidade aplicadas
+✅ Todas as 64 regras aplicadas (39 quality + 25 security)
 ```
 
 ### Exemplo 2: Feature Complexa (Complexidade HIGH)
@@ -784,8 +785,9 @@ Anthropic
 
 - [x] ✅ Template completo Arc42 (12 capítulos)
 - [x] ✅ 15 comandos slash funcionais
-- [x] ✅ 9 agentes especializados
-- [x] ✅ 39 regras de qualidade
+- [x] ✅ 10 agentes especializados (+ security-analyst)
+- [x] ✅ 64 regras (39 quality + 25 security)
+- [x] ✅ 5 frameworks de segurança (OWASP ASVS, STRIDE, Top 10, CWE, NIST SSDF)
 - [x] ✅ Tradução completa para Português BR
 - [x] ✅ 8 exemplos práticos
 - [x] ✅ Validadores automáticos

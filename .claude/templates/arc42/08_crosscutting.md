@@ -15,23 +15,64 @@
 
 ## Segurança
 
+**📘 Templates de Segurança Disponíveis**:
+- `.claude/templates/security/owasp-asvs.md` - Checklist OWASP ASVS 4.0
+- `.claude/templates/security/stride-analysis.md` - Threat Modeling
+- `.claude/templates/security/owasp-top10.md` - OWASP Top 10 (2021)
+- `.claude/templates/security/cwe-top25.md` - CWE Top 25
+- `.claude/templates/security/nist-ssdf.md` - NIST SSDF v1.1
+
+**🛡️ Security Rules**: 040-064 (25 regras) em `.claude/rules/`
+
+**👤 Skill**: `security-analyst` para análise de segurança
+
 ### Autenticação
 
 - **Método**: OAuth 2.0 (Auth0)
 - **Tokens**: JWT, TTL 2h, refresh tokens
 - **Armazenamento**: Cookies HTTP-only (web), armazenamento seguro (mobile)
+- **Password Hashing**: Argon2id (work factor 4, memory 65536 KB)
+- **MFA**: TOTP disponível para contas sensíveis
+- **Rate Limiting**: 5 tentativas/15 min
+
+**Regras Aplicáveis**: 041 (Autenticação Segura), 042 (Sessão), 060 (Spoofing)
 
 ### Autorização
 
 - **Modelo**: RBAC (Role-Based Access Control)
 - **Papéis**: Guest, Customer, Admin
 - **Implementação**: Middleware verifica claims JWT
+- **IDOR Prevention**: Verificar ownership de recursos
+
+**Regras Aplicáveis**: 043 (Controle de Acesso)
 
 ### Criptografia
 
-- **Em Trânsito**: TLS 1.3
-- **Em Repouso**: AES-256
-- **Secrets**: AWS Secrets Manager
+- **Em Trânsito**: TLS 1.3, HSTS habilitado
+- **Em Repouso**: AES-256-GCM
+- **Secrets**: AWS Secrets Manager (rotação trimestral)
+- **IVs**: Aleatórios e únicos (CSPRNG)
+
+**Regras Aplicáveis**: 045 (Criptografia), 048 (TLS)
+
+### Threat Modeling
+
+- **Framework**: STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege)
+- **Documentação**: `specs/08_crosscutting/security/stride-threat-model.md`
+- **Top Ameaças**: Documentadas com mitigações
+
+**Template**: `.claude/templates/security/stride-analysis.md`
+
+### Análise de Vulnerabilidades
+
+- **OWASP ASVS**: Checklist completo (V1-V14)
+- **OWASP Top 10**: Cobertura das 10 vulnerabilidades críticas
+- **CWE Top 25**: Análise das 25 fraquezas mais perigosas
+
+**Documentação**:
+- `specs/08_crosscutting/security/asvs-analysis.md`
+- `specs/10_quality/security-requirements.md`
+- `specs/11_risks/vulnerability-analysis.md`
 
 ---
 

@@ -1,9 +1,9 @@
 # Skills - Documentation-First Workflow Agents
 
-**Version**: 3.0.0
-**Total**: 9 specialized agents
+**Version**: 3.1.0
+**Total**: 10 specialized agents
 **Status**: 🟢 Production-ready
-**Last Updated**: 2025-12-10
+**Last Updated**: 2025-12-16
 
 ---
 
@@ -11,8 +11,8 @@
 
 **Specifications don't implement themselves - specialized agents execute the deterministic workflow.**
 
-These 9 agents cover **100% of the 7-phase workflow** in a structured and deterministic way. Each agent has:
-- Unique position (001-009)
+These 10 agents cover **100% of the 7-phase workflow** in a structured and deterministic way. Each agent has:
+- Unique position (001-010)
 - Workflow phase (1-7)
 - Specific responsibility
 - Well-defined inputs/outputs
@@ -28,20 +28,20 @@ These 9 agents cover **100% of the 7-phase workflow** in a structured and determ
 
 | Phase | Skills | % Total | Purpose |
 |-------|--------|---------|---------|
-| 1 (Discovery) | analyst | 11% | Plan and propose change |
-| 2 (Architecture) | architect | 11% | Design for HIGH complexity |
-| 3 (Specification) | analyst | 11% | Arc42 + BDD specification |
-| 3.5 (Decomposition) | orchestrator | 11% | Decompose into atomic tasks |
-| 4 (Implementation) | developer, gatekeeper | 22% | Implement + validate |
-| 5 (Review & Test) | reviewer, tester | 22% | Review quality + tests |
-| 6 (Documentation) | documenter | 11% | Update documentation |
-| 7 (Validation) | analyst, guardian | 22% | Final validation + pre-commit |
+| 1 (Discovery) | analyst | 10% | Plan and propose change |
+| 2 (Architecture) | architect, **security-analyst** | 15% | Design + threat modeling |
+| 3 (Specification) | analyst, **security-analyst** | 15% | Arc42 + BDD + security specs |
+| 3.5 (Decomposition) | orchestrator | 10% | Decompose into atomic tasks |
+| 4 (Implementation) | developer, gatekeeper | 20% | Implement + validate |
+| 5 (Review & Test) | reviewer, tester, **security-analyst** | 20% | Review + tests + security validation |
+| 6 (Documentation) | documenter | 10% | Update documentation |
+| 7 (Validation) | analyst, guardian, **security-analyst** | 20% | Final validation + security audit |
 
 ### By Criticality
 
 | Criticality | Count | Skills | When It Fails... |
 |-------------|-------|--------|------------------|
-| 🔴 CRITICAL | 5 | orchestrator, developer, gatekeeper, guardian, analyst | System produces hallucinations or technical debt |
+| 🔴 CRITICAL | 6 | orchestrator, developer, gatekeeper, guardian, analyst, **security-analyst** | System produces hallucinations, technical debt, or security vulnerabilities |
 | 🟡 IMPORTANT | 3 | architect, reviewer, tester | Quality degrades, but not catastrophic |
 | 🟢 USEFUL | 1 | documenter | Docs become outdated |
 
@@ -87,6 +87,20 @@ User Request: "Implement OAuth2 authentication"
     Creates: changes/[id]/design.md (uses templates/changes/design.md)
     Creates: specs/09_decisions/adrs/ADR-*.md (uses templates/adr/decision.md)
     ↓
+🛡️ security-analyst - THREAT MODELING (Parallel with architect)
+    Input: design.md + architecture diagrams
+    Process:
+      1. Identify assets, trust boundaries, data flows
+      2. Apply STRIDE analysis to each component
+      3. Document threats and mitigations
+      4. Create security ADRs for critical decisions
+    Output: stride-threat-model.md + security ADRs
+    Time: 1-2h
+    Gate: Top 10 threats identified with mitigations
+    Uses Commands: /adr (security decisions)
+    Creates: specs/08_crosscutting/security/stride-threat-model.md
+    Creates: specs/09_decisions/adrs/ADR-*_security-*.md
+    ↓
 ```
 
 ### Phase 3: Specification
@@ -104,6 +118,23 @@ User Request: "Implement OAuth2 authentication"
     Uses Commands: /vision, /plan, /feature, /flow, /build, /cross, /component
     Creates: changes/[id]/spec.md (uses templates/changes/spec.md)
     Creates: specs/ files (uses all templates/arc42/*, templates/bdd/*)
+    ↓
+🛡️ security-analyst - SECURITY REQUIREMENTS (After analyst)
+    Input: spec.md + stride-threat-model.md (if HIGH)
+    Process:
+      1. Fill OWASP ASVS 4.0 checklist (V1-V14)
+      2. Document OWASP Top 10 (2021) coverage
+      3. Analyze CWE Top 25 vulnerabilities
+      4. Document NIST SSDF practices
+      5. Map security rules (040-064) to requirements
+    Output: asvs-analysis.md + security-requirements.md + vulnerability-analysis.md
+    Time: 1-2h
+    Gate: All security templates filled, requirements documented
+    Uses Commands: /cross, /build (security aspects)
+    Creates: specs/08_crosscutting/security/asvs-analysis.md
+    Creates: specs/10_quality/security-requirements.md
+    Creates: specs/11_risks/vulnerability-analysis.md
+    Creates: specs/08_crosscutting/sdlc-security.md
     ↓
 ```
 
@@ -142,17 +173,18 @@ User Request: "Implement OAuth2 authentication"
     Process:
       1. Load context (Files to Load, ≤500 lines)
       2. Implement code (DDD Co-Located, ≤100 LOC)
-      3. Apply Object Calisthenics (39 rules)
+      3. Apply Object Calisthenics (39 rules) + Security Rules (040-064)
       4. Write tests (TDD, coverage ≥80%)
       5. Validate acceptance criteria
     Output: Code + tests
     Time: <2h per task
     Uses Commands: /code, /component
-    Applies Rules: All 39 rules from rules/ directory
+    Applies Rules: All 64 rules (001-039 quality + 040-064 security)
 
     During implementation:
-    🔒 gatekeeper - QUALITY GATES
-      Validates: 39 rules, spec alignment, quality standards
+    🔒 gatekeeper - QUALITY & SECURITY GATES
+      Validates: 64 rules (quality + security), spec alignment, standards
+      Security: Validates rules 040-064 (input validation, auth, crypto, etc)
       Gate: 100% compliant OR BLOCKS
     ↓
     Repeat for all N tasks (sequential or parallel)
@@ -185,6 +217,19 @@ User Request: "Implement OAuth2 authentication"
     Output: Test report (100% passing, coverage %)
     Time: 30-90 min
     Gate: 100% tests passing, coverage ≥80%
+
+🛡️ security-analyst - SECURITY VALIDATION (Parallel with testing)
+    Input: Implemented code + security specs
+    Process:
+      1. Validate security rules 040-064 compliance
+      2. Run SAST (SonarQube, Semgrep, npm audit)
+      3. Run DAST (OWASP ZAP) if applicable
+      4. Check for hardcoded secrets (TruffleHog)
+      5. Validate against OWASP ASVS checklist
+    Output: Security validation report
+    Time: 30-60 min
+    Gate: Zero critical/high vulnerabilities, all security rules OK
+    Creates: SECURITY_VALIDATION_REPORT.md
     ↓
 ```
 
@@ -219,7 +264,21 @@ User Request: "Implement OAuth2 authentication"
     Time: 15-30 min
     Gate: ≥95% validation complete
     Uses Commands: /stats
-
+    ↓
+🛡️ security-analyst - SECURITY AUDIT (Parallel with analyst)
+    Input: All security artifacts (phases 2, 3, 5)
+    Process:
+      1. Final OWASP ASVS validation (all domains)
+      2. Verify all security rules 040-064 compliant
+      3. Review security test results (SAST/DAST)
+      4. Validate threat model mitigations implemented
+      5. Check for zero critical/high vulnerabilities
+      6. Generate security audit report
+    Output: Security audit report + sign-off
+    Time: 15-30 min
+    Gate: All security requirements met, zero critical vulnerabilities
+    Creates: SECURITY_AUDIT_REPORT.md
+    ↓
 🛡️ guardian - PRE-COMMIT/PUSH/RELEASE
     Input: Code ready for commit
     Process:
@@ -329,7 +388,7 @@ Small context (~500 lines/task) → AI stays deterministic → Correct code ✅
 **What it does**:
 - Implements tasks sequentially (TASK-001, TASK-002, ...)
 - Applies DDD Co-Located structure
-- Applies Object Calisthenics (39 rules)
+- Applies Object Calisthenics + Security Rules (64 rules)
 - Writes tests (TDD, coverage ≥80%)
 
 **When to use**:
@@ -339,7 +398,7 @@ Small context (~500 lines/task) → AI stays deterministic → Correct code ✅
 **Inputs**: tasks.md → TASK-NNN
 **Outputs**: Code + tests
 **Uses Commands**: /code, /component
-**Applies Rules**: All 39 rules from rules/ (Object Calisthenics, SOLID, Package Principles, Code Quality)
+**Applies Rules**: All 64 rules from rules/ (001-039: Quality + 040-064: Security)
 
 📄 [SKILL.md](./developer/SKILL.md) | [CHECKLIST.md](./developer/CHECKLIST.md) | [EXAMPLES.md](./developer/EXAMPLES.md) | [TROUBLESHOOTING.md](./developer/TROUBLESHOOTING.md)
 
@@ -347,14 +406,14 @@ Small context (~500 lines/task) → AI stays deterministic → Correct code ✅
 
 ### 🔒 005: gatekeeper
 
-**Category**: Quality Gates
+**Category**: Quality & Security Gates
 **Phase**: 4 (During implementation)
-**Criticality**: 🔴 CRITICAL (prevents technical debt)
+**Criticality**: 🔴 CRITICAL (prevents technical debt + vulnerabilities)
 
 **What it does**:
-- Validates compliance with 39 rules
+- Validates compliance with 64 rules (quality + security)
 - Validates alignment with spec.md
-- Validates quality principles (39 rules from .claude/rules/)
+- Validates quality principles + security requirements
 
 **When to use**:
 - During implementation (automatically invoked by developer)
@@ -363,7 +422,7 @@ Small context (~500 lines/task) → AI stays deterministic → Correct code ✅
 **Inputs**: Implemented code
 **Outputs**: ✅ Pass OR ❌ Fail (with issues)
 **Uses Commands**: /rule, /code (validates)
-**Applies Rules**: All 39 rules from rules/
+**Applies Rules**: All 64 rules from rules/ (001-039: Quality + 040-064: Security)
 
 📄 [SKILL.md](./gatekeeper/SKILL.md) | [CHECKLIST.md](./gatekeeper/CHECKLIST.md) | [EXAMPLES.md](./gatekeeper/EXAMPLES.md) | [TROUBLESHOOTING.md](./gatekeeper/TROUBLESHOOTING.md)
 
@@ -459,6 +518,46 @@ Small context (~500 lines/task) → AI stays deterministic → Correct code ✅
 **Uses Commands**: /stats, /code
 
 📄 [SKILL.md](./guardian/SKILL.md) | [CHECKLIST.md](./guardian/CHECKLIST.md) | [EXAMPLES.md](./guardian/EXAMPLES.md) | [TROUBLESHOOTING.md](./guardian/TROUBLESHOOTING.md)
+
+---
+
+### 🛡️ 010: security-analyst
+
+**Category**: Security Analysis & Validation
+**Phases**: 2 (Architecture), 3 (Specification), 5 (Testing), 7 (Audit)
+**Criticality**: 🔴 CRITICAL (prevents security vulnerabilities)
+
+**What it does**:
+- **Phase 2**: STRIDE threat modeling, security architecture review
+- **Phase 3**: OWASP ASVS checklist, security requirements documentation
+- **Phase 5**: SAST/DAST validation, security rule compliance
+- **Phase 7**: Final security audit and sign-off
+
+**When to use**:
+- Phase 2: In parallel with architect (for HIGH complexity)
+- Phase 3: After analyst creates spec.md
+- Phase 5: In parallel with tester
+- Phase 7: Before guardian pre-commit validation
+
+**Inputs**: design.md, spec.md, implemented code, security specs
+**Outputs**:
+- Phase 2: stride-threat-model.md, security ADRs
+- Phase 3: asvs-analysis.md, security-requirements.md, vulnerability-analysis.md, sdlc-security.md
+- Phase 5: SECURITY_VALIDATION_REPORT.md
+- Phase 7: SECURITY_AUDIT_REPORT.md
+
+**Uses Commands**: /adr (security decisions), /cross, /build (security aspects)
+**Uses Templates**: security/owasp-asvs.md, security/stride-analysis.md, security/owasp-top10.md, security/cwe-top25.md, security/nist-ssdf.md
+**Applies Rules**: 040-064 (25 security rules)
+
+**Frameworks Covered**:
+- OWASP ASVS 4.0 (V1-V14)
+- STRIDE Threat Modeling
+- OWASP Top 10 (2021)
+- CWE Top 25
+- NIST SSDF v1.1
+
+📄 [SKILL.md](./security-analyst/SKILL.md) | [CHECKLIST.md](./security-analyst/CHECKLIST.md) | [EXAMPLES.md](./security-analyst/EXAMPLES.md) | [TROUBLESHOOTING.md](./security-analyst/TROUBLESHOOTING.md)
 
 ---
 
@@ -625,9 +724,9 @@ git commit -m "feat: Migrate to OAuth2 + OIDC"
 | /rule | architect, gatekeeper | 2, 4 | specs/02_constraints/patterns/* |
 | /feature | analyst, orchestrator | 3, 3.5 | specs/06_runtime/scenarios/* |
 | /flow | analyst | 3 | specs/06_runtime/scenarios/* |
-| /build | analyst, architect | 3 | specs/07_deployment/*, specs/10_quality/* |
-| /cross | analyst, architect | 3 | specs/08_crosscutting/* |
-| /adr | architect | 2 | specs/09_decisions/adrs/* |
+| /build | analyst, architect, security-analyst | 3 | specs/07_deployment/*, specs/10_quality/* |
+| /cross | analyst, architect, security-analyst | 3 | specs/08_crosscutting/* |
+| /adr | architect, security-analyst | 2 | specs/09_decisions/adrs/* |
 | /code | orchestrator, developer, gatekeeper, reviewer, tester | 3.5-5 | Source code + tests |
 | /import | analyst | 1-3 | All specs/ files |
 | /stats | analyst | - | Health dashboard |
@@ -640,6 +739,7 @@ See `../commands/README.md` for complete command catalog.
 |-------|----------------|-----------------|
 | analyst | changes/proposal.md, changes/spec.md, arc42/*, bdd/* | changes/[id]/, specs/ |
 | architect | changes/design.md, adr/decision.md, c4/* | changes/[id]/, specs/09_decisions/adrs/ |
+| security-analyst | security/owasp-asvs.md, security/stride-analysis.md, security/owasp-top10.md, security/cwe-top25.md, security/nist-ssdf.md | specs/08_crosscutting/security/, specs/10_quality/, specs/11_risks/ |
 | orchestrator | changes/tasks.md | changes/[id]/tasks.md |
 | developer | - | src/ (applies all templates indirectly) |
 | gatekeeper | - | (validates against rules/) |
@@ -654,11 +754,12 @@ See `../templates/README.md` for complete template catalog.
 
 | Agent | Rules Applied | Categories |
 |-------|---------------|------------|
-| architect | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
-| developer | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
-| gatekeeper | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
-| reviewer | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
-| guardian | All 39 rules | Object Calisthenics (9), SOLID (5), Package Principles (6), Code Quality (19) |
+| architect | All 64 rules | Quality (001-039) + Security (040-064) |
+| security-analyst | Security rules (040-064) | OWASP ASVS (040-049), OWASP Top 10 & CWE (050-059), STRIDE (060-064) |
+| developer | All 64 rules | Quality (001-039) + Security (040-064) |
+| gatekeeper | All 64 rules | Quality (001-039) + Security (040-064) |
+| reviewer | All 64 rules | Quality (001-039) + Security (040-064) |
+| guardian | All 64 rules | Quality (001-039) + Security (040-064) |
 
 See `../rules/README.md` for complete rule catalog.
 
@@ -735,27 +836,31 @@ Score 9/16 → architect (design.md + ADRs) → developer implements following d
 |-------------|-------|-------|
 | Plan feature | analyst | 1 |
 | Design for HIGH complexity | architect | 2 |
+| Threat modeling + security design | security-analyst | 2 |
 | Create Arc42 + BDD specs | analyst | 3 |
+| Document security requirements | security-analyst | 3 |
 | Decompose into atomic tasks | orchestrator | 3.5 |
 | Implement code | developer | 4 |
 | Validate compliance | gatekeeper | 4 |
 | Review quality | reviewer | 5 |
 | Validate tests | tester | 5 |
+| Security validation (SAST/DAST) | security-analyst | 5 |
 | Update docs | documenter | 6 |
-| Final validation + pre-commit | analyst + guardian | 7 |
+| Final validation + security audit | analyst + security-analyst | 7 |
+| Pre-commit gate | guardian | 7 |
 
 ### By Workflow Phase
 
 | Phase | Skills | Mandatory? |
 |-------|--------|------------|
 | 1 (Discovery) | analyst | ✅ Always |
-| 2 (Architecture) | architect | ⚠️ If HIGH complexity |
-| 3 (Specification) | analyst | ✅ Always |
+| 2 (Architecture) | architect + security-analyst | ⚠️ If HIGH complexity |
+| 3 (Specification) | analyst + security-analyst | ✅ Always |
 | 3.5 (Decomposition) | orchestrator | ✅ Always (CRITICAL) |
 | 4 (Implementation) | developer + gatekeeper | ✅ Always |
-| 5 (Review & Test) | reviewer + tester | ✅ Always |
+| 5 (Review & Test) | reviewer + tester + security-analyst | ✅ Always |
 | 6 (Documentation) | documenter | ⚠️ Recommended |
-| 7 (Validation) | analyst + guardian | ✅ Always |
+| 7 (Validation) | analyst + security-analyst + guardian | ✅ Always |
 
 ---
 
@@ -763,13 +868,22 @@ Score 9/16 → architect (design.md + ADRs) → developer implements following d
 
 - **[Main Hub](../README.md)** - Complete system overview with 7-phase workflow
 - **[Commands](../commands/README.md)** - 15 Arc42 commands
-- **[Templates](../templates/README.md)** - 20 deterministic templates (Arc42, C4, BDD, ADR)
-- **[Rules](../rules/README.md)** - 39 quality rules organized by category
+- **[Templates](../templates/README.md)** - 25+ deterministic templates (Arc42, C4, BDD, ADR, Security)
+- **[Rules](../rules/README.md)** - 64 rules (001-039: Quality + 040-064: Security)
 - **[Result: specs/](../../specs/)** - Well-documented specifications (the constitution)
 
 ---
 
 ## 📜 Changelog
+
+### v3.1.0 (2025-12-16)
+- 🛡️ **SECURITY-ANALYST SKILL ADDED**: Complete security framework integration
+- 📊 **10 SKILLS TOTAL**: Added security-analyst as agent 010 (CRITICAL)
+- 🔐 **25 SECURITY RULES**: Rules 040-064 covering OWASP ASVS, STRIDE, Top 10, CWE
+- 📋 **5 SECURITY TEMPLATES**: OWASP ASVS, STRIDE, OWASP Top 10, CWE Top 25, NIST SSDF
+- 🗺️ **WORKFLOW UPDATED**: Security-analyst integrated in phases 2, 3, 5, 7
+- 📈 **64 TOTAL RULES**: Quality (001-039) + Security (040-064)
+- 🔗 **CROSS-REFERENCES UPDATED**: Commands, templates, and rules tables
 
 ### v3.0.0 (2025-12-10)
 - 🔗 **COMPLETE CROSS-REFERENCES**: Integration with commands, templates, rules
@@ -791,7 +905,7 @@ Score 9/16 → architect (design.md + ADRs) → developer implements following d
 
 ---
 
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Maintained by**: Documentation-First Approach System
 **License**: MIT
-**Last Updated**: 2025-12-10
+**Last Updated**: 2025-12-16

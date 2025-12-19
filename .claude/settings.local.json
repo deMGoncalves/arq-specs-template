@@ -148,7 +148,16 @@
       "Bash(ls:*)",
       "Bash(git mv:*)",
       "Bash(wc:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(/Users/clebgoncalve/Workspace/document-first_approach/arq-specs-template-master/.claude/README.md )",
+      "Bash(/Users/clebgoncalve/Workspace/document-first_approach/arq-specs-template-master/.claude/commands/README.md )",
+      "Bash(/Users/clebgoncalve/Workspace/document-first_approach/arq-specs-template-master/.claude/templates/README.md )",
+      "Bash(/Users/clebgoncalve/Workspace/document-first_approach/arq-specs-template-master/.claude/rules/README.md )",
+      "Bash(zip:*)",
+      "Bash(git -C /home/demgoncalves/Workspace/dfa/boilerplate status)",
+      "Bash(git -C /home/demgoncalves/Workspace/dfa/boilerplate diff --stat)"
     ],
     "deny": [],
     "ask": []

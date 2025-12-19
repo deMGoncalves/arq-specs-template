@@ -1,7 +1,7 @@
 # Sistema de Desenvolvimento Documentation-First
 
-**Versão**: 3.0.0
-**Última Atualização**: 2025-12-10
+**Versão**: 3.1.0
+**Última Atualização**: 2025-12-16
 **Status**: 🟢 Pronto para produção
 
 ---
@@ -68,10 +68,11 @@ Modelos de IA são **máquinas probabilísticas**. Prompts vagos → código ale
 │   ├── import.md          # Importar documentos externos
 │   └── stats.md           # Gerar dashboard de saúde
 │
-├── skills/                # 🤖 9 agentes especializados (7 fases)
+├── skills/                # 🤖 10 agentes especializados (7 fases)
 │   ├── README.md          # Catálogo de agentes + workflow de 7 fases
 │   ├── analyst/           # Fase 1 + 3: Discovery + Specification
 │   ├── architect/         # Fase 2: Architecture (complexidade HIGH)
+│   ├── security-analyst/  # Fases 2, 3, 5, 7: Security (OWASP ASVS, STRIDE, Top 10, CWE, NIST)
 │   ├── orchestrator/      # Fase 3.5: Task Decomposition (CRÍTICO)
 │   ├── developer/         # Fase 4: Implementation
 │   ├── gatekeeper/        # Fase 4: Quality gates
@@ -80,20 +81,24 @@ Modelos de IA são **máquinas probabilísticas**. Prompts vagos → código ale
 │   ├── documenter/        # Fase 6: Documentation
 │   └── guardian/          # Fase 7: Pre-commit/release validation
 │
-├── templates/             # 📚 20 templates determinísticos
+├── templates/             # 📚 26 templates determinísticos
 │   ├── README.md          # Catálogo de templates + uso por complexidade
 │   ├── arc42/             # 12 capítulos Arc42
 │   ├── c4/                # 3 níveis C4 Model
 │   ├── bdd/               # Cenários BDD (Given-When-Then)
 │   ├── adr/               # Architecture Decision Records
+│   ├── security/          # 5 templates de segurança (OWASP ASVS, STRIDE, Top 10, CWE, NIST)
 │   └── changes/           # 4 templates de workflow (proposal → spec → tasks)
 │
-├── rules/                 # 📏 39 regras de qualidade
+├── rules/                 # 📏 64 regras (39 quality + 25 security)
 │   ├── README.md          # Catálogo de regras organizado por categoria
-│   ├── object-calisthenics/    # 9 regras de código limpo
-│   ├── solid/                  # 5 princípios OOP
-│   ├── package-principles/     # 6 regras de coesão/acoplamento
-│   └── code-quality/           # 19 melhores práticas
+│   ├── 001-009            # Object Calisthenics (9 regras)
+│   ├── 010-014            # SOLID Principles (5 regras)
+│   ├── 015-020            # Package Principles (6 regras)
+│   ├── 021-039            # Code Quality (19 regras)
+│   ├── 040-049            # OWASP ASVS (10 regras de segurança)
+│   ├── 050-059            # OWASP Top 10 & CWE (10 regras de segurança)
+│   └── 060-064            # STRIDE (5 regras de segurança)
 │
 ├── hooks/                 # 🎣 Hooks Claude Code (automação)
 │   ├── README.md          # Documentação de hooks
@@ -207,7 +212,7 @@ Fase 7: Validation (guardian)
 |--------------|-------|----------|-----------|--------|-------|
 | **LOW** | 1 → 3 → 3.5 → 4 → 5-7 | 3-5 comandos | 3-5 templates | 10 Críticas | 2-6h |
 | **MEDIUM** | 1 → 3 → 3.5 → 4 → 5-7 | 8-12 comandos | 8-12 templates | 20 Críticas | 1-3 dias |
-| **HIGH** | 1 → **2** → 3 → 3.5 → 4 → 5-7 | 12-15 comandos | 18-20 templates | Todas 39 | 1-2 semanas |
+| **HIGH** | 1 → **2** → 3 → 3.5 → 4 → 5-7 | 12-15 comandos | 20-26 templates | Todas 64 | 1-2 semanas |
 
 ### Por Artefato
 
@@ -406,8 +411,8 @@ Quando você segue este sistema, espere estes resultados:
 
 ### 👨‍💻 Desenvolvedor
 1. **Comandos**: `commands/README.md` - Catálogo de 15 comandos
-2. **Regras**: `rules/README.md` - 39 regras de qualidade
-3. **Templates**: `templates/README.md` - Arc42 + C4 + BDD + ADR
+2. **Regras**: `rules/README.md` - 64 regras (39 quality + 25 security)
+3. **Templates**: `templates/README.md` - Arc42 + C4 + BDD + ADR + Security
 
 ### 👨‍🔬 Arquiteto
 1. **Arc42**: `templates/arc42/` - 12 capítulos
@@ -635,13 +640,13 @@ Você nunca invoca diretamente:
 1. **commands/** - 15 comandos Arc42 para Fase 3 (Specification)
    - Veja `commands/README.md` para catálogo completo
 
-2. **skills/** - 9 agentes especializados para workflow de 7 fases
+2. **skills/** - 10 agentes especializados para workflow de 7 fases (+ security-analyst)
    - Veja `skills/README.md` para guia detalhado de workflow
 
-3. **templates/** - 20 templates determinísticos
+3. **templates/** - 26 templates determinísticos (Arc42, C4, BDD, ADR, Security)
    - Veja `templates/README.md` para uso por complexidade
 
-4. **rules/** - 39 regras de qualidade para Fases 4-7
+4. **rules/** - 64 regras (39 quality + 25 security) para Fases 2-7
    - Veja `rules/README.md` para catálogo organizado
 
 ---
@@ -727,8 +732,8 @@ Melhorias são bem-vindas! Áreas de foco:
 
 ## 📄 Versão & Licença
 
-- **Versão**: 3.0.0
-- **Última Atualização**: 2025-12-10
+- **Versão**: 3.1.0
+- **Última Atualização**: 2025-12-16
 - **Licença**: MIT
 - **Mantido por**: Sistema Documentation-First Approach
 
@@ -752,7 +757,7 @@ Melhorias são bem-vindas! Áreas de foco:
 
 **Links Rápidos**:
 - [Catálogo de Comandos](commands/README.md) - 15 comandos Arc42
-- [Workflow de Skills](skills/README.md) - 9 agentes, 7 fases
-- [Guia de Templates](templates/README.md) - 20 templates determinísticos
-- [Regras de Qualidade](rules/README.md) - 39 regras organizadas
+- [Workflow de Skills](skills/README.md) - 10 agentes (+ security-analyst), 7 fases
+- [Guia de Templates](templates/README.md) - 26 templates (Arc42, C4, BDD, ADR, Security)
+- [Regras de Qualidade](rules/README.md) - 64 regras (39 quality + 25 security)
 - [Resultado: specs/](../specs/) - Especificações bem documentadas

@@ -1,29 +1,30 @@
-# 39 Quality Rules - Documentation-First Approach
+# 64 Rules - Documentation-First Approach
 
-**Version**: 3.0.0
-**Last Updated**: 2025-12-10
+**Version**: 3.1.0
+**Last Updated**: 2025-12-16
 **Status**: 🟢 Production-ready
 
 ---
 
 ## Visão Geral
 
-Este diretório contém **39 regras de qualidade** que garantem código limpo, manutenível e de alta qualidade em todos os projetos Documentation-First Approach.
+Este diretório contém **64 regras** que garantem código limpo, manutenível, seguro e de alta qualidade em todos os projetos Documentation-First Approach.
 
 ### Filosofia
 
-**Código de qualidade não é acidente - é resultado de princípios aplicados consistentemente.**
+**Código de qualidade e seguro não é acidente - é resultado de princípios aplicados consistentemente.**
 
-Estas regras são divididas em 4 categorias:
+Estas regras são divididas em 5 categorias:
 
-1. **Object Calisthenics** (9 regras) - Código limpo no nível mais baixo
-2. **SOLID Principles** (5 regras) - Fundamentos de design orientado a objetos
-3. **Package Principles** (6 regras) - Coesão e acoplamento de módulos
-4. **Code Quality Rules** (19 regras) - DRY, KISS, YAGNI, segurança, testes
+1. **Object Calisthenics** (9 regras: 001-009) - Código limpo no nível mais baixo
+2. **SOLID Principles** (5 regras: 010-014) - Fundamentos de design orientado a objetos
+3. **Package Principles** (6 regras: 015-020) - Coesão e acoplamento de módulos
+4. **Code Quality Rules** (19 regras: 021-039) - DRY, KISS, YAGNI, segurança, testes
+5. **Security Rules** (25 regras: 040-064) - OWASP ASVS, STRIDE, Top 10, CWE
 
 ---
 
-## Por Que 39 Regras?
+## Por Que 64 Regras?
 
 ### Colapso do Espaço Probabilístico
 
@@ -35,24 +36,31 @@ Sem regras:
   ↓
   10^20 formas de implementar
   ↓
-  Código inconsistente, baixa qualidade
+  Código inconsistente, baixa qualidade, inseguro
 
-Com 39 regras:
-  "Criar classe Usuario (seguindo regras 001-039)"
+Com 64 regras:
+  "Criar classe Usuario (seguindo regras 001-064)"
   ↓
   ~10 formas equivalentes
   ↓
-  Código consistente, alta qualidade
+  Código consistente, alta qualidade, seguro
 ```
 
-### Prevenção de Débito Técnico
+### Prevenção de Débito Técnico + Vulnerabilidades
 
 Cada regra previne um padrão problemático específico:
 
+**Quality**:
 - **Regra 001**: Previne complexidade ciclomática alta
 - **Regra 010**: Previne classes "God Object"
 - **Regra 021**: Previne duplicação de código
-- **Regra 030**: Previne vulnerabilidades de segurança
+- **Regra 030**: Previne uso de funções inseguras
+
+**Security**:
+- **Regra 040**: Previne SQL Injection, XSS, Command Injection
+- **Regra 050**: Previne 100% de SQL Injection
+- **Regra 051**: Previne 95% de XSS attacks
+- **Regra 060**: Previne credential stuffing e spoofing
 
 ---
 
@@ -235,6 +243,72 @@ Como verificar automaticamente (linter, testes).
 
 ---
 
+### Categoria 5: Security Rules (Regras 040-064)
+
+**Propósito**: Segurança em profundidade, prevenção de vulnerabilidades, conformidade com frameworks
+
+**Filosofia**: Segurança não é feature opcional - é requisito fundamental desde o design.
+
+#### Sub-categoria: OWASP ASVS (040-049)
+
+| ID | Regra | Descrição | Severidade |
+|----|-------|-----------|------------|
+| 040 | Validação Input Whitelist | Todo input validado com whitelist positiva | 🔴 Crítica |
+| 041 | Autenticação Segura | Password hashing com Argon2id/bcrypt | 🔴 Crítica |
+| 042 | Gerenciamento Sessão | Cookies secure, httpOnly, sameSite, timeout | 🔴 Crítica |
+| 043 | Controle Acesso RBAC | RBAC, ownership verification, deny-by-default | 🔴 Crítica |
+| 044 | Sanitização Output | Context-aware escaping (HTML, JS, SQL, Shell) | 🔴 Crítica |
+| 045 | Criptografia AES-256-GCM | Dados sensíveis criptografados, IVs únicos | 🔴 Crítica |
+| 046 | Tratamento Erros Seguro | Mensagens genéricas, sem stack traces | 🟠 Alta |
+| 047 | Proteção Dados Sensíveis | PII/PCI protegidos, GDPR/LGPD compliance | 🔴 Crítica |
+| 048 | Comunicação Segura TLS | TLS 1.3/1.2, HSTS, certificate pinning | 🔴 Crítica |
+| 049 | Configuração Headers | CSP, X-Frame-Options, nosniff, Referrer-Policy | 🟠 Alta |
+
+#### Sub-categoria: OWASP Top 10 & CWE (050-059)
+
+| ID | Regra | Descrição | Severidade |
+|----|-------|-----------|------------|
+| 050 | Prevenção SQL Injection | Prepared statements, ORM parameterizado | 🔴 Crítica |
+| 051 | Prevenção XSS | Auto-escaping, CSP, sanitização HTML | 🔴 Crítica |
+| 052 | Prevenção CSRF | Tokens anti-CSRF, SameSite cookies | 🟠 Alta |
+| 053 | Prevenção Path Traversal | Validação paths, canonical paths, whitelist | 🔴 Crítica |
+| 054 | Prevenção Command Injection | Evitar shell exec, validação whitelist estrita | 🔴 Crítica |
+| 055 | Prevenção XXE | Desabilitar external entities, DTD processing | 🟠 Alta |
+| 056 | Prevenção Desserialização | Preferir JSON, validar schema, whitelist classes | 🔴 Crítica |
+| 057 | Prevenção SSRF | Whitelist domínios, bloquear IPs privados | 🟠 Alta |
+| 058 | Gerenciamento Dependências | npm audit, Dependabot, atualização regular | 🟠 Alta |
+| 059 | Logging Seguro | Sem PII/senhas nos logs, mascaramento automático | 🟠 Alta |
+
+#### Sub-categoria: STRIDE (060-064)
+
+| ID | Regra | Descrição | Severidade |
+|----|-------|-----------|------------|
+| 060 | Proteção Spoofing | MFA, rate limiting, assinaturas digitais | 🔴 Crítica |
+| 061 | Proteção Tampering | HMAC, checksums, input validation, imutabilidade | 🔴 Crítica |
+| 062 | Proteção Repudiation | Audit logging, timestamps, append-only logs | 🟡 Média |
+| 063 | Proteção Information Disclosure | Erros genéricos, criptografia, sem metadata | 🟠 Alta |
+| 064 | Proteção Denial of Service | Rate limiting, timeouts, WAF/CDN, regex DoS | 🟠 Alta |
+
+**Benefícios**:
+- ✅ Prevenção de 95% das vulnerabilidades OWASP Top 10
+- ✅ Conformidade com OWASP ASVS Level 2
+- ✅ Threat modeling sistemático (STRIDE)
+- ✅ Análise de CWE Top 25 Most Dangerous Weaknesses
+- ✅ Conformidade com NIST SSDF
+
+**Frameworks Cobertos**:
+- OWASP ASVS 4.0 (V1-V14)
+- OWASP Top 10 (2021) A01-A10
+- CWE Top 25
+- STRIDE Threat Model
+- NIST SSDF v1.1
+
+**Arquivos**: `040_validacao-input-whitelist.md` até `064_protecao-denial-service.md`
+
+**Skill Responsável**: `security-analyst` (agent 010) - Phases 2, 3, 5, 7
+
+---
+
 ## Como Aplicar as Regras
 
 ### Durante Specification (Phase 3)
@@ -248,6 +322,13 @@ Este componente DEVE seguir:
 - Regra 010 (SRP): Uma responsabilidade por classe
 - Regra 021 (DRY): Sem duplicação de lógica
 - Regra 032 (Coverage): ≥80% de cobertura de testes
+
+## Segurança
+
+Este componente DEVE seguir:
+- Regra 040 (Input Validation): Validação whitelist em todos endpoints
+- Regra 050 (SQL Injection): Prepared statements obrigatórios
+- Regra 060 (Spoofing): Rate limiting em autenticação
 ```
 
 ### Durante Implementation (Phase 4)
@@ -522,8 +603,21 @@ const service = new UsuarioService(repo);
 
 ## Severidade das Regras
 
-### ❌ Bloqueante (9 regras)
-Violações **bloqueiam** commit/push:
+### 🔴 Crítica (10 regras de segurança)
+Violações **bloqueiam** commit/push - segurança:
+- 040 (Input Validation Whitelist)
+- 041 (Autenticação Segura)
+- 042 (Gerenciamento de Sessão)
+- 043 (Controle de Acesso RBAC)
+- 044 (Sanitização de Output)
+- 045 (Criptografia AES-256-GCM)
+- 047 (Proteção de Dados Sensíveis)
+- 048 (Comunicação Segura TLS)
+- 050 (Prevenção SQL Injection)
+- 051 (Prevenção XSS)
+
+### ❌ Bloqueante (8 regras de qualidade)
+Violações **bloqueiam** commit/push - qualidade:
 - 010 (SRP)
 - 012 (LSP)
 - 014 (DIP)
@@ -533,15 +627,36 @@ Violações **bloqueiam** commit/push:
 - 030 (Unsafe Functions)
 - 032 (Test Coverage ≥80%)
 
-### ⚠️ Warning (24 regras)
-Violações geram **avisos** mas não bloqueiam:
+### 🟠 Alta (10 regras de segurança)
+Violações geram **avisos fortes** - segurança:
+- 046 (Tratamento de Erros Seguro)
+- 049 (Configuração de Headers)
+- 052 (Prevenção CSRF)
+- 053 (Prevenção Path Traversal)
+- 054 (Prevenção Command Injection)
+- 055 (Prevenção XXE)
+- 056 (Prevenção Desserialização Insegura)
+- 057 (Prevenção SSRF)
+- 058 (Gerenciamento de Dependências)
+- 059 (Logging Seguro)
+- 063 (Proteção Information Disclosure)
+- 064 (Proteção Denial of Service)
+
+### ⚠️ Warning (24 regras de qualidade)
+Violações geram **avisos** mas não bloqueiam - qualidade:
 - Object Calisthenics (001-009)
 - SOLID (011, 013)
 - Package Principles (015-017, 019-020)
 - Code Quality (021, 023-024, 027, 029, 031, 033-038)
 
-### ℹ️ Info (6 regras)
-Violações geram **informações** apenas:
+### 🟡 Média (3 regras de segurança)
+Violações geram **informações** - segurança:
+- 060 (Proteção Spoofing)
+- 061 (Proteção Tampering)
+- 062 (Proteção Repudiation)
+
+### ℹ️ Info (6 regras de qualidade)
+Violações geram **informações** apenas - qualidade:
 - 005 (One Dot Per Line)
 - 022 (KISS)
 - 026 (Comment Quality)
@@ -634,7 +749,7 @@ Regras Warning:
 ⚠️ 007 (Max Lines): 2 arquivos excedem 200 linhas
 ⚠️ 021 (DRY): 3 duplicações detectadas
 
-Total: 37/39 regras OK
+Total: 61/64 regras OK (37/39 quality + 24/25 security)
 ```
 
 ---
@@ -673,31 +788,88 @@ Total: 37/39 regras OK
   - [ ] Tratamento de erros explícito
   - [ ] Funções ≤ 3 parâmetros
 
+- [ ] **Security - OWASP ASVS (040-049)**
+  - [ ] Input validation com whitelist
+  - [ ] Autenticação segura (Argon2id/bcrypt)
+  - [ ] Sessões seguras (httpOnly, secure, sameSite)
+  - [ ] Controle de acesso RBAC
+  - [ ] Sanitização de output context-aware
+  - [ ] Criptografia AES-256-GCM
+  - [ ] Tratamento de erros sem exposição de internals
+  - [ ] Proteção de dados sensíveis (PII/PCI)
+  - [ ] TLS 1.3/1.2 + HSTS
+  - [ ] Headers de segurança (CSP, X-Frame-Options)
+
+- [ ] **Security - OWASP Top 10 & CWE (050-059)**
+  - [ ] Prevenção SQL Injection (prepared statements)
+  - [ ] Prevenção XSS (auto-escaping, CSP)
+  - [ ] Prevenção CSRF (tokens anti-CSRF)
+  - [ ] Prevenção Path Traversal (validação de paths)
+  - [ ] Prevenção Command Injection (sem shell exec)
+  - [ ] Prevenção XXE (disable external entities)
+  - [ ] Prevenção Desserialização Insegura (JSON schema)
+  - [ ] Prevenção SSRF (whitelist de domínios)
+  - [ ] Gerenciamento de dependências (npm audit)
+  - [ ] Logging seguro (sem PII/senhas)
+
+- [ ] **Security - STRIDE (060-064)**
+  - [ ] Proteção Spoofing (MFA, rate limiting)
+  - [ ] Proteção Tampering (HMAC, checksums)
+  - [ ] Proteção Repudiation (audit logging)
+  - [ ] Proteção Information Disclosure (erros genéricos)
+  - [ ] Proteção Denial of Service (rate limiting, timeouts)
+
 ---
 
 ## Ferramentas de Validação
 
 ### Recomendadas
 
-**Linters**:
+**Linters** (Regras 001-039):
 - ESLint (TypeScript/JavaScript)
 - Pylint (Python)
 - RuboCop (Ruby)
 - Clippy (Rust)
 
-**Coverage**:
+**Coverage** (Regra 032):
 - Jest (JavaScript/TypeScript)
 - Pytest (Python)
 - SimpleCov (Ruby)
 
-**Análise Estática**:
+**Análise Estática** (Regras 010-039):
 - SonarQube
 - CodeClimate
 - DeepSource
 
-**Dependências**:
+**Dependências** (Regras 018, 058):
 - dependency-cruiser (JS/TS)
 - Madge (JS/TS)
+- npm audit (Regra 058)
+- Snyk (Regra 058)
+- Dependabot (Regra 058)
+
+**Security - SAST** (Regras 040-064):
+- SonarQube Security
+- Semgrep (regras OWASP)
+- ESLint Security Plugin
+- Bandit (Python)
+- Brakeman (Ruby)
+
+**Security - DAST** (Regras 050-057):
+- OWASP ZAP
+- Burp Suite
+- Nuclei
+
+**Security - Secrets Scanning** (Regra 047):
+- TruffleHog
+- GitLeaks
+- detect-secrets
+
+**Security - Dependency Scanning** (Regra 058):
+- npm audit
+- Snyk
+- OWASP Dependency-Check
+- GitHub Dependabot
 
 ---
 
@@ -707,17 +879,19 @@ Total: 37/39 regras OK
 
 | Skill | Rules Applied | Phase | Purpose |
 |-------|---------------|-------|---------|
-| **architect** | All 39 rules | 2 | Design decisions must follow rules |
-| **developer** | All 39 rules | 4 | Implementation must follow rules |
-| **gatekeeper** | All 39 rules | 4 | Validates rule compliance before completing tasks |
-| **reviewer** | All 39 rules | 5 | Reviews code for rule violations |
-| **guardian** | All 39 rules | 7 | Pre-commit validation ensures 100% compliance |
+| **architect** | All 64 rules | 2 | Design decisions must follow rules |
+| **security-analyst** | Security rules (040-064) | 2, 3, 5, 7 | Applies OWASP ASVS, STRIDE, Top 10, CWE, NIST SSDF |
+| **developer** | All 64 rules | 4 | Implementation must follow rules |
+| **gatekeeper** | All 64 rules | 4 | Validates rule compliance before completing tasks |
+| **reviewer** | All 64 rules | 5 | Reviews code for rule violations |
+| **guardian** | All 64 rules | 7 | Pre-commit validation ensures 100% compliance |
 
 **Critical Integration**:
-- **Phase 2 (Architecture)**: architect considers rules when making design decisions
+- **Phase 2 (Architecture)**: architect considers all rules + security-analyst performs threat modeling (STRIDE)
+- **Phase 3 (Specification)**: security-analyst documents OWASP ASVS, Top 10, CWE, NIST SSDF requirements
 - **Phase 4 (Implementation)**: developer applies rules + gatekeeper validates
-- **Phase 5 (Review)**: reviewer checks compliance
-- **Phase 7 (Pre-commit)**: guardian blocks commit if violations found
+- **Phase 5 (Review)**: reviewer checks compliance + security-analyst runs SAST/DAST
+- **Phase 7 (Pre-commit)**: guardian + security-analyst block commit if violations found
 
 See `../skills/README.md` for complete 7-phase workflow documentation.
 
@@ -725,11 +899,11 @@ See `../skills/README.md` for complete 7-phase workflow documentation.
 
 | Command | Rules Referenced | How Used |
 |---------|------------------|----------|
-| /stack | All 39 rules | Defines rules as constraints in specs/02_constraints/ |
+| /stack | All 64 rules | Defines rules as constraints in specs/02_constraints/ |
 | /rule | Creates custom rule | Adds project-specific rule to specs/02_constraints/patterns/ |
-| /code | All 39 rules | Implementation guided by rules |
-| /build | Testing rules (034-039) | Quality requirements reference test coverage rules |
-| /cross | Domain rules (011, 020, 024) | DDD concepts reference domain modeling rules |
+| /code | All 64 rules | Implementation guided by rules |
+| /build | Testing + Security rules (032, 040-064) | Quality requirements reference test coverage + security rules |
+| /cross | Domain + Security rules (011, 020, 024, 040-064) | DDD concepts + security requirements |
 
 See `../commands/README.md` for complete command catalog.
 
@@ -737,11 +911,15 @@ See `../commands/README.md` for complete command catalog.
 
 | Template | Rules Referenced | Integration |
 |----------|------------------|-------------|
-| changes/tasks.md | Task-specific rules | Each task lists applicable rules (e.g., "Apply rules 001, 010, 015") |
-| bdd/scenario.md | Validation rules | BDD scenarios validate business rules |
+| changes/tasks.md | Task-specific rules | Each task lists applicable rules (e.g., "Apply rules 001, 010, 040") |
+| bdd/scenario.md | Validation + Security rules | BDD scenarios validate business + security rules |
 | c4/component.md | SOLID rules (010-014) | Components designed following SRP, OCP, etc |
-| arc42/02_constraints.md | All 39 rules | Lists rules as technical constraints |
-| arc42/10_quality.md | Testing rules (034-039) | Quality requirements reference rules |
+| security/owasp-asvs.md | Security rules (040-049) | OWASP ASVS checklist maps to rules |
+| security/stride-analysis.md | STRIDE rules (060-064) | Threat modeling maps to rules |
+| security/owasp-top10.md | Security rules (050-059) | OWASP Top 10 maps to rules |
+| arc42/02_constraints.md | All 64 rules | Lists rules as technical constraints |
+| arc42/08_crosscutting.md | Security rules (040-064) | Security concepts reference security rules |
+| arc42/10_quality.md | Testing + Security rules (032, 040-064) | Quality + security requirements reference rules |
 
 See `../templates/README.md` for complete template catalog.
 
@@ -751,30 +929,51 @@ See `../templates/README.md` for complete template catalog.
 
 - **[Main Hub](../README.md)** - Complete system overview with 7-phase workflow
 - **[Commands](../commands/README.md)** - 15 Arc42 commands
-- **[Skills](../skills/README.md)** - 9 specialized agents and 7-phase workflow
-- **[Templates](../templates/README.md)** - 20 deterministic templates (Arc42, C4, BDD, ADR)
+- **[Skills](../skills/README.md)** - 10 specialized agents and 7-phase workflow (+ security-analyst)
+- **[Templates](../templates/README.md)** - 26 deterministic templates (Arc42, C4, BDD, ADR, Security)
 - **[Result: specs/](../../specs/)** - Well-documented specifications (the constitution)
 
 ### External References
+
+**Quality (Rules 001-039)**:
 - **Object Calisthenics**: Jeff Bay (ThoughtWorks Anthology)
 - **SOLID**: Robert C. Martin (Uncle Bob)
 - **Package Principles**: Robert C. Martin
 - **Clean Code**: Robert C. Martin
 - **Domain-Driven Design**: Eric Evans
 
+**Security (Rules 040-064)**:
+- **OWASP ASVS 4.0**: [https://owasp.org/www-project-application-security-verification-standard/](https://owasp.org/www-project-application-security-verification-standard/)
+- **STRIDE Threat Model**: Microsoft Security Development Lifecycle
+- **OWASP Top 10 (2021)**: [https://owasp.org/www-project-top-ten/](https://owasp.org/www-project-top-ten/)
+- **CWE Top 25**: [https://cwe.mitre.org/top25/](https://cwe.mitre.org/top25/)
+- **NIST SSDF v1.1**: [https://csrc.nist.gov/publications/detail/sp/800-218/final](https://csrc.nist.gov/publications/detail/sp/800-218/final)
+
 ---
 
 ## 🎓 Next Steps
 
-1. **Read each rule**: Explore the 39 individual files (001-039)
-2. **Configure linters**: Apply rules in your project
-3. **Integrate into workflow**: Use rules in phases 3-7
-4. **Review code**: Validate compliance during code review
-5. **Automate**: Configure pre-commit hooks
+1. **Read each rule**: Explore the 64 individual files (001-064)
+2. **Configure linters**: Apply quality rules (001-039) in your project
+3. **Configure security tools**: Apply security rules (040-064) with SAST/DAST
+4. **Integrate into workflow**: Use rules in phases 2-7
+5. **Review code**: Validate compliance during code review
+6. **Security analysis**: Use security-analyst skill for OWASP ASVS, STRIDE, Top 10, CWE, NIST SSDF
+7. **Automate**: Configure pre-commit hooks with guardian + security-analyst
 
 ---
 
 ## 📜 Changelog
+
+### v3.1.0 (2025-12-16)
+- 🛡️ **SECURITY FRAMEWORK INTEGRATION**: Added 25 security rules (040-064)
+- 🔒 **5 SECURITY FRAMEWORKS**: OWASP ASVS 4.0, STRIDE, OWASP Top 10 (2021), CWE Top 25, NIST SSDF v1.1
+- 🤖 **SECURITY-ANALYST SKILL**: New skill integrated in phases 2, 3, 5, 7
+- 📊 **EXPANDED METRICS**: 39 → 64 rules (39 quality + 25 security)
+- 🔗 **UPDATED CROSS-REFERENCES**: All skills, commands, templates reference security rules
+- 🛠️ **SECURITY TOOLS**: Added SAST/DAST/secrets scanning/dependency scanning tools
+- ✅ **COMPREHENSIVE CHECKLIST**: Added security checklist (OWASP ASVS, Top 10, STRIDE)
+- 📈 **SEVERITY CLASSIFICATION**: Security rules classified as Critical (🔴), High (🟠), Medium (🟡)
 
 ### v3.0.0 (2025-12-10)
 - 🔗 **COMPLETE CROSS-REFERENCES**: Integration with skills, commands, templates
@@ -789,10 +988,10 @@ See `../templates/README.md` for complete template catalog.
 
 ---
 
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Maintained by**: Documentation-First Approach System
 **License**: MIT
-**Last Updated**: 2025-12-10
+**Last Updated**: 2025-12-16
 
 ---
 

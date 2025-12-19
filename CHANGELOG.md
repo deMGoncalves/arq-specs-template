@@ -15,6 +15,45 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ---
 
+## [3.1.0] - 2025-12-16
+
+### 🛡️ Security Framework Integration
+
+Release focado na integração completa de frameworks de segurança ao workflow Documentation-First.
+
+### ✨ Adicionado
+
+#### Security Framework (2025-12-16)
+- ✅ **security-analyst skill** - Novo agente especializado em análise de segurança (agent 010)
+- ✅ **25 Security Rules** (040-064) seguindo padrão das regras 001-039:
+  - 040-049: OWASP ASVS (Input Validation, Auth, Session, Access Control, Crypto, Errors, Data Protection, TLS, Headers)
+  - 050-059: OWASP Top 10 & CWE (SQL Injection, XSS, CSRF, Path Traversal, Command Injection, XXE, Deserialization, SSRF, Dependencies, Logging)
+  - 060-064: STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service)
+- ✅ **5 Security Templates** (`.claude/templates/security/`):
+  - `owasp-asvs.md` - OWASP ASVS 4.0 Checklist (V1-V14)
+  - `stride-analysis.md` - STRIDE Threat Modeling Framework
+  - `owasp-top10.md` - OWASP Top 10 (2021) Coverage
+  - `cwe-top25.md` - CWE Top 25 Most Dangerous Weaknesses
+  - `nist-ssdf.md` - NIST SSDF v1.1 Compliance Framework
+- ✅ **Skill Documentation**: SKILL.md, CHECKLIST.md, EXAMPLES.md, TROUBLESHOOTING.md
+- ✅ **Workflow Integration**: security-analyst integrado em phases 2, 3, 5, 7
+
+#### Updated Components
+- ✅ **Skills README** updated (v3.0.0 → v3.1.0): 9 → 10 agents, complete workflow integration
+- ✅ **Arc42 Templates** updated: Enhanced security sections in 08_crosscutting.md and 10_quality.md
+- ✅ **Cross-references**: All 64 rules have proper cross-references between them
+- ✅ **Documentation**: README.md, CHANGELOG.md updated with security information
+
+### 📊 Metrics
+
+- **Total Rules**: 39 → **64** (39 quality + 25 security)
+- **Total Skills**: 9 → **10** (+ security-analyst)
+- **Total Templates**: 21 → **26** (+ 5 security templates)
+- **Security Frameworks**: **5** (OWASP ASVS, STRIDE, OWASP Top 10, CWE Top 25, NIST SSDF)
+- **Framework Coverage**: **100%** (ASVS V1-V14, STRIDE full, Top 10 A01-A10, CWE Top 25, NIST SSDF 20 practices)
+
+---
+
 ## [3.0.0] - 2025-12-11
 
 ### 🎉 Release Profissional Completo

@@ -1,8 +1,8 @@
 # Templates - Especificações Determinísticas
 
-**Versão**: 3.0.0
-**Última Atualização**: 2025-12-10
-**Total**: 20 templates organizados
+**Versão**: 3.1.0
+**Última Atualização**: 2025-12-16
+**Total**: 26 templates organizados
 **Status**: 🟢 Pronto para produção
 
 ---
@@ -11,12 +11,13 @@
 
 **Especificações determinísticas reduzem o espaço de interpretação da IA de 10²⁰ possibilidades para ~10 implementações funcionalmente equivalentes.**
 
-Este diretório contém 20 templates estruturados baseados em frameworks comprovados:
+Este diretório contém 26 templates estruturados baseados em frameworks comprovados:
 - **Arc42** (12 capítulos): Documentação arquitetural
 - **Modelo C4** (3 níveis): Visualização de arquitetura
 - **BDD** (Gherkin): Cenários comportamentais
 - **ADR**: Registros de decisões arquiteturais
-- **Workflow**: Templates de processo (proposal, design, tasks)
+- **Security** (5 templates): OWASP ASVS, STRIDE, OWASP Top 10, CWE Top 25, NIST SSDF
+- **Workflow**: Templates de processo (proposal, design, spec, tasks)
 
 Taxa de acerto com specs determinísticas: **>90%** vs **20-40%** com specs vagas.
 
@@ -28,13 +29,14 @@ Taxa de acerto com specs determinísticas: **>90%** vs **20-40%** com specs vaga
 
 | Categoria | Quantidade | IDs | Propósito |
 |-----------|------------|-----|-----------|
-| **Workflow** | 3 | TPL-WORKFLOW-001 a 003 | Templates de processo (proposal, design, tasks) |
+| **Workflow** | 4 | TPL-WORKFLOW-001 a 004 | Templates de processo (proposal, design, spec, tasks) |
 | **Arc42** | 12 | TPL-ARC42-01 a 12 | Documentação de arquitetura (12 capítulos) |
 | **Modelo C4** | 3 | TPL-C4-001 a 003 | Visualização de arquitetura (3 níveis) |
+| **Security** | 5 | TPL-SEC-001 a 005 | OWASP ASVS, STRIDE, OWASP Top 10, CWE, NIST SSDF |
 | **BDD** | 1 | TPL-BDD-001 | Cenários comportamentais (Gherkin) |
 | **ADR** | 1 | TPL-ADR-001 | Registros de decisões arquiteturais |
 
-**Total**: 20 templates
+**Total**: 26 templates
 
 ### Por Criticidade
 
@@ -499,11 +501,14 @@ Veja `../commands/README.md` para catálogo completo de comandos.
 
 Templates referenciam regras durante implementação:
 - **changes/tasks.md** → Cada task lista regras aplicáveis de rules/
-- **bdd/scenario.md** → Regras de validação de rules/code-quality/
+- **bdd/scenario.md** → Regras de validação + security rules
 - **c4/component.md** → Regras SRP, OCP de rules/solid/
-- **arc42/02_constraints.md** → Todas as 39 regras categorizadas
+- **security/*.md** → Mapeiam para security rules (040-064)
+- **arc42/02_constraints.md** → Todas as 64 regras (39 quality + 25 security)
+- **arc42/08_crosscutting.md** → Security rules (040-064)
+- **arc42/10_quality.md** → Testing + Security rules (032, 040-064)
 
-Veja `../rules/README.md` para catálogo completo de regras organizadas por categoria.
+Veja `../rules/README.md` para catálogo completo de 64 regras organizadas por categoria.
 
 ---
 
@@ -511,20 +516,42 @@ Veja `../rules/README.md` para catálogo completo de regras organizadas por cate
 
 - **[Hub Principal](../README.md)** - Visão completa do sistema com workflow de 7 fases
 - **[Comandos](../commands/README.md)** - 15 comandos Arc42
-- **[Skills](../skills/README.md)** - 9 agentes especializados e workflow de 7 fases
-- **[Regras](../rules/README.md)** - 39 regras de qualidade organizadas por categoria
+- **[Skills](../skills/README.md)** - 10 agentes especializados (+ security-analyst) e workflow de 7 fases
+- **[Regras](../rules/README.md)** - 64 regras (39 quality + 25 security) organizadas por categoria
 - **[Resultado: specs/](../../specs/)** - Especificações bem documentadas (a constituição)
 
 ### Referências Externas
 
+**Documentação de Arquitetura**:
 - **Arc42**: https://arc42.org/
 - **Modelo C4**: https://c4model.com/
 - **BDD/Gherkin**: https://cucumber.io/docs/gherkin/
 - **ADR**: https://adr.github.io/
 
+**Frameworks de Segurança**:
+- **OWASP ASVS 4.0**: https://owasp.org/www-project-application-security-verification-standard/
+- **STRIDE**: Microsoft Security Development Lifecycle
+- **OWASP Top 10 (2021)**: https://owasp.org/www-project-top-ten/
+- **CWE Top 25**: https://cwe.mitre.org/top25/
+- **NIST SSDF v1.1**: https://csrc.nist.gov/publications/detail/sp/800-218/final
+
 ---
 
 ## 📜 Changelog
+
+### v3.1.0 (2025-12-16)
+
+**🛡️ INTEGRAÇÃO DE SEGURANÇA**:
+- 🔒 Adição de 5 templates de segurança (security/)
+- 📊 Total: 20 → 26 templates
+- 🛡️ OWASP ASVS 4.0 (V1-V14) checklist completo
+- 🎯 STRIDE threat modeling framework
+- 🔴 OWASP Top 10 (2021) A01-A10 coverage
+- ⚠️ CWE Top 25 vulnerability analysis
+- 📋 NIST SSDF v1.1 compliance framework
+- 🔗 Integração completa com 25 security rules (040-064)
+- 📖 Documentação aprimorada com referências aos frameworks de segurança
+- 🎓 Guias de uso para análise de segurança em phases 2, 3, 5, 7
 
 ### v3.0.0 (2025-12-10)
 
@@ -548,7 +575,7 @@ Veja `../rules/README.md` para catálogo completo de regras organizadas por cate
 
 ---
 
-**Versão**: 3.0.0
+**Versão**: 3.1.0
 **Mantido por**: Sistema Documentation-First Approach
 **Licença**: MIT
-**Última Atualização**: 2025-12-10
+**Última Atualização**: 2025-12-16
